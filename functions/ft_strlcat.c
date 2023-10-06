@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/05 21:23:28 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strlcat.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:22 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/06 12:08:12 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int n)
+size_t	ft_strlcat(char *dest, char *src, size_t n)
 {
 	int	i;
 	int	destl;
