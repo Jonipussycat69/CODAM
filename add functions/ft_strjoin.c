@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/10 12:50:55 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/10 12:48:57 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/10 14:03:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	*ft_calloc(size_t c, size_t l)
+static unsigned int	ft_strlen(char	*str)
 {
-	if (c <= 0 || l <= 0)
-		return (NULL);
-	unsigned char	*r;
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	if (!(r = (unsigned char *) malloc(c * sizeof(l))));
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	unsigned char	*r;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = ft_strlen(s1) + ft_strlen(s2) - 1;
+	if (!(r = (unsigned char *) malloc(j * sizeof(unsigned char))));
 		return (NULL);
-	while (i < c)
-		r[i++] = '\0';
-	return ((void *)r);
+	while (i++ < ft_strlen(s1))
+		r[i] = s1[i];
+	j = ft_strlen(s1);
+	while (i++ < ft_strlen(s2))
+		r[j++] = s1[i];
+	r[j] = '\0';
+	return (r);
 }

@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:03:40 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/10 19:14:58 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/10 12:32:47 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/10 12:51:22 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	v;
-	int	c;
+#include <stdio.h>
 
-	v = 0;
-	c = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			c--;
-		str++;
-	}
-	while (*str >= 48 && *str <= 58)
-	{
-		v = v * 10 + (*str - 48);
-		str++;
-	}
-	return (c * v);
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*r;
+	int	i;
+
+	if (!(r = (char *) malloc(len)))
+		return (NULL);
+	i = 0;
+	while (len--)
+		r[i++] = s[start++];
+	return (r);
 }
