@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:12 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/06 19:23:33 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_memmove.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:12 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/06 21:32:29 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,22 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memmove(void *d, void *s, size_t n)
+void	*ft_memmove(void *d, void *s, size_t size)
 {
+	int	n;
 	int	i;
-	unsigned char	*des;
-	unsigned char	*src;
-
+	
+	n = ft_strlen(s);
+	unsigned char	t[n];
 	i = 0;
-	des = (unsigned char *)d;
-	src = (unsigned char *)s;
-	if (d > s)
+	while (t[i])
 	{
-		i = ft_strlen((const char *)des);
-		while (n)
-		{
-			des[i] = src[i];
-			i--;
-			n--;
-		}
+		t[i++] = *(unsigned char *)s++;
 	}
-	else
+	i = 0;
+	while (size-- > 0)
 	{
-		while (n)
-		{
-			des[i] = src[i];
-			i++;
-			n--;
-		}
+		*(unsigned char *)d++ = t[i++];
 	}
 	return (d);
 }
