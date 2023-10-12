@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:19:31 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/11 18:37:06 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 12:15:04 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,10 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, 1);
 		s++;
 	}
+}
+
+int	main(void)
+{
+	ft_putstr_fd("Hello 0 o o", 1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:05 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/04 17:24:40 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:52:15 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *str, int c, size_t n)
 {
-	while (n > 0)
+	while (n > 0 && str)
 	{
 		if (*(unsigned char*)str == c)
 			return ((void *)str);

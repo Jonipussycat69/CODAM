@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 17:49:43 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 12:35:46 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/11 18:21:53 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 12:17:04 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-// void	ft_touppermod(unsigned int i, char *c)
-// {
-// 	if (*c >= 97 && *c <= 122)
-// 		*c = *c - 32;
-// }
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_putendl_fd(char *s, int fd)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
+	while (*s)
 	{
-		f(i, &s[i]);
-		i++;
+		write(fd, s, 1);
+		s++;
 	}
-	return ;
+	write(fd, "\n", 1);
 }
 
-// int	main(void)
-// {
-// 	char s[] = "Heeee6eellloIo";
-// 	ft_striteri(s, ft_touppermod);
-// 	printf("%s\n", s);
-// 	return (0);
-// }
+int	main(void)
+{
+	ft_putendl_fd("Hello 0 o o", 1);
+	return (0);
+}
