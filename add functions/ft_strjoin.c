@@ -6,12 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:48:57 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 14:37:27 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:32:42 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "libft.h"
 
 static unsigned int	ft_strlen(const char	*str)
 {

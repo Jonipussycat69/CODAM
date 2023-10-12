@@ -6,20 +6,21 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:10 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 14:53:09 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:33:58 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *restrict dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char	*d;
 	unsigned char	*s;
-	
-	d = (unsigned char*)dest;
-	s = (unsigned char*)src;
+
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
 	while (n > 0 && d && s)
 	{
 		*d = *s;

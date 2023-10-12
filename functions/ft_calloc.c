@@ -6,11 +6,12 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/10 12:50:55 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:33:15 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t c, size_t l)
 {

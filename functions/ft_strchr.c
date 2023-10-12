@@ -6,11 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:17 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/05 18:37:45 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:34:11 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-const char	*ft_strrchr(const char *str, int c)
+#include "libft.h"
+
+const char	*ft_strchr(const char *str, int c)
 {
 	while (*str && *str != c)
 	{

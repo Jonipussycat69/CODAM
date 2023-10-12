@@ -6,17 +6,18 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:05 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 14:52:15 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:33:48 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft.h"
 
 void	*ft_memchr(const void *str, int c, size_t n)
 {
 	while (n > 0 && str)
 	{
-		if (*(unsigned char*)str == c)
+		if (*(unsigned char *)str == c)
 			return ((void *)str);
 		str++;
 		n--;

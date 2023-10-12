@@ -6,12 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:07 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/05 16:33:27 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:33:53 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

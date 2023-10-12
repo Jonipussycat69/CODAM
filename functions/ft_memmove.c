@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_memmove.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:12 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/06 21:32:29 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:12 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 18:34:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -25,11 +26,11 @@ size_t	ft_strlen(const char *str)
 
 void	*ft_memmove(void *d, void *s, size_t size)
 {
-	int	n;
-	int	i;
-	
+	int				n;
+	int				i;
+	unsigned char	t[n];//VARIABLE LEN ARRAY FORBIDDEN!!!FUNCTION HAS TO CHANGE!!!!
+
 	n = ft_strlen(s);
-	unsigned char	t[n];
 	i = 0;
 	while (t[i])
 	{

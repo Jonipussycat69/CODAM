@@ -6,12 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:30 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/05 12:40:51 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:34:31 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
