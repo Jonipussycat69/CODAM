@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/11 12:38:41 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_split.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/10 18:39:55 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/11 22:10:54 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-static size_t	ft_strlen(char	*str)
+static size_t	ft_strlen(const char	*str)
 {
 	size_t	i;
 
@@ -40,6 +41,7 @@ static int	count(char const *s, char c)
 			temp = 0;
 		s++;
 	}
+	return (i);
 }
 
 static char	*word(char const *s, int b, int e)
@@ -81,4 +83,15 @@ char	**ft_split(char const *s, char c)
 	}
 	arr[j] = 0;/* ????????????????????????????????? */
 	return (arr);
+}
+
+int	main(void)
+{
+	char **out;
+	char s[] = "shahj,hsjahsjah,hs,s";
+	out = ft_split(s, ',');
+	printf("%s\n", out[0]);
+	printf("%s\n", out[1]);
+	printf("%s\n", out[2]);
+	return 0;
 }
