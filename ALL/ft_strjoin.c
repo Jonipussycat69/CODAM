@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:48:57 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:52:32 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 19:02:00 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,11 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static unsigned int	ft_strlen(const char	*str)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*r;
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = ft_strlen(s1) + ft_strlen(s2) + 1;

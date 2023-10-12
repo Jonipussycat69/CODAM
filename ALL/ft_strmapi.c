@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:57 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/11 17:17:05 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 18:32:50 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t n)
+static size_t	ft_strlen(char *str)
 {
 	int	i;
-	int	destl;
 
-	destl = ft_strlen(dest);
 	i = 0;
-	while (++i < n - destl)
-		dest[destl + i] = src[i];
-	dest[destl + i] = '\0';
-	return (n);
+	while (str[i])
+		i++;
+	return (i);
 }
 
-// int	main(void)
-// {
-// 	char dest[20] = "Hello ";
-// 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
-// 	return 0;
-// }
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char	*arr;
+	size_t	i;
 
-// /* NO TEST */
+	i = 0;
+	if (!(arr = (char *) malloc((ft_strlen(s) + 1) * sizeof(char))))
+		return (NULL);
+	while (s[i])
+	{
+		arr[i] = f(i, s[i]);
+		i++;
+	}
+	arr[i] = '\0';
+	return (arr);
+}

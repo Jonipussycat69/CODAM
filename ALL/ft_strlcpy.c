@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:57 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/03 18:04:27 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 19:03:16 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t n)
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
 	int	i;
-	int	destl;
 
-	destl = ft_strlen(dest);
 	i = 0;
-	while (++i < n - destl)
-		dest[destl + i] = src[i];
-	dest[destl + i] = '\0';
-	return (n);
+	while (dest[i] != '\0' && src[i] != '\0' && n > 0)
+	{
+		dest[i] = src[i];
+		i++;
+		n--;
+	}
+	if (i > 0)
+		dest[i] = '\0';
+	return (i);
 }
 
 // int	main(void)
 // {
-// 	char dest[20] = "Hello ";
-// 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
+// 	char	dest[20];
+// 	char	src[] = "Hello World";
+// 	printf("Mine: %zu", ft_strlencpy(dest, src, 6));
+// 	// printf("sys: %d", strlcpy(dest, src, 6));
 // 	return 0;
 // }
 
-// /* NO TEST */
+// /* Not complete probably */

@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:57 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/10 12:32:47 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 18:32:57 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*r;
 	int	i;
-	int	destl;
 
-	destl = ft_strlen(dest);
+	if (!(r = (char *) malloc(len)))
+		return (NULL);
 	i = 0;
-	while (++i < n - destl)
-		dest[destl + i] = src[i];
-	dest[destl + i] = '\0';
-	return (n);
+	while (len-- && s[start])
+		r[i++] = s[start++];
+	return (r);
 }
 
-// int	main(void)
-// {
-// 	char dest[20] = "Hello ";
-// 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
-// 	return 0;
-// }
-
-// /* NO TEST */
+int	main(void)
+{
+	char s[] = "hello there";
+	printf("%s\n", ft_substr(s, 9, 3));
+	return (0);
+}

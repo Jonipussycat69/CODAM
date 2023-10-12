@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:57 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/11 17:49:43 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 18:32:38 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t n)
-{
-	int	i;
-	int	destl;
+// void	ft_touppermod(unsigned int i, char *c)
+// {
+// 	if (*c >= 97 && *c <= 122)
+// 		*c = *c - 32;
+// }
 
-	destl = ft_strlen(dest);
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	i;
+
 	i = 0;
-	while (++i < n - destl)
-		dest[destl + i] = src[i];
-	dest[destl + i] = '\0';
-	return (n);
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+	return ;
 }
 
 // int	main(void)
 // {
-// 	char dest[20] = "Hello ";
-// 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
-// 	return 0;
+// 	char s[] = "Heeee6eellloIo";
+// 	ft_striteri(s, ft_touppermod);
+// 	printf("%s\n", s);
+// 	return (0);
 // }
-
-// /* NO TEST */

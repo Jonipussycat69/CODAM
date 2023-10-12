@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:32 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:38 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 19:03:58 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	mystrcmp(const char *hay, const char *needle, int n)
 char	*ft_strnstr(const char *hay, const char *needle, size_t n)
 {
 	if (!(needle))
-		return (hay);
+		return ((char *)hay);
 	while (*hay != '\0' && *needle != '\0' && n > 0)
 	{
 		if (*hay == *needle)

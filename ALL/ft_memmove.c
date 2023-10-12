@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:12 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:50:10 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/12 19:48:19 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,28 @@
 #include <string.h>
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
 void	*ft_memmove(void *d, void *s, size_t size)
 {
-	int				n;
-	int				i;
-	unsigned char	t[n];//VARIABLE LEN ARRAY FORBIDDEN!!!FUNCTION HAS TO CHANGE!!!!
+	unsigned char	*des;
+	unsigned char	*src;
+	size_t			i;
 
-	n = ft_strlen(s);
+	des = (unsigned char *)d;
+	src = (unsigned char *)s;
 	i = 0;
-	while (t[i])
+	if (d > s)
 	{
-		t[i++] = *(unsigned char *)s++;
+		while (size--)
+		{
+			des[i] = src[i];
+		}
 	}
-	i = 0;
-	while (size-- > 0)
+	if (d < s)
 	{
-		*(unsigned char *)d++ = t[i++];
+		while (size-- && d && s)
+		{
+			des[i] = src[i];
+		}
 	}
 	return (d);
 }

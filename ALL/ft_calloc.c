@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:57 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/12 18:58:42 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t n)
+void	*ft_calloc(size_t c, size_t l)
 {
-	int	i;
-	int	destl;
+	unsigned char	*r;
+	size_t			i;
 
-	destl = ft_strlen(dest);
+	if (c <= 0 || l <= 0)
+		return (NULL);
 	i = 0;
-	while (++i < n - destl)
-		dest[destl + i] = src[i];
-	dest[destl + i] = '\0';
-	return (n);
+	if (!(r = (unsigned char *) malloc(c * sizeof(l))))
+		return (NULL);
+	while (i < c)
+		r[i++] = '\0';
+	return ((void *)r);
 }
-
-// int	main(void)
-// {
-// 	char dest[20] = "Hello ";
-// 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
-// 	return 0;
-// }
-
-// /* NO TEST */
