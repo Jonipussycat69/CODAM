@@ -6,24 +6,25 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:58:42 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:27:35 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-void	*ft_calloc(size_t c, size_t l)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*r;
 	size_t			i;
 
-	if (c <= 0 || l <= 0)
-		return (NULL);
 	i = 0;
-	if (!(r = (unsigned char *) malloc(c * sizeof(l))))
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	while (i < c)
+	r = (unsigned char *) malloc(nmemb * size);
+	if (!r)
+		return (NULL);
+	while (i < nmemb)
 		r[i++] = '\0';
 	return ((void *)r);
 }

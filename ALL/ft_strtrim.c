@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:55:23 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 19:04:51 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/13 18:00:38 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,63 @@ static int	check(char const ch, char const *set)
 	{
 		if (ch == *set)
 			return (1);
+		if (*set == '\0')
+			return (0);
 		set++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+static size_t	count(char const *s1, char const *set)
 {
-	char	t[ft_strlen(s1)];
-	char	*r;
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = ft_strlen(s1) - 1;
+	while (check(s1[i], set) == 1 && s1[i])
+		i++;
+	while (check(s1[j], set) == 1 && j >= i)
+		j--;
+	return (j - i);
+}
+
+static void	writer(char const *s1, char const *set, char *r, size_t l)
+{
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
 	while (check(s1[i], set) == 1)
 		i++;
-	while (check(s1[i], set) == 0)
-		t[j++] = s1[i++];
-	while (check(s1[i], set) == 1)
-		i++;
-	if (!(r = (char *) malloc(j * sizeof(char))))//MALLOC OUT OF IF
-		return (NULL);
-	i = 0;
-	while (t[i])
+	while (s1[i] && j < l + 1)
 	{
-		r[i] = t[i];
+		r[j] = s1[i];
 		i++;
+		j++;
 	}
-	r[i] = '\0';
+	r[j] = '\0';
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*r;
+	size_t	l;
+
+	l = count(s1, set);
+	if (l < 1)
+		return (NULL);
+	r = (char *) malloc((l + 2) * sizeof(char));
+	if (!r)
+		return (NULL);
+	writer(s1, set, r, l);
 	return (r);
 }
+
+// int	main(void)
+// {
+// 	printf("%s\n", ft_strtrim("---hdhdjshd--kwhdw---", "-"));
+// 	free;
+// 	return (0);
+// }
