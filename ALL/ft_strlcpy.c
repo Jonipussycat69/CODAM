@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:27 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 19:03:16 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strlcpy.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:27 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/13 11:53:28 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
 	int	i;
+	int	slen;
 
 	i = 0;
-	while (dest[i] != '\0' && src[i] != '\0' && n > 0)
+	slen = ft_strlen(src);
+	while (dest[i] && src[i] && n > 0)
 	{
 		dest[i] = src[i];
 		i++;
@@ -27,7 +29,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 	}
 	if (i > 0)
 		dest[i] = '\0';
-	return (i);
+	return (slen);
 }
 
 // int	main(void)
