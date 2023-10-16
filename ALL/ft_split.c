@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 19:06:18 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/16 18:13:23 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ char	**ft_split(char const *s, char c)
 	return (arr);
 }
 
-int	main(void)
-{
-	char **out;
-	char s[] = "shahj,hsjahsjah,hs,s";
-	out = ft_split(s, ',');
-	printf("%s\n", out[0]);
-	printf("%s\n", out[1]);
-	printf("%s\n", out[2]);
-	return 0;
-}
+// int	main(void)
+// {
+// 	char **out;
+// 	char s[] = "shahj,hsjahsjah,hs,s";
+// 	out = ft_split(s, ',');
+// 	printf("%s\n", out[0]);
+// 	printf("%s\n", out[1]);
+// 	printf("%s\n", out[2]);
+// 	return 0;
+// }

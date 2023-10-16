@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:19 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 19:00:36 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/16 17:32:40 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 char	*ft_strdup(const char *s)
 {
 	char	*ptr;
-	char	*temp;
+	int		i;
 
-	ptr = (char *) malloc (ft_strlen(s) * sizeof(char));
-	temp = ptr;
-	while (*s)
+	i = 0;
+	ptr = (char *) malloc ((ft_strlen(s) + 1) * sizeof(char));
+	if (!(ptr))
+		return (NULL);
+	while (s[i])
 	{
-		*ptr = *s;
-		s++;
-		ptr++;
+		ptr[i] = s[i];
+		i++;
 	}
-	return (temp);
+	ptr[i] = '\0';
+	return (ptr);
 }

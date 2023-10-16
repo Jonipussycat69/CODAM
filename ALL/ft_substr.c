@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:32:47 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/13 19:08:54 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/16 17:46:10 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start > ft_strlen(s) - 1)
 	{
 		r = (char *) malloc(1 * sizeof(char));
-		if (!r)
+		if (!(r))
 			return (NULL);
+		*r = '\0';
 		return (r);
 	}
 	l = count(s, start, len);
 	r = (char *) malloc((l + 1) * sizeof(char));
-	if (!r)
+	if (!(r))
 		return (NULL);
 	i = 0;
 	while (len-- && s[start])
