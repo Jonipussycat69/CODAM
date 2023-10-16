@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:07 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:50:23 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_memcmp.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:07 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/15 15:48:33 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,20 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	const unsigned char	*ls1;
 	const unsigned char	*ls2;
+	size_t				i;
 
 	ls1 = (const unsigned char*)s1;
 	ls2 = (const unsigned char*)s2;
-	while (*ls1 == *ls2 && *ls1 != '\0' && *ls2 != '\0' && n > 0)
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i < n)
 	{
-		ls1++;
-		ls2++;
-		n--;
+		if (ls1[i] != ls2[i])
+			return (ls1[i] - ls2[i]);
+		i++;
 	}
-	return (*ls1 - *ls2);
+	return (0);
 }
 
 // int	main(void)

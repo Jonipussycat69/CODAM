@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:30 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:48:43 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strncmp.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:30 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/16 11:21:24 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,24 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0' && n > 0)
+	size_t	i;
+	
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] == s2[i] && s1[i] && s2[i] && i <= n)
 	{
-		s1++;
-		s2++;
+		i++;
 		n--;
 	}
-	return (*s1 - *s2);
+	return (s1[i] - s2[i]);
 }
 
 // int	main(void)
 // {
-// 	char s1[] = "Hello World";
-// 	char s2[] = "Hello world";
-// 	printf("mine: %d\n", ft_strncmp(s1, s2, -9));
-// 	printf("sys: %d\n", strncmp(s1, s2, -9));
+// 	char s1[] = "1234";
+// 	char s2[] = "1235";
+// 	printf("mine: %d\n", ft_strncmp(s1, s2, 3));
+// 	printf("sys: %d\n", strncmp(s1, s2, 3));
 // 	return 0;
 // }
