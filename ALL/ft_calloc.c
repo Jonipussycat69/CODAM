@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_calloc.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:03:49 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/15 14:09:26 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/17 16:34:28 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,14 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char	*r;
-	size_t			i;
+	void	*r;
+	size_t	t;
 
-	i = 0;
-	if (nmemb == 0 || size == 0)
-	{
-		r = (unsigned char *) malloc(1);
-		if (!r)
-			return (NULL);
-		*r = '\0';
-		return ((void *)r);
-	}
-	r = (unsigned char *) malloc(nmemb * size);
-	if (!r)
+	t = nmemb * size;
+	if (nmemb != 0 && size != 0 && t / nmemb != size)
 		return (NULL);
-	while (i < nmemb * size)
-	{
-		r[i] = '\0';
-		i++;
-	}
-	return ((void *)r);
+	r = (void *) malloc(t);
+	if (r)
+		ft_memset(r, 0, t);
+	return (r);
 }

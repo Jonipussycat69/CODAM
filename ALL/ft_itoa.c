@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:10:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/16 19:20:22 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/17 17:01:59 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	mystrrev(char *str)
 	return ;
 }
 
-int	min(char *asc, size_t *i)
+static int	min(char *asc, size_t *i)
 {
 	int	r;
 

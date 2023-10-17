@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/16 18:13:23 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/17 19:28:56 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static char	*word(char const *s, int b, int e)
 	size_t	i;
 
 	i = 0;
-	if (!(word = (char *) malloc((e - b + 1) * sizeof(char))))
+	word = (char *) malloc((e - b + 1) * sizeof(char));
+	if (!(word))
 		return (NULL);
 	while (b < e)
 		word[i++] = s[b++];
@@ -48,14 +49,29 @@ static char	*word(char const *s, int b, int e)
 	return (word);
 }
 
+static void	freeer(char **arr, size_t i, size_t l)
+{
+	size_t	j;
+
+	j = 0;
+	while (j < l && j <= i)
+	{
+		free(arr[j]);
+		j++;
+	}
+	free(arr);
+	return ;
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	size_t	i;
 	size_t	j;
-	int	b;
+	int		b;
 
-	if (!s || !(arr = (char **) malloc((count(s, c)+1) * sizeof(char *))))
+	arr = (char **) malloc((count(s, c) + 1) * sizeof(char *));
+	if (!s || !(arr))
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -67,11 +83,13 @@ char	**ft_split(char const *s, char c)
 		else if (s[i] == c && b >= 0)
 		{
 			arr[j++] = word(s, b, i);
-			b = -1;
+			if (!(arr[j - 1]))
+			
+			b = -1;//REEEEEWRITEEEEEEE!!!!!!!!!!!!!!!!!!!!!
 		}
 		i++;
 	}
-	arr[j] = 0;/* ????????????????????????????????? */
+	arr[j] = NULL;
 	return (arr);
 }
 

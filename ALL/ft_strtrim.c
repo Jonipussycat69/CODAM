@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:55:23 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/13 18:00:38 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/17 14:05:41 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check(char const ch, char const *set)
 	return (0);
 }
 
-static size_t	count(char const *s1, char const *set)
+static int	count(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
@@ -36,7 +36,11 @@ static size_t	count(char const *s1, char const *set)
 	while (check(s1[i], set) == 1 && s1[i])
 		i++;
 	while (check(s1[j], set) == 1 && j >= i)
+	{
 		j--;
+		if (j - i < 0)
+			return (j - i);
+	}
 	return (j - i);
 }
 
@@ -61,11 +65,17 @@ static void	writer(char const *s1, char const *set, char *r, size_t l)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*r;
-	size_t	l;
+	int		l;
 
 	l = count(s1, set);
-	if (l < 1)
-		return (NULL);
+	if (l < 0)
+	{
+		r = (char *) malloc(1 * sizeof(char));
+		if (!r)
+			return (NULL);
+		*r = '\0';
+		return (r);
+	}
 	r = (char *) malloc((l + 2) * sizeof(char));
 	if (!r)
 		return (NULL);
@@ -75,7 +85,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	printf("%s\n", ft_strtrim("---hdhdjshd--kwhdw---", "-"));
-// 	free;
+// 	char *r;
+// 	printf("%s\n", ft_strtrim("abcdba", "abc"));
+// 	r = ft_strtrim("abcdba", "abc");
+// 	free(r);
 // 	return (0);
 // }
