@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 18:03:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/18 21:41:11 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/21 12:24:25 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,11 @@ int	ft_atoi(const char *str)
 	}
 	return (c * v);
 }
+
+// int	main(void)
+// {
+// 	char s[] = "12345";
+// 	printf("libft: %d\n", ft_atoi(s));
+// 	printf("original: %d\n", atoi(s));
+// 	return (0);
+// }
