@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strchr.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:17 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/16 11:04:02 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:17 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:18:18 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 const char	*ft_strchr(const char *str, int c)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (c > 127)
 		return (str);
@@ -29,3 +29,12 @@ const char	*ft_strchr(const char *str, int c)
 		return (str + i);
 	return (NULL);
 }
+
+// int	main(void)
+// {
+// 	char	s[] = "String";
+// 	char	c = 'i';
+// 	printf("mine: %s\n", ft_strchr(s, c));
+// 	printf("original: %s\n", strchr(s, c));
+// 	return (0);
+// }

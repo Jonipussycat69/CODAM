@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strrchr.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:35 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/16 11:09:10 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:35 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:42:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ const char	*ft_strrchr(const char *str, int c)
 
 // int	main(void)
 // {
-// 	char	str[] = "Hello World";
-// 	printf("mibne: %s", ft_strrchr(str, 'o'));
-// 	return 0;
+// 	char	s[] = "String String";
+// 	char	c = 'i';
+// 	printf("mine: %s\n", ft_strrchr(s, c));
+// 	printf("original: %s\n", strrchr(s, c));
+// 	return (0);
 // }

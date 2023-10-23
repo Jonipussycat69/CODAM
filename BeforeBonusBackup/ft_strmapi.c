@@ -6,13 +6,19 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:17:05 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/13 18:03:34 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:36:19 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
+
+// void	ft_touppermod(unsigned int i, char *c)
+// {
+// 	if (*c >= 97 && *c <= 122)
+// 		*c = *c - 32;
+// }
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -31,3 +37,12 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	arr[i] = '\0';
 	return (arr);
 }
+
+// int	main(void)
+// {
+// 	char *out;
+// 	char s[] = "Heeee6eellloIo";
+// 	out = ft_strmapi(s, ft_touppermod);
+// 	printf("%s\n", out);
+// 	return (0);
+// }

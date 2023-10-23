@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strlcat.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:22 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/23 11:26:18 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:22 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:26:03 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 // {
 // 	char dest[20] = "Hello ";
 // 	char src[] = "World";
-// 	printf("mine: %ld\n", ft_strlcat(dest, src, 20));
+// 	printf("mine: %zu\n", ft_strlcat(dest, src, 20));
+// 	printf("dest: %s\n", dest);
 // 	return 0;
 // }

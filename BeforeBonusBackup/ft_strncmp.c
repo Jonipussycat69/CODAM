@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:30 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/16 16:27:48 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:37:34 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 // {
 // 	char s1[] = "1234";
 // 	char s2[] = "\200";
-// 	printf("mine: %d\n", ft_strncmp(s1, s2, 3));
-// 	printf("sys: %d\n", strncmp(s1, s2, 3));
+// 	printf("Libft: %d\n", ft_strncmp(s1, s2, 3));
+// 	printf("Original: %d\n", strncmp(s1, s2, 3));
 // 	return 0;
 // }

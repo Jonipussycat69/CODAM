@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strlcpy.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:27 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/23 11:26:47 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:27 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:24:42 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,8 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 // {
 // 	char	dest[] = "AAAAAAAAAA";
 // 	char	src[] = "coucou";
-// 	printf("Mine: %zu\n", ft_strlcpy(dest, src, 2));
-// 	printf("Mine: %d\n", ft_strlcpy(dest, src, 2) == strlen(src) && dest[0] == 'c' && dest[1] == 0  && dest[2] == 'A');
-// 	// printf("sys: %d", strlcpy(dest, src, 6));
-// 	return 0;
-// }
-
-// int	main(void)
-// {
-// 	char	dest[] = "AAAAAAAAAA";
-// 	char	src[] = "coucou";
-// 	printf("Mine: %zu\n", ft_strlcpy(dest, src, -1));
-// 	printf("Mine: %d\n", ft_strlcpy(dest, src, -1) == strlen(src) && !strcmp(src, dest) && dest[strlen(src) + 1] == 'A');
-// 	// printf("sys: %d", strlcpy(dest, src, 6));
+// 	printf("Libft: %zu\n", ft_strlcpy(dest, src, 2));
+// 	printf("dest: %s\n", dest);
+// 	printf("src: %s\n", src);
 // 	return 0;
 // }

@@ -41,12 +41,12 @@
 // 	return (0);
 // }
 
-int	main(void)
-{
-	printf("%d\n", isascii(30));
-	printf("%d\n", isalpha(100));
-	printf("%d\n", isalnum(49));
-	printf("%d\n", isdigit(49));
-	printf("%d\n", isprint(70));
-	return (0);
-}
+// int	main(void)
+// {
+// 	printf("%d\n", isascii(30));
+// 	printf("%d\n", isalpha(100));
+// 	printf("%d\n", isalnum(49));
+// 	printf("%d\n", isdigit(49));
+// 	printf("%d\n", isprint(70));
+// 	return (0);
+// }

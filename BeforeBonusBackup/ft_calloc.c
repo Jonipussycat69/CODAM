@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:03:49 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/17 16:34:28 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 13:07:21 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		ft_memset(r, 0, t);
 	return (r);
 }
+
+// int	main(void)
+// {
+// 	//make it
+// }

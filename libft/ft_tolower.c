@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:37 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:34:45 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:47:45 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,9 @@ int	ft_tolower(int c)
 		return (c + 32);
 	return (c);
 }
+
+// int	main(void)
+// {
+// 	printf("libft: %c\n", ft_tolower('A'));
+// 	return (0);
+// }

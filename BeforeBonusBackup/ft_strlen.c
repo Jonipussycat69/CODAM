@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:25 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/13 12:59:29 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:27:45 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,10 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
+// int	main(void)
+// {
+// 	char	s[] = "12345";
+// 	printf("%zu\n", ft_strlen(s));
+// 	return (0);
+// }

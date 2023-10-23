@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:02 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 12:07:10 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/19 16:43:47 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/19 17:25:31 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (c >= 32 && c <= 126)
-		return (16384);
-	return (0);
-}
+	t_list	*temp;
 
-// int	main(void)
-// {
-// 	char s = 's';
-// 	printf("libft: %d\n", ft_isprint(s));
-// 	printf("original: %d\n", isprint(s));
-// 	return (0);
-// }
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		temp = *lst;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+	}
+}

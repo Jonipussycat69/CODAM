@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_split.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/10 18:39:55 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/18 15:58:33 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:55:29 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*word(char const *s, size_t b, size_t e)
 {
 	char	*word;
 	size_t	i;
-	
+
 	i = 0;
 	word = (char *)malloc((e - b + 1) * sizeof(char));
 	if (!(word))
@@ -70,11 +70,13 @@ static char	*word(char const *s, size_t b, size_t e)
 	return (word);
 }
 
-static char	**arr_word(char **arr, char const *s, char c, size_t i, size_t j)
+static char	**arr_word(char **arr, char const *s, char c, size_t i)
 {
-	int	b;
+	int		b;
+	size_t	j;
 
 	b = -1;
+	j = 0;
 	while (s[i])
 	{
 		if (s[i] != c && b < 0)
@@ -101,14 +103,12 @@ char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	size_t	i;
-	size_t	j;
-	
+
 	i = 0;
-	j = 0;
 	arr = (char **)malloc((count(s, c) + 1) * sizeof(char *));
 	if (!(arr))
 		return (NULL);
-	if (arr_word(arr, s, c, i, j) == NULL)
+	if (arr_word(arr, s, c, i) == NULL)
 		return (NULL);
 	return (arr);
 }

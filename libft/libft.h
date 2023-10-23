@@ -1,11 +1,23 @@
-#ifndef FILE1_H   // Include guards to prevent double inclusion
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 13:07:39 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 13:09:10 by jdobos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FILE1_H
 #define FILE1_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <ctype.h>
-#include <string.h>
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <unistd.h>
+	#include <ctype.h>
+	#include <string.h>
 
 typedef struct s_list
 {

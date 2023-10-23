@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:48:57 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 19:02:00 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:50:35 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(r = (char *) malloc(j * sizeof(char))))
+	r = (char *) malloc(j * sizeof(char));
+	if (!(r))
 		return (NULL);
 	j = ft_strlen(s1);
 	while (i < j)

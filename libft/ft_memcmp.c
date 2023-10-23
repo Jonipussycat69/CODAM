@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_memcmp.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:07 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/15 15:48:33 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:07 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 12:09:48 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	const unsigned char	*ls2;
 	size_t				i;
 
-	ls1 = (const unsigned char*)s1;
-	ls2 = (const unsigned char*)s2;
+	ls1 = (const unsigned char *)s1;
+	ls2 = (const unsigned char *)s2;
 	i = 0;
 	if (n == 0)
 		return (0);

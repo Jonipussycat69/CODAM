@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:19 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/16 17:32:40 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strdup.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:19 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/23 11:25:29 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,17 @@ char	*ft_strdup(const char *s)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
+// int	main(void)
+// {
+// 	char	*out1;
+// 	char	*out2;
+// 	char	in[] = "String";
+// 	out1 = ft_strdup(in);
+// 	out2 = strdup(in);
+// 	printf("Mine: %s\n", out1);
+// 	printf("Mine: %s\n", out2);
+// 	free(out1);
+// 	free(out2);
+// 	return (0);
+// }
