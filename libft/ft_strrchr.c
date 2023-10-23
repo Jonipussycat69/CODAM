@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:35 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 12:42:02 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strrchr.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:35 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/23 16:16:43 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-const char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
-	i = ft_strlen(str);
-	if (c > 127)
-		return (str);
-	while (i > 0 && str[i] != c)
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 		i--;
 	}
-	if (str[i] == c)
-		return (&str[i]);
+	if ((char)c == 0)
+		return ((char *)s + i);
 	return (NULL);
 }
 

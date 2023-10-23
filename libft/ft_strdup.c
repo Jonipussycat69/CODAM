@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 18:04:19 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/23 11:25:29 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/23 17:55:37 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 char	*ft_strdup(const char *s)
 {
 	char	*ptr;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	ptr = (char *) malloc ((ft_strlen(s) + 1) * sizeof(char));
