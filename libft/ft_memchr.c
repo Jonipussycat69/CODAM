@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_memchr.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/03 18:04:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/23 11:06:13 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 18:04:05 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/23 18:55:41 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 void	*ft_memchr(const void *str, int c, size_t n)
 {
-	if (c > 255)
-		c -= 256;
-	while (n > 0 && str)
+	while (n > 0)
 	{
-		if (*(unsigned char *)str == c)
+		if (*(unsigned char *)str == (unsigned char)c)
 			return ((void *)str);
 		str++;
 		n--;

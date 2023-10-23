@@ -6,33 +6,28 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:32 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 12:41:06 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 19:28:46 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strnstr(const char *hay, const char *needle, size_t n)
 {
-	size_t	nl;
+	size_t		nl;
+	size_t		i;
 
-	if (*needle == '\0')
+	if (!(*needle))
 		return ((char *)hay);
 	nl = ft_strlen(needle);
-	if (nl < 2)
-		nl--;
-	if (n > 1)
-		n--;
-	while (*hay != '\0' && *needle != '\0' && n > 0)
+	while (*hay && n-- >= nl)
 	{
-		if (*hay == *needle)
-			if (ft_strncmp(hay, needle, nl) == 0)
-				return ((char *)hay);
+		i = 0;
+		while (needle[i] && hay[i] == needle[i])
+			i++;
+		if (needle[i] == '\0')
+			return ((char *)hay);
 		hay++;
-		n--;
 	}
 	return (NULL);
 }
