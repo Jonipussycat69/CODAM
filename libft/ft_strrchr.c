@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 18:04:35 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/16 11:09:10 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/23 11:19:18 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ const char	*ft_strrchr(const char *str, int c)
 
 // int	main(void)
 // {
-// 	char	str[] = "Hello World";
-// 	printf("mibne: %s", ft_strrchr(str, 'o'));
-// 	return 0;
+// 	char	s[] = "String String";
+// 	char	c = 'i';
+// 	printf("mine: %s\n", ft_strchr(s, c));
+// 	printf("original: %s\n", strchr(s, c));
+// 	return (0);
 // }

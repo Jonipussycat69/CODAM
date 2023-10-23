@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 18:04:17 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/16 11:04:02 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/23 11:18:51 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,12 @@ const char	*ft_strchr(const char *str, int c)
 		return (str + i);
 	return (NULL);
 }
+
+// int	main(void)
+// {
+// 	char	s[] = "String";
+// 	char	c = 'i';
+// 	printf("mine: %s\n", ft_strchr(s, c));
+// 	printf("original: %s\n", strchr(s, c));
+// 	return (0);
+// }

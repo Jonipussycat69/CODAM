@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:04:27 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/17 13:30:15 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strlcpy.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/03 18:04:27 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/23 11:26:47 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,3 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 // 	// printf("sys: %d", strlcpy(dest, src, 6));
 // 	return 0;
 // }
-
-// /* Not complete probably */
