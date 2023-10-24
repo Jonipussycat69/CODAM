@@ -6,11 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:03:47 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 18:35:13 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:39:30 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)

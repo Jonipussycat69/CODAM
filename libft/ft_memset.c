@@ -6,12 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:14 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 18:56:31 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:40:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 #include "libft.h"
 
 void	*ft_memset(void *b, int c, size_t l)

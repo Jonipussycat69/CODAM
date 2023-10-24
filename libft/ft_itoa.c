@@ -6,12 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:10:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 19:32:27 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:39:04 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	counter(int n)
