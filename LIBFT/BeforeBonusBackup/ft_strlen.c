@@ -6,11 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:04:25 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 12:27:45 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:25:56 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 size_t	ft_strlen(const char *str)

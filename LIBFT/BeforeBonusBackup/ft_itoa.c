@@ -1,17 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_itoa.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/11 13:10:56 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/10/21 12:46:26 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/11 13:10:56 by jdobos            #+#    #+#             */
+/*   Updated: 2023/10/24 11:39:04 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	counter(int n)
@@ -83,7 +81,7 @@ char	*ft_itoa(int n)
 		ascii[i++] = '-';
 		n = n * -1;
 	}
-	while (n > 10)
+	while (n > 9)
 	{
 		ascii[i++] = n % 10 + 48;
 		n = n / 10;

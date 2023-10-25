@@ -6,12 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/23 12:55:29 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:40:21 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	count(char const *s, char c)

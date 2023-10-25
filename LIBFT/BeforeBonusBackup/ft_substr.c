@@ -6,12 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:32:47 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/16 17:46:10 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:41:04 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	count(char const *s, unsigned int start, size_t l)
@@ -33,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	size_t	l;
 
-	if (start > ft_strlen(s) - 1)
+	if (start >= ft_strlen(s))
 	{
 		r = (char *) malloc(1 * sizeof(char));
 		if (!(r))

@@ -6,11 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:49:43 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/12 18:32:38 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:40:30 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 // void	ft_touppermod(unsigned int i, char *c)

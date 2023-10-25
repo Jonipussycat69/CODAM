@@ -6,11 +6,10 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:55:23 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/17 14:05:41 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:40:58 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 static int	check(char const ch, char const *set)

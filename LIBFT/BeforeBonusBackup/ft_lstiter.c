@@ -6,7 +6,7 @@
 /*   By: joni <joni@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/20 11:49:04 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/20 11:55:36 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/23 23:20:13 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (lst == NULL || f == NULL)
+		return ;
 	while (lst != NULL)
 	{
 		f(lst->content);
 		lst = lst->next;
 	}
 }
-
-/*TEST IT*/
