@@ -6,13 +6,13 @@
 /*   By: joni <joni@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 19:43:20 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/25 15:31:44 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/26 15:31:34 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_lstnew(void *buf)
+t_list	*ft_lstnew(char *buf)
 {
 	t_list	*new_node;
 
@@ -51,7 +51,8 @@ void	ft_lstclear(t_list **lst)
 	temp = *lst;
 	while (temp != NULL)
 	{
-		free(temp->buf);
+		if (temp->buf)
+			free(temp->buf);
 		temp2 = temp;
 		temp = temp->next;
 		free(temp2);
@@ -59,12 +60,20 @@ void	ft_lstclear(t_list **lst)
 	*lst = NULL;
 }
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+char	*ft_strchr(const char *str, int c)
 {
-	if (lst == NULL || del == NULL)
-		return ;
-	del(lst->buf);
-	free(lst);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == (char)c)
+			return ((char *)str + i);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)str + i);
+	return (NULL);
 }
 
 int	ft_lstsize(t_list *lst)

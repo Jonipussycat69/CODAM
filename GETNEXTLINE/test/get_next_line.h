@@ -6,7 +6,7 @@
 /*   By: joni <joni@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/25 16:15:11 by joni          ########   odam.nl         */
+/*   Updated: 2023/10/26 15:31:41 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <ctype.h>
 # include <string.h>
 # include <fcntl.h>
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 5
 
 typedef struct s_list
 {
@@ -27,10 +27,10 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-t_list	*ft_lstnew(void *buf);
+t_list	*ft_lstnew(char *buf);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-int	ft_lstsize(t_list *lst);
+char	*ft_strchr(const char *str, int c);
+int		ft_lstsize(t_list *lst);
 
 #endif
