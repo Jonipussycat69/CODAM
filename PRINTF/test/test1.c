@@ -62,6 +62,11 @@ char	*ft_strnstr(const char *hay, const char *needle, size_t n)
 	return (NULL);
 }
 
+void	*my_putnbrbase(int n, char *base)
+{
+	
+}
+
 size_t	my_strchr(const char *h, char c)
 {
 	size_t	i;
