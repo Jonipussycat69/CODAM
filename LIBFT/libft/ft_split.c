@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 18:39:55 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/24 11:40:21 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_split.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/10 18:39:55 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/10/31 11:50:13 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,99 +15,78 @@
 static size_t	count(char const *s, char c)
 {
 	int		t;
-	size_t	i;
+	size_t	words;
 
 	t = 0;
-	i = 0;
+	words = 0;
 	while (*s)
 	{
 		if (*s != c && t == 0)
 		{
-			i++;
+			words++;
 			t = 1;
 		}
 		else if (*s == c)
 			t = 0;
 		s++;
 	}
-	return (i);
+	return (words);
 }
 
-static void	free_er(char **arr, size_t j)
+static void	*free_er(char **arr, size_t word)
 {
-	if (j > 1)
-	{
-		j--;
-		while (j > 0)
-		{
-			free(arr[j]);
-			j--;
-		}
-		free(arr[j]);
-	}
+	while (word--)
+		free(arr[word]);
 	free(arr);
-	return ;
+	return (NULL);
 }
 
-static char	*word(char const *s, size_t b, size_t e)
+static char	*wordalloc(char const *s, char const c)
 {
-	char	*word;
 	size_t	i;
+	char	*word;
 
 	i = 0;
-	word = (char *)malloc((e - b + 1) * sizeof(char));
-	if (!(word))
+	while (s[i] && s[i] != c)
+		i++;
+	word = malloc((i + 1) * sizeof(char));
+	if (!word)
 		return (NULL);
-	while (b < e && s[b])
+	i = 0;
+	while (s[i] && s[i] != c)
 	{
-		word[i] = s[b];
-		b++;
+		word[i] = s[i];
 		i++;
 	}
 	word[i] = '\0';
 	return (word);
 }
 
-static char	**arr_word(char **arr, char const *s, char c, size_t i)
-{
-	int		b;
-	size_t	j;
-
-	b = -1;
-	j = 0;
-	while (s[i])
-	{
-		if (s[i] != c && b < 0)
-			b = i;
-		else if (s[i] == c && b >= 0)
-		{
-			arr[j++] = word(s, b, i);
-			if (!(arr[j - 1]))
-			{
-				free_er(arr, j - 1);
-				return (NULL);
-			}
-			b = -1;
-		}
-		i++;
-	}
-	if (b < (int)i && b != -1)
-		arr[j++] = word(s, b, i);
-	arr[j] = NULL;
-	return (arr);
-}
-
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, const char c)
 {
 	char	**arr;
+	size_t	word;
 	size_t	i;
 
-	i = 0;
 	arr = (char **)malloc((count(s, c) + 1) * sizeof(char *));
-	if (!(arr))
+	if (!arr)
 		return (NULL);
-	if (arr_word(arr, s, c, i) == NULL)
-		return (NULL);
+	word = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+		{
+			arr[word] = wordalloc((char *)(s + i), c);
+			if (!arr[word])
+				return (free_er(arr, word));
+			i += ft_strlen(arr[word]);
+			word++;
+		}
+	}
+	arr[word] = NULL;
 	return (arr);
 }
 
