@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.h                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: joni <joni@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/26 15:31:41 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 19:44:21 by joni              #+#    #+#             */
+/*   Updated: 2023/11/01 17:41:37 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-t_list	*ft_lstnew(char *buf);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst);
-char	*ft_strchr(const char *str, int c);
-int		ft_lstsize(t_list *lst);
+// typedef struct fd_list
+// {
+// 	char			**head;
+// 	int				fd;
+// 	struct ft_list	*next;
+// }	fd_l;
+
+// typedef struct variable_list
+// {
+// 	char	*line;
+// 	char	*buf;
+// 	int		pos;
+// 	fd_l	**head_fd;
+// 	t_list	**head_l;
+// }	var;
 
 #endif

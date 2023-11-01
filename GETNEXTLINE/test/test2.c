@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:03:14 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/31 14:52:21 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:42:06 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_list	*ft_read(t_list **head, int fd)
 			break ;
 		}
 		ft_lstadd_back(head, ft_lstnew(buffer));
+		//LEFTOFF
 	}
 	return (newnode);
 }

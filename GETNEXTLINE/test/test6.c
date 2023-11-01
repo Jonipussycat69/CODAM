@@ -41,19 +41,6 @@ void	*freeall(t_list **head)
 	return (NULL);
 }
 
-size_t	llen(t_list *lst)
-{
-	size_t	c;
-
-	c = 0;
-	while (lst != NULL)
-	{
-		c++;
-		lst = lst->next;
-	}
-	return (c);
-}
-
 size_t	slen(char *str)
 {
 	size_t	c;
@@ -109,78 +96,17 @@ int	node_add_back(t_list **head, t_list *new)
 
 int	read_line(int fd, t_list **head)
 {
-	char	buffer[BUFFER_SIZE + 1];
-	t_list	*new_node;
-	ssize_t	bytesread;
-	int		newline;
 
-	newline = 0;
-	while (bytesread > 0 && newline == 0)
-	{
-		bytesread = read(fd, buffer, BUFFER_SIZE);
-		if (bytesread <= 0)
-		{
-			if (bytesread < 0)
-				return (-1);
-			break ;
-		}
-		buffer[BUFFER_SIZE] = '\0';
-		if (node_add_back(head, node_new(buffer)) == 0)
-			return (-1);
-		if (slen(buffer) != BUFFER_SIZE + 1)
-			break ;
-	}
-	return (nl_strlen(buffer));
-}
-
-char	*remain_cpy(char *dest, char *src)
-{
-	size_t	i;
-
-	while (dest[i])
-		dest[i++] = '\0';
-	while (src[i] && --i)
-		*(dest++) = *(src++);
-	return (dest);
 }
 
 char	*make_str(t_list **head, int lblen)
 {
-	char		*line;
-	t_list		*temp;
-	size_t		ib;
-	static char	remainder[BUFFER_SIZE];
-	
-	line = (char *)cal(((llen(head) - 1) * BUFFER_SIZE)
-	 + lblen + slen(remainder) - 1, 1);
-	if (!line)
-		return (NULL);
-	temp = *head;
-	ib = 0;
-	line = remain_cpy(line, remainder);
-	while (temp != NULL)
-	{
-		while ((temp->buf)[ib] && (temp->buf)[ib] != '\n')
-			*(line++) = (temp->buf)[ib++];
-		ib = 0;
-		if (temp->next == NULL)
-			remain_cpy(temp->buf, remainder);
-		temp = temp->next;
-	}
-	return (line);
+
 }
 
 char	*get_next_line(int fd)
 {
-	t_list	*head;
-	int		last_buf_len;
-	char	*line;
-	
+	fd_l	*head;
+
 	head = NULL;
-	last_buf_len = read_line(fd, &head);
-	if (last_buf_len < 0)
-		return (freeall(&head));
-	line = make_str(&head, last_buf_len);
-	freeall(&head);
-	return (line);
 }

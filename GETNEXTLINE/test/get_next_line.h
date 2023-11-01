@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.h                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: joni <joni@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/26 15:31:41 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 19:44:21 by joni              #+#    #+#             */
+/*   Updated: 2023/11/01 15:35:24 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ typedef struct s_list
 	int				position;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct fd_list
+{
+	char			**head;
+	int				fd;
+	struct ft_list	*next;
+}	fd_l;
+
+typedef struct variable_list
+{
+	char	*line;
+	char	*buf;
+	int		pos;
+	fd_l	**head_fd;
+	t_list	**head_l;
+}	var;
 
 t_list	*ft_lstnew(char *buf);
 void	ft_lstadd_back(t_list **lst, t_list *new);

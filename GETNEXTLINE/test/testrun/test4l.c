@@ -130,7 +130,7 @@ int	read_line(int fd, t_list **head)
 		if (slen(buffer) != BUFFER_SIZE + 1)
 			break ;
 	}
-	return (nl_strlen(buffer));
+	return (slen(buffer));
 }
 
 char	*remain_cpy(char *dest, char *src)
@@ -151,7 +151,7 @@ char	*make_str(t_list **head, int lblen)
 	size_t		ib;
 	static char	remainder[BUFFER_SIZE];
 	
-	line = (char *)cal(((llen(head) - 1) * BUFFER_SIZE)
+	line = (char *)cal(((llen(*head) - 1) * BUFFER_SIZE)
 	 + lblen + slen(remainder) - 1, 1);
 	if (!line)
 		return (NULL);
@@ -184,3 +184,16 @@ char	*get_next_line(int fd)
 	freeall(&head);
 	return (line);
 }
+
+// int	main(void)
+// {
+// 	char	*line;
+// 	int	fd = open("test.txt", O_RDONLY);
+// 	if (fd < 0)
+// 		return (1);
+// 	if ((line = get_next_line(fd)) != NULL)
+// 		printf("next line: %s\n", line);
+// 	free(line);
+// 	close(fd);
+// 	return (0);
+// }
