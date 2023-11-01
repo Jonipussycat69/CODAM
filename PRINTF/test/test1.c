@@ -64,7 +64,7 @@ char	*ft_strnstr(const char *hay, const char *needle, size_t n)
 
 void	*my_putnbrbase(int n, char *base)
 {
-	
+	//RESUME HERE!
 }
 
 size_t	my_strchr(const char *h, char c)

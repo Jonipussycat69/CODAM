@@ -83,19 +83,19 @@ char	*get_next_line(int fd)
 	return (out);
 }
 
-int	main(void)
-{
-	char	*line;
-	int	fd = open("test.txt", O_RDONLY);
-	if (fd < 0)
-		return (1);
-	get_next_line(fd);
-	// if ((line = get_next_line(fd)) != NULL)
-	// {
-	// 	printf("next line: %s\n", line);
-	// 	printf("next line: %s\n", line);
-	// }
-	// free(line);
-	close(fd);
-	return (0);
-}
+// int	main(void)
+// {
+// 	char	*line;
+// 	int	fd = open("test.txt", O_RDONLY);
+// 	if (fd < 0)
+// 		return (1);
+// 	get_next_line(fd);
+// 	// if ((line = get_next_line(fd)) != NULL)
+// 	// {
+// 	// 	printf("next line: %s\n", line);
+// 	// 	printf("next line: %s\n", line);
+// 	// }
+// 	// free(line);
+// 	close(fd);
+// 	return (0);
+// }
