@@ -21,7 +21,7 @@ void	*cal(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-void	*freeall(t_list **head)
+void	*lst_free(t_list **head)
 {
 	t_list	*temp;
 	t_list	*temp2;
@@ -139,7 +139,9 @@ char	*remain_cpy(char *dest, char *src)
 
 	while (dest[i])
 		dest[i++] = '\0';
-	while (src[i] && --i)
+	if (slen(src) < BUFFER_SIZE + 1)
+		src += slen(src) - 1;
+	while (*src && --i)
 		*(dest++) = *(src++);
 	return (dest);
 }
@@ -179,21 +181,10 @@ char	*get_next_line(int fd)
 	head = NULL;
 	last_buf_len = read_line(fd, &head);
 	if (last_buf_len < 0)
-		return (freeall(&head));
+		return (lst_free(&head));
 	line = make_str(&head, last_buf_len);
-	freeall(&head);
+	printf("line = %s", line);
+	printf("line = %s", head->buf);
+	lst_free(&head);
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	char	*line;
-// 	int	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	if ((line = get_next_line(fd)) != NULL)
-// 		printf("next line: %s\n", line);
-// 	free(line);
-// 	close(fd);
-// 	return (0);
-// }
