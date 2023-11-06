@@ -8,10 +8,10 @@ int	main(void)
 		return (1);
 	printf("Running\n");//CHECK
 	if ((line = get_next_line(fd)) != NULL)
-		printf("~>>> MAIN next line: %s<<<~\n", line);
+		printf(">> MAIN next line: %s<<\n", line);
 	free(line);
 	if ((line = get_next_line(fd)) != NULL)
-		printf("~>>> MAIN next line: %s<<<~\n", line);
+		printf(">> MAIN next line: %s<<\n", line);
 	printf("Cleaning\n");//CHECK
 	free(line);
 	close(fd);

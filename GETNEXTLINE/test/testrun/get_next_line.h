@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:44:21 by joni              #+#    #+#             */
-/*   Updated: 2023/11/03 13:17:53 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/06 19:58:00 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <ctype.h>
 # include <string.h>
 # include <fcntl.h>
-# define BUFFER_SIZE 5
+# define BUFFER_SIZE 42
 
 typedef struct s_list
 {
@@ -27,6 +27,7 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
+void	*free_line(char *line);
 
 // typedef struct fd_list
 // {
