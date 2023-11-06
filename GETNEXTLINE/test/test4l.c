@@ -3,6 +3,7 @@
 void	*cal(size_t nmemb, size_t size)
 {
 	void	*ptr;
+	void	*tempptr;
 	size_t	t;
 
 	t = nmemb * size;
@@ -11,30 +12,39 @@ void	*cal(size_t nmemb, size_t size)
 	ptr = (void *)malloc(t);
 	if (ptr)
 	{
+		tempptr = ptr;
 		while (t > 0)
 		{
-			*(unsigned char *)ptr = '\0';
-			ptr++;
+			*(unsigned char *)tempptr = '\0';
+			tempptr++;
 			t--;
 		}
 	}
+	else
+		ptr = NULL;
 	return (ptr);
 }
 
-void	*freeall(t_list **head)
+void	*lst_free(t_list **head)
 {
 	t_list	*temp;
 	t_list	*temp2;
 
-	if (head == NULL)
+	if (head == NULL || *head == NULL)
 		return (NULL);
 	temp = *head;
+	printf("GNL >> Running FREE loop\n");//CHECK
 	while (temp != NULL)
 	{
-		if (temp->buf)
-			free(temp->buf);
 		temp2 = temp;
 		temp = temp->next;
+		if (temp2->buf)
+		{
+			printf("GNL >> Running FREE loop >> temp->buf: %s\n", temp2->buf);//CHECK
+			printf("GNL >> Running FREE loop >> freeing buf\n");//CHECK
+			free(temp2->buf);
+		}
+		printf("GNL >> Running FREE loop iteration\n");//CHECK
 		free(temp2);
 	}
 	*head = NULL;
@@ -72,19 +82,22 @@ t_list	*node_new(char *buffer)
 {
 	t_list	*new_node;
 	char	*str;
+	char	*tempstr;
 
 	str = (char *)cal(sizeof(char), BUFFER_SIZE + 1);
 	if (!(str))
 		return (NULL);
+	tempstr = str;
 	while (*buffer)
 		*(str++) = *(buffer++);
+	printf("GNL >> node new str >> %s <<\n", tempstr);//CHECK
 	new_node = (t_list *)malloc(sizeof(t_list));
 	if (!(new_node))
 	{
-		free(str);
+		free(tempstr);
 		return (NULL);
 	}
-	new_node->buf = str;
+	new_node->buf = tempstr;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -112,34 +125,39 @@ int	read_line(int fd, t_list **head)
 	char	buffer[BUFFER_SIZE + 1];
 	t_list	*new_node;
 	ssize_t	bytesread;
-	int		newline;
 
-	newline = 0;
-	while (bytesread > 0 && newline == 0)
+	printf("GNL >> Running read loop\n");//CHECK
+	bytesread = 1;
+	while (bytesread > 0)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
+		printf("GNL >> Running read loop >>\n");//CHECK
+		printf("GNL >> Running read loop >> btsr: %zu\n", bytesread);//CHECK
 		if (bytesread <= 0)
 		{
 			if (bytesread < 0)
 				return (-1);
 			break ;
 		}
-		buffer[BUFFER_SIZE] = '\0';
+		buffer[bytesread] = '\0';
 		if (node_add_back(head, node_new(buffer)) == 0)
 			return (-1);
 		if (slen(buffer) != BUFFER_SIZE + 1)
 			break ;
 	}
-	return (nl_strlen(buffer));
+	return (slen(buffer));
 }
 
 char	*remain_cpy(char *dest, char *src)
 {
 	size_t	i;
 
+	i = 0;
 	while (dest[i])
 		dest[i++] = '\0';
-	while (src[i] && --i)
+	if (slen(src) < BUFFER_SIZE + 1)
+		src += slen(src) - 1;
+	while (*src && --i)
 		*(dest++) = *(src++);
 	return (dest);
 }
@@ -149,22 +167,32 @@ char	*make_str(t_list **head, int lblen)
 	char		*line;
 	t_list		*temp;
 	size_t		ib;
+	size_t		il;
 	static char	remainder[BUFFER_SIZE];
 	
-	line = (char *)cal(((llen(head) - 1) * BUFFER_SIZE)
+	line = (char *)cal(((llen(*head) - 1) * BUFFER_SIZE)
 	 + lblen + slen(remainder) - 1, 1);
 	if (!line)
 		return (NULL);
 	temp = *head;
 	ib = 0;
+	il = 0;
 	line = remain_cpy(line, remainder);
+	printf("GNL >> Running make loop\n");//CHECK
 	while (temp != NULL)
 	{
+		printf("GNL >> Running make loop >>\n");//CHECK
 		while ((temp->buf)[ib] && (temp->buf)[ib] != '\n')
-			*(line++) = (temp->buf)[ib++];
+		{
+			line[il++] = (temp->buf)[ib++];
+			if ((temp->buf)[ib] == '\n')
+				line[il] = '\n';
+		}
 		ib = 0;
 		if (temp->next == NULL)
-			remain_cpy(temp->buf, remainder);
+			remain_cpy(remainder, temp->buf);
+		printf("GNL >> make line >> %s\n", line);//CHECK
+		printf("GNL >> make temp->buf >> %s\n", temp->buf);//CHECK
 		temp = temp->next;
 	}
 	return (line);
@@ -175,12 +203,17 @@ char	*get_next_line(int fd)
 	t_list	*head;
 	int		last_buf_len;
 	char	*line;
-	
+
 	head = NULL;
+	printf("GNL >> Running read\n");//CHECK
 	last_buf_len = read_line(fd, &head);
 	if (last_buf_len < 0)
-		return (freeall(&head));
+		return (lst_free(&head));
+	printf("GNL >> head->buf >> %s\n", head->buf);//CHECK
+	printf("GNL >> Running make\n");//CHECK
 	line = make_str(&head, last_buf_len);
-	freeall(&head);
+	printf("line = %s\n", line);
+	printf("head->buf = %s\n", head->buf);
+	lst_free(&head);
 	return (line);
 }
