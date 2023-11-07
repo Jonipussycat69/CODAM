@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:44:21 by joni              #+#    #+#             */
-/*   Updated: 2023/11/07 18:29:48 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line.h                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
+/*   Updated: 2023/11/07 19:06:16 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # endif
 
 char	*get_next_line(int fd);
-void	*free_line(char *line);
+void	*free_line(char *line, int type);
 size_t	nl_count(char *str, int type);
 
 #endif

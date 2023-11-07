@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:43:20 by joni              #+#    #+#             */
-/*   Updated: 2023/11/07 18:29:31 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line_utils.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/24 19:43:20 by joni          #+#    #+#                 */
+/*   Updated: 2023/11/07 19:12:05 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*free_line(char *line)
+void	*free_line(char *line, int type)
 {
-	if (line != NULL)
+	if (type == 1)
+	{
+		if (line && line[0] == '\0')
+		{
+			free(line);
+			return (NULL);
+		}
+		return (line);
+	}
+	if (line != NULL && type == 0)
 		free(line);
 	return (NULL);
 }
