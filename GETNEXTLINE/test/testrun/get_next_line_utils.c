@@ -6,24 +6,15 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 19:43:20 by joni          #+#    #+#                 */
-/*   Updated: 2023/11/07 19:12:05 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/07 23:29:37 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*free_line(char *line, int type)
+void	*free_line(char *line)
 {
-	if (type == 1)
-	{
-		if (line && line[0] == '\0')
-		{
-			free(line);
-			return (NULL);
-		}
-		return (line);
-	}
-	if (line != NULL && type == 0)
+	if (line != NULL)
 		free(line);
 	return (NULL);
 }
