@@ -4,19 +4,20 @@ int	main(void)
 {
 	char	*line;
 	int	fd = open("test.txt", O_RDONLY);
+	int	i;
+	
+	i = 0;
 	if (fd < 0)
 		return (1);
-	line = get_next_line(fd);
-	if (line)
+	while (i++ < 7)
 	{
-		printf("%s", line);
-		free_line(line);
-	}
-	line = get_next_line(fd);
-	if (line)
-	{
-		printf("%s", line);
-		free_line(line);
+		// printf("MAIN >> getting line\n");
+		line = get_next_line(fd);
+		if (line)
+		{
+			printf("%s", line);
+			free_line(line);
+		}
 	}
 	close(fd);
 	printf("\n");

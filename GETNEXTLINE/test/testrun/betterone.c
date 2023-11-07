@@ -85,7 +85,7 @@ char	*buf_clean(char *buf, ssize_t end, int type)
 	return (NULL);
 }
 
-char	*buf_line(char *line, char *buf)
+char	*buf_line(char *line, char *t_line, char *buf)
 {
 	char	*result;
 	const size_t	l_len = nl_len(line);
@@ -97,7 +97,7 @@ char	*buf_line(char *line, char *buf)
 		return (free_line(line));
 	i = 0;
 	while (i < l_len)
-		result[i++] = *(line++);
+		result[i++] = *(t_line++);
 	while (i - l_len < b_len + 1)//maybe overflow?
 		result[i++] = *(buf++);
 	free_line(line);
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	while (nl_check(buffer) == 0)
 	{
-		line = buf_line(line, buffer);
+		line = buf_line(line, line, buffer);//double frees here
 		if (line == NULL)
 			return (NULL);
 		bytesread = read(fd, buffer, BUFFER_SIZE);
@@ -126,7 +126,7 @@ char	*get_next_line(int fd)
 	}
 	if (bytesread == -1)
 	{
-		line = buf_line(line, buffer);
+		line = buf_line(line, line, buffer);
 		buf_clean(buffer, nl_len(buffer) + 1, 1);
 	}
 	return (line);
@@ -144,7 +144,7 @@ int	main(void)
 	i = 0;
 	if (fd < 0)
 		return (1);
-	while (i++ < 7)
+	while (i++ < 6)
 	{
 		line = get_next_line(fd);
 		if (line)
