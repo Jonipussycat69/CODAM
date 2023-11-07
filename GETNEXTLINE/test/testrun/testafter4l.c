@@ -100,9 +100,9 @@ char	*read_line(char *line, char *remain, int fd)
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread < 0)
 			return (free_line(line));
+		buffer[bytesread] = '\0';
 		if (bytesread == 0 && i == 0)
 			return (NULL);
-		buffer[bytesread] = '\0';
 		line = create_line(line, buffer, bytesread);
 		if (line == NULL)
 			return (NULL);
@@ -137,11 +137,36 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (remain[nl_len(remain)] == '\n')
 	{
-		printf("\n>> GNL remain begin: %s<<\n", remain);
+		// printf("\n>> GNL remain begin: %s<<\n", remain);
 		line = rem_line(line, remain, nl_len(remain) + 1);
 		return (rem_clean(line, remain, nl_len(remain) + 1));
 	}
 	line = create_line(line, remain, BUFFER_SIZE);
 	line = read_line(line, remain, fd);
 	return (line);
+}
+
+// MAIN-----------------------------
+
+int	main(void)
+{
+	char	*line;
+	int	fd = open("test.txt", O_RDONLY);
+	int	i;
+	
+	i = 0;
+	if (fd < 0)
+		return (1);
+	while (i++ < 7)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			printf("%s", line);
+			free_line(line);
+		}
+	}
+	close(fd);
+	printf("\n");
+	return (0);
 }

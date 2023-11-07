@@ -74,6 +74,7 @@ char	*get_next_line(int fd)
 	ssize_t		bytesread;
 
 	bytesread = -1;
+	line = NULL;
 	while (nl_check(buffer) == 0)//buffer undefined??
 	{
 		line = create_line(line, buffer);
@@ -82,9 +83,9 @@ char	*get_next_line(int fd)
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread < 0)
 			return (free_line(line));
+		buffer[bytesread] = '\0';
 		if (bytesread == 0)
 			break ;
-		buffer[bytesread] = '\0';
 	}
 	if (bytesread == -1)
 	{
@@ -92,4 +93,29 @@ char	*get_next_line(int fd)
 		buf_clean(buffer, nl_len(buffer) + 1);
 	}
 	return (line);
+}
+
+// MAIN-----------------------------
+
+int	main(void)
+{
+	char	*line;
+	int	fd = open("test.txt", O_RDONLY);
+	int	i;
+	
+	i = 0;
+	if (fd < 0)
+		return (1);
+	while (i++ < 7)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			printf("%s", line);
+			free_line(line);
+		}
+	}
+	close(fd);
+	printf("\n");
+	return (0);
 }
