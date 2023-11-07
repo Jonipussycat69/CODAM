@@ -132,6 +132,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+// FREES POINTER THAT WAS NOT ALLOCATED WHEN ITERATING MORE TIMES OVER ONE LINE!
 // MAIN-----------------------------
 
 int	main(void)
