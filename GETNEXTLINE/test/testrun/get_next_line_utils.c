@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:44:21 by joni              #+#    #+#             */
-/*   Updated: 2023/11/07 18:29:48 by jdobos           ###   ########.fr       */
+/*   Created: 2023/10/24 19:43:20 by joni              #+#    #+#             */
+/*   Updated: 2023/11/07 18:29:31 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <ctype.h>
-# include <string.h>
-# include <fcntl.h>
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+void	*free_line(char *line)
+{
+	if (line != NULL)
+		free(line);
+	return (NULL);
+}
 
-char	*get_next_line(int fd);
-void	*free_line(char *line);
-size_t	nl_count(char *str, int type);
+size_t	nl_count(char *str, int type)
+{
+	size_t	nl;
 
-#endif
+	if (!str)
+		return (0);
+	nl = 0;
+	if (type == 1)
+	{
+		while (str[nl] && (nl == 0 || str[nl - 1] != '\n'))
+			nl++;
+		return (nl);
+	}
+	while (*str)
+	{
+		if (*str == '\n')
+			nl++;
+		str++;
+	}
+	return (nl);
+}
