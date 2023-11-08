@@ -1,0 +1,28 @@
+#include "get_next_line_bonus.h"
+
+void	*free_line(char *line)
+{
+	if (line != NULL)
+		free(line);
+	return (NULL);
+}
+
+size_t	nl_count(char *str, int type)
+{
+	size_t	nl;
+
+	nl = 0;
+	if (str && type == 1)
+	{
+		while (str[nl] && (nl == 0 || str[nl - 1] != '\n'))
+			nl++;
+		return (nl);
+	}
+	while (str && *str)
+	{
+		if (*str == '\n')
+			nl++;
+		str++;
+	}
+	return (nl);
+}
