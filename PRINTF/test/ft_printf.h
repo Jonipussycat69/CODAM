@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 13:07:39 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/27 12:26:55 by jdobos           ###   ########.fr       */
+/*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/09 17:49:17 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <ctype.h>
 # include <string.h>
 # include <stdarg.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+# include <limits.h>
 
 int			ft_atoi(const char *str);
 void		ft_bzero(void *s, size_t n);
@@ -59,14 +54,14 @@ void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(char const *s, char c);
 char		*ft_itoa(int n);
-void		ft_lstadd_back(t_list **lst, t_list *new);
-void		ft_lstadd_front(t_list **lst, t_list *new);
-void		ft_lstclear(t_list **lst, void (*del)(void *));
-void		ft_lstdelone(t_list *lst, void (*del)(void *));
-void		ft_lstiter(t_list *lst, void (*f)(void *));
-t_list		*ft_lstlast(t_list *lst);
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list		*ft_lstnew(void *content);
-int			ft_lstsize(t_list *lst);
+
+//CUSTOM PRINTF
+
+int		ft_printf(const char *form, ...);
+char	*add_print(char const *heap, char const *stack);
+char	*mod_itoa(long long value, int base, char *print, int hex_type);
+void	*free_str(char *str);
+// char	*ft_strdup(const char *s);
+// size_t	ft_strlen(const char *str);
 
 #endif
