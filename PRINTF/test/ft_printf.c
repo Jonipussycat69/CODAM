@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 12:35:13 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/10 12:37:51 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/10 14:31:33 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_printf(const char *form, ...)
 			print = char_str(form[i], print);
 		if (print == NULL)
 			return (-1);
-		printf("TEST>> print: %s, i: %zu, form[i && i + 1]: %c%c, specnum: %d<<\n", print, i, form[i], form[i + 1], sp_check(form, i));// TEST
+		printf("TEST>> print: %s,\ni: %zu, form[i && i + 1]: %c%c, specnum: %d<<\n\n", print, i, form[i], form[i + 1], sp_check(form, i));// TEST
 		i += specifier_skip(sp_check(form, i));
 	}
 	i = ft_strlen(print);

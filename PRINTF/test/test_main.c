@@ -10,8 +10,8 @@ static void test(int amount, int choice)
 	int		in4 = INT_MAX;
 	int		in5 = INT_MIN;
 	int		in6 = 0;
-	char	*test = NULL;
-	int		*testint = &in6;
+	char	*testp = NULL;
+	int		*testpint = &in6;
 	char	c = 'A';
 
 	int		ft;
@@ -52,17 +52,17 @@ static void test(int amount, int choice)
 	if ((amount > 4 || choice == 5) && (choice == 0 || choice == 5))
 	{
 		printf("\n\033[1;35mT5 \033[0m~~>\noriginal:\n\n");
-		origin = printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		origin = printf("He LLO");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		ft = ft_printf("He LLO");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	if ((amount > 5 || choice == 6) && (choice == 0 || choice == 6))
 	{
 		printf("\n\033[1;35mT6 \033[0m~~>\noriginal:\n\n");
-		origin = printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		origin = printf("%p, %p", testpint, testp);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		ft = ft_printf("%p, %p", testpint, testp);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	if ((amount > 6 || choice == 7) && (choice == 0 || choice == 7))
@@ -82,7 +82,7 @@ static void test(int amount, int choice)
 int	main(void)
 {
 	printf("ENTERING TESTER\n");
-	test(3, 4);
+	test(3, 6);
 	printf("EXITTED TESTER\n");
 	return (0);
 }
