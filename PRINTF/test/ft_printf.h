@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/09 17:49:17 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/09 18:58:12 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		ft_printf(const char *form, ...);
 char	*add_print(char const *heap, char const *stack);
 char	*mod_itoa(long long value, int base, char *print, int hex_type);
 void	*free_str(char *str);
+char	*ptr_str(void *arg, char *print);
 // char	*ft_strdup(const char *s);
 // size_t	ft_strlen(const char *str);
 
