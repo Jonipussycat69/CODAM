@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/09 18:58:12 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/10 12:43:54 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_itoa(int n);
 //CUSTOM PRINTF
 
 int		ft_printf(const char *form, ...);
-char	*add_print(char const *heap, char const *stack);
+char	*add_print(char *heap, char *stack);
 char	*mod_itoa(long long value, int base, char *print, int hex_type);
 void	*free_str(char *str);
 char	*ptr_str(void *arg, char *print);

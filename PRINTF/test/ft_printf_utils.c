@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 12:35:08 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/09 18:51:02 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/10 12:43:41 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,27 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*add_print(char const *heap, char const *stack)
+char	*add_print(char *heap, char *stack)
 {
-	char	*result;
-	size_t	i;
-	size_t	j;
+	char			*result;
+	char			*temp_heap;
+	size_t			i;
+	const size_t	s_len = ft_strlen(stack);
+	const size_t	h_len = ft_strlen(heap);
 
 	if (!heap || !stack)
-		return (free_str((char *)heap));
+		return (free_str(heap));
 	i = 0;
-	j = ft_strlen(heap) + ft_strlen(stack) + 1;
-	result = (char *)malloc(j * sizeof(char));
+	temp_heap = heap;
+	result = (char *)malloc(s_len + h_len + 1);
 	if (!(result))
-		return (free_str((char *)heap));
-	j = ft_strlen(heap);
-	while (i < j)
-	{
-		result[i] = heap[i];
-		i++;
-	}
-	i = 0;
-	while (i < ft_strlen(stack))
-		result[j++] = stack[i++];
-	result[j] = '\0';
-	free_str((char *)heap);
+		return (free_str(heap));
+	while (i < h_len)
+		result[i++] = *(temp_heap++);
+	while (i - h_len < s_len)
+		result[i++] = *(stack++);
+	result[i] = '\0';
+	free_str(heap);
 	return (result);
 }
 

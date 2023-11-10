@@ -6,19 +6,32 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 12:35:13 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/10 10:36:18 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/10 12:37:51 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*char_str(char ch, char *print)
+char	*char_str(char const ch, char *heap)
 {
-	char	ch_str[2];
+	char	*result;
+	char	*temp_heap;
+	size_t	i;
+	const size_t	heap_len = ft_strlen(heap);
 
-	ch_str[0] = ch;
-	ch_str[1] = '\0';
-	return (add_print(print, ch_str));
+	if (!heap || !ch)
+		return (free_str(heap));
+	i = 0;
+	temp_heap = heap;
+	result = (char *)malloc(heap_len + 2);
+	if (!(result))
+		return (free_str(heap));
+	while (i < heap_len)
+		result[i++] = *(temp_heap++);
+	result[i++] = ch;
+	result[i] = '\0';
+	free_str(heap);
+	return (result);
 }
 
 int	sp_check(const char *form, int i)
@@ -63,7 +76,7 @@ char	*get_arg(void *arg, int specifier, char *print)
 	else if (specifier == 8 && arg)
 		print = mod_itoa(*(int *)arg, 16, print, 1);
 	else if (specifier == 9 && arg)
-		print = add_print(print, "%\0");
+		print = add_print(print, "%");
 	if (!(print))
 		return (NULL);
 	return (print);
@@ -87,12 +100,13 @@ int	ft_printf(const char *form, ...)
 	print = ft_strdup("");
 	while (form[i])
 	{
-		if (sp_check(form, i) > 0 && sp_check(form, i) < 10)
+		if (form[i + 1] && sp_check(form, i) > 0 && sp_check(form, i) < 10)
 			print = get_arg(va_arg(args, void *), sp_check(form, i), print);
-		else if (sp_check(form, i) == 0)
+		else
 			print = char_str(form[i], print);
 		if (print == NULL)
 			return (-1);
+		printf("TEST>> print: %s, i: %zu, form[i && i + 1]: %c%c, specnum: %d<<\n", print, i, form[i], form[i + 1], sp_check(form, i));// TEST
 		i += specifier_skip(sp_check(form, i));
 	}
 	i = ft_strlen(print);

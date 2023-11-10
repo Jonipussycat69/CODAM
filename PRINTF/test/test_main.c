@@ -43,10 +43,10 @@ static void test(int amount, int choice)
 	}
 	if ((amount > 3 || choice == 4) && (choice == 0 || choice == 4))
 	{
-		printf("\n\033[1;35mT4 \033[0m~~>\noriginal:\n\n");
-		origin = printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		printf("\n\033[1;35mT4 \033[0m~~>\noriginal:\n\n");// TEST THIS AND FIX THIS!!!!!!!!!
+		origin = printf("%%%%%%");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("HELLO %s, Is %s!.1 %p, %% %c	=%p", s1, s2, test, c, testint);
+		ft = ft_printf("%%%%%%");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	if ((amount > 4 || choice == 5) && (choice == 0 || choice == 5))
@@ -82,7 +82,7 @@ static void test(int amount, int choice)
 int	main(void)
 {
 	printf("ENTERING TESTER\n");
-	test(3, 0);
+	test(3, 4);
 	printf("EXITTED TESTER\n");
 	return (0);
 }
