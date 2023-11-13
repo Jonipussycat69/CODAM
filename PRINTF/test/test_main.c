@@ -22,9 +22,9 @@ static void test(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf("HELLO %s, Is %s!.1", s1, s2);
+		origin = printf(" NULL %s NULL ", s1);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("HELLO %s, Is %s!.1", s1, s2);
+		ft = ft_printf(" NULL %s NULL ", s1);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2
@@ -40,9 +40,9 @@ static void test(int amount, int choice)
 	if ((amount > 2 || choice == 3) && (choice == 0 || choice == 3))
 	{
 		printf("\n\033[1;35mT3 \033[0m~~>\noriginal:\n\n");
-		origin = printf("%c", c);
+		origin = printf("%c %c %c %c", '0', 0, 0, '1');
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("%c", c);
+		ft = ft_printf("%c %c %c %c", '0', 0, 0, '1');
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 4
@@ -58,9 +58,9 @@ static void test(int amount, int choice)
 	if ((amount > 4 || choice == 5) && (choice == 0 || choice == 5))
 	{
 		printf("\n\033[1;35mT5 \033[0m~~>\noriginal:\n\n");
-		origin = printf("He LLO");
+		origin = printf(" %x %X %x ", -1, -99, 78);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("He LLO");
+		ft = ft_printf(" %x %X %x ", -1, -99, 78);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 6
@@ -96,7 +96,7 @@ static void test(int amount, int choice)
 int	main(void)
 {
 	printf("\033[1;32mENTERING TESTER\033[0m\n");
-	test(8, 0);
+	test(8, 5);
 	printf("\n\033[1;32mEXITTED TESTER\033[0m\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:16:39 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/13 16:24:49 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/13 18:18:08 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ char	*get_buf(char *buf, char *line, size_t i, size_t j)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer_array[FOPEN_MAX][BUFFER_SIZE + 1];
+	static char	buffer_array[1024][BUFFER_SIZE + 1];
 	ssize_t		bytesread;
 	char		*line;
 
-	if (fd > FOPEN_MAX || fd < 0)
+	if (fd > 1023 || fd < 0)
 		return (NULL);
 	line = (char *)malloc(sizeof(char));
 	if (!line)

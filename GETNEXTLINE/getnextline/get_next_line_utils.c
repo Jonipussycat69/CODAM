@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line_utils.c                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/24 19:43:20 by joni          #+#    #+#                 */
-/*   Updated: 2023/11/08 08:12:39 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/13 18:06:08 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/13 18:06:13 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	*free_line(char *line)
 
 size_t	nl_count(char *str, int type)
 {
-	size_t	nl;
+	size_t	i;
 
-	nl = 0;
+	i = 0;
 	if (str && type == 1)
 	{
-		while (str[nl] && (nl == 0 || str[nl - 1] != '\n'))
-			nl++;
-		return (nl);
+		while (str[i] && (i == 0 || str[i - 1] != '\n'))
+			i++;
+		return (i);
 	}
 	while (str && *str)
 	{
 		if (*str == '\n')
-			nl++;
+			return (1);
 		str++;
 	}
-	return (nl);
+	return (0);
 }

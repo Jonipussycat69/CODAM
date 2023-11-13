@@ -4,7 +4,7 @@ CFLAGS=-Wall -Werror -Wextra
 
 RM=rm -f
 
-SRC=ft_printf.c ft_convert.c ft_printf_utils.c ft_get_arg.c
+SRC=ft_printf.c ft_convert.c ft_printf_utils.c ft_get_arg.c ft_printer_funct.c
 
 OBJ=$(SRC:.c=.o)
 
