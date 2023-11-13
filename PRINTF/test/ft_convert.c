@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 15:58:59 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/10 10:12:37 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/13 11:35:21 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*mod_itoa(long long value, int base, char *print, int hex_type)
 
 char	*ptr_str(void *arg, char *print)
 {
-	if (arg == NULL)
+	if (!arg)
 		return (add_print(print, "0x0"));
 	print = add_print(print, "0x");
 	return (mod_itoa((long long)arg, 16, print, 0));
