@@ -6,6 +6,8 @@ RM=rm -f
 
 SRC=ft_printf.c ft_convert.c ft_printf_utils.c ft_get_arg.c
 
+OBJ=$(SRC:.c=.o)
+
 all: $(NAME)
 
 %.o: %.c

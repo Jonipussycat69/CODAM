@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: joni <joni@student.codam.nl>                 +#+                     */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
-/*   Updated: 2023/10/25 13:52:26 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/07 23:28:45 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@
 # include <ctype.h>
 # include <string.h>
 # include <fcntl.h>
-# define BUFFER_SIZE 10
 
-typedef struct s_list
-{
-	char			*buf;
-	struct s_list	*next;
-}	t_list;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-t_list	*ft_lstnew(void *buf);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	*ft_calloc(size_t nmemb, size_t size);
+char	*get_next_line(int fd);
+void	*free_line(char *line);
+size_t	nl_count(char *str, int type);
 
 #endif
