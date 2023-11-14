@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 14:07:34 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/14 19:53:01 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 typedef struct s_printf
 {
 	size_t	i;
-	size_t	p_len;
 	int		spec;
 }	t_va;
 

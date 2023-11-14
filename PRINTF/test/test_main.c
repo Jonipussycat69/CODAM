@@ -22,9 +22,9 @@ static void test(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" NULL %s NULL ", s1);
+		origin = printf(" NULL % NULL ");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf(" NULL %s NULL ", s1);
+		ft = ft_printf(" NULL % NULL ");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2
@@ -96,7 +96,7 @@ static void test(int amount, int choice)
 int	main(void)
 {
 	printf("\033[1;32mENTERING TESTER\033[0m\n");
-	test(5, 8);
+	test(5, 1);
 	printf("\n\033[1;32mEXITTED TESTER\033[0m\n");
 	return (0);
 }
