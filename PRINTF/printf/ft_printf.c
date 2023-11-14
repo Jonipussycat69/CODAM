@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:35:13 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 14:23:05 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/14 19:22:40 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	spf(const char *form, int i)
 {
+	if (form[i] != '%')
+		return (0);
 	if (form[i] == '%' && form[i + 1] == 'c')
 		return (1);
 	if (form[i] == '%' && form[i + 1] == 's')
