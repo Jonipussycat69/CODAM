@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:35:08 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 18:22:05 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/13 14:29:30 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,9 @@ size_t	writer(char *print)
 {
 	size_t	i;
 
-	i = 0;
-	if (!print || print[0] == '\0')
-	{
-		free_str(print);
-		return (0);
-	}
-	while (print[i] != '\0')
-	{
-		if (print[i] == -1)
-			print[i] = 0;
-		write(1, &print[i], 1);
-		i++;
-	}
+	i = ft_strlen(print);
+	if (print && print[0] != '\0')
+		write(1, print, i);
 	free_str(print);
 	return (i);
 }

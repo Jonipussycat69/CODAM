@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 14:07:34 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:05:36 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include <stdarg.h>
 # include <limits.h>
 
-typedef struct s_printf
+typedef struct	ft_printf_s
 {
+	char	*print;
 	size_t	i;
-	size_t	p_len;
 	int		spec;
-}	t_va;
+	int		type;
+}	var;
 
 int		ft_printf(const char *form, ...);
 size_t	writer(char *print);

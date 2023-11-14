@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:35:13 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 14:23:05 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/13 14:42:20 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,27 @@ size_t	specifier_skip(int spec)
 int	ft_printf(const char *form, ...)
 {
 	va_list	args;
+	size_t	i;
 	char	*print;
-	t_va	va;
 
 	va_start(args, form);
-	va.i = 0;
+	i = 0;
 	print = ft_strdup("");
-	while (form[va.i])
+	while (form[i])
 	{
-		va.spec = spf(form, va.i);
-		if (va.spec > 1 && va.spec < 4)
-			print = get_arg_void(va_arg(args, void *), va.spec, print);
-		else if (va.spec == 6)
-			print = get_arg_u(va_arg(args, unsigned int), va.spec, print);
-		else if (va.spec > 0 && va.spec < 9)
-			print = get_arg_int(va_arg(args, int), va.spec, print);
+		if (spf(form, i) > 1 && spf(form, i) < 4)
+			print = get_arg_void(va_arg(args, void *), spf(form, i), print);
+		else if (spf(form, i) == 6)
+			print = get_arg_u(va_arg(args, unsigned int), spf(form, i), print);
+		else if (spf(form, i) > 0 && spf(form, i) < 9)
+			print = get_arg_int(va_arg(args, int), spf(form, i), print);
 		else
-			print = char_str(form[va.i], print, va.spec);
+			print = char_str(form[i], print, spf(form, i));
 		if (print == NULL)
 			return (-1);
-		va.i += specifier_skip(va.spec);
+		i += specifier_skip(spf(form, i));
 	}
+	i = writer(print);
 	va_end(args);
-	return (writer(print));
+	return (i);
 }
