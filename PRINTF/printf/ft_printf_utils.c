@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 12:35:08 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 18:22:05 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf_utils.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 12:35:08 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/15 14:48:42 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,21 @@ char	*ft_strdup(const char *s)
 size_t	writer(char *print)
 {
 	size_t	i;
+	size_t	begin;
 
 	i = 0;
-	if (!print || print[0] == '\0')
+	while (print && print[i] != '\0')
 	{
-		free_str(print);
-		return (0);
-	}
-	while (print[i] != '\0')
-	{
+		begin = i;
+		while (print[i] && print[i] != -1)
+			i++;
+		write(1, print + begin, i - begin);
 		if (print[i] == -1)
+		{
 			print[i] = 0;
-		write(1, &print[i], 1);
-		i++;
+			write(1, &print[i], 1);
+			i++;
+		}
 	}
 	free_str(print);
 	return (i);

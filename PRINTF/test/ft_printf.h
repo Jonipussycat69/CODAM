@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 13:05:36 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/15 13:54:51 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 # include <stdarg.h>
 # include <limits.h>
 
-typedef struct	ft_printf_s
+typedef struct s_printf
 {
-	char	*print;
 	size_t	i;
 	int		spec;
-	int		type;
-}	var;
+	char	*print;
+}	t_va;
 
 int		ft_printf(const char *form, ...);
 size_t	writer(char *print);

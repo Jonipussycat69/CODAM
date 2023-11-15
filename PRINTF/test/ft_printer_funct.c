@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 17:16:05 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/13 17:16:37 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/14 18:13:45 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*char_str(int ch, char *heap, int type)
 	size_t			i;
 	const size_t	heap_len = ft_strlen(heap);
 
+	if (ch == 0)
+		ch = -1;
 	if (type == 9)
 		return (add_print(heap, "%"));
 	if (!heap)
