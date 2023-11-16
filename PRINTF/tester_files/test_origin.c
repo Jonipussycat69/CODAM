@@ -23,11 +23,13 @@ static void test_origin(int amount, int choice)
 
 	int		origin;
 
+	// POSSIBLE FLAGS:> +, (space), # <&&> -, (width num), 0 <
+
 	// TEST 1
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf("NULL%5c|%-5cNULL", 'A', 'A');
+		origin = printf(">%5s|%-5s<", "Hi", "Hi");
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 2
@@ -41,21 +43,21 @@ static void test_origin(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT3 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%0   5d|% -5d<", 42, 42);
+		origin = printf(">%0 5i|%0+5d<", 42, 42);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 4
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT4 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%#X|%#x<", 42, 42);
+		origin = printf(">%0#####0##15x|%-#-10x<", 42, 42);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 5
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT5 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%06X|%6x<", 42, 42);
+		origin = printf(">%-6c|%6c<", '4', '4');
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 6
@@ -69,7 +71,7 @@ static void test_origin(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT7 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%#X|%#x<", 42, 42);
+		origin = printf(">%+-3p|%+3p<", testpint, testpint);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 8
