@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 12:16:48 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/13 18:05:42 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line_utils_bonus.c                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 12:16:48 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/16 12:04:18 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@ void	*free_line(char *line)
 	return (NULL);
 }
 
-size_t	nl_count(char *str, int type)
+size_t	nl_len(char *str)
 {
 	size_t	i;
 
 	i = 0;
-	if (str && type == 1)
+	if (str)
 	{
 		while (str[i] && (i == 0 || str[i - 1] != '\n'))
 			i++;
 		return (i);
 	}
+	return (0);
+}
+
+size_t	nl_check(char *str)
+{
 	while (str && *str)
 	{
 		if (*str == '\n')

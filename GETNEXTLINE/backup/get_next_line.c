@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line_bonus.c                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/09 12:16:39 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/16 12:05:59 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 19:43:24 by joni              #+#    #+#             */
+/*   Updated: 2023/11/09 14:30:17 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*get_buf(char *buf, char *line, size_t i, size_t j)
 {
-	const size_t	l_len = nl_len(line);
-	const size_t	b_len = nl_len(buf);
+	const size_t	l_len = nl_count(line, 1);
+	const size_t	b_len = nl_count(buf, 1);
 	char			*new_line;
 	char			*temp_line;
 
@@ -38,27 +38,25 @@ char	*get_buf(char *buf, char *line, size_t i, size_t j)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer_array[1024][BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	ssize_t		bytesread;
 	char		*line;
 
-	if (fd > 1023 || fd < 0)
-		return (NULL);
 	line = (char *)malloc(sizeof(char));
 	if (!line)
 		return (NULL);
 	line[0] = '\0';
-	line = get_buf(buffer_array[fd], line, 0, 0);
-	if (nl_check(line) != 0 || line == NULL)
+	line = get_buf(buffer, line, 0, 0);
+	if (nl_count(line, 0) != 0 || line == NULL)
 		return (line);
 	bytesread = 1;
-	while (nl_check(line) == 0 && line != NULL && bytesread > 0)
+	while (nl_count(line, 0) == 0 && line != NULL && bytesread > 0)
 	{
-		bytesread = read(fd, buffer_array[fd], BUFFER_SIZE);
+		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread < 0)
 			return (free_line(line));
-		buffer_array[fd][bytesread] = '\0';
-		line = get_buf(buffer_array[fd], line, 0, 0);
+		buffer[bytesread] = '\0';
+		line = get_buf(buffer, line, 0, 0);
 	}
 	if (line && line[0] == '\0')
 		line = free_line(line);

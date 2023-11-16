@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 19:44:21 by joni          #+#    #+#                 */
-/*   Updated: 2023/11/16 12:00:54 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/07 23:28:45 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 char	*get_next_line(int fd);
 void	*free_line(char *line);
-size_t	nl_len(char *str);
-size_t	nl_check(char *str);
+size_t	nl_count(char *str, int type);
 
 #endif
