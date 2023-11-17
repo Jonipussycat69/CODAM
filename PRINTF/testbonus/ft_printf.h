@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/17 12:16:06 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/17 14:50:59 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct s_flags
 	size_t	f_hash;
 	size_t	f_sp;
 	size_t	min;
-	size_t	zero;
 	size_t	width;
 	size_t	order;
 	size_t	p_len;
+	int		fill_ch;
 }	t_fl;
 
 int		ft_printf(const char *form, ...);

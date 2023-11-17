@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:52:11 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/16 16:17:33 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf_bonus.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/16 13:52:11 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/17 15:00:45 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_reset(t_fl *f)
 	f->f_hash = 0;
 	f->f_sp = 0;
 	f->min = 0;
-	f->zero = 0;
+	f->fill_ch = 32;
 	f->width = 0;
 	f->order = 0;
 	f->p_len = 0;
@@ -67,7 +67,7 @@ int	get_flags(const char *form, int i, t_fl *f)
 	f->f_hash = hash_count(form, i, f);
 	f->f_sp = space_count(form, i, f);
 	f->min = min_check(form, i, f);
-	f->zero = zero_check(form, i, f);
+	f->fill_ch = zero_check(form, i, f);
 	f->width = get_width(form, i, f);// WRITE THESE FUNCTIONS! FIRST FIND OUT ORDER!
 }
 
