@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/16 16:07:50 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/17 12:16:06 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ int		ft_printf(const char *form, ...);
 size_t	writer(char *print);
 char	*char_str(int ch, char *heap, int type);
 char	*add_print(char *heap, char *stack);
-char	*mod_itoa(long long value, int base, char *print, int hex_type);
+char	*mod_itoa(long long value, int base, int hex_type);
 void	*free_str(char *str);
-char	*ptr_str(void *arg, char *print);
+char	*ptr_str(void *arg);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
 
 char	*get_arg_void(void *arg, t_va *v, t_fl *f);
 char	*get_arg_u(unsigned int arg, t_va *v, t_fl *f);
 char	*get_arg_int(int arg, t_va *v, t_fl *f);
+char	*arg_num(long long arg, t_va *v, t_fl *f);
+char	*arg_ptr(void *arg, t_va *v, t_fl *f);
 
 #endif
