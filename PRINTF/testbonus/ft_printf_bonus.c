@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/16 13:52:11 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/17 15:00:45 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/18 15:41:51 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ int	spf(const char *form, int i)
 {
 	if (form[i] != '%')
 		return (0);
-	if (form[i] == '%' && form[i + 1] == 'c')
+	if (form[i] == 'c')
 		return (1);
-	if (form[i] == '%' && form[i + 1] == 's')
+	if (form[i] == 's')
 		return (2);
-	if (form[i] == '%' && form[i + 1] == 'p')
+	if (form[i] == 'p')
 		return (3);
-	if (form[i] == '%' && form[i + 1] == 'd')
+	if (form[i] == 'd')
 		return (4);
-	if (form[i] == '%' && form[i + 1] == 'i')
+	if (form[i] == 'i')
 		return (5);
-	if (form[i] == '%' && form[i + 1] == 'u')
+	if (form[i] == 'u')
 		return (6);
-	if (form[i] == '%' && form[i + 1] == 'x')
+	if (form[i] == 'x')
 		return (7);
-	if (form[i] == '%' && form[i + 1] == 'X')
+	if (form[i] == 'X')
 		return (8);
-	if (form[i] == '%' && form[i + 1] == '%')
+	if (form[i] == '%')
 		return (9);
 	return (0);
 }
@@ -40,7 +40,7 @@ int	spf(const char *form, int i)
 size_t	specifier_skip(int spec, t_fl *f)
 {
 	if (spec > 0 && spec < 10)
-		return (2);
+		return (2 + f->f_len);
 	return (1);
 }
 
@@ -53,22 +53,17 @@ void	ft_reset(t_fl *f)
 	f->fill_ch = 32;
 	f->width = 0;
 	f->order = 0;
-	f->p_len = 0;
+	f->f_len = 0;
 }
 
-int	get_flags(const char *form, int i, t_fl *f)
+int	ft_flags(const char *form, int i, t_va *v, t_fl *f)
 {
 	ft_reset(f);
 	if (form[i] != '%')
 		return (0);
-	if (spf(form, i))
-		return (spf(form, i));
-	f->f_pl = plus_count(form, i, f);
-	f->f_hash = hash_count(form, i, f);
-	f->f_sp = space_count(form, i, f);
-	f->min = min_check(form, i, f);
-	f->fill_ch = zero_check(form, i, f);
-	f->width = get_width(form, i, f);// WRITE THESE FUNCTIONS! FIRST FIND OUT ORDER!
+	if (spf(form, i + 1))
+		return (spf(form, i + 1));
+	get_flags(form, i, v, f);// WRITE THESE FUNCTIONS! FIRST FIND OUT ORDER!
 }
 
 int	ft_printf(const char *form, ...)
@@ -82,7 +77,7 @@ int	ft_printf(const char *form, ...)
 	v.print = ft_strdup("");
 	while (form[v.i])
 	{
-		v.spec = get_flags(form, v.i, &f);
+		v.spec = ft_flags(form, v.i, &v, &f);
 		if (v.spec == 2 || v.spec == 3)
 			v.print = get_arg_void(va_arg(args, void *), &v, &f);
 		else if (v.spec == 6)
