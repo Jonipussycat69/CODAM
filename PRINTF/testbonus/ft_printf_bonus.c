@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/16 13:52:11 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/18 15:41:51 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/19 12:19:13 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t	specifier_skip(int spec, t_fl *f)
 	return (1);
 }
 
-void	ft_reset(t_fl *f)
+void	fl_reset(t_fl *f)
 {
 	f->f_pl = 0;
 	f->f_hash = 0;
@@ -52,18 +52,60 @@ void	ft_reset(t_fl *f)
 	f->min = 0;
 	f->fill_ch = 32;
 	f->width = 0;
-	f->order = 0;
 	f->f_len = 0;
 }
 
-int	ft_flags(const char *form, int i, t_va *v, t_fl *f)
+size_t	get_flags(const char *form, size_t i, t_va *v, t_fl *f)
 {
-	ft_reset(f);
+	while (form[i] == ' ' || form[i] == '+' || form[i] == '-' ||
+	form[i] == '0' || form[i] == '#')
+	{
+		if (form[i] == ' ')
+			f->f_sp++;
+		if (form[i] == '+')
+			f->f_pl++;
+		if (form[i] == '-')
+			f->min++;
+		if (form[i] == '0')
+			f->fill_ch = 48;
+		if (form[i] == '#')
+			f->f_hash++;
+		f->f_len++;
+		i++;
+	}
+	return (i);
+}
+
+size_t	get_width(const char *form, size_t i, t_va *v, t_fl *f)
+{
+	size_t	num_len;
+	size_t	num;
+
+	num_len = 0;
+	num = 0;
+	while (form[i] >= '0' && form[i] <= '9' && num_len++ < 10)
+		num = num * 10 + (form[i++] - 48);
+	f->width = num;
+	return (i);
+}
+
+int	ft_flags(const char *form, size_t i, t_va *v, t_fl *f)
+{
+	const size_t	begin = i;
+
+	fl_reset(f);
 	if (form[i] != '%')
 		return (0);
 	if (spf(form, i + 1))
 		return (spf(form, i + 1));
-	get_flags(form, i, v, f);// WRITE THESE FUNCTIONS! FIRST FIND OUT ORDER!
+	i = get_flags(form, i, v, f);
+	i = get_width(form, i, v, f);
+	v->spec = spf(form, i);
+	if (v->spec == 0 || v->spec == 9)
+		fl_reset(f);
+	else
+		f->f_len = i - begin;
+	return (v->spec);// LEFTOFF HERE!
 }
 
 int	ft_printf(const char *form, ...)

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/18 14:37:17 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/19 11:13:38 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_flags
 	size_t	f_sp;
 	size_t	min;
 	size_t	width;
-	size_t	order;
 	size_t	f_len;
 	int		fill_ch;
 }	t_fl;
