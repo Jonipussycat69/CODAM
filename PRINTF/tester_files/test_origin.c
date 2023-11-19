@@ -43,7 +43,7 @@ static void test_origin(int amount, int choice)
 	if ((amount > 2 || choice == 3)&& (choice == 0 || choice == 3))
 	{
 		printf("\n\033[1;37mT3 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%0 4i|%0+d<", 42, -42);
+		origin = printf(">%0 4%i%i|%0+d<", 42, -42);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 4

@@ -118,49 +118,49 @@ static void test_origin(int amount, int choice)
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 2
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 1 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT2 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 3
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 2 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT3 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 4
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 3 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT4 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 5
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 4 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT5 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 6
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 5 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT6 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 7
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 6 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT7 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 8
-	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
+	if ((amount > 7 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT8 \033[0m~~>\noriginal:\n\n");
 		origin = printf(" NULL %c, %c NULL ", 0, 0);
@@ -172,8 +172,8 @@ static void test_origin(int amount, int choice)
 int	main(void)
 {
 	int	range = 8;
-	int	test = 0;
-	int	type = 2;
+	int	test = 2;
+	int	type = 1;
 
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if ((type == 1 || type == 3) && (range || test))

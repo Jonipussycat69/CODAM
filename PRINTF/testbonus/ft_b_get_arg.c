@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/16 14:44:16 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/18 14:38:06 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/19 16:24:57 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_arg_void(void *arg, t_va *v, t_fl *f)
 {
 	if (f->f_len == 0)
-		v->print = arg_ptr(arg, v, v);
+		v->print = arg_ptr(arg, v, f);
 	else if (v->spec == 2 && arg && f->f_len > 0)
 		v->print = flag_check_str(v, f, (char *)arg);
 	else if (v->spec == 2 && !arg && f->f_len > 0)
