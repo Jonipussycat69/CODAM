@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "ft_b_printf.h"
 
 static void test_compare(int amount, int choice)
 {
@@ -22,18 +23,18 @@ static void test_compare(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" NULL %c, %c NULL ", 0, 0);
+		origin = printf(" NULL |%3c|%---3c| NULL ", 'A', 'B');
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf(" NULL %c, %c NULL ", 0, 0);
+		ft = ft_printf(" NULL |%3c|%---3c| NULL ", 'A', 'B');
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2
 	if ((amount > 1 || choice == 2) && (choice == 0 || choice == 2))
 	{
 		printf("\n\033[1;35mT2 \033[0m~~>\noriginal:\n\n");
-		origin = printf("%s, %s", "BRUH", "12345");
+		origin = printf("%10s, %s", "BRUH", "12345");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("%s, %s", "BRUH", "12345");
+		ft = ft_printf("%10s, %s", "BRUH", "12345");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 3
@@ -58,9 +59,9 @@ static void test_compare(int amount, int choice)
 	if ((amount > 4 || choice == 5) && (choice == 0 || choice == 5))
 	{
 		printf("\n\033[1;35mT5 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" %x %X %x ", -1, -99, 78);
+		origin = printf("|%#x|%20X|%#-#20x|", -1, -99, 78);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf(" %x %X %x ", -1, -99, 78);
+		ft = ft_printf("|%#x|%20X|%#-#20x|", -1, -99, 78);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 6
@@ -85,9 +86,18 @@ static void test_compare(int amount, int choice)
 	if ((amount > 7 || choice == 8) && (choice == 0 || choice == 8))
 	{
 		printf("\n\033[1;35mT8 \033[0m~~>\noriginal:\n\n");
-		origin = printf("ALL: %s, %d, %i, %u, %p, %c, %X, %%.", s1, in1, in1, uin1, testpint, c, in2);
+		origin = printf("ALL FLAGS: %-10s, %+10d, %0+10i, %u, %20p, %2c, %#15X, %%.", s1, in1, in1, uin1, testpint, c, 123);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("ALL: %s, %d, %i, %u, %p, %c, %X, %%.", s1, in1, in1, uin1, testpint, c, in2);
+		ft = ft_printf("ALL FLAGS: %-10s, %+10d, %0+10i, %u, %20p, %2c, %#15X, %%.", s1, in1, in1, uin1, testpint, c, 123);
+		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
+	}
+	// TEST 9
+	if ((amount > 8 || choice == 9) && (choice == 0 || choice == 9))
+	{
+		printf("\n\033[1;35mT9 \033[0m~~>\noriginal:\n\n");
+		origin = printf("ALL FLAGS: %-1wr0s, %+-----0010d, %0+10ri, %u, %20p, %2c, %#15X, %%.", in1, uin1, testpint, c, 123);
+		printf("\n\nft_printf:\n\n");
+		ft = ft_printf("ALL FLAGS: %-1wr0s, %+-----0010d, %0+10ri, %u, %20p, %2c, %#15X, %%.", in1, uin1, testpint, c, 123);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	return ;
@@ -171,8 +181,8 @@ static void test_origin(int amount, int choice)
 
 int	main(void)
 {
-	int	range = 8;
-	int	test = 2;
+	int	range = 9;
+	int	test = 0;
 	int	type = 1;
 
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");

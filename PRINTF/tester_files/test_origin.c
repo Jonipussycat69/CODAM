@@ -29,7 +29,7 @@ static void test_origin(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%5s|%-5s<", "Hi", "Hi");
+		origin = printf("ALL FLAGS: %-10s, %+10d, %0+10i, % u, %015p, %2c, %#15X, %%.", s1, in1, in1, uin1, testpint, c, 123);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 2
@@ -86,8 +86,8 @@ static void test_origin(int amount, int choice)
 
 int	main(void)
 {
-	int	range = 8;
-	int	test = 3;
+	int	range = 1;
+	int	test = 1;
 
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if (range || test)

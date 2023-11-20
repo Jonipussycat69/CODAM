@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_printf.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/09 13:07:56 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/19 16:20:13 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_b_printf.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/20 16:30:10 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_B_PRINTF_H
+# define FT_B_PRINTF_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -71,5 +71,8 @@ char	*flag_check_hex(t_va *v, t_fl *f, long long arg);
 
 char	*mal_set(size_t size, char c);
 char	*pl_sp_h_print(t_va *v, t_fl *f);
+char	*neg_check(long long num, t_va *v, t_fl *f);
+char	*hash_check(long long num, t_va *v, t_fl *f, size_t len, int type);
+char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, size_t len, int type);
 
 #endif

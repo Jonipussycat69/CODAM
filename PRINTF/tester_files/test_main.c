@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "ft_b_printf.h"
 
 static void test(int amount, int choice)
 {
