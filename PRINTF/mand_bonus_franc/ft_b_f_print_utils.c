@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_b_f_print_util.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 16:34:47 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/20 16:43:40 by jdobos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_b_printf.h"
 
 char	*mal_set(size_t size, char c)
 {
 	char	*ret;
 	size_t	i;
-	
+
 	ret = (char *)malloc(size + 1);
 	if (!ret)
 		return (NULL);
@@ -46,11 +58,11 @@ char	*neg_check(long long num, t_va *v, t_fl *f)
 	return (v->print);
 }
 
-char	*hash_check(long long num, t_va *v, t_fl *f, size_t len, int type)
+char	*hash_check(long long num, t_va *v, t_fl *f, int type)
 {
 	if (type == 0)
 	{
-		if (f->f_hash >= 1 && num != 0 && f->width <= len)
+		if (f->f_hash >= 1 && num != 0 && f->width <= v->len)
 			return (pl_sp_h_print(v, f));
 		if (f->f_hash >= 1 && num != 0 && (f->min > 0 || f->fill_ch == 48))
 			v->print = pl_sp_h_print(v, f);
@@ -70,13 +82,13 @@ char	*hash_check(long long num, t_va *v, t_fl *f, size_t len, int type)
 	return (v->print);
 }
 
-char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, size_t len, int type)
+char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, int type)
 {
 	if (!ptr)
 		return (v->print);
 	if (type == 0)
 	{
-		if (f->width <= len)
+		if (f->width <= v->len)
 			return (add_print(v->print, "0x"));
 		if (f->min > 0 || f->fill_ch == 48)
 			v->print = add_print(v->print, "0x");

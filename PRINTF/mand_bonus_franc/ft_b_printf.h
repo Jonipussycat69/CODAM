@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:30:10 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:53:21 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_printf
 	size_t	i;
 	int		spec;
 	char	*print;
+	size_t	len;
 }	t_va;
 
 typedef struct s_flags
@@ -55,12 +56,12 @@ size_t	ft_strlen(const char *str);
 char	*get_arg_void(void *arg, t_va *v, t_fl *f);
 char	*get_arg_u(unsigned int arg, t_va *v, t_fl *f);
 char	*get_arg_int(int arg, t_va *v, t_fl *f);
-char	*arg_num(long long arg, t_va *v, t_fl *f);
-char	*arg_ptr(void *arg, t_va *v, t_fl *f);
+char	*arg_num(long long arg, t_va *v);
+char	*arg_ptr(void *arg, t_va *v);
 
 void	fl_reset(t_fl *f);
-size_t	get_flags(const char *form, size_t i, t_va *v, t_fl *f);
-size_t	get_width(const char *form, size_t i, t_va *v, t_fl *f);
+size_t	get_flags(const char *form, size_t i, t_fl *f);
+size_t	get_width(const char *form, size_t i, t_fl *f);
 int		spf(const char *form, int i);
 
 char	*flag_check_str(t_va *v, t_fl *f, char *arg);
@@ -72,7 +73,7 @@ char	*flag_check_hex(t_va *v, t_fl *f, long long arg);
 char	*mal_set(size_t size, char c);
 char	*pl_sp_h_print(t_va *v, t_fl *f);
 char	*neg_check(long long num, t_va *v, t_fl *f);
-char	*hash_check(long long num, t_va *v, t_fl *f, size_t len, int type);
-char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, size_t len, int type);
+char	*hash_check(long long num, t_va *v, t_fl *f, int type);
+char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, int type);
 
 #endif

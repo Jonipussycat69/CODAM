@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:52:11 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:31:52 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:46:45 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ int	ft_form(const char *form, size_t i, t_va *v, t_fl *f)
 	i++;
 	if (spf(form, i))
 		return (spf(form, i));
-	i = get_flags(form, i, v, f);
-	i = get_width(form, i, v, f);
+	i = get_flags(form, i, f);
+	i = get_width(form, i, f);
 	v->spec = spf(form, i);
 	if (v->spec == 0)
 		fl_reset(f);
 	else
 		f->f_len = i - begin;
-	return (v->spec);// LEFTOFF HERE!
+	return (v->spec);
 }
 
-int	ft_printf(const char *form, ...)// SOME UNUSED VARIABLES! INSTALL GDB!
+int	ft_printf(const char *form, ...)
 {
 	va_list	args;
 	t_va	v;

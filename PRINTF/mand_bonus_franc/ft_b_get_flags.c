@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_b_get_flags.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 16:35:09 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/20 16:46:26 by jdobos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_b_printf.h"
 
 int	spf(const char *form, int i)
@@ -34,10 +46,10 @@ void	fl_reset(t_fl *f)
 	f->f_len = 0;
 }
 
-size_t	get_flags(const char *form, size_t i, t_va *v, t_fl *f)
+size_t	get_flags(const char *form, size_t i, t_fl *f)
 {
-	while (form[i] == ' ' || form[i] == '+' || form[i] == '-' ||
-	form[i] == '0' || form[i] == '#')
+	while (form[i] == ' ' || form[i] == '+' || form[i] == '-'
+		|| form[i] == '0' || form[i] == '#')
 	{
 		if (form[i] == ' ')
 			f->f_sp++;
@@ -55,7 +67,7 @@ size_t	get_flags(const char *form, size_t i, t_va *v, t_fl *f)
 	return (i);
 }
 
-size_t	get_width(const char *form, size_t i, t_va *v, t_fl *f)
+size_t	get_width(const char *form, size_t i, t_fl *f)
 {
 	size_t	num_len;
 	size_t	num;
