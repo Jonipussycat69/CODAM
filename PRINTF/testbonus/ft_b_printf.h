@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:53:21 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:46:10 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_flags
 	size_t	min;
 	size_t	width;
 	size_t	f_len;
+	size_t	prec;
 	int		fill_ch;
 }	t_fl;
 
@@ -62,6 +63,7 @@ char	*arg_ptr(void *arg, t_va *v);
 void	fl_reset(t_fl *f);
 size_t	get_flags(const char *form, size_t i, t_fl *f);
 size_t	get_width(const char *form, size_t i, t_fl *f);
+size_t	get_prec(const char *form, size_t i, t_fl *f);
 int		spf(const char *form, int i);
 
 char	*flag_check_str(t_va *v, t_fl *f, char *arg);

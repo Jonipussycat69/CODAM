@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:35:09 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:46:26 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:43:42 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	fl_reset(t_fl *f)
 	f->fill_ch = 32;
 	f->width = 0;
 	f->f_len = 0;
+	f->prec = 0;
 }
 
 size_t	get_flags(const char *form, size_t i, t_fl *f)
@@ -77,5 +78,21 @@ size_t	get_width(const char *form, size_t i, t_fl *f)
 	while (form[i] >= '0' && form[i] <= '9' && num_len++ < 10)
 		num = num * 10 + (form[i++] - 48);
 	f->width = num;
+	return (i);
+}
+
+size_t	get_prec(const char *form, size_t i, t_fl *f)
+{
+	size_t	num_len;
+	size_t	num;
+
+	if (form[i] != '.')
+		return (i);
+	i++;
+	num_len = 0;
+	num = 0;
+	while (form[i] >= '0' && form[i] <= '9' && num_len++ < 10)
+		num = num * 10 + (form[i++] - 48);
+	f->prec = num;
 	return (i);
 }

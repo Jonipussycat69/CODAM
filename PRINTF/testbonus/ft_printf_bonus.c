@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:52:11 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:46:45 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:43:13 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_form(const char *form, size_t i, t_va *v, t_fl *f)
 		return (spf(form, i));
 	i = get_flags(form, i, f);
 	i = get_width(form, i, f);
+	i = get_prec(form, i, f);
 	v->spec = spf(form, i);
 	if (v->spec == 0)
 		fl_reset(f);

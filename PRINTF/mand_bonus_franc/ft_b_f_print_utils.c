@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_b_f_print_util.c                                :+:      :+:    :+:   */
+/*   ft_b_f_print_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:34:47 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:43:40 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:25:48 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char	*pl_sp_h_print(t_va *v, t_fl *f)
 
 char	*neg_check(long long num, t_va *v, t_fl *f)
 {
-	if ((f->f_pl >= 1 || f->f_sp >= 1) && num > 0 && v->spec != 6)
+	if ((f->f_pl >= 1 || f->f_sp >= 1) && num >= 0 && v->spec != 6)
 		return (pl_sp_h_print(v, f));
-	if (num > 0)
+	if (num >= 0)
 		return (v->print);
 	if (f->fill_ch == 48)
 	{

@@ -6,6 +6,48 @@
 #include <stdarg.h>
 #include <limits.h>
 
+#include <sys/ioctl.h>
+
+void	print_full_width(void)// FUNCTION TO PRINT WHOLE WITH OF TERMINAL.
+{
+	struct winsize	w;
+	int				i;
+
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	i = 0;
+	while (i++ < w.ws_col)
+		// markup(" ", -1, 45, 0);
+		printf("\033[1;35m~\033[0m");
+	printf("\n");
+}
+
+void	markup(char *str, ...)// FUNCTION FOR PRINTF FORMATTING. ALWAYS LAST INPUT = 0!
+{
+	va_list	style;
+	int		num_styles;
+	int		minus_check;
+
+	num_styles = 0;
+	va_start(style, str);
+	while (va_arg(style, int) != 0)
+		num_styles++;
+	va_end(style);
+	va_start(style, str);
+	if (num_styles == 0)
+		printf("\n%s\n", str);
+	else if (num_styles > 0)
+	{
+		minus_check = va_arg(style, int);
+		if (minus_check == -1 && printf("\033[45m%s\033[0m", str))
+			return ;
+		printf("\n\033[%d", minus_check);
+		while (--num_styles)
+			printf(";%d", va_arg(style, int));
+		printf("m%s\033[0m\n", str);
+	}
+	va_end(style);
+}
+
 static void test_origin(int amount, int choice)
 {
 	char	s1[] = "WORLD";
@@ -29,35 +71,35 @@ static void test_origin(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf("ALL FLAGS: %-10s, %+10d, %0+10i, % u, %015p, %2c, %#15X, %%.", s1, in1, in1, uin1, testpint, c, 123);
+		origin = printf(" %.x ", 17);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 2
 	if ((amount > 1 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT2 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%5s|%-5s<", "Hi", "Hi");
+		origin = printf(" %.6x ", 17);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 3
 	if ((amount > 2 || choice == 3)&& (choice == 0 || choice == 3))
 	{
 		printf("\n\033[1;37mT3 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%0 4%i%i|%0+d<", 42, -42);
+		origin = printf(" %8.6x ", 17);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 4
 	if ((amount > 3 || choice == 4)&& (choice == 0 || choice == 4))
 	{
 		printf("\n\033[1;37mT4 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%0#5x|%#x<", 42, 42);
+		origin = printf(" %.6d ", 17);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 5
 	if ((amount > 4 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;37mT5 \033[0m~~>\noriginal:\n\n");
-		origin = printf(">%-6c|%6c<", '4', '4');
+		origin = printf(" %10.d ", 17);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 6
@@ -86,10 +128,12 @@ static void test_origin(int amount, int choice)
 
 int	main(void)
 {
-	int	range = 1;
-	int	test = 1;
+	int	range = 5;
+	int	test = 0;
 
-	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
+	print_full_width();
+	markup("~ ENTERING TESTER ~ ", 1, 32, 0);
+	// printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if (range || test)
 	{
 		printf("\n\033[1;36mORIGINAL TEST\033[0m\n");
@@ -97,5 +141,6 @@ int	main(void)
 		printf("\n\033[1;36mORIGINAL TEST <END>\033[0m\n");
 	}
 	printf("\n\033[1;32m~ EXITTED TESTER ~\033[0m\n");
+	print_full_width();
 	return (0);
 }

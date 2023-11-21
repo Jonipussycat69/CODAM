@@ -6,13 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:53:17 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:53:45 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/21 19:00:48 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
-char	*flag_check_str(t_va *v, t_fl *f, char *arg)
+char	*flag_check_str(t_va *v, t_fl *f, char *arg)// INCLUDE PREC FLAG CHECK IN FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!! LEFTOFF!
 {
 	const size_t	arg_len = ft_strlen(arg);
 
