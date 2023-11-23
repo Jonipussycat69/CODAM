@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 17:16:05 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:31:20 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:14:33 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ char	*add_p_f(char *heap, char *also_h)
 	const size_t	h_len = ft_strlen(heap);
 
 	if (!heap || !also_h)
-		return (free_str(heap));
+		return (free_both_str(heap, also_h));
 	result = (char *)malloc(s_len + h_len + 1);
 	if (!(result))
-		return (free_str(heap));
+		return (free_both_str(heap, also_h));
 	i = 0;
 	temp_heap = heap;
 	while (i < h_len)
@@ -83,7 +83,6 @@ char	*add_p_f(char *heap, char *also_h)
 	while (i - h_len < s_len)
 		result[i++] = *(temp_heap++);
 	result[i] = '\0';
-	free_str(heap);
-	free_str(also_h);
+	free_both_str(heap, also_h);
 	return (result);
 }

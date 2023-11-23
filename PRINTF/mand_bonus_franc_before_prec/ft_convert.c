@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_b_convert.c                                     :+:      :+:    :+:   */
+/*   ft_convert.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:58:59 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:06:24 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/16 14:19:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_b_printf.h"
+#include "ft_printf.h"
 
-static char	*itoa_base(long long value, int base, const char *rep)
+static char	*itoa_base(long long value, int base, const char *rep, char *print)
 {
 	char		buf[65];
 	char		*ptr;
@@ -30,10 +30,12 @@ static char	*itoa_base(long long value, int base, const char *rep)
 		*(--ptr) = rep[value % base];
 		value /= base;
 	}
-	return (ft_strdup(ptr));
+	if (num < 0 && base == 10)
+		*(--ptr) = '-';
+	return (add_print(print, ptr));
 }
 
-static char	*itoa_hex_neg_l(long long value, const char *rep)
+static char	*itoa_hex_neg_l(long long value, const char *rep, char *print)
 {
 	char	buf[65];
 	char	*ptr;
@@ -47,10 +49,10 @@ static char	*itoa_hex_neg_l(long long value, const char *rep)
 		*(--ptr) = rep[value & 0xF];
 		value >>= 4;
 	}
-	return (ft_strdup(ptr));
+	return (add_print(print, ptr));
 }
 
-static char	*itoa_hex_neg_i(long long value, const char *rep)
+static char	*itoa_hex_neg_i(long long value, const char *rep, char *print)
 {
 	char	buf[65];
 	char	*ptr;
@@ -64,44 +66,39 @@ static char	*itoa_hex_neg_i(long long value, const char *rep)
 		*(--ptr) = rep[value & 0xF];
 		value >>= 4;
 	}
-	return (ft_strdup(ptr));
+	return (add_print(print, ptr));
 }
 
-char	*mod_itoa(long long value, int base, int hex_type, t_fl *f)
+char	*mod_itoa(long long value, int base, char *print, int hex_type)
 {
 	const char	rep[] = "0123456789abcdef";
 	const char	rep_up[] = "0123456789ABCDEF";
-	char		*rtrn_str;
 
 	if (hex_type == 3)
-		return (itoa_hex_neg_l(value, rep));
+		return (itoa_hex_neg_l(value, rep, print));
 	if (base != 10 && value < 0)
 	{
 		if (hex_type == 1)
-			rtrn_str = itoa_hex_neg_i(value, rep_up);
+			return (itoa_hex_neg_i(value, rep_up, print));
 		else
-			rtrn_str = itoa_hex_neg_i(value, rep);
-		rtrn_str = ft_n_prec(rtrn_str, ft_strlen(rtrn_str), 1, f);
-		return (rtrn_str);
+			return (itoa_hex_neg_i(value, rep, print));
 	}
 	if (hex_type == 1)
-		rtrn_str = itoa_base(value, base, rep_up);
+		return (itoa_base(value, base, rep_up, print));
 	else
-		rtrn_str = itoa_base(value, base, rep);
-	rtrn_str = ft_n_prec(rtrn_str, ft_strlen(rtrn_str), value, f);
-	return (rtrn_str);
+		return (itoa_base(value, base, rep, print));
 }
 
-char	*ptr_str(void *arg, t_fl *f)
+char	*ptr_str(void *arg, char *print)
 {
 	long long	value;
 
 	if (!arg)
-		return (ft_strdup("(nil)"));
+		return (add_print(print, "(nil)"));
+	print = add_print(print, "0x");
 	value = (long long)arg;
-	f->prec = 0;
 	if (value < 0)
-		return (mod_itoa(value, 16, 3, f));
+		return (mod_itoa(value, 16, print, 3));
 	else
-		return (mod_itoa(value, 16, 0, f));
+		return (mod_itoa(value, 16, print, 0));
 }

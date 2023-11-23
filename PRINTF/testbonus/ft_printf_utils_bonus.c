@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:49:10 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:32:02 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:13:09 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ void	*free_str(char *str)
 {
 	if (str)
 		free(str);
+	return (NULL);
+}
+
+void	*free_both_str(char *str1, char *str2)
+{
+	if (str1)
+		free(str1);
+	if (str2)
+		free(str2);
 	return (NULL);
 }
 

@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 14:49:10 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 13:13:09 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf_utils.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/09 12:35:08 by jdobos        #+#    #+#                 */
+/*   Updated: 2023/11/15 14:48:42 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_b_printf.h"
+#include "ft_printf.h"
 
 void	*free_str(char *str)
 {
 	if (str)
 		free(str);
-	return (NULL);
-}
-
-void	*free_both_str(char *str1, char *str2)
-{
-	if (str1)
-		free(str1);
-	if (str2)
-		free(str2);
 	return (NULL);
 }
 

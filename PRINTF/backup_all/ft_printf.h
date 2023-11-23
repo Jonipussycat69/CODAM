@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 13:43:53 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/14 19:53:01 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,24 @@
 # include <stdarg.h>
 # include <limits.h>
 
-typedef struct	ft_printf_s
+typedef struct s_printf
 {
-	char	*print;
 	size_t	i;
 	int		spec;
-	size_t	p_len;
-}	var;
+}	t_va;
 
 int		ft_printf(const char *form, ...);
 size_t	writer(char *print);
-char	*char_str(int ch, var *va);
-char	*add_print(var *va, char *stack);
-char	*mod_itoa(long long value, int base, var *va, int hex_type);
+char	*char_str(int ch, char *heap, int type);
+char	*add_print(char *heap, char *stack);
+char	*mod_itoa(long long value, int base, char *print, int hex_type);
 void	*free_str(char *str);
-char	*ptr_str(void *arg, var *va);
+char	*ptr_str(void *arg, char *print);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
 
-char	*get_arg_void(void *arg, var *va);
-char	*get_arg_u(unsigned int arg, var *va);
-char	*get_arg_int(int arg, var *va);
+char	*get_arg_void(void *arg, int specifier, char *print);
+char	*get_arg_u(unsigned int arg, int specifier, char *print);
+char	*get_arg_int(int arg, int specifier, char *print);
 
 #endif

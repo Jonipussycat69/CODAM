@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:44:16 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/20 16:53:34 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:21:57 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_arg_void(void *arg, t_va *v, t_fl *f)
 {
 	if (f->f_len == 0 && v->spec == 2)
-		v->print = add_print(v->print, arg_ptr(arg, v));
+		v->print = add_print(v->print, arg_ptr(arg, v, f));
 	else if (v->spec == 2 && arg && f->f_len > 0)
 		v->print = flag_check_str(v, f, (char *)arg);
 	else if (v->spec == 2 && !arg && f->f_len > 0)
@@ -30,7 +30,7 @@ char	*get_arg_void(void *arg, t_va *v, t_fl *f)
 char	*get_arg_u(unsigned int arg, t_va *v, t_fl *f)
 {
 	if (v->spec == 6 && f->f_len == 0)
-		v->print = add_p_f(v->print, arg_num(arg, v));
+		v->print = add_p_f(v->print, arg_num(arg, v, f));
 	else if (v->spec == 6 && f->f_len > 0)
 		v->print = flag_check_num(v, f, arg);
 	if (!(v->print))
@@ -43,7 +43,7 @@ char	*get_arg_int(int arg, t_va *v, t_fl *f)
 	if (f->f_len == 0 && v->spec == 1)
 		v->print = char_str(arg, v->print, 0);
 	else if (f->f_len == 0)
-		v->print = add_p_f(v->print, arg_num(arg, v));
+		v->print = add_p_f(v->print, arg_num(arg, v, f));
 	else if (v->spec == 1 && f->f_len > 0)
 		v->print = flag_check_ch(v, f, arg);
 	else if (v->spec == 4 && f->f_len > 0)
@@ -59,25 +59,25 @@ char	*get_arg_int(int arg, t_va *v, t_fl *f)
 	return (v->print);
 }
 
-char	*arg_num(long long arg, t_va *v)
+char	*arg_num(long long arg, t_va *v, t_fl *f)
 {
 	char	*arg_str;
 
 	arg_str = NULL;
 	if (v->spec == 6)
-		arg_str = mod_itoa(arg, 10, 0);
+		arg_str = mod_itoa(arg, 10, 0, f);
 	else if (v->spec == 4)
-		arg_str = mod_itoa(arg, 10, 0);
+		arg_str = mod_itoa(arg, 10, 0, f);
 	else if (v->spec == 5)
-		arg_str = mod_itoa(arg, 10, 0);
+		arg_str = mod_itoa(arg, 10, 0, f);
 	else if (v->spec == 7)
-		arg_str = mod_itoa(arg, 16, 0);
+		arg_str = mod_itoa(arg, 16, 0, f);
 	else if (v->spec == 8)
-		arg_str = mod_itoa(arg, 16, 1);
+		arg_str = mod_itoa(arg, 16, 1, f);
 	return (arg_str);
 }
 
-char	*arg_ptr(void *arg, t_va *v)
+char	*arg_ptr(void *arg, t_va *v, t_fl *f)
 {
 	char	*arg_str;
 
@@ -87,6 +87,6 @@ char	*arg_ptr(void *arg, t_va *v)
 	else if (v->spec == 2 && !arg)
 		arg_str = add_print(ft_strdup(""), "(null)");
 	else if (v->spec == 3)
-		arg_str = ptr_str(arg);
+		arg_str = ptr_str(arg, f);
 	return (arg_str);
 }

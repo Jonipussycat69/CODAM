@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 12:35:08 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/13 14:29:30 by jdobos           ###   ########.fr       */
+/*   Created: 2023/11/16 14:49:10 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/20 16:32:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_b_printf.h"
 
 void	*free_str(char *str)
 {
@@ -50,10 +50,22 @@ char	*ft_strdup(const char *s)
 size_t	writer(char *print)
 {
 	size_t	i;
+	size_t	begin;
 
-	i = ft_strlen(print);
-	if (print && print[0] != '\0')
-		write(1, print, i);
+	i = 0;
+	while (print && print[i] != '\0')
+	{
+		begin = i;
+		while (print[i] && print[i] != -1)
+			i++;
+		write(1, print + begin, i - begin);
+		if (print[i] == -1)
+		{
+			print[i] = 0;
+			write(1, &print[i], 1);
+			i++;
+		}
+	}
 	free_str(print);
 	return (i);
 }

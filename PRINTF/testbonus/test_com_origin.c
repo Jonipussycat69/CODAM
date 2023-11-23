@@ -37,18 +37,18 @@ static void test_compare(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf("%.s", "");
+		origin = printf(" %.s ", "-");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("%.s", "");
+		ft = ft_printf(" %.s ", "-");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2
 	if ((amount > 1 || choice == 2) && (choice == 0 || choice == 2))
 	{
 		printf("\n\033[1;35mT2 \033[0m~~>\noriginal:\n\n");
-		origin = printf("%.1s ", "");
+		origin = printf("%.s ", "abc");
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf("%.1s ", "");
+		ft = ft_printf("%.s ", "abc");
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 3
@@ -199,6 +199,7 @@ int	main(void)
 	int	test = 0;
 	int	type = 1;
 
+	print_full_width();
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if ((type == 1 || type == 3) && (range || test))
 	{
@@ -213,5 +214,6 @@ int	main(void)
 		printf("\n\033[1;36mORIGINAL TEST <END>\033[0m\n");
 	}
 	printf("\n\033[1;32m~ EXITTED TESTER ~\033[0m\n");
+	print_full_width();
 	return (0);
 }

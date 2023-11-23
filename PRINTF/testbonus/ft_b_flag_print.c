@@ -6,28 +6,31 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:53:17 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/21 19:00:48 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:22:16 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
-char	*flag_check_str(t_va *v, t_fl *f, char *arg)// INCLUDE PREC FLAG CHECK IN FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!! LEFTOFF!
+char	*flag_check_str(t_va *v, t_fl *f, char *arg)
 {
-	const size_t	arg_len = ft_strlen(arg);
+	char	*mal_arg;
+	size_t	arg_len;
 
+	mal_arg = ft_s_prec(arg, ft_strlen(arg), f);
+	arg_len = ft_strlen(mal_arg);
 	if (f->width <= arg_len)
-		return (add_print(v->print, arg));
+		return (add_p_f(v->print, mal_arg));
 	if (f->min == 0)
 	{
 		v->print = add_p_f(v->print, mal_set(f->width - arg_len, ' '));
 		if (!(v->print))
 			return (NULL);
-		return (add_print(v->print, arg));
+		return (add_p_f(v->print, mal_arg));
 	}
 	if (f->min > 0)
 	{
-		v->print = add_print(v->print, arg);
+		v->print = add_p_f(v->print, mal_arg);
 		if (!(v->print))
 			return (NULL);
 		return (add_p_f(v->print, mal_set(f->width - arg_len, ' ')));
@@ -39,7 +42,7 @@ char	*flag_check_ptr(t_va *v, t_fl *f, void *arg)
 {
 	char	*arg_str;
 
-	arg_str = arg_ptr(arg, v);
+	arg_str = arg_ptr(arg, v, f);
 	v->len = ft_strlen(arg_str);
 	v->print = ptr_fill_check(arg, v, f, 0);
 	if (f->width <= v->len)
@@ -90,7 +93,7 @@ char	*flag_check_num(t_va *v, t_fl *f, long long arg)
 	v->print = neg_check(arg, v, f);
 	if (arg < 0 && f->fill_ch == 48)
 		arg *= -1;
-	arg_str = arg_num(arg, v);
+	arg_str = arg_num(arg, v, f);
 	v->len = ft_strlen(arg_str);
 	if (f->width <= v->len)
 		return (add_p_f(v->print, arg_str));
@@ -115,7 +118,7 @@ char	*flag_check_hex(t_va *v, t_fl *f, long long arg)
 {
 	char	*arg_str;
 
-	arg_str = arg_num(arg, v);
+	arg_str = arg_num(arg, v, f);
 	v->len = ft_strlen(arg_str);
 	v->print = hash_check(arg, v, f, 0);
 	if (f->width <= v->len)
