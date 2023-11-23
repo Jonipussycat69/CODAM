@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:35:13 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/16 13:56:49 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:24:27 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	spf(const char *form, int i)
 	return (0);
 }
 
-size_t	specifier_skip(int spec)
+static size_t	specifier_skip(int spec)
 {
 	if (spec > 0 && spec < 10)
 		return (2);

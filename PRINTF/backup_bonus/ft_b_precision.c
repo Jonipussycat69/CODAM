@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:39:43 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:20:48 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:28:59 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ char	*ft_n_prec(char *str, size_t s_len, long long value, t_fl *f)
 	if (f->prec <= s_len)
 	{
 		if (value < 0)
-			return (add_p_f(ft_strdup("-"), str));
+			return (add_p_f(ft_strdup_b("-"), str));
 		return (str);
 	}
 	padding = f->prec - s_len;
 	pad_str = mal_set(padding, '0');
 	if (value < 0)
-		pad_str = add_p_f(ft_strdup("-"), pad_str);
+		pad_str = add_p_f(ft_strdup_b("-"), pad_str);
 	if (!pad_str)
-		return (free_str(str));
+		return (free_str_b(str));
 	return (add_p_f(pad_str, str));
 }
 

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:34:47 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 13:23:50 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:18:27 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ char	*mal_set(size_t size, char c)
 char	*pl_sp_h_print(t_va *v, t_fl *f)
 {
 	if (f->f_sp >= 1 && f->f_pl == 0)
-		v->print = char_str(' ', v->print, 0);
+		v->print = char_str_b(' ', v->print, 0);
 	else if (f->f_pl >= 1)
-		v->print = char_str('+', v->print, 0);
+		v->print = char_str_b('+', v->print, 0);
 	else if (f->f_hash >= 1 && v->spec == 7)
-		v->print = add_print(v->print, "0x");
+		v->print = add_pr_b(v->print, "0x");
 	else if (f->f_hash >= 1 && v->spec == 8)
-		v->print = add_print(v->print, "0X");
+		v->print = add_pr_b(v->print, "0X");
 	if (f->width > 0 && (f->f_pl >= 1 || f->f_sp >= 1 || f->f_hash >= 1))
 		f->width--;
 	if (f->width > 0 && f->f_hash >= 1)
@@ -53,7 +53,7 @@ char	*neg_check(long long num, t_va *v, t_fl *f)
 	if (f->fill_ch == 48)
 	{
 		f->width--;
-		v->print = char_str('-', v->print, 0);
+		v->print = char_str_b('-', v->print, 0);
 	}
 	return (v->print);
 }
@@ -89,9 +89,9 @@ char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, int type)
 	if (type == 0)
 	{
 		if (f->width <= v->len)
-			return (add_print(v->print, "0x"));
+			return (add_pr_b(v->print, "0x"));
 		if (f->min > 0 || f->fill_ch == 48)
-			v->print = add_print(v->print, "0x");
+			v->print = add_pr_b(v->print, "0x");
 		if (f->width > 1)
 			f->width -= 2;
 		else if (f->width > 0)
@@ -100,7 +100,7 @@ char	*ptr_fill_check(void *ptr, t_va *v, t_fl *f, int type)
 	if (type == 1)
 	{
 		if (f->fill_ch == 32)
-			v->print = add_print(v->print, "0x");
+			v->print = add_pr_b(v->print, "0x");
 	}
 	return (v->print);
 }

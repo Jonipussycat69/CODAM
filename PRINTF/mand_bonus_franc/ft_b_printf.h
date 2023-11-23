@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:18:41 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:22:32 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,30 @@ typedef struct s_flags
 }	t_fl;
 
 int		ft_printf(const char *form, ...);
-size_t	writer(char *print);
-size_t	specifier_skip(int spec, t_fl *f);
+size_t	writer_b(char *print);
 
-char	*char_str(int ch, char *heap, int type);
-char	*add_print(char *heap, char *stack);
+char	*char_str_b(int ch, char *heap, int type);
+char	*add_pr_b(char *heap, char *stack);
 char	*add_p_f(char *heap, char *also_h);
 
-char	*mod_itoa(long long value, int base, int hex_type, t_fl *f);
-void	*free_str(char *str);
+char	*mod_itoa_b(long long value, int base, int hex_type, t_fl *f);
+void	*free_str_b(char *str);
 void	*free_both_str(char *str1, char *str2);
-char	*ptr_str(void *arg, t_fl *f);
-char	*ft_strdup(const char *s);
-size_t	ft_strlen(const char *str);
+char	*ptr_str_b(void *arg, t_fl *f);
+char	*ft_strdup_b(const char *s);
+size_t	ft_strlen_b(const char *str);
 
-char	*get_arg_void(void *arg, t_va *v, t_fl *f);
-char	*get_arg_u(unsigned int arg, t_va *v, t_fl *f);
-char	*get_arg_int(int arg, t_va *v, t_fl *f);
-char	*arg_num(long long arg, t_va *v, t_fl *f);
-char	*arg_ptr(void *arg, t_va *v, t_fl *f);
+char	*get_arg_void_b(void *arg, t_va *v, t_fl *f);
+char	*get_arg_u_b(unsigned int arg, t_va *v, t_fl *f);
+char	*get_arg_int_b(int arg, t_va *v, t_fl *f);
+char	*arg_num_b(long long arg, t_va *v, t_fl *f);
+char	*arg_ptr_b(void *arg, t_va *v, t_fl *f);
 
 void	fl_reset(t_fl *f);
 size_t	get_flags(const char *form, size_t i, t_fl *f);
 size_t	get_width(const char *form, size_t i, t_fl *f);
 size_t	get_prec(const char *form, size_t i, t_fl *f);
-int		spf(const char *form, int i);
+int		spf_b(const char *form, int i);
 
 char	*flag_check_str(t_va *v, t_fl *f, char *arg);
 char	*flag_check_ptr(t_va *v, t_fl *f, void *arg);

@@ -6,13 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:35:09 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:29:25 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:08:45 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
-int	spf(const char *form, int i)
+int	spf_b(const char *form, int i)
 {
 	if (form[i] == 'c')
 		return (1);

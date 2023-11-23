@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:58:59 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:06:24 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:21:17 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*itoa_base(long long value, int base, const char *rep)
 		*(--ptr) = rep[value % base];
 		value /= base;
 	}
-	return (ft_strdup(ptr));
+	return (ft_strdup_b(ptr));
 }
 
 static char	*itoa_hex_neg_l(long long value, const char *rep)
@@ -47,7 +47,7 @@ static char	*itoa_hex_neg_l(long long value, const char *rep)
 		*(--ptr) = rep[value & 0xF];
 		value >>= 4;
 	}
-	return (ft_strdup(ptr));
+	return (ft_strdup_b(ptr));
 }
 
 static char	*itoa_hex_neg_i(long long value, const char *rep)
@@ -64,10 +64,10 @@ static char	*itoa_hex_neg_i(long long value, const char *rep)
 		*(--ptr) = rep[value & 0xF];
 		value >>= 4;
 	}
-	return (ft_strdup(ptr));
+	return (ft_strdup_b(ptr));
 }
 
-char	*mod_itoa(long long value, int base, int hex_type, t_fl *f)
+char	*mod_itoa_b(long long value, int base, int hex_type, t_fl *f)
 {
 	const char	rep[] = "0123456789abcdef";
 	const char	rep_up[] = "0123456789ABCDEF";
@@ -81,27 +81,27 @@ char	*mod_itoa(long long value, int base, int hex_type, t_fl *f)
 			rtrn_str = itoa_hex_neg_i(value, rep_up);
 		else
 			rtrn_str = itoa_hex_neg_i(value, rep);
-		rtrn_str = ft_n_prec(rtrn_str, ft_strlen(rtrn_str), 1, f);
+		rtrn_str = ft_n_prec(rtrn_str, ft_strlen_b(rtrn_str), 1, f);
 		return (rtrn_str);
 	}
 	if (hex_type == 1)
 		rtrn_str = itoa_base(value, base, rep_up);
 	else
 		rtrn_str = itoa_base(value, base, rep);
-	rtrn_str = ft_n_prec(rtrn_str, ft_strlen(rtrn_str), value, f);
+	rtrn_str = ft_n_prec(rtrn_str, ft_strlen_b(rtrn_str), value, f);
 	return (rtrn_str);
 }
 
-char	*ptr_str(void *arg, t_fl *f)
+char	*ptr_str_b(void *arg, t_fl *f)
 {
 	long long	value;
 
 	if (!arg)
-		return (ft_strdup("(nil)"));
+		return (ft_strdup_b("(nil)"));
 	value = (long long)arg;
 	f->prec = 0;
 	if (value < 0)
-		return (mod_itoa(value, 16, 3, f));
+		return (mod_itoa_b(value, 16, 3, f));
 	else
-		return (mod_itoa(value, 16, 0, f));
+		return (mod_itoa_b(value, 16, 0, f));
 }

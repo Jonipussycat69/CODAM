@@ -6,13 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:52:11 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 14:29:39 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:25:54 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
-size_t	specifier_skip(int spec, t_fl *f)
+static size_t	specifier_skip(int spec, t_fl *f)
 {
 	if (f->f_len > 0)
 		f->f_len--;
@@ -29,12 +29,12 @@ int	ft_form(const char *form, size_t i, t_va *v, t_fl *f)
 	if (form[i] != '%')
 		return (0);
 	i++;
-	if (spf(form, i))
-		return (spf(form, i));
+	if (spf_b(form, i))
+		return (spf_b(form, i));
 	i = get_flags(form, i, f);
 	i = get_width(form, i, f);
 	i = get_prec(form, i, f);
-	v->spec = spf(form, i);
+	v->spec = spf_b(form, i);
 	if (v->spec == 0)
 		fl_reset(f);
 	else
@@ -50,22 +50,22 @@ int	ft_printf(const char *form, ...)
 
 	va_start(args, form);
 	v.i = 0;
-	v.print = ft_strdup("");
+	v.print = ft_strdup_b("");
 	while (form[v.i])
 	{
 		v.spec = ft_form(form, v.i, &v, &f);
 		if (v.spec == 2 || v.spec == 3)
-			v.print = get_arg_void(va_arg(args, void *), &v, &f);
+			v.print = get_arg_void_b(va_arg(args, void *), &v, &f);
 		else if (v.spec == 6)
-			v.print = get_arg_u(va_arg(args, unsigned int), &v, &f);
+			v.print = get_arg_u_b(va_arg(args, unsigned int), &v, &f);
 		else if (v.spec > 0 && v.spec < 9)
-			v.print = get_arg_int(va_arg(args, int), &v, &f);
+			v.print = get_arg_int_b(va_arg(args, int), &v, &f);
 		else
-			v.print = char_str(form[v.i], v.print, v.spec);
+			v.print = char_str_b(form[v.i], v.print, v.spec);
 		if (v.print == NULL)
 			return (-1);
 		v.i += specifier_skip(v.spec, &f);
 	}
 	va_end(args);
-	return (writer(v.print));
+	return (writer_b(v.print));
 }
