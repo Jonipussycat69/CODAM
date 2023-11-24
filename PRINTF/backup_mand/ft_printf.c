@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:35:13 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 16:24:27 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/24 12:57:25 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_printf(const char *form, ...)
 	va_start(args, form);
 	va.i = 0;
 	print = ft_strdup("");
-	while (form[va.i])
+	while (form && form[va.i])
 	{
 		va.spec = spf(form, va.i);
 		if (va.spec > 1 && va.spec < 4)
@@ -69,5 +69,5 @@ int	ft_printf(const char *form, ...)
 		va.i += specifier_skip(va.spec);
 	}
 	va_end(args);
-	return (writer(print));
+	return (writer(print, form));
 }

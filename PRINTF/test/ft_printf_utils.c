@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_printf_utils.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/09 12:35:08 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/15 14:48:42 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 12:35:08 by jdobos            #+#    #+#             */
+/*   Updated: 2023/11/24 12:57:48 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ char	*ft_strdup(const char *s)
 	return (ptr);
 }
 
-size_t	writer(char *print)
+size_t	writer(char *print, const char *form)
 {
 	size_t	i;
 	size_t	begin;
 
+	if (!form)
+		return (-1);
 	i = 0;
 	while (print && print[i] != '\0')
 	{

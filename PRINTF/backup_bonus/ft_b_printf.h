@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 16:22:32 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/24 12:59:00 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_flags
 }	t_fl;
 
 int		ft_printf(const char *form, ...);
-size_t	writer_b(char *print);
+size_t	writer_b(char *print, const char *form);
 
 char	*char_str_b(int ch, char *heap, int type);
 char	*add_pr_b(char *heap, char *stack);

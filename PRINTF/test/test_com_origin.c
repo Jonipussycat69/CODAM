@@ -22,9 +22,9 @@ static void test_compare(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" NULL %c, %c NULL ", 0, 0);
+		origin = printf(NULL);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf(" NULL %c, %c NULL ", 0, 0);
+		ft = ft_printf(NULL);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2
@@ -173,7 +173,7 @@ int	main(void)
 {
 	int	range = 8;
 	int	test = 0;
-	int	type = 3;
+	int	type = 1;
 
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if ((type == 1 || type == 3) && (range || test))

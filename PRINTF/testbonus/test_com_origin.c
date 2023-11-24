@@ -37,9 +37,9 @@ static void test_compare(int amount, int choice)
 	if ((amount > 0 || choice == 1)&& (choice == 0 || choice == 1))
 	{
 		printf("\n\033[1;35mT1 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" %.s ", "-");
+		origin = printf(NULL);
 		printf("\n\nft_printf:\n\n");
-		ft = ft_printf(" %.s ", "-");
+		ft = ft_printf(NULL);
 		printf("\n\nreturns: original: %d, ft: %d\n", origin, ft);
 	}
 	// TEST 2

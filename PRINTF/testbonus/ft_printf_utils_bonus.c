@@ -6,13 +6,13 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:49:10 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/23 13:13:09 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/24 12:58:51 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
-void	*free_str(char *str)
+void	*free_str_b(char *str)
 {
 	if (str)
 		free(str);
@@ -28,7 +28,7 @@ void	*free_both_str(char *str1, char *str2)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_b(const char *str)
 {
 	size_t	i;
 
@@ -38,13 +38,13 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup_b(const char *s)
 {
 	char	*ptr;
 	size_t	i;
 
 	i = 0;
-	ptr = (char *) malloc ((ft_strlen(s) + 1) * sizeof(char));
+	ptr = (char *) malloc ((ft_strlen_b(s) + 1) * sizeof(char));
 	if (!(ptr))
 		return (NULL);
 	while (s[i])
@@ -56,11 +56,13 @@ char	*ft_strdup(const char *s)
 	return (ptr);
 }
 
-size_t	writer(char *print)
+size_t	writer_b(char *print, const char *form)
 {
 	size_t	i;
 	size_t	begin;
 
+	if (!form)
+		return (-1);
 	i = 0;
 	while (print && print[i] != '\0')
 	{
@@ -75,6 +77,6 @@ size_t	writer(char *print)
 			i++;
 		}
 	}
-	free_str(print);
+	free_str_b(print);
 	return (i);
 }

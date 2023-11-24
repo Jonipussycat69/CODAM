@@ -85,7 +85,7 @@ static void test_origin(int amount, int choice)
 	if ((amount > 2 || choice == 3)&& (choice == 0 || choice == 3))
 	{
 		printf("\n\033[1;37mT3 \033[0m~~>\noriginal:\n\n");
-		origin = printf(" %8.6x ", 17);
+		origin = printf(NULL);
 		printf("\n\nreturn: original: %d\n", origin);
 	}
 	// TEST 4
@@ -129,7 +129,7 @@ static void test_origin(int amount, int choice)
 int	main(void)
 {
 	int	range = 5;
-	int	test = 0;
+	int	test = 3;
 
 	print_full_width();
 	markup("~ ENTERING TESTER ~ ", 1, 32, 0);

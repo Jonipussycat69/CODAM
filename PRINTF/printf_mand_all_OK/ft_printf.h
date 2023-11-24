@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:07:56 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/14 19:53:01 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/24 12:58:02 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_printf
 }	t_va;
 
 int		ft_printf(const char *form, ...);
-size_t	writer(char *print);
+size_t	writer(char *print, const char *form);
 char	*char_str(int ch, char *heap, int type);
 char	*add_print(char *heap, char *stack);
 char	*mod_itoa(long long value, int base, char *print, int hex_type);
