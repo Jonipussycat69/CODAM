@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/24 19:43:24 by joni          #+#    #+#                 */
-/*   Updated: 2023/11/16 12:02:46 by joni          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 19:43:24 by joni              #+#    #+#             */
+/*   Updated: 2023/11/24 16:48:21 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_buf(char *buf, char *line, size_t i, size_t j)
 	char			*temp_line;
 
 	temp_line = line;
-	new_line = (char *)malloc(l_len + b_len + 1);
+	new_line = (char *)malloc(l_len + b_len + 1);//MAYBE IMPLEMENT CHECK IF B_LEN == 0 THEN RETURN line??
 	if (!new_line)
 		return (free_line(line));
 	while (i < l_len)
