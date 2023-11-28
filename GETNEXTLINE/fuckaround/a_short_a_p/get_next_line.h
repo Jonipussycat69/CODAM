@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:55:39 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/24 20:29:58 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:27:56 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 # include <limits.h>
 
-# ifndef BUF_SIZE
-#  define BUF_SIZE 42
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
 # endif
 
 # define RETURN_NULL_IF(condition) do { if (condition) { return NULL; } } while (0)
