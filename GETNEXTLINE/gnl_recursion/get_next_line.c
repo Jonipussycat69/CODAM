@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 18:32:26 by jdobos            #+#    #+#             */
-/*   Updated: 2023/11/28 20:51:36 by jdobos           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:06:03 by jdobos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	buf_cat(t_variables *v, char *buf)
 	}
 	else
 		v->rec--;
-	while (buf[i])
+	while (i < v->cat_len)
 		v->cat_line[cat_i++] = buf[i++];
 	return ;
 }
@@ -90,7 +90,7 @@ void	get_line(int fd, t_variables *v)
 		v->cat_line = (char *)malloc(v->cat_len + 1);
 	if (v->error && v->cat_line == NULL)
 		v->error = 0;
-	if (v->error && v->rec > 0)
+	if (v->error && v->rec >= 0)
 		buf_cat(v, buffer);
 	return ;
 }
@@ -103,11 +103,11 @@ char	*get_next_line(int fd)
 	v.line = (char *)malloc(sizeof(char));
 	if (v.line)
 		v.line[0] = '\0';
-	v.line = cpy_to_line(&v, remainder);
-	printf("p1: %s\n",v.line);	// LEFTOFF: v.line stays \0!!
+	v.line = cpy_to_line(&v, remainder);	// REMAINDER NEEDS TO BE CLEANED!!! LEFTOFF!!!
+	// printf("p1: %s\n",v.line);
 	if (!v.line || nl_check(v.line))
 		return (v.line);
-	printf("p2: %s\n",v.line);
+	// printf("p2: %s\n",v.line);
 	v.rec = 0;
 	v.checkpoint = 1;
 	v.error = 1;
@@ -118,7 +118,7 @@ char	*get_next_line(int fd)
 	if (v.error == 0)
 		return (free_line(v.line));
 	v.line = cpy_to_line(&v, v.cat_line);
-	printf("p3: %s\n",v.line);
+	// printf("p3: %s\n",v.line);
 	free(v.cat_line);
 	if (!v.line || v.line[0] == '\0')
 		return (NULL);

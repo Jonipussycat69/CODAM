@@ -18,7 +18,7 @@ typedef struct s_variables
 	size_t	j;
 	size_t	l_len;
 	size_t	b_len;
-	size_t	rec;
+	int		rec;
 	size_t	cat_len;
 	ssize_t	btsr;
 	int		error;
