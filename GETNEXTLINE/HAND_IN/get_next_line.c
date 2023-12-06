@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:43:24 by joni              #+#    #+#             */
-/*   Updated: 2023/11/24 16:48:21 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/24 19:43:24 by joni          #+#    #+#                 */
+/*   Updated: 2023/11/27 13:00:30 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char	*get_buf(char *buf, char *line, size_t i, size_t j)
 	char			*new_line;
 	char			*temp_line;
 
+	if (b_len == 0)
+		return (line);
 	temp_line = line;
-	new_line = (char *)malloc(l_len + b_len + 1);//MAYBE IMPLEMENT CHECK IF B_LEN == 0 THEN RETURN line??
+	new_line = (char *)malloc(l_len + b_len + 1);
 	if (!new_line)
 		return (free_line(line));
 	while (i < l_len)
@@ -49,8 +51,8 @@ char	*get_next_line(int fd)
 	line = get_buf(buffer, line, 0, 0);
 	if (nl_check(line) != 0 || line == NULL)
 		return (line);
-	bytesread = 1;
-	while (nl_check(line) == 0 && line != NULL && bytesread > 0)
+	bytesread = BUFFER_SIZE;
+	while (line && nl_check(line) == 0 && bytesread == BUFFER_SIZE)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread < 0)

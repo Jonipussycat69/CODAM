@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/09 12:16:39 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/11/16 12:05:59 by joni          ########   odam.nl         */
+/*   Updated: 2023/11/27 13:00:43 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_buf(char *buf, char *line, size_t i, size_t j)
 	char			*new_line;
 	char			*temp_line;
 
+	if (b_len == 0)
+		return (line);
 	temp_line = line;
 	new_line = (char *)malloc(l_len + b_len + 1);
 	if (!new_line)
@@ -51,8 +53,8 @@ char	*get_next_line(int fd)
 	line = get_buf(buffer_array[fd], line, 0, 0);
 	if (nl_check(line) != 0 || line == NULL)
 		return (line);
-	bytesread = 1;
-	while (nl_check(line) == 0 && line != NULL && bytesread > 0)
+	bytesread = BUFFER_SIZE;
+	while (line && nl_check(line) == 0 && bytesread == BUFFER_SIZE)
 	{
 		bytesread = read(fd, buffer_array[fd], BUFFER_SIZE);
 		if (bytesread < 0)

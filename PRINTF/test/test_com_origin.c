@@ -173,7 +173,7 @@ int	main(void)
 {
 	int	range = 8;
 	int	test = 0;
-	int	type = 1;
+	int	type = 3;
 
 	printf("\033[1;32m~ ENTERING TESTER ~\033[0m\n");
 	if ((type == 1 || type == 3) && (range || test))
