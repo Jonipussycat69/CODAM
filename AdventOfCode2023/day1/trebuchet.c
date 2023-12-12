@@ -72,8 +72,8 @@ int	get_num(char *buffer)
 	{
 		if (isdigit(buffer[i]))
 			get_digit(buffer[i], &first_num, &num_1, &num_2);
-		else if (buffer[i] == 'o' || buffer[i] == 'e' || buffer[i] == 's' || buffer[i] == 'f' || buffer[i] == 't' || buffer[i] == 'z' || buffer[i] == 'n')
-			i = get_word(buffer, i, &first_num, &num_1, &num_2);
+		else if (buffer[i] == 'o' || buffer[i] == 'e' || buffer[i] == 's' || buffer[i] == 'f' || buffer[i] == 't' || buffer[i] == 'n')
+			i = get_word(buffer, i, &first_num, &num_1, &num_2);// RETURN I????
 		i++;
 	}
 	// printf("Buffer: %c, i: %zu\n", buffer[i], i);
