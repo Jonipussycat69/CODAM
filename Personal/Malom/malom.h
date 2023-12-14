@@ -11,11 +11,12 @@
 
 # define INP_LEN 12
 
-enum	colour{black, white};
 enum	state{dead, alive};
 enum	board{empty, W, B};
-enum	retvalues{error, next, end, exit_program, redo};
+enum	retvalues{error, next, end, exit_program, redo, reinp};
 enum	checktype{set, move};
+enum	colours{black, red, green, yellow, blue, purple, cyan, white, reset_colour};
+enum	txtformat{standard_form, bold, cursive};
 
 typedef struct s_man
 {
@@ -49,13 +50,17 @@ typedef struct s_men
 
 typedef struct s_inp
 {
-	int	X_old;
-	int	Y_old;
+	char	X_cur_alpf;
+	char	X_new_alpf;
+	int	X_cur;
+	int	Y_cur;
 	int	X_new;
 	int	Y_new;
 }	inpt;
 
 int		malom(void);
 void	reset_board(void);
+void	print_format(int col, int type);
+void	ft_bzero(void *s, size_t n);
 
 #endif

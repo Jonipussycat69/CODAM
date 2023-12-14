@@ -18,29 +18,152 @@ int	inner_layer[3][3] = {
 	{0, 0, 0}
 };
 
+#define A1 outer_layer[2][0]
+#define A4 outer_layer[1][0]
+#define A7 outer_layer[0][0]
+
+#define B2 middle_layer[2][0]
+#define B4 middle_layer[1][0]
+#define B6 middle_layer[0][0]
+
+#define C3 inner_layer[2][0]
+#define C4 inner_layer[1][0]
+#define C5 inner_layer[0][0]
+
+#define D1 outer_layer[2][1]
+#define D2 middle_layer[2][1]
+#define D3 inner_layer[2][1]
+#define D5 inner_layer[0][1]
+#define D6 middle_layer[0][1]
+#define D7 outer_layer[0][1]
+
+#define E3 inner_layer[2][2]
+#define E4 inner_layer[1][2]
+#define E5 inner_layer[0][2]
+
+#define F2 middle_layer[2][2]
+#define F4 middle_layer[1][2]
+#define F6 middle_layer[0][2]
+
+#define G1 outer_layer[2][2]
+#define G4 outer_layer[1][2]
+#define G7 outer_layer[0][2]
+
+void	print_info(void)
+{
+	printf("\033[3;34m");
+	printf("\n~ INFO ~\n\n");
+	printf(" Game: Nine men's morris / Malom\n\n");
+	printf(" Input syntax:\n\n");
+	printf(" -> When inputting a set (\"Input set\"):\n");
+	printf(" <coordinate x (a-z)> <coordinate y (1-7)> <Enter>\n\n");
+	printf(" -> When inputting a move (\"Input move\"):\n");
+	printf(" <current x> <current y> <Space> <new x> <new y> <Enter>\n\n");
+	printf(" -> to start a new game type: \"redo\"\n");
+	printf(" -> to exit the program type: \"exit\"\n\n");
+	printf("\033[0m");
+	return ;
+}
+
+void	stop_game(int type)
+{
+	// Write something of exit in the save file and close it maybe
+	return ;
+}
+
 int	save_game(int cur_game, int turns)
 {
 	return (next);
 }
 
-int	inp_check(char *input, inpt *inp, int type)
+int	coordinate_check(int type, inpt *inp)
 {
-	return (next);
+	return (next); //LEFTOFF should check if coordinates are existing ones
 }
 
-int	rule_check()
+int	rule_check(int type, inpt *inp)
 {
-	return (next);
+	if (type == set)
+	{
+		return (next); //LEFTOFF should check if the set/ move is possible
+	}
+	if (type == move)
+	{
+		return (next);
+	}
+	return (error);
+}
+
+int	inp_check(char *input, inpt *inp, int type)
+{
+	const char	alnum[] = " abcdefg";
+	int			i = 0;
+
+	if (strcmp(input, "exit") == 0)
+		return (stop_game(exit_program), exit_program);
+	if (strcmp(input, "redo") == 0)
+		return (stop_game(redo), redo);
+	if (type == set)
+	{
+		if (!(input[0] >= 'a' && input[0] <= 'g'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (!(input[1] >= '1' && input[1] <= '7'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (input[2] != '\0')
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		while (alnum[i] != input[0])
+			i++;
+		inp->X_new_alpf = input[0];
+		inp->X_new = i;
+		inp->Y_new = input[1] - '0';
+		if (coordinate_check(set, inp) == error)
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (rule_check(set, inp) == error)
+			return (printf("\n\033[2;33m Invalid set!\033[0m\n"), reinp);
+		return (next);
+	}
+	if (type == move)
+	{
+		if (!(input[0] >= 'a' && input[0] <= 'g'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (!(input[1] >= '1' && input[1] <= '7'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (input[2] != ' ')
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (!(input[3] >= 'a' && input[3] <= 'g'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (!(input[4] >= '1' && input[4] <= '7'))
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (input[5] != '\0')
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		while (alnum[i] != input[0])
+			i++;
+		inp->X_cur_alpf = input[0];
+		inp->X_cur = i;
+		inp->Y_cur = input[1] - '0';
+		i = 0;
+		while (alnum[i] != input[3])
+			i++;
+		inp->X_new_alpf = input[3];
+		inp->X_new = i;
+		inp->Y_new = input[4] - '0';
+		if (coordinate_check(move, inp) == error)
+			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
+		if (rule_check(move, inp) == error)
+			return (printf("\n\033[2;33m Invalid Move!\033[0m\n"), reinp);
+		return (next);
+	}
+	return (error);
 }
 
 int	do_set(inpt *inp, int turn, int cur_game)
 {
-	return (end);
+	return (next);
 }
 
 int	do_move(inpt *inp, int turn, int cur_game)
 {
-	return (end);
+	return (next);
 }
 
 int	malom()
@@ -49,16 +172,14 @@ int	malom()
 	int	games = 1;
 	int	turn = 1;
 	int	re_turn;
+	int	check_ret = 0;
 	char	input_buf[INP_LEN + 1];
+	char	*ptr;
 
-	input_buf[INP_LEN] = '\0';
-	printf("\n~ INFO ~\n\n");
-	printf(" Game: Nine men's morris / Malom\n\n");
-	printf(" Input syntax:\n");
-	printf(" > When inputting a set (\"Input set\") type: \n");
-	printf(" > When inputting a move (\"Input move\") type: \n");
+	print_info();
 	while (games <= 100)
 	{
+		ft_bzero(input_buf, INP_LEN);
 		printf("\n~ GAME %d START ~\n\n", games);
 		turn = 1;
 		re_turn = next;
@@ -69,14 +190,22 @@ int	malom()
 				printf("\n WHITE");
 			else
 				printf("\n BLACK");
-			printf(" > Turn:%5d\n", turn);
-			printf(" > Input set: ");
-			fgets(input_buf, INP_LEN, stdin);
-			if (inp_check(input_buf, &inp, set) == error)
+			printf(" > Turn:%2d\n", turn);
+			check_ret = reinp;
+			while (check_ret == reinp)
+			{
+				printf(" > Input set: ");
+				fgets(input_buf, INP_LEN, stdin);
+				ptr = strchr(input_buf, '\n');
+				*ptr = '\0';
+				check_ret = inp_check(input_buf, &inp, set);
+				printf("\n");
+			}
+			if (check_ret == error)
 				return (error);
-			if (inp_check(input_buf, &inp, set) == exit_program)
+			if (check_ret == exit_program)
 				return (exit_program);
-			if (inp_check(input_buf, &inp, set) == redo)
+			if (check_ret == redo)
 				break ;
 			re_turn = do_set(&inp, turn, games);
 			if (re_turn == error)
@@ -90,14 +219,22 @@ int	malom()
 				printf("\n WHITE");
 			else
 				printf("\n BLACK");
-			printf(" > Turn:%5d	> Move Turn:%5d\n", turn, turn - 18);
-			printf(" > Input move: ");
-			fgets(input_buf, INP_LEN, stdin);
-			if (inp_check(input_buf, &inp, move) == error)
+			printf(" > Turn:%2d	> Move Turn:%2d\n", turn, turn - 18);
+			check_ret = reinp;
+			while (check_ret == reinp)
+			{
+				printf(" > Input move: ");
+				fgets(input_buf, INP_LEN, stdin);
+				ptr = strchr(input_buf, '\n');
+				*ptr = '\0';
+				check_ret = inp_check(input_buf, &inp, move);
+				printf("\n");
+			}
+			if (check_ret == error)
 				return (error);
-			if (inp_check(input_buf, &inp, move) == exit_program)
+			if (check_ret == exit_program)
 				return (exit_program);
-			if (inp_check(input_buf, &inp, move) == redo)
+			if (check_ret == redo)
 				break ;
 			re_turn = do_move(&inp, turn, games);
 			if (re_turn == error)
