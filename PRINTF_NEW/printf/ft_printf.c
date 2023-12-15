@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/15 13:38:19 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/12/15 19:24:53 by jdobos        ########   odam.nl         */
+/*   Updated: 2023/12/15 20:25:45 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_spec(va_list arg, t_va *s, char frm)
 	if (frm == 's')
 		return (ft_str(s, va_arg(arg, char *)));
 	if (frm == 'p')
-		return (ft_ptr(s, va_arg(arg, void *)));
+		return (ft_ptr(s, va_arg(arg, void *), rep));
 	if (frm == 'd' || frm == 'i')
 		return (ft_itoa(s, va_arg(arg, int), 10, rep));
 	if (frm == 'u')
@@ -76,8 +76,8 @@ int	get_form(va_list args, t_va *s, const char *frm)
 	|| frm[s->i + 1] == 's' || frm[s->i + 1] == 'p' || frm[s->i + 1] == 'x' \
 	|| frm[s->i + 1] == 'X' || frm[s->i + 1] == 'u' || frm[s->i + 1] == '%')
 	{
-		s->print_len += s->i - s->begin;
-		if (add_arr(s->print, (unsigned char *)frm, s) == -1)
+		s->arr_len += s->i - s->begin;
+		if (add_arr(s->print, frm + s->begin, s) == -1)
 			return (-1);
 		s->begin = ++s->i + 1;
 		ret = ft_spec(args, &s, frm[s->i]);
@@ -109,6 +109,12 @@ int	ft_printf(const char *format, ...)
 			if (get_form(args, &s, format[s.i]) < 0)
 				return (-1);
 		s.i++;
+	}
+	if (s.begin < s.i)
+	{
+		s.arr_len = s.i - s.begin;
+		if (add_arr(s.print, format + s.begin, &s) == -1)
+			return (-1);
 	}
 	va_end(args);
 	return (ft_write(&s));
