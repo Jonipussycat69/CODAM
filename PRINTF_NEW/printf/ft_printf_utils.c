@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/15 16:59:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/12/16 00:20:43 by joni          ########   odam.nl         */
+/*   Updated: 2023/12/16 00:53:07 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	ft_ptr(t_va *s, void *arg, const char *rep)
 	unsigned long	value;
 	unsigned char	buf[65];
 	unsigned char	*ptr;
-	int				i;
 
 	if (!arg)
 	{
@@ -84,11 +83,12 @@ int	ft_ptr(t_va *s, void *arg, const char *rep)
 	value = (unsigned long)arg;
 	ptr = &buf[64];
 	*ptr = '\0';
-	i = 0;
-	while (i++ < 16)
+	if (value == 0)
+		*(--ptr) = rep[value % 16];
+	while (value != 0)
 	{
-		*(--ptr) = rep[value & 0xF];
-		value >>= 4;
+		*(--ptr) = rep[value % 16];
+		value /= 16;
 	}
 	s->arr_len = ft_strlen((char *)ptr);
 	return (add_arr(s->print, ptr, s));
