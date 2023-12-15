@@ -1,5 +1,16 @@
 #include "malom.h"
 
+int	board[8][8] = {
+	{7, 0, 3, 3, 0, 3, 3, 0},
+	{6, 3, 0, 3, 0, 3, 0, 3},
+	{5, 3, 3, 0, 0, 0, 3, 3},
+	{4, 0, 0, 0, 4, 0, 0, 0},
+	{3, 3, 3, 0, 0, 0, 3, 3},
+	{2, 3, 0, 3, 0, 3, 0, 3},
+	{1, 0, 3, 3, 0, 3, 3, 0},
+	{0, 'a', 'b', 'c', 'd', 'e', 'f', 'g'}	
+};
+
 int	outer_layer[3][3] = {
 	{0, 0, 0},
 	{0, -1, 0},
@@ -78,20 +89,60 @@ int	save_game(int cur_game, int turns)
 
 int	coordinate_check(int type, inpt *inp)
 {
-	return (next); //LEFTOFF should check if coordinates are existing ones
+	if (inp->X_new_alpf == 'a' || inp->X_new_alpf == 'g')
+	{
+		if (inp->Y_new == 1 || inp->Y_new == 4 || inp->Y_new == 7)
+			return (next);
+	}
+	else if (inp->X_new_alpf == 'b' || inp->X_new_alpf == 'f')
+	{
+		if (inp->Y_new == 2 || inp->Y_new == 4 || inp->Y_new == 6)
+			return (next);
+	}
+	else if (inp->X_new_alpf == 'c' || inp->X_new_alpf == 'e')
+	{
+		if (inp->Y_new == 3 || inp->Y_new == 4 || inp->Y_new == 5)
+			return (next);
+	}
+	else if (inp->X_new_alpf == 'd')
+	{
+		if (inp->Y_new >= 1 && inp->Y_new <= 7 && inp->Y_new != 4)
+			return (next);
+	}
+	if (type == move)
+	{
+		if (inp->X_cur_alpf == 'a' || inp->X_cur_alpf == 'g')
+		{
+			if (inp->Y_cur == 1 || inp->Y_cur == 4 || inp->Y_cur == 7)
+				return (next);
+		}
+		else if (inp->X_cur_alpf == 'b' || inp->X_cur_alpf == 'f')
+		{
+			if (inp->Y_cur == 2 || inp->Y_cur == 4 || inp->Y_cur == 6)
+				return (next);
+		}
+		else if (inp->X_cur_alpf == 'c' || inp->X_cur_alpf == 'e')
+		{
+			if (inp->Y_cur == 3 || inp->Y_cur == 4 || inp->Y_cur == 5)
+				return (next);
+		}
+		else if (inp->X_cur_alpf == 'd')
+		{
+			if (inp->Y_cur >= 1 && inp->Y_cur <= 7 && inp->Y_cur != 4)
+				return (next);
+		}
+	}
+	return (error); // should check if coordinates are existing ones
 }
 
 int	rule_check(int type, inpt *inp)
 {
-	if (type == set)
-	{
-		return (next); //LEFTOFF should check if the set/ move is possible
-	}
+	
 	if (type == move)
 	{
 		return (next);
 	}
-	return (error);
+	return (error);//LEFTOFF should check if the set/ move is possible
 }
 
 int	inp_check(char *input, inpt *inp, int type)

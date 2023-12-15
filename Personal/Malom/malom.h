@@ -9,7 +9,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-# define INP_LEN 12
+# define INP_LEN 6
 
 enum	state{dead, alive};
 enum	board{empty, W, B};
