@@ -34,7 +34,7 @@ int	ft_sym(char *l1, char *l2, char *l3, int begin, int end)
 		i++;
 	}
 	i = begin - 1;
-	while (l3 && l3[i] && i <= end)
+	while (l3 && l3[i] && i <= end)// INCLUDE that it looks next to the number on line 2 !!!!!!!!!!!!!!!!!
 	{
 		if (!(isdigit(l3[i]) || l3[i] == '.' || l3[i] != '\n'))
 			return (ft_get_num(l2, begin, end));
