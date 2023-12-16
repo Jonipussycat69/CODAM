@@ -230,7 +230,7 @@ int	malom()
 	print_info();
 	while (games <= 100)
 	{
-		ft_bzero(input_buf, INP_LEN);
+		ft_bzero(input_buf, INP_LEN + 1);
 		printf("\n~ GAME %d START ~\n\n", games);
 		turn = 1;
 		re_turn = next;
@@ -247,8 +247,7 @@ int	malom()
 			{
 				printf(" > Input set: ");
 				fgets(input_buf, INP_LEN, stdin);
-				ptr = strchr(input_buf, '\n');
-				*ptr = '\0';
+				terminate_c(input_buf, '\n');
 				check_ret = inp_check(input_buf, &inp, set);
 				printf("\n");
 			}
@@ -276,8 +275,7 @@ int	malom()
 			{
 				printf(" > Input move: ");
 				fgets(input_buf, INP_LEN, stdin);
-				ptr = strchr(input_buf, '\n');
-				*ptr = '\0';
+				terminate_c(input_buf, '\n');
 				check_ret = inp_check(input_buf, &inp, move);
 				printf("\n");
 			}

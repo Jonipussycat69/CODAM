@@ -8,8 +8,11 @@
 # include <ctype.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <wchar.h>
+# include <locale.h>
 
-# define INP_LEN 6
+# define INP_LEN 10
 
 enum	state{dead, alive};
 enum	board{empty, W, B};
@@ -62,5 +65,6 @@ int		malom(void);
 void	reset_board(void);
 void	print_format(int col, int type);
 void	ft_bzero(void *s, size_t n);
+int		terminate_c(char *str, int c);
 
 #endif

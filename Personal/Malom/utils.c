@@ -10,6 +10,20 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
+int	terminate_c(char *str, int c)
+{
+	while (*str)
+	{
+		if (*str == c)
+		{
+			*str = '\0';
+			return (1);
+		}
+		str++;
+	}
+	return (0);
+}
+
 int	play_to_file(int fd)
 {
 	return (next);
