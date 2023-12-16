@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/15 16:59:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/12/16 00:20:43 by joni          ########   odam.nl         */
+/*   Updated: 2023/12/16 10:33:48 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	ft_ptr(t_va *s, void *arg, const char *rep)
 
 	if (!arg)
 	{
-		s->arr_len = 6;
-		return (add_arr(s->print, (unsigned char *)"(nill)", s));
+		s->arr_len = 5;
+		return (add_arr(s->print, (unsigned char *)"(nil)", s));
 	}
 	s->arr_len = 2;
 	if (add_arr(s->print, (unsigned char *)"0x", s) == -1)
