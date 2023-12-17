@@ -1,64 +1,67 @@
 #include "malom.h"
 
-int	board[8][8] = {
-	{7, 0, 3, 3, 0, 3, 3, 0},
-	{6, 3, 0, 3, 0, 3, 0, 3},
-	{5, 3, 3, 0, 0, 0, 3, 3},
-	{4, 0, 0, 0, 4, 0, 0, 0},
-	{3, 3, 3, 0, 0, 0, 3, 3},
-	{2, 3, 0, 3, 0, 3, 0, 3},
-	{1, 0, 3, 3, 0, 3, 3, 0},
-	{0, 'a', 'b', 'c', 'd', 'e', 'f', 'g'}	
+int	board[PARAMB][PARAMB] = {
+	{0, 8, 8, 0, 8, 8, 0},
+	{9, 0, 8, 0, 8, 0, 9},
+	{9, 9, 0, 0, 0, 9, 9},
+	{0, 0, 0, -1, 0, 0, 0},
+	{9, 9, 0, 0, 0, 9, 9},
+	{9, 0, 8, 0, 8, 0, 9},
+	{0, 8, 8, 0, 8, 8, 0},
 };
 
-int	outer_layer[3][3] = {
-	{0, 0, 0},
-	{0, -1, 0},
-	{0, 0, 0}
-};
+int	print_board(int turn, int game)
+{
+	int	x;
+	int	y = 0;
 
-int	middle_layer[3][3] = {
-	{0, 0, 0},
-	{0, -1, 0},
-	{0, 0, 0}
-};
-
-int	inner_layer[3][3] = {
-	{0, 0, 0},
-	{0, -1, 0},
-	{0, 0, 0}
-};
-
-#define A1 outer_layer[2][0]
-#define A4 outer_layer[1][0]
-#define A7 outer_layer[0][0]
-
-#define B2 middle_layer[2][0]
-#define B4 middle_layer[1][0]
-#define B6 middle_layer[0][0]
-
-#define C3 inner_layer[2][0]
-#define C4 inner_layer[1][0]
-#define C5 inner_layer[0][0]
-
-#define D1 outer_layer[2][1]
-#define D2 middle_layer[2][1]
-#define D3 inner_layer[2][1]
-#define D5 inner_layer[0][1]
-#define D6 middle_layer[0][1]
-#define D7 outer_layer[0][1]
-
-#define E3 inner_layer[2][2]
-#define E4 inner_layer[1][2]
-#define E5 inner_layer[0][2]
-
-#define F2 middle_layer[2][2]
-#define F4 middle_layer[1][2]
-#define F6 middle_layer[0][2]
-
-#define G1 outer_layer[2][2]
-#define G4 outer_layer[1][2]
-#define G7 outer_layer[0][2]
+	while (y < PARAMB)
+	{
+		printf("%d   ", PARAMB - y);
+		x = 0;
+		while (x < PARAMB)
+		{
+			if (board[y][x] == 0)
+				printf("%so%s", DIMMED_F, RESET_F);
+			else if (board[y][x] == 'w')
+				printf("%sW%s", WHITE_F, RESET_F);
+			else if (board[y][x] == 'b')
+				printf("%sB%s", BLUE_F, RESET_F);
+			else if (board[y][x] == 8)
+				printf("-");
+			else if (board[y][x] == 9)
+				printf("|");
+			else if (board[y][x] == -1)
+				printf(" ");
+			if (y == (PARAMB - 1) / 2)
+			{
+				if (x == (PARAMB - 1) / 2 || x == (PARAMB - 1) / 2 - 1)
+					printf(" ");
+				else if (x < PARAMB - 1)
+					printf("-");
+			}
+			else if (y < (PARAMB - 1) / 2)
+			{
+				if (x < (PARAMB - 1) - y && x >= (PARAMB - 1) - ((PARAMB - 1) - y))
+					printf("-");
+				else
+					printf(" ");
+			}
+			else if (y > 3)
+			{
+				if (x >= (PARAMB - 1) - y && x < (PARAMB - 1) - ((PARAMB - 1) - y))
+					printf("-");
+				else
+					printf(" ");
+			}
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n    a b c d e f g\n");
+	print_width_format("Malom ", BLUE_DIM_F);
+}
 
 void	print_info(void)
 {
@@ -76,144 +79,32 @@ void	print_info(void)
 	return ;
 }
 
-void	stop_game(int type)
-{
-	// Write something of exit in the save file and close it maybe
-	return ;
-}
-
 int	save_game(int cur_game, int turns)
 {
 	return (next);
 }
 
-int	coordinate_check(int type, inpt *inp)
-{
-	if (inp->X_new_alpf == 'a' || inp->X_new_alpf == 'g')
-	{
-		if (inp->Y_new == 1 || inp->Y_new == 4 || inp->Y_new == 7)
-			return (next);
-	}
-	else if (inp->X_new_alpf == 'b' || inp->X_new_alpf == 'f')
-	{
-		if (inp->Y_new == 2 || inp->Y_new == 4 || inp->Y_new == 6)
-			return (next);
-	}
-	else if (inp->X_new_alpf == 'c' || inp->X_new_alpf == 'e')
-	{
-		if (inp->Y_new == 3 || inp->Y_new == 4 || inp->Y_new == 5)
-			return (next);
-	}
-	else if (inp->X_new_alpf == 'd')
-	{
-		if (inp->Y_new >= 1 && inp->Y_new <= 7 && inp->Y_new != 4)
-			return (next);
-	}
-	if (type == move)
-	{
-		if (inp->X_cur_alpf == 'a' || inp->X_cur_alpf == 'g')
-		{
-			if (inp->Y_cur == 1 || inp->Y_cur == 4 || inp->Y_cur == 7)
-				return (next);
-		}
-		else if (inp->X_cur_alpf == 'b' || inp->X_cur_alpf == 'f')
-		{
-			if (inp->Y_cur == 2 || inp->Y_cur == 4 || inp->Y_cur == 6)
-				return (next);
-		}
-		else if (inp->X_cur_alpf == 'c' || inp->X_cur_alpf == 'e')
-		{
-			if (inp->Y_cur == 3 || inp->Y_cur == 4 || inp->Y_cur == 5)
-				return (next);
-		}
-		else if (inp->X_cur_alpf == 'd')
-		{
-			if (inp->Y_cur >= 1 && inp->Y_cur <= 7 && inp->Y_cur != 4)
-				return (next);
-		}
-	}
-	return (error); // should check if coordinates are existing ones
-}
-
-int	rule_check(int type, inpt *inp)
-{
-	
-	if (type == move)
-	{
-		return (next);
-	}
-	return (error);//LEFTOFF should check if the set/ move is possible
-}
-
-int	inp_check(char *input, inpt *inp, int type)
-{
-	const char	alnum[] = " abcdefg";
-	int			i = 0;
-
-	if (strcmp(input, "exit") == 0)
-		return (stop_game(exit_program), exit_program);
-	if (strcmp(input, "redo") == 0)
-		return (stop_game(redo), redo);
-	if (type == set)
-	{
-		if (!(input[0] >= 'a' && input[0] <= 'g'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (!(input[1] >= '1' && input[1] <= '7'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (input[2] != '\0')
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		while (alnum[i] != input[0])
-			i++;
-		inp->X_new_alpf = input[0];
-		inp->X_new = i;
-		inp->Y_new = input[1] - '0';
-		if (coordinate_check(set, inp) == error)
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (rule_check(set, inp) == error)
-			return (printf("\n\033[2;33m Invalid set!\033[0m\n"), reinp);
-		return (next);
-	}
-	if (type == move)
-	{
-		if (!(input[0] >= 'a' && input[0] <= 'g'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (!(input[1] >= '1' && input[1] <= '7'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (input[2] != ' ')
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (!(input[3] >= 'a' && input[3] <= 'g'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (!(input[4] >= '1' && input[4] <= '7'))
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (input[5] != '\0')
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		while (alnum[i] != input[0])
-			i++;
-		inp->X_cur_alpf = input[0];
-		inp->X_cur = i;
-		inp->Y_cur = input[1] - '0';
-		i = 0;
-		while (alnum[i] != input[3])
-			i++;
-		inp->X_new_alpf = input[3];
-		inp->X_new = i;
-		inp->Y_new = input[4] - '0';
-		if (coordinate_check(move, inp) == error)
-			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (rule_check(move, inp) == error)
-			return (printf("\n\033[2;33m Invalid Move!\033[0m\n"), reinp);
-		return (next);
-	}
-	return (error);
-}
-
 int	do_set(inpt *inp, int turn, int cur_game)
 {
+	if (turn % 2 == 1)
+		board[7 - inp->Y_new][inp->X_new - 1] = 'w';
+	else
+		board[7 - inp->Y_new][inp->X_new - 1] = 'b';
 	return (next);
 }
 
 int	do_move(inpt *inp, int turn, int cur_game)
 {
+	if (turn % 2 == 1)
+	{
+		board[7 - inp->Y_new][inp->X_new - 1] = 'w';
+		board[7 - inp->Y_cur][inp->X_cur - 1] = 0;
+	}
+	else
+	{
+		board[7 - inp->Y_new][inp->X_new - 1] = 'b';
+		board[7 - inp->Y_cur][inp->X_cur - 1] = 0;
+	}
 	return (next);
 }
 
@@ -238,9 +129,9 @@ int	malom()
 		while (re_turn == next)
 		{
 			if (turn % 2 == 1)
-				printf("\n WHITE");
+				printf("\n %sWHITE%s", WHITE_F, RESET_F);
 			else
-				printf("\n BLACK");
+				printf("\n %sBLUE%s", BLUE_F, RESET_F);
 			printf(" > Turn:%2d\n", turn);
 			check_ret = reinp;
 			while (check_ret == reinp)
@@ -260,15 +151,17 @@ int	malom()
 			re_turn = do_set(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
+			print_board(turn, games);
 			turn++;
 		}
+		printf("\n Lets start moving!..\n");
 		re_turn = next;
 		while (turn > 18 && re_turn == next)
 		{
 			if (turn % 2 == 1)
-				printf("\n WHITE");
+				printf("\n %sWHITE%s", WHITE_F, RESET_F);
 			else
-				printf("\n BLACK");
+				printf("\n %sBLUE%s", BLUE_F, RESET_F);
 			printf(" > Turn:%2d	> Move Turn:%2d\n", turn, turn - 18);
 			check_ret = reinp;
 			while (check_ret == reinp)
@@ -288,6 +181,7 @@ int	malom()
 			re_turn = do_move(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
+			print_board(turn, games);
 			turn++;
 		}
 		if (save_game(games, turn - 1) == error)
@@ -300,32 +194,52 @@ int	malom()
 
 void	reset_board(void)
 {
-	inner_layer[0][0] = 0;
-	inner_layer[0][1] = 0;
-	inner_layer[0][2] = 0;
-	inner_layer[1][0] = 0;
-	inner_layer[1][1] = -1;
-	inner_layer[1][2] = 0;
-	inner_layer[2][0] = 0;
-	inner_layer[2][1] = 0;
-	inner_layer[2][2] = 0;
-	middle_layer[0][0] = 0;
-	middle_layer[0][1] = 0;
-	middle_layer[0][2] = 0;
-	middle_layer[1][0] = 0;
-	middle_layer[1][1] = -1;
-	middle_layer[1][2] = 0;
-	middle_layer[2][0] = 0;
-	middle_layer[2][1] = 0;
-	middle_layer[2][2] = 0;
-	outer_layer[0][0] = 0;
-	outer_layer[0][1] = 0;
-	outer_layer[0][2] = 0;
-	outer_layer[1][0] = 0;
-	outer_layer[1][1] = -1;
-	outer_layer[1][2] = 0;
-	outer_layer[2][0] = 0;
-	outer_layer[2][1] = 0;
-	outer_layer[2][2] = 0;
+	board[0][0] = 0;
+	board[0][3] = 0;
+	board[0][6] = 0;
+	board[1][1] = 0;
+	board[1][3] = 0;
+	board[1][5] = 0;
+	board[2][2] = 0;
+	board[2][3] = 0;
+	board[2][4] = 0;
+	board[3][0] = 0;
+	board[3][1] = 0;
+	board[3][2] = 0;
+	board[3][4] = 0;
+	board[3][5] = 0;
+	board[3][6] = 0;
+	board[4][2] = 0;
+	board[4][3] = 0;
+	board[4][4] = 0;
+	board[5][1] = 0;
+	board[5][3] = 0;
+	board[5][5] = 0;
+	board[6][0] = 0;
+	board[6][3] = 0;
+	board[6][6] = 0;
+	board[3][3] = -1;
 	return ;
+}
+
+int	rule_check(int type, inpt *inp)
+{
+	if (board[PARAMB - inp->Y_new][inp->X_new - 1] != 0)
+		return (error);
+	if (type == move || type == jumpmove)
+	{
+		if (board[PARAMB - inp->Y_cur][inp->X_cur - 1] != 0)
+			return (error);
+	}
+	if (type == move)
+	{
+		if (inp->X_cur == 3 || inp->X_cur == 5 || inp->Y_cur == 3 || inp->Y_cur == 5)
+		{
+			if (inp->X_new - inp->X_cur > 1 || inp->X_new - inp->X_cur < -1)
+				return (error);
+		}
+		if (inp->X_new - inp->X_cur > 2 || inp->X_new - inp->X_cur < -2)
+			return (error);
+	}
+	return (next);// check if the set/ move is possible
 }
