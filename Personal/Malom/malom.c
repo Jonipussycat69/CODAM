@@ -10,6 +10,51 @@ int	board[PARAMB][PARAMB] = {
 	{0, 8, 8, 0, 8, 8, 0},
 };
 
+bool	malom_indicator = 0;
+
+int	assign_men(int turn, int game, inpt *inp, mann *men, int type)
+{
+	int	x;
+	int	y = 0;
+	int	i = 0;
+
+	if (type == set)
+	{
+		while (y < PARAMB)
+		{
+			x = 0;
+			while (x < PARAMB)
+			{
+				while (x < PARAMB && (board[y][x] != 'b' || board[y][x] != 'w'))
+					x++;
+				if (board[y][x] == 'b')
+				{
+					while (i < 18 && (!(men[i].x == x && men[i].y == y)))
+						i++;
+					if (i == 19)
+					{
+						i = 0;
+						while (i < 18 && men[i].code != 0)
+							i++;
+					}
+				}
+				x++;
+			}
+			y++;
+		}
+	}
+	if (type == move)
+	{
+
+	}
+	return (next);// LEFTOFF check if the coordinates of a man changed!
+}
+
+int	chek_malom(int turn, int game)
+{
+	return (next);
+}
+
 int	print_board(int turn, int game)
 {
 	int	x;
@@ -87,9 +132,9 @@ int	save_game(int cur_game, int turns)
 int	do_set(inpt *inp, int turn, int cur_game)
 {
 	if (turn % 2 == 1)
-		board[7 - inp->Y_new][inp->X_new - 1] = 'w';
+		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'w';
 	else
-		board[7 - inp->Y_new][inp->X_new - 1] = 'b';
+		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'b';
 	return (next);
 }
 
@@ -97,20 +142,21 @@ int	do_move(inpt *inp, int turn, int cur_game)
 {
 	if (turn % 2 == 1)
 	{
-		board[7 - inp->Y_new][inp->X_new - 1] = 'w';
-		board[7 - inp->Y_cur][inp->X_cur - 1] = 0;
+		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'w';
+		board[PARAMB - inp->Y_cur][inp->X_cur - 1] = 0;
 	}
 	else
 	{
-		board[7 - inp->Y_new][inp->X_new - 1] = 'b';
-		board[7 - inp->Y_cur][inp->X_cur - 1] = 0;
+		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'b';
+		board[PARAMB - inp->Y_cur][inp->X_cur - 1] = 0;
 	}
 	return (next);
 }
 
 int	malom()
 {
-	inpt inp;
+	inpt	inp;
+	mann	men[19];
 	int	games = 1;
 	int	turn = 1;
 	int	re_turn;
@@ -151,6 +197,7 @@ int	malom()
 			re_turn = do_set(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
+			assign_men(turn, games, &inp, men, set);
 			print_board(turn, games);
 			turn++;
 		}
@@ -181,6 +228,7 @@ int	malom()
 			re_turn = do_move(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
+			assign_men(turn, games, &inp, men, move);
 			print_board(turn, games);
 			turn++;
 		}

@@ -21,8 +21,11 @@
 # define DIMMED_F "\033[2;37m"
 # define RESET_F "\033[0m"
 # define BLUE_DIM_F "\033[2;34m"
+# define RED_DIM_F "\033[2;31m"
+# define GREEN_DIM_F "\033[2;32m"
+# define CYAN_DIM_F "\033[2;36m"
 
-enum	state{dead, alive};
+enum	state{dead, alive, inactive};
 enum	board{empty, W, B};
 enum	retvalues{error, next, end, exit_program, redo, reinp};
 enum	checktype{set, move, jumpmove};
@@ -33,31 +36,32 @@ typedef struct s_man
 {
 	int	x;
 	int	y;
+	int	code;
 	bool	colour;
 	bool	state;
-}	man;
+}	mann;
 
 typedef struct s_men
 {
-	man	B1;
-	man	B2;
-	man	B3;
-	man	B4;
-	man	B5;
-	man	B6;
-	man	B7;
-	man	B8;
-	man	B9;
-	man	W1;
-	man	W2;
-	man	W3;
-	man	W4;
-	man	W5;
-	man	W6;
-	man	W7;
-	man	W8;
-	man	W9;
-}	men;
+	mann	B1;
+	mann	B2;
+	mann	B3;
+	mann	B4;
+	mann	B5;
+	mann	B6;
+	mann	B7;
+	mann	B8;
+	mann	B9;
+	mann	W1;
+	mann	W2;
+	mann	W3;
+	mann	W4;
+	mann	W5;
+	mann	W6;
+	mann	W7;
+	mann	W8;
+	mann	W9;
+}	menn;
 
 typedef struct s_inp
 {
