@@ -12,11 +12,40 @@ int	board[PARAMB][PARAMB] = {
 
 bool	malom_indicator = 0;
 
+void	set_men(mann *men)
+{
+	int	i = 0;
+
+	while (i < 9)
+	{
+		men[i].colour = white;
+		men[i].state = inactive;
+		men[i].x = 0;
+		men[i].y = 0;
+		men[i].code = i;
+		men[i].update = 0;
+		i++;
+	}
+	while (i < 18)
+	{
+		men[i].colour = blue;
+		men[i].state = inactive;
+		men[i].x = 0;
+		men[i].y = 0;
+		men[i].code = i;
+		men[i].update = 0;
+		i++;
+	}
+	return ;
+}
+
 int	assign_men(int turn, int game, inpt *inp, mann *men, int type)
 {
 	int	x;
 	int	y = 0;
 	int	i = 0;
+	int	temp_x = 0;
+	int	temp_y = 0;
 
 	if (type == set)
 	{
@@ -34,8 +63,26 @@ int	assign_men(int turn, int game, inpt *inp, mann *men, int type)
 					if (i == 19)
 					{
 						i = 0;
-						while (i < 18 && men[i].code != 0)
-							i++;
+						while (i < 18)
+						{
+							if (men[i].x != 0 && men[i].y != 0 && board[PARAMB - men[i].y][men[i].x - 1] == 0 && men[i].colour == blue)
+							{
+								men[i].x = x;
+								men[i].y = y;
+								break ;
+							}
+							if (men[i].state == inactive)
+							{
+								men[i].x = x;
+								men[i].y = y;
+								break ;
+							}
+							i++; // LEFTOFF incorrect!!!
+						}
+					}
+					else
+					{
+						men[i].update = turn;
 					}
 				}
 				x++;

@@ -37,8 +37,9 @@ typedef struct s_man
 	int	x;
 	int	y;
 	int	code;
-	bool	colour;
-	bool	state;
+	int	colour;
+	int	state;
+	int	update;
 }	mann;
 
 typedef struct s_men
