@@ -11,8 +11,38 @@ int	board[PARAMB][PARAMB] = {
 };
 
 bool	malom_indicator = 0;
+int		malom_coord[3];
+int		coord_save[19][4];
+mann	men_prev[19];
+mann	men[19];
 
-void	set_men(mann *men)
+void	reset_malom_coord(void)
+{
+	malom_coord[0] = 0;
+	malom_coord[1] = 0;
+	malom_coord[2] = 0;
+	return ;
+}
+
+void	set_coord(void)
+{
+	int	y = 0;
+	int	x;
+
+	while (y < 19)
+	{
+		x = 0;
+		while (x < 4)
+		{
+			coord_save[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
+void	set_men(void)
 {
 	int	i = 0;
 
@@ -22,7 +52,7 @@ void	set_men(mann *men)
 		men[i].state = inactive;
 		men[i].x = 0;
 		men[i].y = 0;
-		men[i].code = i;
+		men[i].code = i + 1;
 		men[i].update = 0;
 		i++;
 	}
@@ -32,15 +62,16 @@ void	set_men(mann *men)
 		men[i].state = inactive;
 		men[i].x = 0;
 		men[i].y = 0;
-		men[i].code = i;
+		men[i].code = i + 1;
 		men[i].update = 0;
 		i++;
 	}
 	return ;
 }
 
-int	assign_men(int turn, int game, inpt *inp, mann *men, int type)
+int	assign_men(int turn, int game, inpt *inp, int type)
 {
+	int	reassigned = 0;
 	int	x;
 	int	y = 0;
 	int	i = 0;
@@ -49,52 +80,54 @@ int	assign_men(int turn, int game, inpt *inp, mann *men, int type)
 
 	if (type == set)
 	{
-		while (y < PARAMB)
+		while (i < 18)
 		{
-			x = 0;
-			while (x < PARAMB)
+			if (men[i].y > 0 && men[i].x > 0 && board[PARAMB - men[i].y][men[i].x - 1] == 0 \
+			&& malom_coord[0] == men[i].y && malom_coord[1] == men[i].x)
 			{
-				while (x < PARAMB && (board[y][x] != 'b' || board[y][x] != 'w'))
-					x++;
-				if (board[y][x] == 'b')
-				{
-					while (i < 18 && (!(men[i].x == x && men[i].y == y)))
-						i++;
-					if (i == 19)
-					{
-						i = 0;
-						while (i < 18)
-						{
-							if (men[i].x != 0 && men[i].y != 0 && board[PARAMB - men[i].y][men[i].x - 1] == 0 && men[i].colour == blue)
-							{
-								men[i].x = x;
-								men[i].y = y;
-								break ;
-							}
-							if (men[i].state == inactive)
-							{
-								men[i].x = x;
-								men[i].y = y;
-								break ;
-							}
-							i++; // LEFTOFF incorrect!!!
-						}
-					}
-					else
-					{
-						men[i].update = turn;
-					}
-				}
-				x++;
+				men[i].y = 0;
+				men[i].x = 0;
+				men[i].state = dead;
 			}
-			y++;
+			i++;
 		}
+		i = 0;
+		while ((men[i].y == 0 && men[i].x == 0) || men[i].state == dead)
+			i++;
+		men[i].y = inp->Y_new;
+		men[i].x = inp->X_new;
+		men[i].state = alive;
+		return (next);
 	}
 	if (type == move)
 	{
-
+		while (i < 18)
+		{
+			if (men[i].y > 0 && men[i].x > 0 && board[PARAMB - men[i].y][men[i].x - 1] == 0 \
+			&& malom_coord[0] == men[i].y && malom_coord[1] == men[i].x)
+			{
+				men[i].y = 0;
+				men[i].x = 0;
+				men[i].state = dead;
+			}
+			i++;
+		}
+		i = 0;
+		while (i < 18)
+		{
+			if (men[i].y > 0 && men[i].x > 0 && board[PARAMB - men[i].y][men[i].x - 1] == 0)
+				reassigned = i;
+			i++;
+		}
+		if (reassigned)
+		{
+			men[reassigned].y = inp->Y_new;
+			men[reassigned].x = inp->X_new;
+			men[i].state = moved;
+		}
+		return (next);
 	}
-	return (next);// LEFTOFF check if the coordinates of a man changed!
+	return (next);// LEFTOFF check if the coordinates of a man changed SEGFAULT!!!!!!!!!!!!!!
 }
 
 int	chek_malom(int turn, int game)
@@ -106,6 +139,7 @@ int	print_board(int turn, int game)
 {
 	int	x;
 	int	y = 0;
+	int	i = 0;
 
 	while (y < PARAMB)
 	{
@@ -152,6 +186,28 @@ int	print_board(int turn, int game)
 		y++;
 	}
 	printf("\n    a b c d e f g\n");
+	while ((men[i].state == alive || men[i].state == dead) && i < 18)
+	{
+		printf("  ");
+		if (men[i].state == alive)
+			printf("%sman %2d%s", GREEN_DIM_F, i + 1, RESET_F);
+		if (men[i].state == dead)
+			printf("%sman %2d%s", RED_DIM_F, i + 1, RESET_F);
+		i++;
+	}
+	printf("\n");
+	i = 0;
+	while ((men[i].state == alive || men[i].state == dead) && i < 18)
+	{
+		printf("    ");
+		if (men[i].state == alive)
+			printf("%s%c%d%s", GREEN_DIM_F, men[i].x, men[i].y, RESET_F);
+		if (men[i].state == dead)
+			printf("%s X%s", RED_DIM_F, RESET_F);
+		printf("  ");
+		i++;
+	}
+	printf("\n");
 	print_width_format("Malom ", BLUE_DIM_F);
 }
 
@@ -203,7 +259,6 @@ int	do_move(inpt *inp, int turn, int cur_game)
 int	malom()
 {
 	inpt	inp;
-	mann	men[19];
 	int	games = 1;
 	int	turn = 1;
 	int	re_turn;
@@ -214,11 +269,14 @@ int	malom()
 	print_info();
 	while (games <= 100)
 	{
+		set_men();
+		set_coord();
+		reset_malom_coord();
+		reset_board();
 		ft_bzero(input_buf, INP_LEN + 1);
 		printf("\n~ GAME %d START ~\n\n", games);
 		turn = 1;
 		re_turn = next;
-		reset_board();
 		while (re_turn == next)
 		{
 			if (turn % 2 == 1)
@@ -244,7 +302,8 @@ int	malom()
 			re_turn = do_set(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
-			assign_men(turn, games, &inp, men, set);
+			
+			assign_men(turn, games, &inp, set);
 			print_board(turn, games);
 			turn++;
 		}
@@ -275,7 +334,7 @@ int	malom()
 			re_turn = do_move(&inp, turn, games);
 			if (re_turn == error)
 				return (error);
-			assign_men(turn, games, &inp, men, move);
+			assign_men(turn, games, &inp, move);
 			print_board(turn, games);
 			turn++;
 		}

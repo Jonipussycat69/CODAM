@@ -25,7 +25,7 @@
 # define GREEN_DIM_F "\033[2;32m"
 # define CYAN_DIM_F "\033[2;36m"
 
-enum	state{dead, alive, inactive};
+enum	state{dead, alive, inactive, moved};
 enum	board{empty, W, B};
 enum	retvalues{error, next, end, exit_program, redo, reinp};
 enum	checktype{set, move, jumpmove};
