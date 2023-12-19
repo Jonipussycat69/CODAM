@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/15 13:38:19 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/12/16 00:12:47 by joni          ########   odam.nl         */
+/*   Updated: 2023/12/19 15:28:53 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	add_arr(unsigned char *heap, unsigned char *stack, t_va *s)
 
 static int	ft_write(t_va *s, const char *form)
 {
-	int	words_written;
+	int	char_written;
 
 	if (!form)
 		return (-1);
-	words_written = write(1, s->print, s->print_len);
+	char_written = write(1, s->print, s->print_len);
 	free(s->print);
-	return (words_written);
+	return (char_written);
 }
 
 static int	get_form(va_list args, t_va *s, const char *frm)

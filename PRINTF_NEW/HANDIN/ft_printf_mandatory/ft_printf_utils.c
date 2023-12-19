@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/15 16:59:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2023/12/16 10:36:52 by joni          ########   odam.nl         */
+/*   Updated: 2023/12/19 14:19:14 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_itoa(t_va *s, long long value, int base, const char *rep)
 
 int	ft_char(t_va *s, int arg)
 {
-	unsigned char c[1];
+	unsigned char	c[1];
 
 	c[0] = arg;
 	s->arr_len = 1;
