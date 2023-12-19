@@ -209,6 +209,7 @@ int	print_board(int turn, int game)
 	}
 	printf("\n");
 	print_width_format("Malom ", BLUE_DIM_F);
+	return (next);
 }
 
 void	print_info(void)
