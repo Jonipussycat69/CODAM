@@ -19,9 +19,13 @@
 # define BLUE_F "\033[1;34m"
 # define WHITE_F "\033[1;37m"
 # define DIMMED_F "\033[2;37m"
+# define DIMMED_BOLD_F "\033[1;2;37m"
 # define RESET_F "\033[0m"
 # define BLUE_DIM_F "\033[2;34m"
+# define BLUE_BOLD_DIM_F "\033[1;2;34m"
+# define BLUE_BOLD_F "\033[1;34m"
 # define RED_DIM_F "\033[2;31m"
+# define GREEN_F "\033[32m"
 # define GREEN_DIM_F "\033[2;32m"
 # define CYAN_DIM_F "\033[2;36m"
 
@@ -36,6 +40,7 @@ typedef struct s_man
 {
 	int	x;
 	int	y;
+	int	x_alpha;
 	int	code;
 	int	colour;
 	int	state;

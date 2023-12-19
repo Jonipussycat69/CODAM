@@ -52,6 +52,7 @@ void	set_men(void)
 		men[i].state = inactive;
 		men[i].x = 0;
 		men[i].y = 0;
+		men[i].x_alpha = 0;
 		men[i].code = i + 1;
 		men[i].update = 0;
 		i++;
@@ -62,6 +63,7 @@ void	set_men(void)
 		men[i].state = inactive;
 		men[i].x = 0;
 		men[i].y = 0;
+		men[i].x_alpha = 0;
 		men[i].code = i + 1;
 		men[i].update = 0;
 		i++;
@@ -92,12 +94,26 @@ int	assign_men(int turn, int game, inpt *inp, int type)
 			i++;
 		}
 		i = 0;
-		while ((men[i].y == 0 && men[i].x == 0) || men[i].state == dead)
-			i++;
-		men[i].y = inp->Y_new;
-		men[i].x = inp->X_new;
-		men[i].state = alive;
-		return (next);
+		if (turn % 2 == 1)
+		{
+			while (men[i].state != inactive || men[i].colour != white)
+				i++;
+			men[i].y = inp->Y_new;
+			men[i].x = inp->X_new;
+			men[i].x_alpha = inp->X_new_alpf;
+			men[i].state = alive;
+			return (next);
+		}
+		else
+		{
+			while (men[i].state != inactive || men[i].colour != blue)
+				i++;
+			men[i].y = inp->Y_new;
+			men[i].x = inp->X_new;
+			men[i].x_alpha = inp->X_new_alpf;
+			men[i].state = alive;
+			return (next);
+		}
 	}
 	if (type == move)
 	{
@@ -127,7 +143,7 @@ int	assign_men(int turn, int game, inpt *inp, int type)
 		}
 		return (next);
 	}
-	return (next);// LEFTOFF check if the coordinates of a man changed SEGFAULT!!!!!!!!!!!!!!
+	return (next);
 }
 
 int	chek_malom(int turn, int game)
@@ -185,26 +201,50 @@ int	print_board(int turn, int game)
 		printf("\n");
 		y++;
 	}
-	printf("\n    a b c d e f g\n");
-	while ((men[i].state == alive || men[i].state == dead) && i < 18)
+	printf("\n    a b c d e f g\n\n");
+	while (i < 9)
 	{
-		printf("  ");
-		if (men[i].state == alive)
-			printf("%sman %2d%s", GREEN_DIM_F, i + 1, RESET_F);
-		if (men[i].state == dead)
-			printf("%sman %2d%s", RED_DIM_F, i + 1, RESET_F);
+		if (men[i].state == alive && men[i].colour == white)
+			printf("%s  man %-2d%s", WHITE_F, men[i].code, RESET_F);
+		if (men[i].state == dead && men[i].colour == white)
+			printf("%s  man %-2d%s", DIMMED_BOLD_F, men[i].code, RESET_F);
+		if (men[i].state == alive && men[i].colour == blue)
+			printf("%s  man %-2d%s", BLUE_BOLD_F, men[i].code, RESET_F);
+		if (men[i].state == dead && men[i].colour == blue)
+			printf("%s  man %-2d%s", BLUE_BOLD_DIM_F, men[i].code, RESET_F);
 		i++;
 	}
 	printf("\n");
 	i = 0;
-	while ((men[i].state == alive || men[i].state == dead) && i < 18)
+	while (i < 9)
 	{
-		printf("    ");
 		if (men[i].state == alive)
-			printf("%s%c%d%s", GREEN_DIM_F, men[i].x, men[i].y, RESET_F);
+			printf("%s    %c%d  %s", GREEN_F, men[i].x_alpha, men[i].y, RESET_F);
 		if (men[i].state == dead)
-			printf("%s X%s", RED_DIM_F, RESET_F);
-		printf("  ");
+			printf("%s    X   %s", RED_DIM_F, RESET_F);
+		i++;
+	}
+	printf("\n\n");
+	while (i < 18)
+	{
+		if (men[i].state == alive && men[i].colour == white)
+			printf("%s  man %-2d%s", WHITE_F, men[i].code, RESET_F);
+		if (men[i].state == dead && men[i].colour == white)
+			printf("%s  man %-2d%s", DIMMED_BOLD_F, men[i].code, RESET_F);
+		if (men[i].state == alive && men[i].colour == blue)
+			printf("%s  man %-2d%s", BLUE_BOLD_F, men[i].code, RESET_F);
+		if (men[i].state == dead && men[i].colour == blue)
+			printf("%s  man %-2d%s", BLUE_BOLD_DIM_F, men[i].code, RESET_F);
+		i++;
+	}
+	printf("\n");
+	i = 9;
+	while (i < 18)
+	{
+		if (men[i].state == alive)
+			printf("%s    %c%d  %s", GREEN_F, men[i].x_alpha, men[i].y, RESET_F);
+		if (men[i].state == dead)
+			printf("%s    X   %s", RED_DIM_F, RESET_F);
 		i++;
 	}
 	printf("\n");
@@ -235,10 +275,21 @@ int	save_game(int cur_game, int turns)
 
 int	do_set(inpt *inp, int turn, int cur_game)
 {
+	int	i = 0;
+	int	count = 0;
+
 	if (turn % 2 == 1)
 		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'w';
 	else
 		board[PARAMB - inp->Y_new][inp->X_new - 1] = 'b';
+	while (i < 18)
+	{
+		if (men[i].state == inactive)
+			count++;
+		i++;
+	}
+	if (count <= 1)
+		return (end);
 	return (next);
 }
 
@@ -310,7 +361,7 @@ int	malom()
 		}
 		printf("\n Lets start moving!..\n");
 		re_turn = next;
-		while (turn > 18 && re_turn == next)
+		while (re_turn == next)
 		{
 			if (turn % 2 == 1)
 				printf("\n %sWHITE%s", WHITE_F, RESET_F);
@@ -396,5 +447,5 @@ int	rule_check(int type, inpt *inp)
 		if (inp->X_new - inp->X_cur > 2 || inp->X_new - inp->X_cur < -2)
 			return (error);
 	}
-	return (next);// check if the set/ move is possible
+	return (next);// check if the set/ move is possible / does not allow all allowed moves!!!!!!!!!!!! check for colour!!!!!!!!!!!!!
 }
