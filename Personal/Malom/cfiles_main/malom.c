@@ -439,13 +439,16 @@ int	rule_check(int type, inpt *inp)
 	}
 	if (type == move)
 	{
-		if (inp->X_cur == 3 || inp->X_cur == 5 || inp->Y_cur == 3 || inp->Y_cur == 5)
+		if (inp->X_cur != inp->X_new)
 		{
-			if (inp->X_new - inp->X_cur > 1 || inp->X_new - inp->X_cur < -1)
+			if (inp->Y_new != inp->Y_cur)
 				return (error);
 		}
-		if (inp->X_new - inp->X_cur > 2 || inp->X_new - inp->X_cur < -2)
-			return (error);
+		if (inp->Y_new != inp->Y_cur)
+		{
+			if (inp->X_new != inp->X_cur)
+				return (error);
+		}
 	}
-	return (next);// check if the set/ move is possible / does not allow all allowed moves!!!!!!!!!!!! check for colour!!!!!!!!!!!!!
+	return (next);// does not allow all allowed moves!!!!!!!!!!!! check for colour!!!!!!!!!!!!!
 }
