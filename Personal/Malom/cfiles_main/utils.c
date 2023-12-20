@@ -190,7 +190,7 @@ int	coordinate_check(int type, inpt *inp)
 	return (error); // check if coordinates are existing ones
 }
 
-int	inp_check(char *input, inpt *inp, int type)
+int	inp_check(char *input, inpt *inp, int type, int turn)
 {
 	const char	alnum[] = " abcdefg";
 	int			i = 0;
@@ -214,7 +214,7 @@ int	inp_check(char *input, inpt *inp, int type)
 		inp->Y_new = input[1] - '0';
 		if (coordinate_check(set, inp) == error)
 			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (rule_check(set, inp) == error)
+		if (rule_check(turn, set, inp) == error)
 			return (printf("\n\033[2;33m Invalid set!\033[0m\n"), reinp);
 		return (next);
 	}
@@ -245,7 +245,7 @@ int	inp_check(char *input, inpt *inp, int type)
 		inp->Y_new = input[4] - '0';
 		if (coordinate_check(move, inp) == error)
 			return (printf("\n\033[2;33m Invalid Input!\033[0m\n"), reinp);
-		if (rule_check(move, inp) == error)
+		if (rule_check(turn, move, inp) == error)
 			return (printf("\n\033[2;33m Invalid Move!\033[0m\n"), reinp);
 		return (next);
 	}

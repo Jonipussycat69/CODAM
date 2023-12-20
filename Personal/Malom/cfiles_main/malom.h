@@ -85,8 +85,8 @@ void	print_format(int col, int type);
 void	ft_bzero(void *s, size_t n);
 int		terminate_c(char *str, int c);
 
-int	rule_check(int type, inpt *inp);
-int	inp_check(char *input, inpt *inp, int type);
+int	rule_check(int turn, int type, inpt *inp);
+int	inp_check(char *input, inpt *inp, int type, int turn);
 int	coordinate_check(int type, inpt *inp);
 
 void	stop_game(int type);

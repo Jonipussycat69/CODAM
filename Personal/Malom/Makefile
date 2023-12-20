@@ -18,18 +18,18 @@ all: $(NAME)
 #	cc $(CFLAGS) -c $< -o $@
 
 %.o: %.c
-	@cc -c $< -o $@
+	cc -c $< -o $@
 
 $(NAME): fclean $(OBJ)
-	@cc -o $(NAME) $(OBJ)
-	@$(RM) $(OBJ)
-	@./$(NAME)
+	cc -o $(NAME) $(OBJ)
+	$(RM) $(OBJ)
+	./$(NAME)
 
 clean:
-	@$(RM) $(OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

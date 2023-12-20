@@ -329,7 +329,7 @@ int	malom()
 		printf("\n~ GAME %d START ~\n\n", games);
 		turn = 1;
 		re_turn = next;
-		while (re_turn == next)
+		while (turn < 3 && re_turn == next)
 		{
 			if (turn % 2 == 1)
 				printf("\n %sWHITE%s", WHITE_F, RESET_F);
@@ -342,7 +342,7 @@ int	malom()
 				printf(" > Input set: ");
 				fgets(input_buf, INP_LEN, stdin);
 				terminate_c(input_buf, '\n');
-				check_ret = inp_check(input_buf, &inp, set);
+				check_ret = inp_check(input_buf, &inp, set, turn);
 				printf("\n");
 			}
 			if (check_ret == error)
@@ -374,7 +374,7 @@ int	malom()
 				printf(" > Input move: ");
 				fgets(input_buf, INP_LEN, stdin);
 				terminate_c(input_buf, '\n');
-				check_ret = inp_check(input_buf, &inp, move);
+				check_ret = inp_check(input_buf, &inp, move, turn);
 				printf("\n");
 			}
 			if (check_ret == error)
@@ -428,27 +428,21 @@ void	reset_board(void)
 	return ;
 }
 
-int	rule_check(int type, inpt *inp)
+int	rule_check(int turn, int type, inpt *inp)
 {
 	if (board[PARAMB - inp->Y_new][inp->X_new - 1] != 0)
 		return (error);
 	if (type == move || type == jumpmove)
 	{
-		if (board[PARAMB - inp->Y_cur][inp->X_cur - 1] != 0)
+		if (turn % 2 == 1 && board[PARAMB - inp->Y_cur][inp->X_cur - 1] != 'w')
+			return (error);
+		if (turn % 2 == 0 && board[PARAMB - inp->Y_cur][inp->X_cur - 1] != 'b')
 			return (error);
 	}
 	if (type == move)
 	{
-		if (inp->X_cur != inp->X_new)
-		{
-			if (inp->Y_new != inp->Y_cur)
+		if (inp->X_cur != inp->X_new && inp->Y_new != inp->Y_cur)
 				return (error);
-		}
-		if (inp->Y_new != inp->Y_cur)
-		{
-			if (inp->X_new != inp->X_cur)
-				return (error);
-		}
 	}
-	return (next);// does not allow all allowed moves!!!!!!!!!!!! check for colour!!!!!!!!!!!!!
+	return (next);// check for colour!!!!!!!!!!!!!
 }
