@@ -24,3 +24,21 @@ void	set_screen(void)
 	return ;
 }
 
+int	loop(main_variables *mv, screen_prop *sp)
+{
+	int	input = 1;
+	
+	while (input != quit)
+	{
+		input = getchar();
+		input = inputcheck(input, mv);
+		if (input == quit)
+			break ;
+		refresh_snake(input, mv, sp);
+		get_terminal_size(sp);
+		mv->iter++;
+		clear_screen(sp);
+		print_screen(mv, sp);
+	}
+	return (0);
+}

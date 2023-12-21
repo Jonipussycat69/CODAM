@@ -59,7 +59,7 @@ void	print_screen(main_variables *mv, screen_prop *sp)
 			else if (sp->candy[0] == y && sp->candy[1] == x)
 				printf("x");
 			else
-				printf(" ");
+				printf(".");
 			i = 0;
 			while (i < sp->snake_len)
 			{
@@ -145,18 +145,23 @@ int	inputcheck(int input, main_variables *mv)
 
 int	loop(main_variables *mv, screen_prop *sp)
 {
-	int	input = 1;
-	
+	unsigned char	input = 'w';
+	int				bytesRead;
+
 	while (input != quit)
 	{
-		input = getchar();
-		input = inputcheck(input, mv);
+		// printf("first\n");
+		bytesRead = read(STDIN_FILENO, &input, 1);// LEFTOFF DOES NOT WORK FOR SHIT!
+		// if (bytesRead < 0)
+		// 	return (1);
+		input = inputcheck((int)input, mv);
 		if (input == quit)
 			break ;
 		refresh_snake(input, mv, sp);
 		get_terminal_size(sp);
 		mv->iter++;
-		clear_screen(sp);
+		// clear_screen(sp);
+		usleep(10000);
 		print_screen(mv, sp);
 	}
 	return (0);
@@ -168,8 +173,6 @@ int	snake_main(void)
 	screen_prop	sp;
 	int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
 	fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
-	int		input;
-	int		bytesRead;
 
 	printf("Snake\n");
 	set_variables(&mv, &sp);
