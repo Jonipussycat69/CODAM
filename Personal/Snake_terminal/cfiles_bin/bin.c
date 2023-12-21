@@ -1,4 +1,5 @@
-#include "snake.h"
+#define WINDOW_X 1
+#define WINDOW_Y 1
 
 int	screen[WINDOW_Y][WINDOW_X];
 
@@ -9,6 +10,7 @@ void	set_screen(void)
 
 	while (y < WINDOW_Y)
 	{
+		x = 0;
 		while (x < WINDOW_X)
 		{
 			if (x == 0 || y == 0 || WINDOW_X - x == 1 || WINDOW_Y - y == 1)
@@ -19,27 +21,6 @@ void	set_screen(void)
 		}
 		y++;
 	}
-}
-
-void	print_screen(void)
-{
 	return ;
 }
 
-void	clear_screen(void)
-{
-	return ;
-}
-
-int	refresh(void)// LEFTOFF look at structs in header!
-{
-	return (0);
-}
-
-int	snake_main(void)
-{
-	printf("Snake\n");
-	set_screen();
-	refresh();
-	printf("Exit\n");
-}

@@ -12,11 +12,11 @@
 # include <wchar.h>
 # include <locale.h>
 # include <sys/ioctl.h>
+# include <fcntl.h>
 
-# define INP_LEN 10
-# define WINDOW_X 100
-# define WINDOW_Y 50
+# define STARTING_LEN 3
 # define MAX_LEN 20
+# define OFFSET 4
 
 # define BLUE_F "\033[1;34m"
 # define WHITE_F "\033[1;37m"
@@ -31,20 +31,24 @@
 # define GREEN_DIM_F "\033[2;32m"
 # define CYAN_DIM_F "\033[2;36m"
 
-enum	returns{error, next, end, re};
+enum	returns{error, next, quit, re};
 
 typedef struct s_basic
 {
-	int	iter;
-	int	inp;
+	unsigned long long	iter;
+	int					last_inp;
 }	main_variables;
 
 typedef struct s_screen
 {
-	int	pix_new[MAX_LEN][MAX_LEN];
-	int	pix_old[MAX_LEN][MAX_LEN];
-	int	change;
-}	screen_changes;
+	int	candy[2];
+	int	pix_new[2][MAX_LEN];
+	int	pix_old[2][MAX_LEN];
+	int	snake_len;
+	int	direction[3][MAX_LEN];
+	int	terminal_height;
+	int	terminal_width;
+}	screen_prop;
 
 int	snake_main(void);
 
