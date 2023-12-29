@@ -152,6 +152,7 @@ int	loop(main_variables *mv, screen_prop *sp)
 	{
 		// printf("first\n");
 		bytesRead = read(STDIN_FILENO, &input, 1);// LEFTOFF DOES NOT WORK FOR SHIT!
+		usleep(1000000);
 		// if (bytesRead < 0)
 		// 	return (1);
 		input = inputcheck((int)input, mv);
@@ -161,7 +162,6 @@ int	loop(main_variables *mv, screen_prop *sp)
 		get_terminal_size(sp);
 		mv->iter++;
 		// clear_screen(sp);
-		usleep(10000);
 		print_screen(mv, sp);
 	}
 	return (0);
