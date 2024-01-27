@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/01/25 16:43:48 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/01/27 08:25:47 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 typedef struct s_list
 {
-	void			*content;
+	int				value;
+	int				index;
 	struct s_list	*next;
 }	t_list;
 
