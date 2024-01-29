@@ -1,10 +1,27 @@
 #include "push_swap.h"
 
+void	print_values(t_list **head)
+{
+	t_list	*tmp;
+
+	tmp = *head;
+	printf("Values:\n");
+	while (tmp != NULL)
+	{
+		printf("%d ", tmp->value);
+		tmp = tmp->next;
+	}
+	printf("\n\n");
+	return ;
+}
+
 void	free_list(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
 
+	if (!*head)
+		return ;
 	tmp = *head;
 	while (tmp != NULL)
 	{
@@ -20,8 +37,11 @@ void	nodeadd_back(t_list **head, t_list *node)
 {
 	t_list	*tmp;
 
-	if (!head)
-		head = &node;
+	if (!*head)
+	{
+		*head = node;
+		return ;
+	}
 	tmp = *head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -31,10 +51,13 @@ void	nodeadd_back(t_list **head, t_list *node)
 
 void	nodeadd_front(t_list **head, t_list *node)
 {
-	if (!head)
-		head = &node;
-	node->next = *head;
-	*head = node;
+	if (!*head)
+		*head = node;
+	else
+	{
+		node->next = *head;
+		*head = node;
+	}
 	return ;
 }
 
@@ -106,11 +129,15 @@ void	ft_pushswap(t_list **head)
 int	main(void)
 {
 	char	input[] = "12 23 34 45 11 67 32";
+	t_list	*first;
 	t_list	**head;
 
-	head = NULL;
+	first = NULL;
+	head = &first;
 	parser(input, head);
 	indexer(head);
+	print_values(head);
 	ft_pushswap(head);
+	free_list(head);
 	return (0);
 }
