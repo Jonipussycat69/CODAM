@@ -77,6 +77,24 @@ void	parser(char *input, t_list **head)
 
 void	indexer(t_list **head)
 {
+	t_list	*tmp;
+	t_list	*tmptmp;
+	int		i;
+
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		i = 0;
+		tmptmp = *head;
+		while (tmptmp != NULL)
+		{
+			if (tmp->value > tmptmp->value)
+				i++;
+			tmptmp = tmptmp->next;
+		}
+		tmp->index = i;
+		tmp = tmp->next;
+	}
 	return ;
 }
 
