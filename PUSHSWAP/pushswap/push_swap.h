@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/01/27 08:25:47 by joni          ########   odam.nl         */
+/*   Updated: 2024/01/30 15:15:50 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@ typedef struct s_list
 {
 	int				value;
 	int				index;
+	short			flag;
 	struct s_list	*next;
 }	t_list;
+
+// PUSH SWAP ORIGINAL
+
+void	choose_action(t_list **head_a, t_list **head_b);
+
+// LIBFT
 
 int			ft_atoi(const char *str);
 void		ft_bzero(void *s, size_t n);

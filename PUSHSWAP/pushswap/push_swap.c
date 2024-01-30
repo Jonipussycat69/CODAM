@@ -12,6 +12,14 @@ void	print_values(t_list **head)
 		tmp = tmp->next;
 	}
 	printf("\n\n");
+	tmp = *head;
+	printf("Index:\n");
+	while (tmp != NULL)
+	{
+		printf("%d ", tmp->index);
+		tmp = tmp->next;
+	}
+	printf("\n\n");
 	return ;
 }
 
@@ -25,7 +33,7 @@ void	free_list(t_list **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		tmp->next = tmptmp;
+		tmptmp = tmp->next;
 		free(tmp);
 		tmp = tmptmp;
 	}
@@ -76,22 +84,25 @@ t_list	*new_node(int val, int ind)
 
 void	parser(char *input, t_list **head)
 {
-	t_list	*node;
 	int		i;
 	int		num;
+	short	multiplier;
 
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] <= '9' && input[i] >= '0')
 		{
+			multiplier = 1;
+			if (i > 0 && input[i - 1] == '-')
+				multiplier = -1;
 			num = 0;
 			while (input[i] <= '9' && input[i] >= '0')
 			{
 				num = num * 10 + (input[i] - '0');
 				i++;
 			}
-			nodeadd_back(head, new_node(num, 0));
+			nodeadd_back(head, new_node(num * multiplier, 0));
 		}
 		i++;
 	}
@@ -121,14 +132,22 @@ void	indexer(t_list **head)
 	return ;
 }
 
-void	ft_pushswap(t_list **head)
+void	ft_pushswap(t_list **head_a)
 {
+	t_list	*first;
+	t_list	**head_b;
+
+	first = NULL;
+	head_b = &first;
+	if (!*head_a)
+		return ;
+	choose_action(head_a, head_b);// LEFTOFF
 	return ;
 }
 
 int	main(void)
 {
-	char	input[] = "12 23 34 45 11 67 32";
+	char	input[] = "12 -23 34 45 11 67 32";
 	t_list	*first;
 	t_list	**head;
 
