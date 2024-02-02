@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/01/30 15:15:50 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/02/02 15:23:18 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,28 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_variables
+{
+	int		inputsize;
+	int		stack_a;
+	int		stack_b;
+}	t_var;
+
 // PUSH SWAP ORIGINAL
 
 void	choose_action(t_list **head_a, t_list **head_b);
+
+void	free_list(t_list **head);
+void	nodeadd_back(t_list **head, t_list *node);
+void	nodeadd_front(t_list **head, t_list *node);
+
+int	get_index(t_list *node);
+int	get_value(t_list *node);
+int	get_flag(t_list *node);
+int	list_len(t_list **head);
+
+t_list	*last_node(t_list **head);
+t_list	*nth_node(t_list **head, int n);
 
 // LIBFT
 

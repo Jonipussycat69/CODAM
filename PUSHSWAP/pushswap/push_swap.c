@@ -2,6 +2,7 @@
 
 void	print_values(t_list **head)
 {
+	// THIS FUNCTION IS JUST FOR TETSTING!!
 	t_list	*tmp;
 
 	tmp = *head;
@@ -20,52 +21,6 @@ void	print_values(t_list **head)
 		tmp = tmp->next;
 	}
 	printf("\n\n");
-	return ;
-}
-
-void	free_list(t_list **head)
-{
-	t_list	*tmp;
-	t_list	*tmptmp;
-
-	if (!*head)
-		return ;
-	tmp = *head;
-	while (tmp != NULL)
-	{
-		tmptmp = tmp->next;
-		free(tmp);
-		tmp = tmptmp;
-	}
-	*head = NULL;
-	return ;
-}
-
-void	nodeadd_back(t_list **head, t_list *node)
-{
-	t_list	*tmp;
-
-	if (!*head)
-	{
-		*head = node;
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = node;
-	return ;
-}
-
-void	nodeadd_front(t_list **head, t_list *node)
-{
-	if (!*head)
-		*head = node;
-	else
-	{
-		node->next = *head;
-		*head = node;
-	}
 	return ;
 }
 
@@ -150,11 +105,13 @@ int	main(void)
 	char	input[] = "12 -23 34 45 11 67 32";
 	t_list	*first;
 	t_list	**head;
+	t_var	var;
 
 	first = NULL;
 	head = &first;
 	parser(input, head);
 	indexer(head);
+	var.inputsize = list_len(head);
 	print_values(head);
 	ft_pushswap(head);
 	free_list(head);

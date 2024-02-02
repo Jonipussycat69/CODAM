@@ -21,10 +21,13 @@ $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-run:
+frun:
 	@cc $(CFLAGS) $(SRC) -o $(EXE)
 	@./$(EXE)
 
+run:
+	@cc $(SRC) -o $(EXE)
+	@./$(EXE)
 clean:
 	@$(RM) $(OBJ)
 
@@ -32,6 +35,7 @@ fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(EXE)
 
+ftest: frun fclean
 test: run fclean
 
 re: fclean all
