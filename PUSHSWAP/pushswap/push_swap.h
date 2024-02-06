@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/02 15:23:18 by joni          ########   odam.nl         */
+/*   Updated: 2024/02/06 18:54:49 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_variables
 	int		stack_b;
 }	t_var;
 
+enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
+
 // PUSH SWAP ORIGINAL
 
 void	choose_action(t_list **head_a, t_list **head_b);
@@ -48,6 +50,13 @@ int	list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
 t_list	*nth_node(t_list **head, int n);
+
+short	swap(t_list **head, char stack);
+short	push(t_list **head_a, t_list **head_b, char stack);
+short	rotate(t_list **head, char stack);
+short	r_rotate(t_list **head, char stack);
+
+void	write_action(char type, char stack);
 
 // LIBFT
 
