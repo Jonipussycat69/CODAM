@@ -1,83 +1,55 @@
 #include "push_swap.h"
 
-// Swap, first and second elemnt swapped.
-short	swap(t_list **head, char stack)
+short	swap_both(t_list **head_a, t_list **head_b)
 {
-	t_list	*tmp;
-	t_list	*tmptmp;
-
-	if (!*head || list_len(head) < 2)
-		return (1);
-	tmp = *head;
-	tmptmp = tmp->next;
-	tmp->next = tmptmp->next;
-	tmptmp->next = tmp;
-	write_action('s', stack);
-	return (0);
+	if (swap(head_a) != ok)
+		return (err);
+	if (swap(head_b) != ok)
+		return (err);
+	return (ok);
 }
 
-// Push, first element of other stack pushed to chosen stack.
-short	push(t_list **head_a, t_list **head_b, char stack)
+short	rotate_both(t_list **head_a, t_list **head_b)
 {
-	t_list	*tmp;
-
-	if (!*head_a || !*head_b)
-		return (1);
-	if (stack == 'a')
-	{
-		tmp = *head_b;
-		*head_b = tmp->next;
-		tmp->next = *head_a;
-		*head_a = tmp;
-		write_action('p', stack);
-	}
-	else if (stack == 'b')
-	{
-		tmp = *head_a;
-		*head_a = tmp->next;
-		tmp->next = *head_b;
-		*head_b = tmp;
-		write_action('p', stack);
-	}
-	return (0);
+	if (rotate(head_a) != ok)
+		return (err);
+	if (rotate(head_b) != ok)
+		return (err);
+	return (ok);
 }
 
-// Rotate, firts becomes last.
-short	rotate(t_list **head, char stack)
+short	r_rotate_both(t_list **head_a, t_list **head_b)
 {
-	t_list	*tmp;
-	t_list	*tmptmp;
-
-	if (!*head || list_len(head) < 2)
-		return (1);
-	if (list_len(head) == 2)
-		return (swap(head, stack));
-	tmp = *head;
-	*head = tmp->next;
-	tmp->next = NULL;
-	tmptmp = last_node(head);
-	tmptmp->next = tmp;
-	write_action('r', stack);
-	return (0);
+	if (r_rotate(head_a) != ok)
+		return (err);
+	if (r_rotate(head_b) != ok)
+		return (err);
+	return (ok);
 }
 
-// Reverse rotate, last becomes first.
-short	r_rotate(t_list **head, char stack)
+short	action_redirect(t_list **head_a, t_list **head_b, short action)
 {
-	t_list	*tmp;
-	t_list	*tmptmp;
-
-	if (!*head || list_len(head) < 2)
-		return (1);
-	if (list_len(head) == 2)
-		return (swap(head, stack));
-	tmp = *head;
-	while (tmp->next->next != NULL)
-		tmp = tmp->next;
-	tmptmp = tmp->next;
-	tmptmp->next = *head;
-	tmp->next = NULL;
-	*head = tmptmp;
-	write_action('rr', stack);
-	return (0);
+	if (action == sa)
+		return (wr_a("sa"), swap(head_a));
+	if (action == sb)
+		return (wr_a("sb"), swap(head_b));
+	if (action == pa)
+		return (wr_a("pa"), push(head_a, head_b, pa));
+	if (action == pb)
+		return (wr_a("pb"), push(head_a, head_b, pb));
+	if (action == ra)
+		return (wr_a("ra"), rotate(head_a));
+	if (action == rb)
+		return (wr_a("rb"), rotate(head_b));
+	if (action == rra)
+		return (wr_a("rra"), r_rotate(head_a));
+	if (action == rrb)
+		return (wr_a("rrb"), r_rotate(head_b));
+	if (action == ss)
+		return (wr_a("ss"), swap_both(head_a, head_b));
+	if (action == rr)
+		return (wr_a("rr"), rotate_both(head_a, head_b));
+	if (action == rrr)
+		return (wr_a("rrr"), r_rotate_both(head_a, head_b));
+	return (err);
 }
