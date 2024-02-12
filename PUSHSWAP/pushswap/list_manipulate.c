@@ -18,24 +18,28 @@ void	free_list(t_list **head)
 	return ;
 }
 
-void	nodeadd_back(t_list **head, t_list *node)
+short	nodeadd_back(t_list **head, t_list *node)
 {
 	t_list	*tmp;
 
+	if (!node)
+		return (err);
 	if (!*head)
 	{
 		*head = node;
-		return ;
+		return (ok);
 	}
 	tmp = *head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = node;
-	return ;
+	return (ok);
 }
 
-void	nodeadd_front(t_list **head, t_list *node)
+short	nodeadd_front(t_list **head, t_list *node)
 {
+	if (!node)
+		return (err);
 	if (!*head)
 		*head = node;
 	else
@@ -43,5 +47,5 @@ void	nodeadd_front(t_list **head, t_list *node)
 		node->next = *head;
 		*head = node;
 	}
-	return ;
+	return (ok);
 }

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/09 13:13:46 by joni          ########   odam.nl         */
+/*   Updated: 2024/02/12 16:12:45 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,34 @@ typedef struct s_list
 {
 	int				value;
 	int				index;
+	int				list_index;
 	short			flag;
 	struct s_list	*next;
 }	t_list;
 
-typedef struct s_variables
+typedef struct s_sort
 {
 	int		inputsize;
+	int		sorting_point;
+	int		sorted_amount;
 	int		stack_a;
 	int		stack_b;
-}	t_var;
+}	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err, mid, ok};
 
 // PUSH SWAP ORIGINAL
 
-void	choose_action(t_list **head_a, t_list **head_b);
+void	list_indexer(t_list **head);
+void	indexer(t_list **head);
+void	parser(char *input, t_list **head);
+
+void	choose_action(t_list **head_a, t_list **head_b, t_sort *s);
 
 void	free_list(t_list **head);
-void	nodeadd_back(t_list **head, t_list *node);
-void	nodeadd_front(t_list **head, t_list *node);
+short	nodeadd_back(t_list **head, t_list *node);
+short	nodeadd_front(t_list **head, t_list *node);
 
 int	get_index(t_list *node);
 int	get_value(t_list *node);
@@ -60,6 +67,7 @@ short	r_rotate(t_list **head);
 short	swap_both(t_list **head_a, t_list **head_b);
 short	rotate_both(t_list **head_a, t_list **head_b);
 short	r_rotate_both(t_list **head_a, t_list **head_b);
+short	do_action(t_list **head_a, t_list **head_b, short action);
 
 void	wr_a(char *action);
 

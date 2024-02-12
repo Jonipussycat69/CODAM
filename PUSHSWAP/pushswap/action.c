@@ -27,7 +27,7 @@ short	r_rotate_both(t_list **head_a, t_list **head_b)
 	return (ok);
 }
 
-short	action_redirect(t_list **head_a, t_list **head_b, short action)
+short	do_action(t_list **head_a, t_list **head_b, short action)
 {
 	if (action == sa)
 		return (wr_a("sa"), swap(head_a));
