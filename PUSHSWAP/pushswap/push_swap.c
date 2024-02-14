@@ -17,24 +17,11 @@ void	print_values(t_list **head)
 	printf("Index:\n");
 	while (tmp != NULL)
 	{
-		printf("%d ", tmp->index);
+		printf("%d ", tmp->i_value);
 		tmp = tmp->next;
 	}
 	printf("\n\n");
 	return ;
-}
-
-t_list	*new_node(int val, int ind)
-{
-	t_list	*node;
-
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node->value = val;
-	node->index = ind;
-	node->next = NULL;
-	return (node);
 }
 
 void	ft_pushswap(t_list **head_a, t_sort *s)
@@ -61,7 +48,7 @@ int	main(void)
 	head = &first;
 	parser(input, head);
 	indexer(head);
-	s.inputsize = list_len(head);
+	s.total_inputsize = list_len(head);
 	print_values(head);
 	ft_pushswap(head, &s);
 	free_list(head);

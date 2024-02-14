@@ -4,7 +4,7 @@ int	get_index(t_list *node)
 {
 	if (!node)
 		return (-1);
-	return (node->index);
+	return (node->i_value);
 }
 
 int	get_value(t_list *node)
@@ -51,7 +51,7 @@ int	list_len(t_list **head)
 	int		i;
 	
 	if (!*head)
-		return (-1);
+		return (0);
 	i = 0;
 	tmp = *head;
 	while (tmp->next != NULL && ++i)

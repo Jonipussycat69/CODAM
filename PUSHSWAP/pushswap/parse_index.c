@@ -45,7 +45,32 @@ void	indexer(t_list **head)
 				i++;
 			tmptmp = tmptmp->next;
 		}
-		tmp->index = i;
+		tmp->i_value = i;
+		tmp = tmp->next;
+	}
+	return ;
+}
+
+void	stack_indexer(t_list **head)
+{
+	t_list	*tmp;
+	t_list	*tmptmp;
+	int		i;
+
+	if (!*head)
+		return ;
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		i = 0;
+		tmptmp = *head;
+		while (tmptmp != NULL)
+		{
+			if (tmp->value > tmptmp->value)
+				i++;
+			tmptmp = tmptmp->next;
+		}
+		tmp->stack_iv = i;
 		tmp = tmp->next;
 	}
 	return ;

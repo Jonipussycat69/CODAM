@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/12 16:12:45 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/02/14 17:04:25 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,55 @@
 typedef struct s_list
 {
 	int				value;
-	int				index;
+	int				i_value;
 	int				list_index;
+	int				stack_iv;
 	short			flag;
 	struct s_list	*next;
 }	t_list;
 
 typedef struct s_sort
 {
-	int		inputsize;
+	int		total_inputsize;
+	int		mid_iv_a;
+	int		mid_iv_b;
+	int		mid_si_a;
+	int		mid_si_b;
+	int		mid_li_a;
+	int		mid_li_b;
+	int		large_si_a;
+	int		large_si_b;
+	int		large_b_si_a;
+	int		large_b_si_b;
+	int		large_t_si_a;
+	int		large_t_si_b;
 	int		sorting_point;
 	int		sorted_amount;
-	int		stack_a;
-	int		stack_b;
+	int		stack_a_len;
+	int		stack_b_len;
+	short	choice_index;
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err, mid, ok};
+enum	stacks{a, b};
 
 // PUSH SWAP ORIGINAL
 
 void	list_indexer(t_list **head);
 void	indexer(t_list **head);
+void	stack_indexer(t_list **head);
 void	parser(char *input, t_list **head);
+
+void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
+int		get_mid_si(t_list **head, t_sort *s);
 
 void	choose_action(t_list **head_a, t_list **head_b, t_sort *s);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
 short	nodeadd_front(t_list **head, t_list *node);
+t_list	*new_node(int val, int ind);
 
 int	get_index(t_list *node);
 int	get_value(t_list *node);
@@ -58,6 +78,10 @@ int	list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
 t_list	*nth_node(t_list **head, int n);
+
+t_list	*n_si_node(t_list **head, int n);
+t_list	*n_li_node(t_list **head, int n);
+t_list	*n_iv_node(t_list **head, int n);
 
 short	swap(t_list **head);
 short	push(t_list **head_a, t_list **head_b, short stack);

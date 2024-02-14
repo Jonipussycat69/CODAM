@@ -49,3 +49,16 @@ short	nodeadd_front(t_list **head, t_list *node)
 	}
 	return (ok);
 }
+
+t_list	*new_node(int val, int ind)
+{
+	t_list	*node;
+
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->value = val;
+	node->i_value = ind;
+	node->next = NULL;
+	return (node);
+}
