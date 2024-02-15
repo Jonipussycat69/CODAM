@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/15 16:48:08 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/02/15 18:26:27 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_sort
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
-enum	returns{err, mid, ok};
+enum	returns{err, mid, ok, eureka};
 enum	stacks{a, b};
 
 // PUSH SWAP ORIGINAL
@@ -66,8 +66,12 @@ int		get_mid_si(t_list **head, t_sort *s);
 
 void	assign_large(t_list **head_a, t_list **head_b, t_sort *s);
 
-void	small_algo(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
-void	midsplit_algo(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
+short	check_sort(t_list **head);
+void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
+
+void	algo_sub(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
+void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
+void	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, short arr); // LEFTOFF
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
@@ -98,6 +102,7 @@ short	do_action(t_list **head_a, t_list **head_b, short action);
 short	do_actions(t_list **head_a, t_list **head_b, short amount, ...);
 
 void	wr_a(char *action);
+t_list	*find_annom(t_list **head);
 
 size_t	ps_strlen(char *str);
 

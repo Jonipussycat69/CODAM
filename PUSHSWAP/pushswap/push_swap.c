@@ -35,7 +35,7 @@ void	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return ;
-	midsplit_algorithm(head_a, head_b, s, arr);// LEFTOFF
+	algo_swap_push(head_a, head_b, s, arr);// LEFTOFF
 	return ;
 }
 
