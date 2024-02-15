@@ -53,3 +53,19 @@ short	do_action(t_list **head_a, t_list **head_b, short action)
 		return (wr_a("rrr"), r_rotate_both(head_a, head_b));
 	return (err);
 }
+
+short	do_actions(t_list **head_a, t_list **head_b, short amount, ...)
+{
+	va_list	actions;
+	short	iteration;
+
+	va_start(actions, amount);
+	iteration = 0;
+	while (iteration++ < amount)
+	{
+		if (do_action(head_a, head_b, va_arg(actions, short)) == err)
+			return (err);
+	}
+	va_end(actions);
+	return (ok);
+}

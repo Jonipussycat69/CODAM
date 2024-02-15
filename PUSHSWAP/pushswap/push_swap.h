@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/14 17:04:25 by joni          ########   odam.nl         */
+/*   Updated: 2024/02/15 16:48:08 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,20 @@ void	parser(char *input, t_list **head);
 void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
 int		get_mid_si(t_list **head, t_sort *s);
 
-void	choose_action(t_list **head_a, t_list **head_b, t_sort *s);
+void	assign_large(t_list **head_a, t_list **head_b, t_sort *s);
+
+void	small_algo(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
+void	midsplit_algo(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
 short	nodeadd_front(t_list **head, t_list *node);
 t_list	*new_node(int val, int ind);
 
-int	get_index(t_list *node);
-int	get_value(t_list *node);
-int	get_flag(t_list *node);
-int	list_len(t_list **head);
+int		get_index(t_list *node);
+int		get_value(t_list *node);
+int		get_flag(t_list *node);
+int		list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
 t_list	*nth_node(t_list **head, int n);
@@ -92,6 +95,7 @@ short	swap_both(t_list **head_a, t_list **head_b);
 short	rotate_both(t_list **head_a, t_list **head_b);
 short	r_rotate_both(t_list **head_a, t_list **head_b);
 short	do_action(t_list **head_a, t_list **head_b, short action);
+short	do_actions(t_list **head_a, t_list **head_b, short amount, ...);
 
 void	wr_a(char *action);
 

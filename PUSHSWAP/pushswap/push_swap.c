@@ -28,12 +28,14 @@ void	ft_pushswap(t_list **head_a, t_sort *s)
 {
 	t_list	*first;
 	t_list	**head_b;
+	const short	arr[11] = {sa, sb, pa, pb, ra, rb, rra, rrb, ss, rr, rrr};
+
 
 	first = NULL;
 	head_b = &first;
 	if (!*head_a)
 		return ;
-	choose_action(head_a, head_b, s);// LEFTOFF
+	midsplit_algorithm(head_a, head_b, s, arr);// LEFTOFF
 	return ;
 }
 
