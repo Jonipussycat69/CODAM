@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/15 18:26:27 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/02/16 08:49:41 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <ctype.h>
 # include <string.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
