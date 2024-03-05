@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/02/16 08:49:41 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/05 17:00:26 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	int				i_value;
 	int				list_index;
 	int				stack_iv;
+	int				mark;
 	short			flag;
 	struct s_list	*next;
 }	t_list;
@@ -49,10 +50,13 @@ typedef struct s_sort
 	int		stack_a_len;
 	int		stack_b_len;
 	short	choice_index;
+	short	ret_a;
+	short	ret_b;
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
-enum	returns{err, mid, ok, eureka};
+enum	returns{err = -3, mid = -2, ok = -1, eureka};
+enum	flags{lower, upper, true, false};
 enum	stacks{a, b};
 
 // PUSH SWAP ORIGINAL
@@ -61,6 +65,7 @@ void	list_indexer(t_list **head);
 void	indexer(t_list **head);
 void	stack_indexer(t_list **head);
 void	parser(char *input, t_list **head);
+void	assign_mark(t_list **head);
 
 void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
 int		get_mid_si(t_list **head, t_sort *s);
@@ -72,7 +77,7 @@ void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
 
 void	algo_sub(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
 void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
-void	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, short arr); // LEFTOFF
+short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, short arr); // LEFTOFF
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);

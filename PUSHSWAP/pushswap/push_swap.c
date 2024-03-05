@@ -35,7 +35,8 @@ void	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return ;
-	algo_swap_push(head_a, head_b, s, arr);// LEFTOFF
+	if (algo_swap_push(head_a, head_b, s, arr) == err)// LEFTOFF
+		return ;
 	return ;
 }
 
@@ -50,6 +51,7 @@ int	main(void)
 	head = &first;
 	parser(input, head);
 	indexer(head);
+	assign_mark(head);
 	s.total_inputsize = list_len(head);
 	print_values(head);
 	ft_pushswap(head, &s);

@@ -6,16 +6,16 @@ short	check_sort(t_list **head)
 	int		prev_index;
 	
 	if (!*head)
-		return (NULL);
+		return (err);
 	tmp = *head;
 	while (tmp != NULL)
 	{
 		prev_index = tmp->i_value;
 		tmp = tmp->next;
 		if (tmp->i_value < prev_index)
-			return (0);
+			return (err);
 	}
-	return (1);
+	return (ok);
 }
 
 void	flagger(t_list **head, t_sort *s)
