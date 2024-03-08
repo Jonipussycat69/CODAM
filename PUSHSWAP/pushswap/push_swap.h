@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/05 17:00:26 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/03/08 17:37:17 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_sort
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
-enum	returns{err = -3, mid = -2, ok = -1, eureka};
+enum	returns{err = -1, neutral = -2, ok = 0, eureka};
 enum	flags{lower, upper, true, false};
 enum	stacks{a, b};
 

@@ -32,7 +32,7 @@ t_list	*last_node(t_list **head)
 		tmp = tmp->next;
 	return (tmp);
 }
-
+// Returns pointer on the index of the input starting from 0
 t_list	*nth_node(t_list **head, int n)
 {
 	t_list	*tmp;

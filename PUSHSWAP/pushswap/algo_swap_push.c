@@ -1,12 +1,44 @@
 #include "push_swap.h"
 
-short	fsl_check(t_list **head)
+// First Second Last check: Checks which of the 3 is the biggest
+static char	*fsl_check(t_list **head)
 {
-	return (ok);
-}
+	static char	ret[4];
+	int			fsl[4];
+	int			i;
+	int			j;
+	int			k;
 
+	fsl[0] = get_index(nth_node(head, 0));
+	fsl[1] = get_index(nth_node(head, 1));
+	fsl[2] = get_index(last_node(head));
+	fsl[3] = 0;
+
+	i = 0;
+	k = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (fsl[i] < fsl[j])
+				break ;
+			j++;
+		}
+		if (j == 4)
+		{
+			fsl[i] = 0;
+			ret[k] = i;
+			k++;
+		}
+		i++;
+	}
+	return (ret);
+}
+// Determines the actions based on fsl_check, so the smallest gets pushed to b and b is as (invertedly) sorted as possible
 short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, short arr)
 {
+	// LEFTOFF
 	return (ok);
 }
 
