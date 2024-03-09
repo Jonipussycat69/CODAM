@@ -39,6 +39,10 @@ static char	*fsl_check(t_list **head)
 short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, short arr)
 {
 	// LEFTOFF
+	const char	*ret_fsl_a = fsl_check(head_b);
+	const char	*ret_fsl_b = fsl_check(head_b);
+
+	// Here write all the possibible combinations
 	return (ok);
 }
 
