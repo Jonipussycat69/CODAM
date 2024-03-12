@@ -22,5 +22,5 @@ t_list	*find_annom(t_list **head)
 		if (tmp->i_value < prev_index)
 			return (tmp);
 	}
-	return (head);
+	return (NULL);
 }

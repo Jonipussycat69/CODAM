@@ -54,16 +54,16 @@ short	do_action(t_list **head_a, t_list **head_b, short action)
 	return (err);
 }
 
-short	do_actions(t_list **head_a, t_list **head_b, short amount, ...)
+short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 {
 	va_list	actions;
-	short	iteration;
+	int		iteration;
 
 	va_start(actions, amount);
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		if (do_action(head_a, head_b, va_arg(actions, short)) == err)
+		if (do_action(head_a, head_b, va_arg(actions, int)) == err)
 			return (err);
 	}
 	va_end(actions);

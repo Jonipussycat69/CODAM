@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	ms_big_to_b(t_list **head_a, t_list **head_b, t_sort *s, short *arr)
+void	ms_big_to_b(t_list **head_a, t_list **head_b, t_sort *s, const short *arr)
 {
 	int	n;
 	t_list	*tmp_a;
@@ -25,7 +25,7 @@ void	ms_big_to_b(t_list **head_a, t_list **head_b, t_sort *s, short *arr)
 	return ;
 }
 
-void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, short *arr)
+void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, const short *arr)
 {
 	while (!check_sort(head_a))
 	{

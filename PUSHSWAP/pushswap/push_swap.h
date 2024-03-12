@@ -6,18 +6,19 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/08 17:37:17 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/12 17:32:23 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <ctype.h>
 # include <string.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -32,6 +33,7 @@ typedef struct s_list
 
 typedef struct s_sort
 {
+	char	*str_to_free;
 	int		total_inputsize;
 	int		mid_iv_a;
 	int		mid_iv_b;
@@ -62,9 +64,9 @@ enum	stacks{a, b};
 // PUSH SWAP ORIGINAL
 
 void	list_indexer(t_list **head);
-void	indexer(t_list **head);
+short	indexer(t_list **head);
 void	stack_indexer(t_list **head);
-void	parser(char *input, t_list **head);
+short	parser(char *input, t_list **head);
 void	assign_mark(t_list **head);
 
 void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
@@ -75,9 +77,8 @@ void	assign_large(t_list **head_a, t_list **head_b, t_sort *s);
 short	check_sort(t_list **head);
 void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
 
-void	algo_sub(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
-void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, short *arr);
-short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, short arr); // LEFTOFF
+void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
+short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
@@ -105,12 +106,14 @@ short	swap_both(t_list **head_a, t_list **head_b);
 short	rotate_both(t_list **head_a, t_list **head_b);
 short	r_rotate_both(t_list **head_a, t_list **head_b);
 short	do_action(t_list **head_a, t_list **head_b, short action);
-short	do_actions(t_list **head_a, t_list **head_b, short amount, ...);
+short	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 
 void	wr_a(char *action);
 t_list	*find_annom(t_list **head);
 
 size_t	ps_strlen(char *str);
+short	ps_isdigit(int c);
+char	*ps_strjoin(char *add, char *line, size_t i, size_t j);
 
 // LIBFT
 

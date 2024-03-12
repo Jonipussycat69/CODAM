@@ -1,0 +1,11 @@
+Fix:
+	The original main segfaults in push_swap
+
+LEFTOFF:
+	The sorting!
+
+To do?
+	Change to const for safety
+	Add headers
+	Clean up and organize files
+	Rewrite MAKEFILE

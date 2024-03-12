@@ -1,9 +1,10 @@
 #include "push_swap.h"
 
-void	parser(char *input, t_list **head)
+// Checks the input string for value size and creates linked list with values
+short	parser(char *input, t_list **head)
 {
 	int		i;
-	int		num;
+	long	num;
 	short	multiplier;
 
 	i = 0;
@@ -20,27 +21,35 @@ void	parser(char *input, t_list **head)
 				num = num * 10 + (input[i] - '0');
 				i++;
 			}
-			if (nodeadd_back(head, new_node(num * multiplier, 0)) != ok)
-				return (free_list(head));
+			if (num < INT_MIN || num > INT_MAX || \
+			nodeadd_back(head, new_node((int)num * multiplier, 0)) != ok)
+				return (free_list(head), err);
 		}
 		i++;
 	}
-	return ;
+	return (ok);
 }
 
-void	indexer(t_list **head)
+// Checks for doubles while assigning each value an corresponding index
+short	indexer(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
 	int		i;
+	short	double_check;
 
 	tmp = *head;
 	while (tmp != NULL)
 	{
+		double_check = 0;
 		i = 0;
 		tmptmp = *head;
 		while (tmptmp != NULL)
 		{
+			if (tmp->value == tmptmp->value)
+				double_check += 1;
+			if (double_check > 1)
+				return (err);
 			if (tmp->value > tmptmp->value)
 				i++;
 			tmptmp = tmptmp->next;
@@ -48,7 +57,7 @@ void	indexer(t_list **head)
 		tmp->i_value = i;
 		tmp = tmp->next;
 	}
-	return ;
+	return (ok);
 }
 
 void	stack_indexer(t_list **head)

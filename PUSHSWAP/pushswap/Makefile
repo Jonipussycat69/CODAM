@@ -28,6 +28,7 @@ frun:
 run:
 	@cc $(SRC) -o $(EXE)
 	@./$(EXE)
+
 clean:
 	@$(RM) $(OBJ)
 

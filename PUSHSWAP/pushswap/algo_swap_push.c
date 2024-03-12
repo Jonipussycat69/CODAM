@@ -39,7 +39,8 @@ char	*fsl_order(t_list **head)
 	return (ret);
 }
 // Determines the actions based on fsl_order, the smallest gets pushed to b and b is as (invertedly) sorted as possible
-short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, short arr)
+short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, \
+	const short *arr)
 {
 	const char	*fsl_a = fsl_order(head_b);
 	const char	*fsl_b = fsl_order(head_b);
@@ -52,7 +53,8 @@ short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, short arr)
 	return (ok);
 }
 
-short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, short arr)
+short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
+	const short *arr)
 {
 	// stage 1: pushing from a to b
 	while (check_sort(head_a) == err && list_len(head_a) > 3)
