@@ -18,18 +18,62 @@ short	check_sort(t_list **head)
 	return (ok);
 }
 
-void	flagger(t_list **head, t_sort *s)
+// Returns the code corresponding top the right action(s) for hc_action, code 'err' = no action
+static short	hs_code(t_list **head_used)
 {
-	// WHAT WILL THE FLAG INDICATE?
-	return ;
+	const short	big = get_li(n_si_node(head_used, 2));
+	const short	small = get_li(n_si_node(head_used, 0));
+
+	if (big == 0 && small == 2)
+		return (1);
+	if (big == 1 && small == 0)
+		return (2);
+	if (small == 2)
+		return (3);
+	if (big == 2 && small == 1)
+		return (4);
+	if (big == 0)
+		return (5);
+	return (err);
 }
 
-void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s)
+// Chooses action based on hs_code return
+static short	hs_action(t_list **head_a, t_list **head_b, short code, short stack)
 {
-	list_indexer(head_a);
-	list_indexer(head_b);
-	s->stack_a_len = list_len(head_a);
-	s->stack_b_len = list_len(head_b);
-	assign_mid(head_a, head_b, s);
-	assign_large(head_a, head_b, s);
+	const short	act[] = {sa, sb, ra, rb, rra, rrb};
+
+	if (code == 1)
+		return (do_actions(head_a, head_b, 2, act[2 + stack], act[0 + stack]));
+	if (code == 2)
+		return (do_actions(head_a, head_b, 2, act[4 + stack], act[0 + stack]));
+	if (code == 3)
+		return (do_action(head_a, head_b, act[4 + stack]));
+	if (code == 4)
+		return (do_action(head_a, head_b, act[0 + stack]));
+	if (code == 5)
+		return (do_action(head_a, head_b, act[2 + stack]));
+	return (err);
+}
+
+// Hard-sorting for 2 or 3 value list
+short	hardsort(t_list **head_used, t_list **head_other, short used_stack)
+{
+	short	code;
+
+	if (list_len(head_used) > 3 || list_len(head_used) < 2 || \
+	check_sort(head_used) == ok)
+		return (ok);
+	if (list_len(head_used) == 2)
+		return (hs_action(head_used, head_other, 4, used_stack));
+	while (check_sort(head_used) != ok)
+	{
+		code = hs_code(head_used);
+		if (code == err)
+			return (err);
+		if (used_stack == a)
+			hs_action(head_used, head_other, code, used_stack);
+		else
+			hs_action(head_other, head_used, code, used_stack);
+	}
+	return (ok);
 }

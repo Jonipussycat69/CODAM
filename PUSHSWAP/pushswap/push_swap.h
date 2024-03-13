@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/12 17:32:23 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/03/13 14:24:05 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 typedef struct s_list
 {
-	int				value;
-	int				i_value;
-	int				list_index;
-	int				stack_iv;
-	int				mark;
+	int				value;// original inputted value
+	int				i_value;// index corresponding to value
+	int				list_index;// index of placement in list
+	int				stack_iv;// index corresponding to the values in current list
+	int				mark;// the i_value of node this one should go ontop, used in sorting
 	short			flag;
 	struct s_list	*next;
 }	t_list;
@@ -59,7 +59,7 @@ typedef struct s_sort
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err = -1, neutral = -2, ok = 0, eureka};
 enum	flags{lower, upper, true, false};
-enum	stacks{a, b};
+enum	stacks{a = 0, b = 1};
 
 // PUSH SWAP ORIGINAL
 
@@ -73,9 +73,10 @@ void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
 int		get_mid_si(t_list **head, t_sort *s);
 
 void	assign_large(t_list **head_a, t_list **head_b, t_sort *s);
+void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
 
 short	check_sort(t_list **head);
-void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
+short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
 void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
 short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
@@ -85,9 +86,10 @@ short	nodeadd_back(t_list **head, t_list *node);
 short	nodeadd_front(t_list **head, t_list *node);
 t_list	*new_node(int val, int ind);
 
-int		get_index(t_list *node);
+int		get_i_value(t_list *node);
 int		get_value(t_list *node);
 int		get_flag(t_list *node);
+int		get_li(t_list *node);
 int		list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
