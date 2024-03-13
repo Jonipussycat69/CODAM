@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/13 14:24:05 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/13 16:06:45 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_sort
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
-enum	returns{err = -1, neutral = -2, ok = 0, eureka};
+enum	returns{err = -1, inert = -2, ok = 0, eureka};
 enum	flags{lower, upper, true, false};
 enum	stacks{a = 0, b = 1};
 
@@ -78,8 +78,13 @@ void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
 short	check_sort(t_list **head);
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
-void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
-short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, const short *arr);
+void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
+short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
+
+short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);

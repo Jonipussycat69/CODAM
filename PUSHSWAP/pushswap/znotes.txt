@@ -2,7 +2,9 @@ Fix:
 	The original main segfaults in push_swap
 
 LEFTOFF:
-	The sorting!
+	Third stage!
+		- Calculating steps for each node from b
+		- Checking for upper or lower half (for the possible double-steps)
 
 To do?
 	Change to const for safety

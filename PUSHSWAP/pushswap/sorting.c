@@ -18,7 +18,8 @@ short	check_sort(t_list **head)
 	return (ok);
 }
 
-// Returns the code corresponding top the right action(s) for hc_action, code 'err' = no action
+// Returns the code corresponding top the right action(s) for hc_action,
+// code 'err' = no action
 static short	hs_code(t_list **head_used)
 {
 	const short	big = get_li(n_si_node(head_used, 2));
@@ -63,8 +64,10 @@ short	hardsort(t_list **head_used, t_list **head_other, short used_stack)
 	if (list_len(head_used) > 3 || list_len(head_used) < 2 || \
 	check_sort(head_used) == ok)
 		return (ok);
-	if (list_len(head_used) == 2)
+	if (list_len(head_used) == 2 && used_stack == a)
 		return (hs_action(head_used, head_other, 4, used_stack));
+	if (list_len(head_used) == 2 && used_stack == b)
+		return (hs_action(head_other, head_used, 4, used_stack));
 	while (check_sort(head_used) != ok)
 	{
 		code = hs_code(head_used);
