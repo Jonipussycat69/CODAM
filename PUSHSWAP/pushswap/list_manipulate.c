@@ -62,3 +62,15 @@ t_list	*new_node(int val, int ind)
 	node->next = NULL;
 	return (node);
 }
+
+t_list	*last_node(t_list **head)
+{
+	t_list	*tmp;
+	
+	if (!*head)
+		return (NULL);
+	tmp = *head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	return (tmp);
+}

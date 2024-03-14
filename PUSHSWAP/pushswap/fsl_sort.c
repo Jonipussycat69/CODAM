@@ -9,6 +9,7 @@ static int	*init_fsl(t_list **head)
 	fsl[1] = get_i_value(nth_node(head, 1));
 	fsl[2] = get_i_value(last_node(head));
 	fsl[3] = 0;
+	printf("\033[32m>|init_fsl| fsl = %d %d %d<\033[0m\n", fsl[0], fsl[1], fsl[2]);// TEST!
 	return (fsl);
 }
 // First Second Last check: Checks which of the 3 is the biggest
@@ -24,7 +25,7 @@ static char	*fsl_order(t_list **head, const char *fsl_arr)
 
 	i = 0;
 	if (list_len(head) <= 3)
-		return (err);
+		return (NULL);
 	fsl = init_fsl(head);
 	while (i < 3)
 	{
@@ -39,6 +40,7 @@ static char	*fsl_order(t_list **head, const char *fsl_arr)
 		ret[place] = fsl_arr[i];
 		i++;
 	}
+	printf("\033[32m>|fsl_order| fsl(ret) = %s<\033[0m\n", ret);// TEST!
 	ret[3] = '\0';
 	return (ret);
 }
@@ -49,6 +51,8 @@ static short	first_s_a(t_list **head, const short *arr, const char *fsl_arr)
 {
 	const char	*fsl_a = fsl_order(head, fsl_arr);
 
+	if (!fsl_a)
+		return (err);
 	if (fsl_a[0] == 's' && fsl_a[2] == 'f')
 		return (ra);
 	if (fsl_a[0] == 's')
@@ -65,6 +69,8 @@ static short	first_s_b(t_list **head, short act_a, const short *arr, \
 {
 	const char	*fsl_b = fsl_order(head, fsl_arr);
 
+	if (!fsl_b)
+		return (act_a);
 	if (act_a == ra)
 	{
 		if (fsl_b[2] == 'f')
@@ -85,20 +91,31 @@ static short	first_s_b(t_list **head, short act_a, const short *arr, \
 
 // Determines the actions based on fsl_order,
 // the smallest gets pushed to b and tries to sort b (invertedly)
-short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, \
+short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 	const short *arr)
 {
 	const char	fsla[] = "fsl";
 
 	while (check_sort(head_a) == err && list_len(head_a) > 3)
 	{
+		print_values(head_a, 'a');//TEST!
+		print_values(head_b, 'b');//TEST!
 		s->ret_a = first_s_b(head_b, first_s_a(head_a, arr, fsla), arr, fsla);
 		if (s->ret_a == err)
 			return (err);
 		if (s->ret_a >= 0)
-			do_actions(head_a, head_b, 2, s->ret_a, pb);
+		{
+			if (do_actions(head_a, head_b, 2, s->ret_a, pb) != ok)
+				return (err);
+		}
 		else
-			do_action(head_a, head_b, pb);
+		{
+			if (do_action(head_a, head_b, pb) != ok)
+				return (err);
+		}
 	}
+	printf("\033[32m>|first_stage| list_len a = %d<\033[0m\n", list_len(head_a));// TEST!
+	print_values(head_a, 'a');//TEST!
+	print_values(head_b, 'b');//TEST!
 	return (ok);
 }

@@ -21,23 +21,25 @@ int	get_value(t_list *node)
 	return (node->value);
 }
 
-int	get_flag(t_list *node)
+int	get_weight(t_list *node)
 {
 	if (!node)
 		return (-1);
-	return (node->flag);
+	return (node->weight);
 }
 
-t_list	*last_node(t_list **head)
+int	get_mark(t_list *node)
 {
-	t_list	*tmp;
-	
-	if (!*head)
-		return (NULL);
-	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	return (tmp);
+	if (!node)
+		return (-1);
+	return (node->mark);
+}
+
+int	get_side(t_list *node)
+{
+	if (!node)
+		return (-1);
+	return (node->side);
 }
 
 int	list_len(t_list **head)
@@ -49,7 +51,7 @@ int	list_len(t_list **head)
 		return (0);
 	i = 0;
 	tmp = *head;
-	while (tmp->next != NULL && ++i)
+	while (tmp != NULL && ++i)
 		tmp = tmp->next;
 	return (i);
 }

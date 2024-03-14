@@ -12,6 +12,7 @@ short	swap(t_list **head)
 	tmptmp = tmp->next;
 	tmp->next = tmptmp->next;
 	tmptmp->next = tmp;
+	*head = tmptmp;
 	return (ok);
 }
 
@@ -20,7 +21,7 @@ short	push(t_list **head_a, t_list **head_b, short stack)
 {
 	t_list	*tmp;
 
-	if (!*head_a || !*head_b)
+	if ((!*head_a && stack == pb) || (!*head_b && stack == pa))
 		return (err);
 	if (stack == pa)
 	{

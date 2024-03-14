@@ -11,7 +11,7 @@
 # include <stdio.h>
 # include <wchar.h>
 # include <locale.h>
-#include <sys/ioctl.h>
+# include <sys/ioctl.h>
 
 # define INP_LEN 10
 # define PARAMB 7

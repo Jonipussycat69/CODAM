@@ -90,6 +90,8 @@ void	list_indexer(t_list **head)
 	t_list	*tmp;
 	int		i;
 
+	if (!*head)
+		return ;
 	tmp = *head;
 	i = 0;
 	while (tmp != NULL)

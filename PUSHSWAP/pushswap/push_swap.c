@@ -1,29 +1,5 @@
 #include "push_swap.h"
 
-void	print_values(t_list **head)
-{
-	// THIS FUNCTION IS JUST FOR TETSTING!!
-	t_list	*tmp;
-
-	tmp = *head;
-	printf("Values:\n");
-	while (tmp != NULL)
-	{
-		printf("%d ", tmp->value);
-		tmp = tmp->next;
-	}
-	printf("\n\n");
-	tmp = *head;
-	printf("Index:\n");
-	while (tmp != NULL)
-	{
-		printf("%d ", tmp->i_value);
-		tmp = tmp->next;
-	}
-	printf("\n\n");
-	return ;
-}
-
 static short	char_check(char *str)
 {
 	if (!str)
@@ -76,6 +52,9 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 		return (err);
 	if (algo_swap_push(head_a, head_b, s, arr) == err)
 		return (free_list(head_a), free_list(head_b), err);
+	print_width_format("-", "");// TEST!
+	print_values(head_a, 'a');// TEST!
+	print_values(head_b, 'b');// TEST!
 	return (ok);
 }
 
@@ -100,7 +79,8 @@ int	main(void)// TEST MAIN
 		return (wr_a("Error"), -1);
 	assign_mark(head);
 	s.total_inputsize = list_len(head);
-	print_values(head);
+	print_values(head, 'a');
+	print_width_format("-", "");
 	if (ft_pushswap(head, &s) != ok)
 		return (wr_a("Error"), -1);
 	free_list(head);

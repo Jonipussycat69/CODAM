@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/13 16:06:45 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/14 20:09:50 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,31 @@
 # include <stdarg.h>
 # include <limits.h>
 
+/*
+	value = original inputted value
+
+	i_value = index corresponding to value
+
+	list_index = index of placement in list
+
+	stack_iv = index corresponding to the values in current list
+
+	mark = the i_value of node this one should go ontop, used in sorting
+
+	side = multiplier; 1 upper half, -1 lower half
+
+	weight = the lower the wheight the better,
+		[val + num of act] for low values, [num of act - val] for high
+*/
 typedef struct s_list
 {
-	int				value;// original inputted value
-	int				i_value;// index corresponding to value
-	int				list_index;// index of placement in list
-	int				stack_iv;// index corresponding to the values in current list
-	int				mark;// the i_value of node this one should go ontop, used in sorting
-	short			flag;
+	int				value;
+	int				i_value;
+	int				list_index;
+	int				stack_iv;
+	int				mark;
+	short			side;
+	short			weight;
 	struct s_list	*next;
 }	t_list;
 
@@ -35,25 +52,11 @@ typedef struct s_sort
 {
 	char	*str_to_free;
 	int		total_inputsize;
-	int		mid_iv_a;
-	int		mid_iv_b;
-	int		mid_si_a;
-	int		mid_si_b;
-	int		mid_li_a;
-	int		mid_li_b;
-	int		large_si_a;
-	int		large_si_b;
-	int		large_b_si_a;
-	int		large_b_si_b;
-	int		large_t_si_a;
-	int		large_t_si_b;
-	int		sorting_point;
-	int		sorted_amount;
-	int		stack_a_len;
-	int		stack_b_len;
 	short	choice_index;
 	short	ret_a;
 	short	ret_b;
+	double	val_mult;
+	double	act_mult;
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
@@ -63,27 +66,26 @@ enum	stacks{a = 0, b = 1};
 
 // PUSH SWAP ORIGINAL
 
+void	print_values(t_list **head, char stack);// TEST!
+void	print_width_format(char *c, char *f);// TEST!
+
 void	list_indexer(t_list **head);
 short	indexer(t_list **head);
 void	stack_indexer(t_list **head);
 short	parser(char *input, t_list **head);
 void	assign_mark(t_list **head);
 
-void	assign_mid(t_list **head_a, t_list **head_b, t_sort *s);
-int		get_mid_si(t_list **head, t_sort *s);
-
-void	assign_large(t_list **head_a, t_list **head_b, t_sort *s);
 void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
 
 short	check_sort(t_list **head);
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
-void	algo_midsplit(t_list **head_a, t_list **head_b, t_sort *s, \
-		const short *arr);
 short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
 
-short	first_stage(t_list **head_a, t_list **head_b, t_sort *s, \
+short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
+short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
 
 void	free_list(t_list **head);
@@ -93,16 +95,19 @@ t_list	*new_node(int val, int ind);
 
 int		get_i_value(t_list *node);
 int		get_value(t_list *node);
-int		get_flag(t_list *node);
+int		get_weight(t_list *node);
 int		get_li(t_list *node);
+int		get_mark(t_list *node);
+int		get_side(t_list *node);
 int		list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
-t_list	*nth_node(t_list **head, int n);
 
+t_list	*nth_node(t_list **head, int n);
 t_list	*n_si_node(t_list **head, int n);
 t_list	*n_li_node(t_list **head, int n);
 t_list	*n_iv_node(t_list **head, int n);
+void	update_variable_index(t_list **head_a, t_list **head_b);
 
 short	swap(t_list **head);
 short	push(t_list **head_a, t_list **head_b, short stack);

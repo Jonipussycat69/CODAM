@@ -1,23 +1,5 @@
 #include "push_swap.h"
 
-short	check_sort(t_list **head)
-{
-	t_list	*tmp;
-	int		prev_index;
-	
-	if (!*head)
-		return (err);
-	tmp = *head;
-	while (tmp != NULL)
-	{
-		prev_index = tmp->i_value;
-		tmp = tmp->next;
-		if (tmp->i_value < prev_index)
-			return (err);
-	}
-	return (ok);
-}
-
 // Returns the code corresponding top the right action(s) for hc_action,
 // code 'err' = no action
 static short	hs_code(t_list **head_used)
@@ -70,6 +52,7 @@ short	hardsort(t_list **head_used, t_list **head_other, short used_stack)
 		return (hs_action(head_other, head_used, 4, used_stack));
 	while (check_sort(head_used) != ok)
 	{
+		update_variable_index(head_used, head_other);
 		code = hs_code(head_used);
 		if (code == err)
 			return (err);
