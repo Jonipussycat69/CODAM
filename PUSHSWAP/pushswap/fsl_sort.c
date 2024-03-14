@@ -96,7 +96,7 @@ short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 {
 	const char	fsla[] = "fsl";
 
-	while (check_sort(head_a) == err && list_len(head_a) > 3)
+	while (check_sort_asc(head_a) == err && list_len(head_a) > 3)
 	{
 		print_values(head_a, 'a');//TEST!
 		print_values(head_b, 'b');//TEST!

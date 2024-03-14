@@ -1,33 +1,13 @@
 #include "push_swap.h"
 
-// Checks the input string for value size and creates linked list with values
-short	parser(char *input, t_list **head)
+// Updates stack_i & list_i in both lists
+void	update_variable_index(t_list **head_a, t_list **head_b)
 {
-	int		i;
-	long	num;
-	short	multiplier;
-
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] <= '9' && input[i] >= '0')
-		{
-			multiplier = 1;
-			if (i > 0 && input[i - 1] == '-')
-				multiplier = -1;
-			num = 0;
-			while (input[i] <= '9' && input[i] >= '0')
-			{
-				num = num * 10 + (input[i] - '0');
-				i++;
-			}
-			if (num < INT_MIN || num > INT_MAX || \
-			nodeadd_back(head, new_node((int)num * multiplier, 0)) != ok)
-				return (free_list(head), err);
-		}
-		i++;
-	}
-	return (ok);
+	list_indexer(head_a);
+	stack_indexer(head_a);
+	list_indexer(head_b);
+	stack_indexer(head_b);
+	return ;
 }
 
 // Checks for doubles while assigning each value an corresponding index
@@ -99,21 +79,6 @@ void	list_indexer(t_list **head)
 		tmp->list_index = i;
 		tmp = tmp->next;
 		i++;
-	}
-	return ;
-}
-
-void	assign_mark(t_list **head)
-{
-	t_list	*tmp;
-
-	if (!*head)
-		return ;
-	tmp = *head;
-	while (tmp != NULL)
-	{
-		tmp->mark = tmp->i_value - 1;
-		tmp = tmp->next;
 	}
 	return ;
 }

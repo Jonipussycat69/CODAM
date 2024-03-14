@@ -44,13 +44,13 @@ short	hardsort(t_list **head_used, t_list **head_other, short used_stack)
 	short	code;
 
 	if (list_len(head_used) > 3 || list_len(head_used) < 2 || \
-	check_sort(head_used) == ok)
+	check_sort_asc(head_used) == ok)
 		return (ok);
 	if (list_len(head_used) == 2 && used_stack == a)
 		return (hs_action(head_used, head_other, 4, used_stack));
 	if (list_len(head_used) == 2 && used_stack == b)
 		return (hs_action(head_other, head_used, 4, used_stack));
-	while (check_sort(head_used) != ok)
+	while (check_sort_asc(head_used) != ok)
 	{
 		update_variable_index(head_used, head_other);
 		code = hs_code(head_used);

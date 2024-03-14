@@ -7,17 +7,17 @@
 short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr)
 {
-	if (list_len(head_a) > 3 && check_sort(head_a) != ok)
+	if (list_len(head_a) > 3 && check_sort_asc(head_a) != ok)
 	{
 		if (fsl_sort(head_a, head_b, s, arr) != ok)
 			return (err);
 	}
-	if (check_sort(head_a) != ok)
+	if (check_sort_asc(head_a) != ok)
 	{
 		if (hardsort(head_a, head_b, a))
 			return (err);
 	}
-	if (check_sort(head_a) != ok && list_len(head_b) == 0)
+	if (check_sort_asc(head_a) != ok && list_len(head_b) == 0)
 	{
 		return (ok);
 		// LEFTOFF third stage!

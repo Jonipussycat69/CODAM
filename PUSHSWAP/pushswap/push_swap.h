@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/14 20:09:50 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/14 23:18:59 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ void	print_width_format(char *c, char *f);// TEST!
 void	list_indexer(t_list **head);
 short	indexer(t_list **head);
 void	stack_indexer(t_list **head);
-short	parser(char *input, t_list **head);
+void	update_variable_index(t_list **head_a, t_list **head_b);
+
 void	assign_mark(t_list **head);
 
-void	innit_sorting_var(t_list **head_a, t_list **head_b, t_sort *s);
+short	check_sort_asc(t_list **head);
+short	check_sort_des(t_list **head);
 
-short	check_sort(t_list **head);
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
 short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
@@ -99,6 +100,7 @@ int		get_weight(t_list *node);
 int		get_li(t_list *node);
 int		get_mark(t_list *node);
 int		get_side(t_list *node);
+
 int		list_len(t_list **head);
 
 t_list	*last_node(t_list **head);
@@ -107,7 +109,7 @@ t_list	*nth_node(t_list **head, int n);
 t_list	*n_si_node(t_list **head, int n);
 t_list	*n_li_node(t_list **head, int n);
 t_list	*n_iv_node(t_list **head, int n);
-void	update_variable_index(t_list **head_a, t_list **head_b);
+short	parser(char *input, t_list **head);
 
 short	swap(t_list **head);
 short	push(t_list **head_a, t_list **head_b, short stack);
