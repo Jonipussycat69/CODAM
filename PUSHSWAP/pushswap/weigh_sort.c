@@ -47,6 +47,7 @@ double	weigh_pb(t_list **head_a, t_list **head_b, t_sort *s, t_act *a)
 {
 	const int	act_ra = a->node_a->list_index;
 	const int	act_rra = list_len(head_a) - a->node_a->list_index;
+	// LEFTOFF
 	return (ok);
 }
 
