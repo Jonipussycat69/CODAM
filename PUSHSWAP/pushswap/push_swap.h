@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/14 23:18:59 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/15 19:45:02 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 # include <stdarg.h>
 # include <limits.h>
+
+# define WS_REMAIN 3
 
 /*
 	value = original inputted value
@@ -51,18 +53,37 @@ typedef struct s_list
 typedef struct s_sort
 {
 	char	*str_to_free;
-	int		total_inputsize;
+	int		total_inp;
 	short	choice_index;
 	short	ret_a;
 	short	ret_b;
 	double	val_mult;
 	double	act_mult;
+	double	sortedness_a;
+	double	sortedness_b;
+	double	total_sorted;
 }	t_sort;
+
+typedef struct s_action
+{
+	t_list	*node_b;
+	t_list	*node_a;
+	int		act_arr[6];
+	int		total_act;
+}	t_act;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err = -1, inert = -2, ok = 0, eureka};
-enum	flags{lower, upper, true, false};
-enum	stacks{a = 0, b = 1};
+enum	flags{lower = -1, upper = 1, f_true, f_false};
+enum	stacks{st_a = 0, st_b = 1};
+enum	act_arr{
+	_ra = 0,
+	_rb = 1,
+	_rra = 2,
+	_rrb = 3,
+	_rr = 4,
+	_rrr = 5,
+};
 
 // PUSH SWAP ORIGINAL
 
@@ -75,9 +96,12 @@ void	stack_indexer(t_list **head);
 void	update_variable_index(t_list **head_a, t_list **head_b);
 
 void	assign_mark(t_list **head);
+void	assign_side(t_list **head);
 
 short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
+double	sortedness_asc(t_list **head);
+double	sortedness_des(t_list **head);
 
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 

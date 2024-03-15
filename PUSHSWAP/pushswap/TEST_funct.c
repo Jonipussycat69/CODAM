@@ -48,6 +48,66 @@ void	print_width_format(char *c, char *f)
 	return ;
 }
 
+void	print_sortedness_asc(t_list **head)
+{
+	long			total_dif;
+	int				hold;
+	double			sortedness;
+	t_list			*tmp;
+
+	if (!head || !*head || list_len(head) < 2)
+		return ;
+	tmp = *head;
+	total_dif = 0;
+	stack_indexer(head);
+	while (tmp->next != NULL)
+	{
+		hold = tmp->stack_iv;
+		tmp = tmp->next;
+		hold = tmp->stack_iv - hold;
+		if (hold < 0)
+			hold *= -2;
+		total_dif += hold;
+	}
+	// sortedness = (((double)list_len(head) - 1.0) / (double)total_dif) * 100.00;
+	// printf("[Sortedness asc: %.3f]\n", sortedness);
+	// sortedness = ((double)list_len(head) / ((double)total_dif + 1.0)) * 100.00;
+	// printf("[Sortedness asc: %.3f]\n", sortedness);
+	sortedness = (((double)list_len(head) - 1.0) / (double)total_dif) * 100.00;
+	sortedness = ((((double)list_len(head) / ((double)total_dif + 1.0)) * 100.00) + sortedness) / 2.0;
+	printf("[Sortedness asc: %.3f]\n", sortedness);
+}
+
+void	print_sortedness_des(t_list **head)
+{
+	long			total_dif;
+	int				hold;
+	double			sortedness;
+	t_list			*tmp;
+
+	if (!head || !*head || list_len(head) < 2)
+		return ;
+	tmp = *head;
+	total_dif = 0;
+	stack_indexer(head);
+	while (tmp->next != NULL)
+	{
+		hold = tmp->stack_iv;
+		tmp = tmp->next;
+		hold = hold - tmp->stack_iv;
+		if (hold < 0)
+			hold *= -2;
+		total_dif += hold;
+	}
+	// sortedness = (((double)list_len(head) - 1.0) / (double)total_dif) * 100.00;
+	// printf("[Sortedness des: %.3f]\n", sortedness);
+	// sortedness = ((double)list_len(head) / ((double)total_dif + 1.0)) * 100.00;
+	// printf("[Sortedness des: %.3f]\n", sortedness);
+	sortedness = (((double)list_len(head) - 1.0) / (double)total_dif) * 100.00;
+	sortedness = ((((double)list_len(head) / ((double)total_dif + 1.0)) * 100.00) + sortedness) / 2.0;
+	printf("[Sortedness des: %.3f]\n", sortedness);
+}
+
 void	print_values(t_list **head, char stack)
 {
 	// THIS FUNCTION IS JUST FOR TETSTING!!
@@ -56,6 +116,8 @@ void	print_values(t_list **head, char stack)
 	tmp = *head;
 	print_width_format("-", BLUE_BOLD_F);
 	printf("\n< Stack: %c >\n", stack);
+	print_sortedness_asc(head);
+	print_sortedness_des(head);
 	printf("Values:\n");
 	while (tmp != NULL)
 	{

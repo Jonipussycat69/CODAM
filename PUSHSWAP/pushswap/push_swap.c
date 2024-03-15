@@ -78,7 +78,7 @@ int	main(void)// TEST MAIN
 	if (indexer(head) != ok)
 		return (wr_a("Error"), -1);
 	assign_mark(head);
-	s.total_inputsize = list_len(head);
+	s.total_inp = list_len(head);
 	print_values(head, 'a');
 	print_width_format("-", "");
 	if (ft_pushswap(head, &s) != ok)
