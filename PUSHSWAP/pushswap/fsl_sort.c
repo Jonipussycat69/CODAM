@@ -95,17 +95,18 @@ short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 	const short *arr)
 {
 	const char	fsla[] = "fsl";
+	short		ret;
 
 	while (check_sort_asc(head_a) == err && list_len(head_a) > 3)
 	{
 		print_values(head_a, 'a');//TEST!
 		print_values(head_b, 'b');//TEST!
-		s->ret_a = first_s_b(head_b, first_s_a(head_a, arr, fsla), arr, fsla);
-		if (s->ret_a == err)
+		ret = first_s_b(head_b, first_s_a(head_a, arr, fsla), arr, fsla);
+		if (ret == err)
 			return (err);
-		if (s->ret_a >= 0)
+		if (ret >= 0)
 		{
-			if (do_actions(head_a, head_b, 2, s->ret_a, pb) != ok)
+			if (do_actions(head_a, head_b, 2, ret, pb) != ok)
 				return (err);
 		}
 		else

@@ -92,6 +92,28 @@ double	sortedness_des(t_list **head)
 	return (sorted);
 }
 
+double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage)
+{
+	double	receiver;
+	double	giver;
+
+	if (stage == s_pb)
+	{
+		receiver = sortedness_des(head_b) * s->receive_mult;
+		giver = sortedness_asc(head_a);
+		return ((receiver + giver) / 2.0);
+	}
+	if (stage == s_pa)
+	{
+		receiver = sortedness_asc(head_a) * s->receive_mult;
+		giver = sortedness_des(head_b);
+		return ((receiver + giver) / 2.0);
+	}
+	receiver = sortedness_asc(head_a);
+	giver = sortedness_des(head_b);
+	return ((receiver + giver) / 2.0);
+}
+
 short	act_logic(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	// Maybe use fsl logic here?

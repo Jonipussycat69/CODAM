@@ -13,7 +13,7 @@ static short	char_check(char *str)
 	return (ok);
 }
 
-static char	*input_to_string(int argc, char **argv, t_sort *s)
+static char	*input_to_string(int argc, char **argv, t_misc *m)
 {
 	char	*str;
 	int		i;
@@ -36,7 +36,7 @@ static char	*input_to_string(int argc, char **argv, t_sort *s)
 	}
 	if (char_check(str) != ok)
 		return (free(str), NULL);
-	s->str_to_free = str;
+	m->str_to_free = str;
 	return (str);
 }
 
@@ -65,16 +65,17 @@ int	main(void)// TEST MAIN
 	t_list	*first;
 	t_list	**head;
 	t_sort	s;
+	t_misc	m;
 
 	first = NULL;
 	head = &first;
-	s.str_to_free = NULL;
+	m.str_to_free = NULL;
 	// if (argc <= 1)
 	// 	return (-1);
 	if (parser((char *)input, head) != ok)
 		return (wr_a("Error"), -1);
-	if (s.str_to_free)
-		free(s.str_to_free);
+	if (m.str_to_free)
+		free(m.str_to_free);
 	if (indexer(head) != ok)
 		return (wr_a("Error"), -1);
 	assign_mark(head);
@@ -87,29 +88,29 @@ int	main(void)// TEST MAIN
 	return (0);
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	short	ret;
-// 	t_list	*first;
-// 	t_list	**head;
-// 	t_sort	s;
+int	main(int argc, char **argv)
+{
+	short	ret;
+	t_list	*first;
+	t_list	**head;
+	t_sort	s;
+	t_misc	m;
 
-// 	first = NULL;
-// 	head = &first;
-// 	s.str_to_free = NULL;
-// 	if (argc <= 1)
-// 		return (-1);
-// 	if (parser(input_to_string(argc, argv, &s), head) != ok)
-// 		return (wr_a("Error"), -1);
-// 	if (s.str_to_free)
-// 		free(s.str_to_free);
-// 	if (indexer(head) != ok)
-// 		return (wr_a("Error"), -1);
-// 	assign_mark(head);
-// 	s.total_inputsize = list_len(head);
-// 	print_values(head);
-// 	if (ft_pushswap(head, &s) != ok)
-// 		return (wr_a("Error"), -1);
-// 	free_list(head);
-// 	return (0);
-// }
+	first = NULL;
+	head = &first;
+	m.str_to_free = NULL;
+	if (argc <= 1)
+		return (-1);
+	if (parser(input_to_string(argc, argv, &s), head) != ok)
+		return (wr_a("Error"), -1);
+	if (m.str_to_free)
+		free(m.str_to_free);
+	if (indexer(head) != ok)
+		return (wr_a("Error"), -1);
+	assign_mark(head);
+	s.total_inp = list_len(head);
+	if (ft_pushswap(head, &s) != ok)
+		return (wr_a("Error"), -1);
+	free_list(head);
+	return (0);
+}

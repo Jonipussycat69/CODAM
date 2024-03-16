@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/15 19:45:02 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/03/16 23:12:03 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,36 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef struct s_sort
+typedef struct s_misc
 {
 	char	*str_to_free;
+}	t_misc;
+
+typedef struct s_sort
+{
 	int		total_inp;
-	short	choice_index;
-	short	ret_a;
-	short	ret_b;
 	double	val_mult;
 	double	act_mult;
+	double	sort_mult;
+	double	receive_mult;
 	double	sortedness_a;
 	double	sortedness_b;
-	double	total_sorted;
+	double	global_sorted;
 }	t_sort;
 
-typedef struct s_action
+typedef struct s_weighsort
 {
 	t_list	*node_b;
 	t_list	*node_a;
 	int		act_arr[6];
 	int		total_act;
-}	t_act;
+}	t_ws;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err = -1, inert = -2, ok = 0, eureka};
 enum	flags{lower = -1, upper = 1, f_true, f_false};
 enum	stacks{st_a = 0, st_b = 1};
+enum	inputs{s_pa = 1, s_pb = 2, global = 20};
 enum	act_arr{
 	_ra = 0,
 	_rb = 1,
@@ -102,6 +106,7 @@ short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
 double	sortedness_asc(t_list **head);
 double	sortedness_des(t_list **head);
+double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 

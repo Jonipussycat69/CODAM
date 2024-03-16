@@ -39,4 +39,18 @@ void	init_sortedness(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	s->sortedness_a = sortedness_asc(head_a);
 	s->sortedness_b = sortedness_des(head_b);
+	s->global_sorted = sortedness_gl(head_a, head_b, s, global);
+}
+
+void	init_multipliers(t_list **head_a, t_list **head_b, t_sort *s, short st)
+{
+	const double	len_a = list_len(head_a);
+	const double	len_b = list_len(head_b);
+	const double	sort_a = sortedness_asc(head_a);
+	const double	sort_b = sortedness_des(head_b);
+
+	s->act_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
+	s->sort_mult = 1.0;
+	s->val_mult = 1.0;
+	s->receive_mult = 1.0;
 }
