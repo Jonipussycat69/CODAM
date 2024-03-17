@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/16 23:12:03 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/17 09:18:50 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_list
 	int				stack_iv;
 	int				mark;
 	short			side;
-	short			weight;
 	struct s_list	*next;
 }	t_list;
 
@@ -65,15 +64,10 @@ typedef struct s_sort
 	double	sortedness_a;
 	double	sortedness_b;
 	double	global_sorted;
-}	t_sort;
-
-typedef struct s_weighsort
-{
-	t_list	*node_b;
-	t_list	*node_a;
+	t_list	*act_node;
+	double	act_weight;
 	int		act_arr[6];
-	int		total_act;
-}	t_ws;
+}	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err = -1, inert = -2, ok = 0, eureka};
@@ -101,6 +95,7 @@ void	update_variable_index(t_list **head_a, t_list **head_b);
 
 void	assign_mark(t_list **head);
 void	assign_side(t_list **head);
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, short st);
 
 short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
@@ -125,7 +120,7 @@ t_list	*new_node(int val, int ind);
 
 int		get_i_value(t_list *node);
 int		get_value(t_list *node);
-int		get_weight(t_list *node);
+int		get_si(t_list *node);
 int		get_li(t_list *node);
 int		get_mark(t_list *node);
 int		get_side(t_list *node);

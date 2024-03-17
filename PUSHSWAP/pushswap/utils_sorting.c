@@ -122,7 +122,7 @@ short	act_logic(t_list **head_a, t_list **head_b, t_sort *s)
 
 // Chooses most efficient node to push to a out of the ones connected
 // Size + amount of act, lower = better
-short	connect_pa(t_list **head_a, t_list **head_b, t_sort *s, t_act *a)
+short	connect_pa(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	return (ok);
 }

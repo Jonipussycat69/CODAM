@@ -38,3 +38,19 @@ int	list_len(t_list **head)
 		tmp = tmp->next;
 	return (i);
 }
+
+short	double_act(t_list **head, short act)
+{
+	stack_indexer(head);
+	if (act == ra || act == rra)
+	{
+		if (get_si(*head) < get_si(last_node(head)))
+			return (rr);
+	}
+	if (act == rb || act == rrb)
+	{
+		if (get_si(*head) > get_si(last_node(head)))
+			return (rr);
+	}
+	return (act);
+}

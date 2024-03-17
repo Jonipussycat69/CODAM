@@ -42,7 +42,7 @@ void	init_sortedness(t_list **head_a, t_list **head_b, t_sort *s)
 	s->global_sorted = sortedness_gl(head_a, head_b, s, global);
 }
 
-void	init_multipliers(t_list **head_a, t_list **head_b, t_sort *s, short st)
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, short st)
 {
 	const double	len_a = list_len(head_a);
 	const double	len_b = list_len(head_b);
