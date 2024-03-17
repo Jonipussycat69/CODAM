@@ -12,6 +12,7 @@ int	pathfind(t_list **head_a, t_list **head_b, t_sort *s)
 	const int	act_rra = list_len(head_a) - s->act_node->list_index;
 	int			total_act;
 
+	// LEFTOFF!
 	return (total_act);
 }
 
