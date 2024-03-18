@@ -36,7 +36,7 @@ short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		if (do_action(head_a, head_b, va_arg(actions, int)) == err)
+		if (do_action(head_a, head_b, va_arg(actions, int)) == err)// add double act??
 			return (err);
 	}
 	va_end(actions);
@@ -47,7 +47,7 @@ short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		if (do_action(head_a, head_b, act) == err)
+		if (do_action(head_a, head_b, act) == err)// add double act??
 			return (err);
 	}
 	return (ok);
@@ -66,4 +66,30 @@ short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 		i++;
 	}
 	return (ok);
+}
+
+short	double_act(t_list **head_a, t_list **head_b, short act)
+{
+	stack_indexer(head_a);
+	if (act == ra)
+	{
+		if (get_si(*head_b) < get_si(last_node(head_b)))
+			return (rr);
+	}
+	if (act == rra)
+	{
+		if (get_si(*head_b) < get_si(last_node(head_b)))
+			return (rrr);
+	}
+	if (act == rb)
+	{
+		if (get_si(*head_a) > get_si(last_node(head_a)))
+			return (rr);
+	}
+	if (act == rrb)
+	{
+		if (get_si(*head_a) > get_si(last_node(head_a)))
+			return (rrr);
+	}
+	return (act);
 }

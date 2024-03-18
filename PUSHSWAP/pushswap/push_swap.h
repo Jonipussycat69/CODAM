@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/18 12:31:49 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/18 13:24:05 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,9 @@ short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
 short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
-		
-int		path_combi(t_list **head_a, t_list **head_b, t_list *s);
+
+short	exec_pre_arr(t_list **head_a, t_list **head_b, t_sort *s);
+short	revert_calc(t_list **head_a, t_list **head_b, t_sort *s);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
@@ -154,6 +155,7 @@ short	do_action(t_list **head_a, t_list **head_b, short action);
 short	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
 short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
+short	double_act(t_list **head_a, t_list **head_b, short act);
 
 void	wr_a(char *action);
 t_list	*find_annom(t_list **head);

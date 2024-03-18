@@ -37,7 +37,7 @@ short	pre_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		if (pre_action(head_a, head_b, va_arg(actions, int)) == err)
+		if (pre_action(head_a, head_b, va_arg(actions, int)) == err)// add doube act??
 			return (err);
 	}
 	va_end(actions);
@@ -48,22 +48,22 @@ short	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		if (pre_action(head_a, head_b, act) == err)
+		if (pre_action(head_a, head_b, double_act(head_a, head_b, act)) == err)
 			return (err);
 	}
 	return (ok);
 }
 
 // Parses the act_arr and executes it at pre_actions
-short	parse_pre_arr(t_list **head_a, t_list **head_b, t_sort *s)
+short	exec_pre_arr(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	short		i;
-	const short	actions[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
+	const short	action[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
 
 	i = 0;
 	while (i < 8)
 	{
-		if (repeat_pre_act(head_a, head_b, s->pre_arr[i], actions[i]) != ok)
+		if (repeat_pre_act(head_a, head_b, s->pre_arr[i], action[i]) != ok)
 			return (err);
 		i++;
 	}
