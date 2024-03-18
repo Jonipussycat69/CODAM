@@ -36,7 +36,8 @@ short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		if (do_action(head_a, head_b, va_arg(actions, int)) == err)// add double act??
+		if (do_action(head_a, head_b, double_act(head_a, head_b, \
+		va_arg(actions, int))) == err)
 			return (err);
 	}
 	va_end(actions);
@@ -47,7 +48,7 @@ short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		if (do_action(head_a, head_b, act) == err)// add double act??
+		if (do_action(head_a, head_b, double_act(head_a, head_b, act)) == err)
 			return (err);
 	}
 	return (ok);
@@ -61,7 +62,7 @@ short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 	i = 0;
 	while (i < 8)
 	{
-		if (repeat_act(head_a, head_b, s->pre_arr[i], actions[i]) != ok)
+		if (repeat_act(head_a, head_b, s->act_arr[i], actions[i]) != ok)
 			return (err);
 		i++;
 	}

@@ -14,7 +14,7 @@ void	act_arr_reset(t_sort *s)
 }
 
 // Finds initializes act_arr with bossible actions, returns total actions
-int	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
+void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
 	const int	act_r = s->act_node->list_index;
 	const int	act_rrb = list_len(head_b) - act_r;
@@ -27,15 +27,17 @@ int	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 		s->act_arr[_rb] = act_r;
 		s->act_arr[_rrb] = act_rrb;
 		s->act_arr[_pa] = 1;
+		s->rr_actions = act_rrb;
 	}
 	if (stage == s_pa)
 	{
 		s->act_arr[_ra] = act_r;
 		s->act_arr[_rra] = act_rra;
 		s->act_arr[_pb] = 1;
+		s->rr_actions = act_rrb;
 	}
-	total_act = path_combi(head_a, head_b, s);
-	return (total_act);
+	s->r_actions = act_r;
+	return ;
 }
 
 // Finds best path to get the act_node above the mark - pb stage
@@ -70,12 +72,21 @@ int	pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
-	const double	act = path_init(head_a, head_b, s, stage);
 	const double	value = get_i_value(s->act_node);
+	double			sortedness;
+	double			act;
+	double			act_weight;
 
+	path_init(head_a, head_b, s, stage);
 	init_multiplier(head_a, head_b, s, stage);
-	if (stage == s_pb)
-		return ((value * s->val_mult) + (act * s->act_mult));
+	sortedness = precalc(head_a, head_b, s, stage);
+	if (s->r_actions == inert)
+		act = s->rr_actions;
 	else
-		return ((value * s->val_mult) - (act * s->act_mult));
+		act = s->r_actions;
+	if (stage == s_pb)
+		act_weight = (value * s->val_mult) + (act * s->act_mult);
+	else
+		act_weight = (value * s->val_mult) - (act * s->act_mult);
+	return (act_weight * ((sortedness / 100.0) * s->sort_mult));
 }

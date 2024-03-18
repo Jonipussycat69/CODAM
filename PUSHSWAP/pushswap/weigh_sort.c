@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+void	init_act_arr(t_sort *s, int r_act, int rr_act)
+{
+	//LEFTOFF
+}
+
 // Chooses most efficient node globally
 t_list	*ws_gl_path(t_list **head_a, t_list **head_b, t_sort *s)
 {
@@ -28,6 +33,8 @@ t_list	*ws_gl_path(t_list **head_a, t_list **head_b, t_sort *s)
 t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	int		i;
+	int		r_act;
+	int		rr_act;
 	double	cur_weight;
 	t_list	*the_node;
 
@@ -41,9 +48,12 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
+			r_act = s->r_actions;
+			rr_act = s->rr_actions;
 		}
 		i++;
 	}
+	init_act_arr(s, r_act, rr_act);
 	return (the_node);
 }
 
@@ -52,6 +62,8 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	int		i;
+	int		r_act;
+	int		rr_act;
 	double	cur_weight;
 	t_list	*the_node;
 
@@ -65,35 +77,13 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
+			r_act = s->r_actions;
+			rr_act = s->rr_actions;
 		}
 		i++;
 	}
+	init_act_arr(s, r_act, rr_act);
 	return (the_node);
-}
-
-// Initializes type and amount of actions in t_ws
-// Weighs node_b for pb stage
-// Size + amount of act, lower = better
-// Include sortednes of stack a and b into the equation!!
-// Include multipliers into the equation!!
-double	weigh_pb(t_list **head_a, t_list **head_b, t_sort *s)
-{
-	const double	weight_path = path_weigh(head_a, head_b, s, s_pb);
-	const double	weight_sort = precalc(head_a, head_b, s);
-	
-	// Function for defining global weight
-
-	return (ok);
-}
-
-// Initializes type and amount of actions in t_ws
-// Weighs node_a for pa stage
-// Size - amount of act, higher = better
-// Include sortednes of stack a and b into the equation!!
-// Include multipliers into the equation!!
-double	weigh_pa(t_list **head_a, t_list **head_b, t_sort *s)
-{
-	return (ok);
 }
 
 short	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
@@ -102,7 +92,6 @@ short	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		update_variable_index(head_a, head_b);
 		s->act_node = ws_pb_path(head_a, head_b, s);
-		weigh_pb(head_a, head_b, s);
 		if (path_act(head_a, head_b, s) != ok)
 			return (err);
 	}

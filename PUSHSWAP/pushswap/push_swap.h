@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/18 13:24:05 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/18 17:46:34 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_sort
 	double	global_sorted;
 	t_list	*act_node;
 	double	act_weight;
-	int		act_arr[8];//make smaller? rr and rrr not needed?
-	int		pre_arr[8];
-	int		best_path[8];
+	int		r_actions;
+	int		rr_actions;
+	int		act_arr[6];
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
@@ -81,10 +81,8 @@ enum	act_arr{
 	_rb = 1,
 	_rra = 2,
 	_rrb = 3,
-	_rr = 4,
-	_rrr = 5,
-	_pa = 6,
-	_pb = 7
+	_pa = 4,
+	_pb = 5
 };
 
 // PUSH SWAP ORIGINAL
@@ -117,8 +115,7 @@ short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
 
-short	exec_pre_arr(t_list **head_a, t_list **head_b, t_sort *s);
-short	revert_calc(t_list **head_a, t_list **head_b, t_sort *s);
+double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
