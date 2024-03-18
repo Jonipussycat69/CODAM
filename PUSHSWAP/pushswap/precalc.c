@@ -77,12 +77,12 @@ double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	revert_pre_rr(head_a, head_b, s);
 	if (sortedness_r > sortedness_rr)
 	{
-		s->rr_actions = inert;
+		s->rr_actions = 0;
 		return (sortedness_r);
 	}
 	else
 	{
-		s->r_actions = inert;
+		s->r_actions = 0;
 		return (sortedness_rr);
 	}
 }

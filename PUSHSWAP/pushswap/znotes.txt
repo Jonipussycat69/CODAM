@@ -1,5 +1,6 @@
 Fix:
-	The original main segfaults in push_swap
+	The original main segfaults in push_swap!
+	It spams ra in weigh_sort!
 
 LEFTOFF:
 	Weight algo! look inside notebook!
@@ -11,4 +12,5 @@ To do?
 	Change to const for safety
 	Add headers
 	Clean up and organize files
+	Remove 'ok' and 'err' checks where there is no malloc!
 	Rewrite MAKEFILE

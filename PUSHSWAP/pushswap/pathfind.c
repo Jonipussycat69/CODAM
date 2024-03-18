@@ -22,19 +22,19 @@ void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	int			total_act;
 
 	act_arr_reset(s);
-	if (stage == s_pb)
+	if (stage == s_pa)
 	{
 		s->act_arr[_rb] = act_r;
 		s->act_arr[_rrb] = act_rrb;
 		s->act_arr[_pa] = 1;
 		s->rr_actions = act_rrb;
 	}
-	if (stage == s_pa)
+	if (stage == s_pb)
 	{
 		s->act_arr[_ra] = act_r;
 		s->act_arr[_rra] = act_rra;
 		s->act_arr[_pb] = 1;
-		s->rr_actions = act_rrb;
+		s->rr_actions = act_rra;
 	}
 	s->r_actions = act_r;
 	return ;
@@ -80,13 +80,18 @@ double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	path_init(head_a, head_b, s, stage);
 	init_multiplier(head_a, head_b, s, stage);
 	sortedness = precalc(head_a, head_b, s, stage);
-	if (s->r_actions == inert)
+	if (s->r_actions == 0)
 		act = s->rr_actions;
 	else
 		act = s->r_actions;
 	if (stage == s_pb)
+	{
 		act_weight = (value * s->val_mult) + (act * s->act_mult);
+		return (act_weight * ((1.0 / (sortedness / 100.0)) * s->sort_mult));
+	}
 	else
+	{
 		act_weight = (value * s->val_mult) - (act * s->act_mult);
-	return (act_weight * ((sortedness / 100.0) * s->sort_mult));
+		return (act_weight * ((sortedness / 100.0) * s->sort_mult));
+	}
 }

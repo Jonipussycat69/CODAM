@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/18 17:46:34 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/18 20:34:02 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,17 @@ double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
 short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
-short	algo_swap_push(t_list **head_a, t_list **head_b, t_sort *s, \
+short	fsl_algo(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
-
 short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
-short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s, \
-		const short *arr);
 
+short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s);
+double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage);
+short	pre_action(t_list **head_a, t_list **head_b, short action);
+short	pre_actions(t_list **head_a, t_list **head_b, int amount, ...);
+short	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);

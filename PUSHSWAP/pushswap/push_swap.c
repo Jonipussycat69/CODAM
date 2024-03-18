@@ -28,7 +28,9 @@ static char	*input_to_string(int argc, char **argv, t_misc *m)
 	str = NULL;
 	while (i < argc)
 	{
-		str = ps_strjoin(argv[i], str, 0, 0);// Well protected?
+		str = ps_strjoin(argv[i], str, 0, 0);
+		if (!str)
+			return (NULL);
 		str = ps_strjoin(" ", str, 0, 0);
 		if (!str)
 			return (NULL);
@@ -50,8 +52,7 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return (err);
-	if (algo_swap_push(head_a, head_b, s, arr) == err)
-		return (free_list(head_a), free_list(head_b), err);
+	weigh_sort(head_a, head_b, s);
 	print_width_format("-", "");// TEST!
 	print_values(head_a, 'a');// TEST!
 	print_values(head_b, 'b');// TEST!
@@ -88,29 +89,29 @@ int	main(void)// TEST MAIN
 	return (0);
 }
 
-int	main(int argc, char **argv)
-{
-	short	ret;
-	t_list	*first;
-	t_list	**head;
-	t_sort	s;
-	t_misc	m;
+// int	main(int argc, char **argv)
+// {
+// 	short	ret;
+// 	t_list	*first;
+// 	t_list	**head;
+// 	t_sort	s;
+// 	t_misc	m;
 
-	first = NULL;
-	head = &first;
-	m.str_to_free = NULL;
-	if (argc <= 1)
-		return (-1);
-	if (parser(input_to_string(argc, argv, &s), head) != ok)
-		return (wr_a("Error"), -1);
-	if (m.str_to_free)
-		free(m.str_to_free);
-	if (indexer(head) != ok)
-		return (wr_a("Error"), -1);
-	assign_mark(head);
-	s.total_inp = list_len(head);
-	if (ft_pushswap(head, &s) != ok)
-		return (wr_a("Error"), -1);
-	free_list(head);
-	return (0);
-}
+// 	first = NULL;
+// 	head = &first;
+// 	m.str_to_free = NULL;
+// 	if (argc <= 1)
+// 		return (-1);
+// 	if (parser(input_to_string(argc, argv, &m), head) != ok)
+// 		return (wr_a("Error"), -1);
+// 	if (m.str_to_free)
+// 		free(m.str_to_free);
+// 	if (indexer(head) != ok)
+// 		return (wr_a("Error"), -1);
+// 	assign_mark(head);
+// 	s.total_inp = list_len(head);
+// 	if (ft_pushswap(head, &s) != ok)
+// 		return (wr_a("Error"), -1);
+// 	free_list(head);
+// 	return (0);
+// }

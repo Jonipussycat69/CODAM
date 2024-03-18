@@ -62,7 +62,7 @@ short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 	i = 0;
 	while (i < 8)
 	{
-		if (repeat_act(head_a, head_b, s->act_arr[i], actions[i]) != ok)
+		if (repeat_action(head_a, head_b, s->act_arr[i], actions[i]) != ok)
 			return (err);
 		i++;
 	}
