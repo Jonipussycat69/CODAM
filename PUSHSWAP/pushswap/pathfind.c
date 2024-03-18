@@ -1,24 +1,40 @@
 #include "push_swap.h"
 
-// Finds path with best sortedness - pb
-int	pathfind_pb(t_list **head_a, t_list **head_b, t_sort *s)
+void	act_arr_reset(t_sort *s)
 {
-	const int	act_ra = s->act_node->list_index;
-	const int	act_rra = list_len(head_a) - act_ra;
-	int			total_act;
+	short	i;
 
-	// LEFTOFF!
-	return (total_act);
+	i = 0;
+	while (i < 8)
+	{
+		s->act_arr[i] = 0;
+		i++;
+	}
+	return ;
 }
 
-// Finds path with best sortedness - pa
-int	pathfind_pa(t_list **head_a, t_list **head_b, t_sort *s)
+// Finds initializes act_arr with bossible actions, returns total actions
+int	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
-	const int	act_rb = s->act_node->list_index;
-	const int	act_rrb = list_len(head_b) - act_rb;
+	const int	act_r = s->act_node->list_index;
+	const int	act_rrb = list_len(head_b) - act_r;
+	const int	act_rra = list_len(head_a) - act_r;
 	int			total_act;
 
-	// LEFTOFF!
+	act_arr_reset(s);
+	if (stage == s_pb)
+	{
+		s->act_arr[_rb] = act_r;
+		s->act_arr[_rrb] = act_rrb;
+		s->act_arr[_pa] = 1;
+	}
+	if (stage == s_pa)
+	{
+		s->act_arr[_ra] = act_r;
+		s->act_arr[_rra] = act_rra;
+		s->act_arr[_pb] = 1;
+	}
+	total_act = path_combi(head_a, head_b, s);
 	return (total_act);
 }
 
@@ -54,7 +70,7 @@ int	pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
-	const double	act = pathfind(head_a, head_b, s);
+	const double	act = path_init(head_a, head_b, s, stage);
 	const double	value = get_i_value(s->act_node);
 
 	init_multiplier(head_a, head_b, s, stage);

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/18 10:19:00 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/18 12:31:49 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ typedef struct s_sort
 	double	global_sorted;
 	t_list	*act_node;
 	double	act_weight;
-	int		act_arr[8];
+	int		act_arr[8];//make smaller? rr and rrr not needed?
 	int		pre_arr[8];
+	int		best_path[8];
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
@@ -115,6 +116,8 @@ short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
 short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s, \
 		const short *arr);
+		
+int		path_combi(t_list **head_a, t_list **head_b, t_list *s);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
