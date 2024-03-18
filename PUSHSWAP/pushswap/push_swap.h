@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/17 09:18:50 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/18 10:19:00 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ typedef struct s_sort
 	double	global_sorted;
 	t_list	*act_node;
 	double	act_weight;
-	int		act_arr[6];
+	int		act_arr[8];
+	int		pre_arr[8];
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
@@ -81,6 +82,8 @@ enum	act_arr{
 	_rrb = 3,
 	_rr = 4,
 	_rrr = 5,
+	_pa = 6,
+	_pb = 7
 };
 
 // PUSH SWAP ORIGINAL
@@ -143,8 +146,11 @@ short	r_rotate(t_list **head);
 short	swap_both(t_list **head_a, t_list **head_b);
 short	rotate_both(t_list **head_a, t_list **head_b);
 short	r_rotate_both(t_list **head_a, t_list **head_b);
+
 short	do_action(t_list **head_a, t_list **head_b, short action);
 short	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
+short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
+short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
 
 void	wr_a(char *action);
 t_list	*find_annom(t_list **head);

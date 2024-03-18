@@ -1,32 +1,5 @@
 #include "push_swap.h"
 
-short	swap_both(t_list **head_a, t_list **head_b)
-{
-	if (swap(head_a) != ok)
-		return (err);
-	if (swap(head_b) != ok)
-		return (err);
-	return (ok);
-}
-
-short	rotate_both(t_list **head_a, t_list **head_b)
-{
-	if (rotate(head_a) != ok)
-		return (err);
-	if (rotate(head_b) != ok)
-		return (err);
-	return (ok);
-}
-
-short	r_rotate_both(t_list **head_a, t_list **head_b)
-{
-	if (r_rotate(head_a) != ok)
-		return (err);
-	if (r_rotate(head_b) != ok)
-		return (err);
-	return (ok);
-}
-
 short	do_action(t_list **head_a, t_list **head_b, short action)
 {
 	if (action == sa)
@@ -67,5 +40,30 @@ short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 			return (err);
 	}
 	va_end(actions);
+	return (ok);
+}
+
+short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
+{
+	while (iter-- > 0)
+	{
+		if (do_action(head_a, head_b, act) == err)
+			return (err);
+	}
+	return (ok);
+}
+
+short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	short		i;
+	const short	actions[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
+
+	i = 0;
+	while (i < 8)
+	{
+		if (repeat_act(head_a, head_b, s->pre_arr[i], actions[i]) != ok)
+			return (err);
+		i++;
+	}
 	return (ok);
 }
