@@ -1,12 +1,10 @@
 Fix:
 	The original main segfaults in push_swap!
-	It spams ra in weigh_sort!
+	WS takes too long with long strings!
+	Is sortedness usefull??
 
 LEFTOFF:
-	Weight algo! look inside notebook!
-		First and Third stage!
-			- Calculating steps for each node from b
-			- Checking for upper or lower half (for the possible double-steps)
+	Deciding woh im gonna do mark_algo...
 
 To do?
 	Change to const for safety

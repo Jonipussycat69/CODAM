@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/19 14:30:12 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/03/19 18:29:48 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdarg.h>
 # include <limits.h>
 
-# define WS_REMAIN 3
+# define WS_REMAIN 0
 # define WS_PB_INIT_WEIGHT 3000.0
 
 /*
@@ -58,8 +58,10 @@ typedef struct s_misc
 typedef struct s_sort
 {
 	int		total_inp;
-	double	val_mult;
-	double	act_mult;
+	double	val_pa_mult;
+	double	val_pb_mult;
+	double	act_pa_mult;
+	double	act_pb_mult;
 	double	sort_mult;
 	double	receive_mult;
 	double	sortedness_a;
@@ -98,10 +100,13 @@ void	update_variable_index(t_list **head_a, t_list **head_b);
 
 void	assign_mark(t_list **head);
 void	assign_side(t_list **head);
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, short st);
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round);
 
 short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
+short	strict_check_asc(t_list **head);
+short	strict_check_des(t_list **head);
+
 double	sortedness_asc(t_list **head);
 double	sortedness_des(t_list **head);
 double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage);

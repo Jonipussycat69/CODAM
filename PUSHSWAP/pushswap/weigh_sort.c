@@ -25,13 +25,13 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 	t_list	*the_node;
 
 	i = 0;
-	s->act_weight = WS_PB_INIT_WEIGHT;
-	update_variable_index(head_a, head_b);
+	s->act_weight = 0;
 	while (i < list_len(head_a))
 	{
 		s->act_node = n_li_node(head_a, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pb);
-		if (cur_weight < s->act_weight)
+		printf(">> cur_weight pb %d = %f\n", i, cur_weight);// TEST!
+		if (cur_weight < s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
@@ -55,13 +55,13 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 	t_list	*the_node;
 
 	i = 0;
-	s->act_weight = 0.0;
-	update_variable_index(head_a, head_b);
+	s->act_weight = 0;
 	while (i < list_len(head_b))
 	{
 		s->act_node = n_li_node(head_b, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pa);
-		if (cur_weight > s->act_weight)
+		printf(">> cur_weight pa %d = %f\n", i, cur_weight);// TEST!
+		if (cur_weight > s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
@@ -99,11 +99,13 @@ t_list	*ws_gl_path(t_list **head_a, t_list **head_b, t_sort *s)
 
 short	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 {
-	while (list_len(head_a) != WS_REMAIN)
+	while (list_len(head_a) != WS_REMAIN && strict_check_asc(head_a) != ok)
 	{
 		update_variable_index(head_a, head_b);
 		ws_pb_path(head_a, head_b, s);
 		do_act_arr(head_a, head_b, s);
+		print_values(head_a, 'a');// TEST!
+		print_values(head_b, 'b');// TEST!
 	}
 	return (ok);
 }
@@ -115,16 +117,23 @@ short	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 		update_variable_index(head_a, head_b);
 		ws_pa_path(head_a, head_b, s);
 		do_act_arr(head_a, head_b, s);
+		print_values(head_a, 'a');// TEST!
+		print_values(head_b, 'b');// TEST!
 	}
 	return (ok);
 }
 
 short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
 {
+	int	round;
+
+	round = 0;
 	while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
 	{
+		init_multiplier(head_a, head_b, s, round);
 		ws_pb_stage(head_a, head_b, s);
 		ws_pa_stage(head_a, head_b, s);
+		round++;
 		print_values(head_a, 'a');// TEST!
 		print_values(head_b, 'b');// TEST!
 	}

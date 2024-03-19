@@ -14,7 +14,7 @@ void	free_list(t_list **head)
 		free(tmp);
 		tmp = tmptmp;
 	}
-	*head = NULL;
+	head = NULL;
 	return ;
 }
 

@@ -20,9 +20,11 @@
 # define BLUE_BOLD_DIM_F "\033[1;2;34m"
 # define BLUE_BOLD_F "\033[1;34m"
 # define RED_DIM_F "\033[2;31m"
+# define GREEN_BOLD_F "\033[1;32m"
 # define GREEN_F "\033[32m"
 # define GREEN_DIM_F "\033[2;32m"
 # define CYAN_DIM_F "\033[2;36m"
+# define CYAN_BOLD_F "\033[1;36m"
 
 void	print_width_format(char *c, char *f)
 {
@@ -114,7 +116,10 @@ void	print_values(t_list **head, char stack)
 	t_list	*tmp;
 
 	tmp = *head;
-	print_width_format("-", BLUE_BOLD_F);
+	if (stack == 'a')
+		print_width_format("-", CYAN_BOLD_F);
+	else
+		print_width_format("-", BLUE_BOLD_F);
 	printf("\n< Stack: %c >\n", stack);
 	print_sortedness_asc(head);
 	print_sortedness_des(head);
@@ -133,7 +138,10 @@ void	print_values(t_list **head, char stack)
 		tmp = tmp->next;
 	}
 	printf("\n");
-	print_width_format("-", BLUE_BOLD_F);
+	if (stack == 'a')
+		print_width_format("-", CYAN_BOLD_F);
+	else
+		print_width_format("-", BLUE_BOLD_F);
 	printf("%s", RESET_F);
 	printf("\n");
 	return ;

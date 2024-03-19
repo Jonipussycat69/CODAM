@@ -42,15 +42,21 @@ void	init_sortedness(t_list **head_a, t_list **head_b, t_sort *s)
 	s->global_sorted = sortedness_gl(head_a, head_b, s, global);
 }
 
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, short st)
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round)
 {
 	const double	len_a = list_len(head_a);
 	const double	len_b = list_len(head_b);
-	const double	sort_a = sortedness_asc(head_a);
-	const double	sort_b = sortedness_des(head_b);
+	double			val_mult_round;
 
-	s->act_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
-	s->sort_mult = 1.0;
-	s->val_mult = 1.0;
-	s->receive_mult = 1.0;
+	s->act_pb_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
+	s->act_pa_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
+
+	val_mult_round = 1.0;
+	while (round-- > 0)
+		val_mult_round = val_mult_round * 1.01;
+	s->val_pb_mult = 2.0 * val_mult_round;
+	s->val_pa_mult = 2.0 * val_mult_round;
+
+	s->sort_mult = 0.0;// HIGHER = SLOWER!??
+	s->receive_mult = 0.0;
 }

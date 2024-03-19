@@ -72,26 +72,26 @@ int	pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
-	const double	value = get_i_value(s->act_node);
+	const double	value = get_i_value(s->act_node) + 1.0;
 	double			sortedness;
 	double			act;
 	double			act_weight;
 
 	path_init(head_a, head_b, s, stage);
-	init_multiplier(head_a, head_b, s, stage);
 	sortedness = precalc(head_a, head_b, s, stage);
 	if (s->r_actions == 0)
-		act = s->rr_actions + 1;
+		act = s->rr_actions + 1.0;
 	else
-		act = s->r_actions + 1;
+		act = s->r_actions + 1.0;
 	if (stage == s_pb)
 	{
-		act_weight = (value * s->val_mult) + (act * s->act_mult);
-		return (act_weight * ((1.0 / (sortedness / 100.0)) * s->sort_mult));
+		act_weight = (value * s->val_pb_mult) + ((act * s->act_pb_mult) / 2);
+		return (act_weight * ((1.0 / (1 + ((sortedness / 10000.0)) * s->sort_mult))));
 	}
 	else
 	{
-		act_weight = (value * s->val_mult) - (act * s->act_mult);
-		return (act_weight * ((sortedness / 100.0) * s->sort_mult));
+		act_weight = s->total_inp + ((value * s->val_pa_mult) - \
+		((act * s->act_pa_mult) / 2));
+		return (act_weight * (1 + ((sortedness / 10000.0)) * s->sort_mult));
 	}
 }

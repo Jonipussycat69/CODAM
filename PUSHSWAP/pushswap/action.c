@@ -1,7 +1,10 @@
 #include "push_swap.h"
 
+size_t	amount_of_act = 0;// TEST!
+
 short	do_action(t_list **head_a, t_list **head_b, short action)
 {
+	printf("total_actions = %zu\n", ++amount_of_act);// TEST!
 	if (action == sa)
 		return (wr_a("sa"), swap(head_a));
 	if (action == sb)
@@ -57,10 +60,10 @@ short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	short		i;
-	const short	actions[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
+	const short	actions[] = {ra, rb, rra, rrb, pa, pb};
 
 	i = 0;
-	while (i < 8)
+	while (i < 6)
 	{
 		if (repeat_action(head_a, head_b, s->act_arr[i], actions[i]) != ok)
 			return (err);
