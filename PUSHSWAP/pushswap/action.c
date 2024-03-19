@@ -72,6 +72,7 @@ short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 short	double_act(t_list **head_a, t_list **head_b, short act)
 {
 	stack_indexer(head_a);
+	stack_indexer(head_b);
 	if (act == ra)
 	{
 		if (get_si(*head_b) < get_si(last_node(head_b)))

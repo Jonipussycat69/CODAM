@@ -25,11 +25,12 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 	t_list	*the_node;
 
 	i = 0;
-	s->act_weight = 0.0;
+	s->act_weight = WS_PB_INIT_WEIGHT;
+	update_variable_index(head_a, head_b);
 	while (i < list_len(head_a))
 	{
 		s->act_node = n_li_node(head_a, i);
-		cur_weight = path_weigh(head_a, head_b, s, _pb);
+		cur_weight = path_weigh(head_a, head_b, s, s_pb);
 		if (cur_weight < s->act_weight)
 		{
 			s->act_weight = cur_weight;
@@ -55,10 +56,11 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 
 	i = 0;
 	s->act_weight = 0.0;
+	update_variable_index(head_a, head_b);
 	while (i < list_len(head_b))
 	{
 		s->act_node = n_li_node(head_b, i);
-		cur_weight = path_weigh(head_a, head_b, s, _pa);
+		cur_weight = path_weigh(head_a, head_b, s, s_pa);
 		if (cur_weight > s->act_weight)
 		{
 			s->act_weight = cur_weight;

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/18 20:34:02 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/19 14:30:12 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h>
 
 # define WS_REMAIN 3
+# define WS_PB_INIT_WEIGHT 3000.0
 
 /*
 	value = original inputted value

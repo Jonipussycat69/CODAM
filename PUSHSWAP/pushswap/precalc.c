@@ -75,7 +75,8 @@ double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	exec_pre_rr(head_a, head_b, s);
 	sortedness_rr = sortedness_gl(head_a, head_b, s, stage);
 	revert_pre_rr(head_a, head_b, s);
-	if (sortedness_r > sortedness_rr)
+	if ((sortedness_r / 100) * (s->r_actions + 1) > \
+	(sortedness_rr / 100) * (s->rr_actions + 1))
 	{
 		s->rr_actions = 0;
 		return (sortedness_r);

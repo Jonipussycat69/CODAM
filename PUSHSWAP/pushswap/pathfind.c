@@ -81,9 +81,9 @@ double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	init_multiplier(head_a, head_b, s, stage);
 	sortedness = precalc(head_a, head_b, s, stage);
 	if (s->r_actions == 0)
-		act = s->rr_actions;
+		act = s->rr_actions + 1;
 	else
-		act = s->r_actions;
+		act = s->r_actions + 1;
 	if (stage == s_pb)
 	{
 		act_weight = (value * s->val_mult) + (act * s->act_mult);
