@@ -35,13 +35,6 @@ void	assign_side(t_list **head)
 	return ;
 }
 
-void	init_sortedness(t_list **head_a, t_list **head_b, t_sort *s)
-{
-	s->sortedness_a = sortedness_asc(head_a);
-	s->sortedness_b = sortedness_des(head_b);
-	s->global_sorted = sortedness_gl(head_a, head_b, s, global);
-}
-
 void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round)
 {
 	const double	len_a = list_len(head_a);

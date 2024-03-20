@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/20 09:19:51 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/20 20:22:50 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include <stdarg.h>
 # include <limits.h>
 
-# define WS_REMAIN 0
+# define WS_REMAIN 3
 # define WS_PB_INIT_WEIGHT 3000.0
+
+# define DIMMED_F "\033[2;37m"// TEST!
+# define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
+# define RESET_F "\033[0m"// TEST!
 
 /*
 	value = original inputted value
@@ -64,14 +68,11 @@ typedef struct s_sort
 	double	act_pb_mult;
 	double	sort_mult;
 	double	receive_mult;
-	double	sortedness_a;
-	double	sortedness_b;
-	double	global_sorted;
 	t_list	*act_node;
 	double	act_weight;
 	int		r_actions;
 	int		rr_actions;
-	int		act_arr[6];
+	int		act_arr[8];
 }	t_sort;
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
@@ -85,7 +86,9 @@ enum	act_arr{
 	_rra = 2,
 	_rrb = 3,
 	_pa = 4,
-	_pb = 5
+	_pb = 5,
+	_rr = 6,
+	_rrr = 7
 };
 
 // PUSH SWAP ORIGINAL
@@ -115,10 +118,19 @@ void	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
 void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s);
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage);
+void	act_arr_reset(t_sort *s);
+void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 void	pre_action(t_list **head_a, t_list **head_b, short action);
 void	pre_actions(t_list **head_a, t_list **head_b, int amount, ...);
 void	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act);
+
+void	mark_sort_pa(t_list **head_a, t_list **head_b, t_sort *s);
+void	ms_rep_action(t_list **head_a, t_list **head_b, int iter, short act);
+void	ms_do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
+void	init_shortest(t_sort *s, int *tmp, short *act);
+void	init_shortest_prepare(t_sort *s, short *act);
+void	shortest_path(t_sort *s);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
@@ -133,6 +145,9 @@ int		get_mark(t_list *node);
 int		get_side(t_list *node);
 
 int		list_len(t_list **head);
+void	set_null(int *arr, int size);
+void	copy_arr(int *dest, int *source, int size);
+void	wr_a(char *action);
 
 t_list	*last_node(t_list **head);
 
@@ -156,9 +171,6 @@ void	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
 void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
 short	double_act(t_list **head_a, t_list **head_b, short act);
-
-void	wr_a(char *action);
-t_list	*find_annom(t_list **head);
 
 size_t	ps_strlen(char *str);
 short	ps_isdigit(int c);

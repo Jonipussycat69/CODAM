@@ -7,24 +7,6 @@ void	wr_a(char *action)
 	return ;
 }
 
-t_list	*find_annom(t_list **head)
-{
-	t_list	*tmp;
-	int		prev_index;
-	
-	if (!*head)
-		return (NULL);
-	tmp = *head;
-	while (tmp != NULL)
-	{
-		prev_index = tmp->i_value;
-		tmp = tmp->next;
-		if (tmp->i_value < prev_index)
-			return (tmp);
-	}
-	return (NULL);
-}
-
 int	list_len(t_list **head)
 {
 	t_list	*tmp;
@@ -37,4 +19,28 @@ int	list_len(t_list **head)
 	while (tmp != NULL && ++i)
 		tmp = tmp->next;
 	return (i);
+}
+
+void	set_null(int *arr, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		arr[i] = 0;
+		i++;
+	}
+}
+
+void	copy_arr(int *dest, int *source, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		dest[i] = source[i];
+		i++;
+	}
 }

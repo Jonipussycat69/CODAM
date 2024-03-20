@@ -4,7 +4,7 @@ Fix:
 	Is sortedness usefull??
 
 LEFTOFF:
-	Deciding woh im gonna do mark_algo...
+	Returns inf then segfaults in mark_sort!
 
 To do?
 	Change to const for safety

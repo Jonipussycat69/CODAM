@@ -1,9 +1,5 @@
 #include "push_swap.h"
 
-# define DIMMED_F "\033[2;37m"// TEST!
-# define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
-# define RESET_F "\033[0m"// TEST!
-
 void	init_act_arr(t_sort *s, int r_act, int rr_act, short stage)
 {
 	if (stage == s_pb)
@@ -129,19 +125,28 @@ short	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 
 void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
 {
-	int	round;
-
-	round = 0;
-	while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
-	{
-		init_multiplier(head_a, head_b, s, round);
-		if (s->total_inp > 3);
-			ws_pb_stage(head_a, head_b, s);
-		hardsort(head_a, head_b, st_a);
-		ws_pa_stage(head_a, head_b, s);
-		round++;
-		print_values(head_a, 'a');// TEST!
-		print_values(head_b, 'b');// TEST!
-	}
+	init_multiplier(head_a, head_b, s, 0);
+	ws_pb_stage(head_a, head_b, s);
+	// print_values(head_a, 'a');// TEST!
+	// print_values(head_b, 'b');// TEST!
 	return ;
 }
+
+// void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
+// {
+// 	int	round;
+
+// 	round = 0;
+// 	while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
+// 	{
+// 		init_multiplier(head_a, head_b, s, round);
+// 		if (s->total_inp > 3)
+// 			ws_pb_stage(head_a, head_b, s);
+// 		hardsort(head_a, head_b, st_a);
+// 		ws_pa_stage(head_a, head_b, s);
+// 		round++;
+// 		print_values(head_a, 'a');// TEST!
+// 		print_values(head_b, 'b');// TEST!
+// 	}
+// 	return ;
+// }

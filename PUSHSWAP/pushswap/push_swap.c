@@ -42,6 +42,21 @@ static char	*input_to_string(int argc, char **argv, t_misc *m)
 	return (str);
 }
 
+static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
+	{
+		weigh_sort(head_a, head_b, s);
+		hardsort(head_a, head_b, st_a);
+		printf("len b = %d\n", list_len(head_b));// TEST!
+		mark_sort_pa(head_a, head_b, s);
+	}
+	else if (check_sort_asc(head_a) != ok)
+		hardsort(head_a, head_b, st_a);
+	print_values(head_a, 'a');// TEST!
+	print_values(head_b, 'b');// TEST!
+}
+
 static short	ft_pushswap(t_list **head_a, t_sort *s)
 {
 	t_list	*first;
@@ -51,7 +66,7 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return (err);
-	weigh_sort(head_a, head_b, s);
+	sorting(head_a, head_b, s);
 	free_list(head_a);
 	free_list(head_b);
 	return (ok);
