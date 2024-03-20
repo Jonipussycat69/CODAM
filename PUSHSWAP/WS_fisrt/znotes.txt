@@ -1,0 +1,14 @@
+Fix:
+	The original main segfaults in push_swap!
+	WS takes too long with long strings!
+	Is sortedness usefull??
+
+LEFTOFF:
+	Deciding woh im gonna do mark_algo...
+
+To do?
+	Change to const for safety
+	Add headers
+	Clean up and organize files
+	Remove 'ok' and 'err' checks where there is no malloc!
+	Rewrite MAKEFILE

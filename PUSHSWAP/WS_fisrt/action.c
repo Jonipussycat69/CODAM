@@ -1,13 +1,10 @@
 #include "push_swap.h"
 
-# define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
-# define RESET_F "\033[0m"// TEST!
-
 size_t	amount_of_act = 0;// TEST!
 
-void	do_action(t_list **head_a, t_list **head_b, short action)
+short	do_action(t_list **head_a, t_list **head_b, short action)
 {
-	printf("%stotal_actions = %zu%s\n", DIMMED_BOLD_F, ++amount_of_act, RESET_F);// TEST!
+	printf("total_actions = %zu\n", ++amount_of_act);// TEST!
 	if (action == sa)
 		return (wr_a("sa"), swap(head_a));
 	if (action == sb)
@@ -30,10 +27,10 @@ void	do_action(t_list **head_a, t_list **head_b, short action)
 		return (wr_a("rr"), rotate_both(head_a, head_b));
 	if (action == rrr)
 		return (wr_a("rrr"), r_rotate_both(head_a, head_b));
-	return ;
+	return (err);
 }
 
-void	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
+short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 {
 	va_list	actions;
 	int		iteration;
@@ -42,23 +39,25 @@ void	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		do_action(head_a, head_b, double_act(head_a, head_b, \
-		va_arg(actions, int)));
+		if (do_action(head_a, head_b, double_act(head_a, head_b, \
+		va_arg(actions, int))) == err)
+			return (err);
 	}
 	va_end(actions);
-	return ;
+	return (ok);
 }
 
-void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
+short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		do_action(head_a, head_b, double_act(head_a, head_b, act));
+		if (do_action(head_a, head_b, double_act(head_a, head_b, act)) == err)
+			return (err);
 	}
-	return ;
+	return (ok);
 }
 
-void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
+short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	short		i;
 	const short	actions[] = {ra, rb, rra, rrb, pa, pb};
@@ -66,10 +65,11 @@ void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 	i = 0;
 	while (i < 6)
 	{
-		repeat_action(head_a, head_b, s->act_arr[i], actions[i]);
+		if (repeat_action(head_a, head_b, s->act_arr[i], actions[i]) != ok)
+			return (err);
 		i++;
 	}
-	return ;
+	return (ok);
 }
 
 short	double_act(t_list **head_a, t_list **head_b, short act)

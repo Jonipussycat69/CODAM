@@ -1,28 +1,28 @@
 #include "push_swap.h"
 
 // Swap, first and second elemnt swapped.
-void	swap(t_list **head)
+short	swap(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
 
 	if (!*head || list_len(head) < 2)
-		return ;
+		return (err);
 	tmp = *head;
 	tmptmp = tmp->next;
 	tmp->next = tmptmp->next;
 	tmptmp->next = tmp;
 	*head = tmptmp;
-	return ;
+	return (ok);
 }
 
 // Push, first element of other stack pushed to chosen stack.
-void	push(t_list **head_a, t_list **head_b, short stack)
+short	push(t_list **head_a, t_list **head_b, short stack)
 {
 	t_list	*tmp;
 
 	if ((!*head_a && stack == pb) || (!*head_b && stack == pa))
-		return ;
+		return (err);
 	if (stack == pa)
 	{
 		tmp = *head_b;
@@ -37,17 +37,17 @@ void	push(t_list **head_a, t_list **head_b, short stack)
 		tmp->next = *head_b;
 		*head_b = tmp;
 	}
-	return ;
+	return (ok);
 }
 
 // Rotate, firts becomes last.
-void	rotate(t_list **head)
+short	rotate(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
 
 	if (!*head || list_len(head) < 2)
-		return ;
+		return (err);
 	if (list_len(head) == 2)
 		return (swap(head));
 	tmp = *head;
@@ -55,17 +55,17 @@ void	rotate(t_list **head)
 	tmp->next = NULL;
 	tmptmp = last_node(head);
 	tmptmp->next = tmp;
-	return ;
+	return (ok);
 }
 
 // Reverse rotate, last becomes first.
-void	r_rotate(t_list **head)
+short	r_rotate(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
 
 	if (!*head || list_len(head) < 2)
-		return ;
+		return (err);
 	if (list_len(head) == 2)
 		return (swap(head));
 	tmp = *head;
@@ -75,5 +75,5 @@ void	r_rotate(t_list **head)
 	tmptmp->next = *head;
 	tmp->next = NULL;
 	*head = tmptmp;
-	return ;
+	return (ok);
 }

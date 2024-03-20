@@ -1,28 +1,22 @@
 #include "push_swap.h"
 
-short	swap_both(t_list **head_a, t_list **head_b)
+void	swap_both(t_list **head_a, t_list **head_b)
 {
-	if (swap(head_a) != ok)
-		return (err);
-	if (swap(head_b) != ok)
-		return (err);
-	return (ok);
+	swap(head_a);
+	swap(head_b);
+	return ;
 }
 
-short	rotate_both(t_list **head_a, t_list **head_b)
+void	rotate_both(t_list **head_a, t_list **head_b)
 {
-	if (rotate(head_a) != ok)
-		return (err);
-	if (rotate(head_b) != ok)
-		return (err);
-	return (ok);
+	rotate(head_a);
+	rotate(head_b);
+	return ;
 }
 
-short	r_rotate_both(t_list **head_a, t_list **head_b)
+void	r_rotate_both(t_list **head_a, t_list **head_b)
 {
-	if (r_rotate(head_a) != ok)
-		return (err);
-	if (r_rotate(head_b) != ok)
-		return (err);
-	return (ok);
+	r_rotate(head_a);
+	r_rotate(head_b);
+	return ;
 }

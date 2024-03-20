@@ -21,7 +21,7 @@ static short	hs_code(t_list **head_used)
 }
 
 // Chooses action based on hs_code return
-static void	hs_action(t_list **head_a, t_list **head_b, short code, short stack)
+static short	hs_action(t_list **head_a, t_list **head_b, short code, short stack)
 {
 	const short	act[] = {sa, sb, ra, rb, rra, rrb};
 
@@ -35,17 +35,17 @@ static void	hs_action(t_list **head_a, t_list **head_b, short code, short stack)
 		return (do_action(head_a, head_b, act[0 + stack]));
 	if (code == 5)
 		return (do_action(head_a, head_b, act[2 + stack]));
-	return ;
+	return (err);
 }
 
 // Hard-sorting for 2 or 3 value list
-void	hardsort(t_list **head_used, t_list **head_other, short used_stack)
+short	hardsort(t_list **head_used, t_list **head_other, short used_stack)
 {
 	short	code;
 
 	if (list_len(head_used) > 3 || list_len(head_used) < 2 || \
 	check_sort_asc(head_used) == ok)
-		return ;
+		return (ok);
 	if (list_len(head_used) == 2 && used_stack == st_a)
 		return (hs_action(head_used, head_other, 4, used_stack));
 	if (list_len(head_used) == 2 && used_stack == st_b)
@@ -55,11 +55,11 @@ void	hardsort(t_list **head_used, t_list **head_other, short used_stack)
 		update_variable_index(head_used, head_other);
 		code = hs_code(head_used);
 		if (code == err)
-			return ;
+			return (err);
 		if (used_stack == st_a)
 			hs_action(head_used, head_other, code, used_stack);
 		else
 			hs_action(head_other, head_used, code, used_stack);
 	}
-	return ;
+	return (ok);
 }

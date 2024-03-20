@@ -1,9 +1,5 @@
 #include "push_swap.h"
 
-# define DIMMED_F "\033[2;37m"// TEST!
-# define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
-# define RESET_F "\033[0m"// TEST!
-
 void	init_act_arr(t_sort *s, int r_act, int rr_act, short stage)
 {
 	if (stage == s_pb)
@@ -34,7 +30,7 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		s->act_node = n_li_node(head_a, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pb);
-		printf("%s>> weight pb %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
+		printf(">> cur_weight pb %d = %f\n", i, cur_weight);// TEST!
 		if (cur_weight < s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
@@ -64,7 +60,7 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		s->act_node = n_li_node(head_b, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pa);
-		printf("%s>> weight pa %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
+		printf(">> cur_weight pa %d = %f\n", i, cur_weight);// TEST!
 		if (cur_weight > s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
@@ -108,8 +104,8 @@ short	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 		update_variable_index(head_a, head_b);
 		ws_pb_path(head_a, head_b, s);
 		do_act_arr(head_a, head_b, s);
-		// print_values(head_a, 'a');// TEST!
-		// print_values(head_b, 'b');// TEST!
+		print_values(head_a, 'a');// TEST!
+		print_values(head_b, 'b');// TEST!
 	}
 	return (ok);
 }
@@ -121,13 +117,13 @@ short	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 		update_variable_index(head_a, head_b);
 		ws_pa_path(head_a, head_b, s);
 		do_act_arr(head_a, head_b, s);
-		// print_values(head_a, 'a');// TEST!
-		// print_values(head_b, 'b');// TEST!
+		print_values(head_a, 'a');// TEST!
+		print_values(head_b, 'b');// TEST!
 	}
 	return (ok);
 }
 
-void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
+short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	int	round;
 
@@ -135,13 +131,11 @@ void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
 	while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
 	{
 		init_multiplier(head_a, head_b, s, round);
-		if (s->total_inp > 3);
-			ws_pb_stage(head_a, head_b, s);
-		hardsort(head_a, head_b, st_a);
+		ws_pb_stage(head_a, head_b, s);
 		ws_pa_stage(head_a, head_b, s);
 		round++;
 		print_values(head_a, 'a');// TEST!
 		print_values(head_b, 'b');// TEST!
 	}
-	return ;
+	return (ok);
 }

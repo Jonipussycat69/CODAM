@@ -75,3 +75,16 @@ double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 	giver = sortedness_des(head_b);
 	return ((receiver + giver) / 2.0);
 }
+
+short	act_logic(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	// Maybe use fsl logic here?
+	return (ok);
+}
+
+// Chooses most efficient node to push to a out of the ones connected
+// Size + amount of act, lower = better
+short	connect_pa(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	return (ok);
+}

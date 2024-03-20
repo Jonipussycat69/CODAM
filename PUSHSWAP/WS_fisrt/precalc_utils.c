@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 // Utils for precalc, eg: a pre_actions function
-void	pre_action(t_list **head_a, t_list **head_b, short action)
+short	pre_action(t_list **head_a, t_list **head_b, short action)
 {
 	if (action == sa)
 		return (swap(head_a));
@@ -25,10 +25,10 @@ void	pre_action(t_list **head_a, t_list **head_b, short action)
 		return (rotate_both(head_a, head_b));
 	if (action == rrr)
 		return (r_rotate_both(head_a, head_b));
-	return ;
+	return (err);
 }
 
-void	pre_actions(t_list **head_a, t_list **head_b, int amount, ...)
+short	pre_actions(t_list **head_a, t_list **head_b, int amount, ...)
 {
 	va_list	actions;
 	int		iteration;
@@ -37,18 +37,20 @@ void	pre_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		pre_action(head_a, head_b, double_act(head_a, head_b, \
-		va_arg(actions, int)));
+		if (pre_action(head_a, head_b, double_act(head_a, head_b, \
+		va_arg(actions, int))) == err)
+			return (err);
 	}
 	va_end(actions);
-	return ;
+	return (ok);
 }
 
-void	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act)
+short	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		pre_action(head_a, head_b, double_act(head_a, head_b, act));
+		if (pre_action(head_a, head_b, double_act(head_a, head_b, act)) == err)
+			return (err);
 	}
-	return ;
+	return (ok);
 }

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/20 09:19:51 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/19 18:29:48 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,19 @@ double	sortedness_asc(t_list **head);
 double	sortedness_des(t_list **head);
 double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
-void	hardsort(t_list **head_used, t_list **head_other, short used_stack);
+short	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
-void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s);
+short	fsl_algo(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
+short	fsl_sort(t_list **head_a, t_list **head_b, t_sort *s, \
+		const short *arr);
+
+short	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s);
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage);
-void	pre_action(t_list **head_a, t_list **head_b, short action);
-void	pre_actions(t_list **head_a, t_list **head_b, int amount, ...);
-void	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act);
+short	pre_action(t_list **head_a, t_list **head_b, short action);
+short	pre_actions(t_list **head_a, t_list **head_b, int amount, ...);
+short	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
@@ -142,19 +147,19 @@ t_list	*n_li_node(t_list **head, int n);
 t_list	*n_iv_node(t_list **head, int n);
 short	parser(char *input, t_list **head);
 
-void	swap(t_list **head);
-void	push(t_list **head_a, t_list **head_b, short stack);
-void	rotate(t_list **head);
-void	r_rotate(t_list **head);
+short	swap(t_list **head);
+short	push(t_list **head_a, t_list **head_b, short stack);
+short	rotate(t_list **head);
+short	r_rotate(t_list **head);
 
-void	swap_both(t_list **head_a, t_list **head_b);
-void	rotate_both(t_list **head_a, t_list **head_b);
-void	r_rotate_both(t_list **head_a, t_list **head_b);
+short	swap_both(t_list **head_a, t_list **head_b);
+short	rotate_both(t_list **head_a, t_list **head_b);
+short	r_rotate_both(t_list **head_a, t_list **head_b);
 
-void	do_action(t_list **head_a, t_list **head_b, short action);
-void	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
-void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
-void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
+short	do_action(t_list **head_a, t_list **head_b, short action);
+short	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
+short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
+short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
 short	double_act(t_list **head_a, t_list **head_b, short act);
 
 void	wr_a(char *action);
