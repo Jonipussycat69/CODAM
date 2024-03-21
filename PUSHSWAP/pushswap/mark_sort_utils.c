@@ -25,14 +25,15 @@ void	ms_do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 
 void	init_shortest(t_sort *s, int *tmp, short *act)
 {
-	const int	one = s->act_arr[act[0]];
-	const int	two = s->act_arr[act[1]];
+	const int	act_one = s->act_arr[act[0]];
+	int			act_two;
 
-	if (tmp[_rr] || tmp[_rrr])
+	if (act[1] == -1)
 		return (copy_arr(s->act_arr, tmp, 8));
+	act_two = s->act_arr[act[1]];
 	act_arr_reset(s);
-	s->act_arr[act[0]] = one;
-	s->act_arr[act[1]] = two;
+	s->act_arr[act[0]] = act_one;
+	s->act_arr[act[1]] = act_two;
 }
 
 void	init_shortest_prepare(t_sort *s, short *act)
@@ -43,7 +44,7 @@ void	init_shortest_prepare(t_sort *s, short *act)
 	if (act[0] == _rr)
 	{
 		tmp[_rr] = s->act_arr[_ra];
-		tmp[_ra] = s->act_arr[_rb] - s->act_arr[_ra];
+		tmp[_rb] = s->act_arr[_rb] - s->act_arr[_ra];
 		if (s->act_arr[_ra] > s->act_arr[_rb])
 		{
 			tmp[_rr] = s->act_arr[_rb];
@@ -53,7 +54,7 @@ void	init_shortest_prepare(t_sort *s, short *act)
 	else if (act[0] == _rrr)
 	{
 		tmp[_rr] = s->act_arr[_ra];
-		tmp[_ra] = s->act_arr[_rb] - s->act_arr[_ra];
+		tmp[_rb] = s->act_arr[_rb] - s->act_arr[_ra];
 		if (s->act_arr[_ra] > s->act_arr[_rb])
 		{
 			tmp[_rr] = s->act_arr[_rb];

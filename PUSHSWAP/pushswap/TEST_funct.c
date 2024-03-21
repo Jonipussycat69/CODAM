@@ -146,3 +146,10 @@ void	print_values(t_list **head, char stack)
 	printf("\n");
 	return ;
 }
+
+void	print_act_arr(t_sort *s)
+{
+	printf("~> act_arr = [%d, %d, %d, %d, %d, %d, %d, %d]\n", s->act_arr[0], \
+	s->act_arr[1], s->act_arr[2], s->act_arr[3], s->act_arr[4], s->act_arr[5], \
+	s->act_arr[6], s->act_arr[7]);
+}

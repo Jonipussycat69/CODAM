@@ -2,14 +2,18 @@
 
 void	assign_mark(t_list **head)
 {
-	t_list	*tmp;
+	t_list		*tmp;
+	const int	max = list_len(head);
 
 	if (!*head)
 		return ;
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		tmp->mark = tmp->i_value - 1;
+		if (tmp->i_value + 1 == max)
+			tmp->mark = biggest;
+		else
+			tmp->mark = tmp->i_value + 1;
 		tmp = tmp->next;
 	}
 	return ;
@@ -47,8 +51,8 @@ void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round)
 	val_mult_round = 1.0;
 	while (round-- > 0)
 		val_mult_round = val_mult_round * 1.01;
-	s->val_pb_mult = 2.0 * val_mult_round;
-	s->val_pa_mult = 2.0 * val_mult_round;
+	s->val_pb_mult = 1.0 * val_mult_round;
+	s->val_pa_mult = 1.0 * val_mult_round;
 
 	s->sort_mult = 0.0;// HIGHER = SLOWER!??
 	s->receive_mult = 0.0;

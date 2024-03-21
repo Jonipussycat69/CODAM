@@ -23,9 +23,9 @@
 
 static double	pathmark_weight(t_sort *s)
 {
-	const int	value = s->act_node->i_value;
-	int			actions;
-	int			i;
+	const double	value = s->act_node->i_value;
+	double			actions;
+	int				i;
 
 	i = 0;
 	actions = 0;
@@ -45,7 +45,7 @@ static double	pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 	const int	act_ra = get_li(n_iv_node(head_a, s->act_node->mark));
 	const int	act_rra = list_len(head_a) - act_ra;
 
-	if (act_rb == err)
+	if (act_ra == err)
 		return (err);
 	act_arr_reset(s);
 	s->act_arr[_rb] = act_rb;
@@ -62,6 +62,7 @@ static double	pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 		s->act_arr[_rrr] = act_rra;
 	shortest_path(s);
 	s->act_arr[_pa] = 1;
+	print_act_arr(s);// TEST!
 	return (pathmark_weight(s));
 }
 
@@ -78,7 +79,7 @@ static void	choose_pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		s->act_node = n_li_node(head_b, i);
 		cur_weight = pathmark_pa(head_a, head_b, s);
-		if (cur_weight >= 0 && (cur_weight < s->act_weight || i == 0))
+		if (cur_weight > 0 && (cur_weight < s->act_weight || i == 0))
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
@@ -87,6 +88,7 @@ static void	choose_pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 		}
 		i++;
 	}
+	print_act_arr(s);// TEST!
 	return (do_act_arr(head_a, head_b, s));
 }
 
@@ -96,6 +98,9 @@ void	mark_sort_pa(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	while (list_len(head_b) > 0)
 	{
+		update_variable_index(head_a, head_b);
 		choose_pathmark_pa(head_a, head_b, s);
+		// print_values(head_a, 'a');// TEST!
+		// print_values(head_b, 'b');// TEST!
 	}
 }

@@ -30,7 +30,7 @@ t_list	*ws_pb_path(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		s->act_node = n_li_node(head_a, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pb);
-		printf("%s>> weight pb %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
+		// printf("%s>> weight pb %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
 		if (cur_weight < s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
@@ -60,7 +60,7 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 	{
 		s->act_node = n_li_node(head_b, i);
 		cur_weight = path_weigh(head_a, head_b, s, s_pa);
-		printf("%s>> weight pa %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
+		// printf("%s>> weight pa %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
 		if (cur_weight > s->act_weight || i == 0)
 		{
 			s->act_weight = cur_weight;
