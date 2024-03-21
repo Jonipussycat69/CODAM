@@ -12,10 +12,10 @@ void	ms_rep_action(t_list **head_a, t_list **head_b, int iter, short act)
 void	ms_do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	short		i;
-	const short	actions[] = {ra, rb, rra, rrb, pa, pb, rr, rrr};
+	const short	actions[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
 
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
 		ms_rep_action(head_a, head_b, s->act_arr[i], actions[i]);
 		i++;

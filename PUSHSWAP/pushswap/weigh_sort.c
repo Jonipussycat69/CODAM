@@ -74,29 +74,6 @@ t_list	*ws_pa_path(t_list **head_a, t_list **head_b, t_sort *s)
 	return (the_node);
 }
 
-// Chooses most efficient node globally
-t_list	*ws_gl_path(t_list **head_a, t_list **head_b, t_sort *s)
-{
-	double	res;
-	double	pb_weight;
-	double	pa_weight;
-	t_list	*pb_node;
-	t_list	*pa_node;
-
-	pb_node = ws_pb_path(head_a, head_b, s);
-	pb_weight = s->act_weight;
-	pa_node = ws_pa_path(head_a, head_b, s);
-	pa_weight = s->act_weight;
-
-	// Function for converting the weights so they can be compared
-
-	res = pb_weight - pa_weight;
-	if (res > 0)
-		return (pb_node);
-	else
-		return (pa_node);
-}
-
 void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	while (list_len(head_a) != 3 && strict_check_asc(head_a) != ok)

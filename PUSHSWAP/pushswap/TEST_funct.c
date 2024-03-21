@@ -123,15 +123,15 @@ void	print_values(t_list **head, char stack)
 	printf("\n< Stack: %c >\n", stack);
 	print_sortedness_asc(head);
 	print_sortedness_des(head);
-	printf("Values:\n");
-	while (tmp != NULL)
-	{
-		printf("%d ", tmp->value);
-		tmp = tmp->next;
-	}
-	printf("\n\n");
-	tmp = *head;
-	printf("Index:\n");
+	// printf("Values:\n");
+	// while (tmp != NULL)
+	// {
+	// 	printf("%d ", tmp->value);
+	// 	tmp = tmp->next;
+	// }
+	// printf("\n\n");
+	// tmp = *head;
+	printf("Index_value:\n");
 	while (tmp != NULL)
 	{
 		printf("%d ", tmp->i_value);

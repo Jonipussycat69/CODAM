@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/21 18:24:13 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/21 21:40:20 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ enum	act_arr{
 	_rb = 1,
 	_rra = 2,
 	_rrb = 3,
-	_pa = 4,
-	_pb = 5,
-	_rr = 6,
-	_rrr = 7
+	_rr = 4,
+	_rrr = 5,
+	_pa = 6,
+	_pb = 7,
 };
 
 // PUSH SWAP ORIGINAL
@@ -105,7 +105,7 @@ void	update_variable_index(t_list **head_a, t_list **head_b);
 
 void	assign_mark(t_list **head);
 void	assign_side(t_list **head);
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s);
+void	init_multiplier(t_list **head_a, t_sort *s);
 
 short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
@@ -122,10 +122,6 @@ void	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s);
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 void	act_arr_reset(t_sort *s);
 void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage);
-double	precalc(t_list **head_a, t_list **head_b, t_sort *s, short stage);
-void	pre_action(t_list **head_a, t_list **head_b, short action);
-void	pre_actions(t_list **head_a, t_list **head_b, int amount, ...);
-void	repeat_pre_act(t_list **head_a, t_list **head_b, int iter, short act);
 
 void	mark_sort_pa(t_list **head_a, t_list **head_b, t_sort *s);
 void	ms_rep_action(t_list **head_a, t_list **head_b, int iter, short act);

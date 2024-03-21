@@ -39,15 +39,14 @@ void	assign_side(t_list **head)
 	return ;
 }
 
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s)
+void	init_multiplier(t_list **head_a, t_sort *s)
 {
 	const double	len_a = list_len(head_a);
-	const double	len_b = list_len(head_b);
 	const double	sort = sortedness_asc(head_a);
 
-	s->act_pb_mult = sort;
-	s->act_pa_mult = 0.5;
+	s->act_pb_mult = 0.9;
+	s->val_pb_mult = 1;
 
-	s->val_pb_mult = 1.0;
-	s->val_pa_mult = 1.0;
+	s->act_pa_mult = 1;
+	s->val_pa_mult = 1;
 }

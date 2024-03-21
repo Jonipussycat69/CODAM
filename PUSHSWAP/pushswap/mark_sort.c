@@ -1,26 +1,5 @@
 #include "push_swap.h"
 
-// void	shortest_path(t_sort *s)
-// {
-// 	if (s->act_arr[_rb] <= s->act_arr[_rrb] && \
-// 	s->act_arr[_ra] <= s->act_arr[_rra])
-// 	{
-// 		if (s->act_arr[_rb] > s->act_arr[_ra])
-// 			s->act_arr[_rr] = s->act_arr[_ra]; 
-// 		else
-// 			s->act_arr[_rr] = s->act_arr[_rb];
-// 	}
-// 	else if (s->act_arr[_rb] >= s->act_arr[_rrb] && \
-// 	s->act_arr[_ra] >= s->act_arr[_rra])
-// 	{
-// 		if (s->act_arr[_rrb] > s->act_arr[_rra])
-// 			s->act_arr[_rrr] = s->act_arr[_rra];
-// 		else
-// 			s->act_arr[_rrr] = s->act_arr[_rrb];
-// 	}
-// 	init_shortest(s);
-// }
-
 static double	pathmark_weight(t_sort *s)
 {
 	const double	value = s->act_node->i_value;
@@ -36,6 +15,28 @@ static double	pathmark_weight(t_sort *s)
 	}
 	return ((double)actions + (1 / \
 	(((value + 1) / (s->total_inp + 1)) * 100.0)));
+}
+
+static void	do_mark_sort(t_list **head_a, t_list **head_b, t_sort *s, int mark)
+{
+	ms_do_act_arr(head_a, head_b, s);
+	if (mark == biggest)
+		do_action(head_a, head_b, ra);
+	return ;
+}
+
+static double	pathmark_big(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	const int	act_rb = s->act_node->list_index;
+	const int	act_rrb = list_len(head_b) - act_rb;
+
+	act_arr_reset(s);
+	if (act_rb < act_rrb)
+		s->act_arr[_rb] = act_rb;
+	else
+		s->act_arr[_rrb] = act_rrb;
+	s->act_arr[_pa] = 1;
+	return (pathmark_weight(s) + 1);
 }
 
 // Finds best path to get the act_node above the mark - pa stage
@@ -74,12 +75,15 @@ static void	choose_pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 	t_list	*the_node;
 
 	i = 0;
-	s->act_weight = 0;
+	s->act_weight = s->total_inp * 2;
 	while (i < list_len(head_b))
 	{
 		s->act_node = n_li_node(head_b, i);
-		cur_weight = pathmark_pa(head_a, head_b, s);
-		if (cur_weight > 0 && (cur_weight < s->act_weight || i == 0))
+		if (s->act_node->mark == biggest)
+			cur_weight = pathmark_big(head_a, head_b, s);
+		else
+			cur_weight = pathmark_pa(head_a, head_b, s);
+		if (cur_weight > 0 && cur_weight < s->act_weight)
 		{
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
@@ -88,7 +92,7 @@ static void	choose_pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 		}
 		i++;
 	}
-	return (do_act_arr(head_a, head_b, s));
+	return (do_mark_sort(head_a, head_b, s, the_node->mark));
 }
 
 // Chooses most efficient node to push to a out of the ones connected
