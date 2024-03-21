@@ -22,8 +22,8 @@ double	sortedness_asc(t_list **head)
 			hold *= -2;
 		total_dif += hold;
 	}
-	sorted = (len - 1.0) / (double)total_dif;
-	sorted = ((len / ((double)total_dif + 1.0)) + sorted) / 2.0;
+	sorted = ((len - 1.0) / (double)total_dif) * 100.00;
+	sorted = (((len / ((double)total_dif + 1.0)) * 100.00) + sorted) / 2.0;
 	return (sorted);
 }
 
@@ -49,7 +49,29 @@ double	sortedness_des(t_list **head)
 			hold *= -2;
 		total_dif += hold;
 	}
-	sorted = (len - 1.0) / (double)total_dif;
-	sorted = ((len / ((double)total_dif + 1.0)) + sorted) / 2.0;
+	sorted = ((len - 1.0) / (double)total_dif) * 100.00;
+	sorted = (((len / ((double)total_dif + 1.0)) * 100.00) + sorted) / 2.0;
 	return (sorted);
+}
+
+double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage)
+{
+	double	receiver;
+	double	giver;
+
+	if (stage == s_pb)
+	{
+		receiver = sortedness_des(head_b) * s->receive_mult;
+		giver = sortedness_asc(head_a);
+		return ((receiver + giver) / 2.0);
+	}
+	if (stage == s_pa)
+	{
+		receiver = sortedness_asc(head_a) * s->receive_mult;
+		giver = sortedness_des(head_b);
+		return ((receiver + giver) / 2.0);
+	}
+	receiver = sortedness_asc(head_a);
+	giver = sortedness_des(head_b);
+	return ((receiver + giver) / 2.0);
 }

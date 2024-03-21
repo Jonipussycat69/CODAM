@@ -39,15 +39,21 @@ void	assign_side(t_list **head)
 	return ;
 }
 
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s)
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round)
 {
 	const double	len_a = list_len(head_a);
 	const double	len_b = list_len(head_b);
-	const double	sort = sortedness_asc(head_a);
+	double			val_mult_round;
 
-	s->act_pb_mult = sort;
-	s->act_pa_mult = 0.5;
+	s->act_pb_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
+	s->act_pa_mult = 1.0;//? [act_mul = (len_ / total_len) * sort_] ?
 
-	s->val_pb_mult = 1.0;
-	s->val_pa_mult = 1.0;
+	val_mult_round = 1.0;
+	while (round-- > 0)
+		val_mult_round = val_mult_round * 1.01;
+	s->val_pb_mult = 1.0 * val_mult_round;
+	s->val_pa_mult = 1.0 * val_mult_round;
+
+	s->sort_mult = 0.0;// HIGHER = SLOWER!??
+	s->receive_mult = 0.0;
 }

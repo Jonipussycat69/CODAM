@@ -1,12 +1,55 @@
 #include "push_swap.h"
 
+static short	char_check(char *str)
+{
+	if (!str)
+		return (err);
+	while (*str)
+	{
+		if (*str != ' ' && ps_isdigit(*str) != ok)
+			return (err);
+		str++;
+	}
+	return (ok);
+}
+
+static char	*input_to_string(int argc, char **argv, t_misc *m)
+{
+	char	*str;
+	int		i;
+
+	if (argc == 2)
+	{
+		if (char_check(argv[1]) != ok)
+			return (NULL);
+		return (argv[1]);
+	}
+	i = 1;
+	str = NULL;
+	while (i < argc)
+	{
+		str = ps_strjoin(argv[i], str, 0, 0);
+		if (!str)
+			return (NULL);
+		str = ps_strjoin(" ", str, 0, 0);
+		if (!str)
+			return (NULL);
+		i++;
+	}
+	if (char_check(str) != ok)
+		return (free(str), NULL);
+	m->str_to_free = str;
+	return (str);
+}
+
 static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
 	{
-		ws_pb_stage(head_a, head_b, s);
+		weigh_sort(head_a, head_b, s);
 		hardsort(head_a, head_b, st_a);
-		ws_pa_stage(head_a, head_b, s);
+		printf("len b = %d\n", list_len(head_b));// TEST!
+		mark_sort_pa(head_a, head_b, s);
 	}
 	else if (check_sort_asc(head_a) != ok)
 		hardsort(head_a, head_b, st_a);
@@ -23,7 +66,6 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return (err);
-	init_multiplier(head_a, head_b, s);
 	sorting(head_a, head_b, s);
 	free_list(head_a);
 	free_list(head_b);

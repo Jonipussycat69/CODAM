@@ -1,19 +1,5 @@
 #include "push_swap.h"
 
-static void	choose_r_rr(t_sort *s)
-{
-	if (s->r_actions > s->rr_actions)
-	{
-		s->r_actions = 0;
-		return ;
-	}
-	else
-	{
-		s->rr_actions = 0;
-		return ;
-	}
-}
-
 void	act_arr_reset(t_sort *s)
 {
 	short	i;
@@ -56,24 +42,25 @@ void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage)
 {
 	const double	value = get_i_value(s->act_node) + 1.0;
+	double			sortedness;
 	double			act;
 	double			act_weight;
 
 	path_init(head_a, head_b, s, stage);
-	choose_r_rr(s);
+	sortedness = precalc(head_a, head_b, s, stage);
 	if (s->r_actions == 0)
 		act = s->rr_actions + 1.0;
 	else
 		act = s->r_actions + 1.0;
 	if (stage == s_pb)
 	{
-		act_weight = (value * s->val_pb_mult) + (act * s->act_pb_mult);
-		return (act_weight);
+		act_weight = (value * s->val_pb_mult) + ((act * s->act_pb_mult) / 2);
+		return (act_weight * ((1.0 / (1 + ((sortedness / 10000.0)) * s->sort_mult))));
 	}
 	else
 	{
-		act_weight = s->total_inp + (value * s->val_pa_mult) - \
-		((act * s->act_pa_mult));
-		return (act_weight);
+		act_weight = s->total_inp + ((value * s->val_pa_mult) - \
+		((act * s->act_pa_mult) / 2));
+		return (act_weight * (1 + ((sortedness / 10000.0)) * s->sort_mult));
 	}
 }

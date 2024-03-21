@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/21 18:24:13 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/21 17:30:00 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdarg.h>
 # include <limits.h>
 
+# define WS_REMAIN 3
 # define WS_PB_INIT_WEIGHT 3000.0
 
 # define DIMMED_F "\033[2;37m"// TEST!
@@ -65,6 +66,8 @@ typedef struct s_sort
 	double	val_pb_mult;
 	double	act_pa_mult;
 	double	act_pb_mult;
+	double	sort_mult;
+	double	receive_mult;
 	t_list	*act_node;
 	double	act_weight;
 	int		r_actions;
@@ -94,10 +97,6 @@ void	print_values(t_list **head, char stack);// TEST!
 void	print_width_format(char *c, char *f);// TEST!
 void	print_act_arr(t_sort *s);// TEST!
 
-short	char_check(char *str);
-char	*input_to_string(int argc, char **argv, t_misc *m);
-short	parser(char *input, t_list **head);
-
 void	list_indexer(t_list **head);
 short	indexer(t_list **head);
 void	stack_indexer(t_list **head);
@@ -105,7 +104,7 @@ void	update_variable_index(t_list **head_a, t_list **head_b);
 
 void	assign_mark(t_list **head);
 void	assign_side(t_list **head);
-void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s);
+void	init_multiplier(t_list **head_a, t_list **head_b, t_sort *s, int round);
 
 short	check_sort_asc(t_list **head);
 short	check_sort_des(t_list **head);
@@ -114,11 +113,11 @@ short	strict_check_des(t_list **head);
 
 double	sortedness_asc(t_list **head);
 double	sortedness_des(t_list **head);
+double	sortedness_gl(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
 void	hardsort(t_list **head_used, t_list **head_other, short used_stack);
 
-void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s);
-void	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s);
+void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s);
 double	path_weigh(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 void	act_arr_reset(t_sort *s);
 void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage);
@@ -157,6 +156,7 @@ t_list	*nth_node(t_list **head, int n);
 t_list	*n_si_node(t_list **head, int n);
 t_list	*n_li_node(t_list **head, int n);
 t_list	*n_iv_node(t_list **head, int n);
+short	parser(char *input, t_list **head);
 
 void	swap(t_list **head);
 void	push(t_list **head_a, t_list **head_b, short stack);

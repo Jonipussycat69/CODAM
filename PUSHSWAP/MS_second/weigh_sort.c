@@ -97,9 +97,9 @@ t_list	*ws_gl_path(t_list **head_a, t_list **head_b, t_sort *s)
 		return (pa_node);
 }
 
-void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
+short	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 {
-	while (list_len(head_a) != 3 && strict_check_asc(head_a) != ok)
+	while (list_len(head_a) != WS_REMAIN && strict_check_asc(head_a) != ok)
 	{
 		update_variable_index(head_a, head_b);
 		ws_pb_path(head_a, head_b, s);
@@ -107,10 +107,10 @@ void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 		// print_values(head_a, 'a');// TEST!
 		// print_values(head_b, 'b');// TEST!
 	}
-	return ;
+	return (ok);
 }
 
-void	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
+short	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	while (list_len(head_b) != 0)
 	{
@@ -120,5 +120,33 @@ void	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 		// print_values(head_a, 'a');// TEST!
 		// print_values(head_b, 'b');// TEST!
 	}
+	return (ok);
+}
+
+void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	init_multiplier(head_a, head_b, s, 0);
+	ws_pb_stage(head_a, head_b, s);
+	// print_values(head_a, 'a');// TEST!
+	// print_values(head_b, 'b');// TEST!
 	return ;
 }
+
+// void	weigh_sort(t_list **head_a, t_list **head_b, t_sort *s)
+// {
+// 	int	round;
+
+// 	round = 0;
+// 	while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
+// 	{
+// 		init_multiplier(head_a, head_b, s, round);
+// 		if (s->total_inp > 3)
+// 			ws_pb_stage(head_a, head_b, s);
+// 		hardsort(head_a, head_b, st_a);
+// 		ws_pa_stage(head_a, head_b, s);
+// 		round++;
+// 		print_values(head_a, 'a');// TEST!
+// 		print_values(head_b, 'b');// TEST!
+// 	}
+// 	return ;
+// }
