@@ -1,5 +1,5 @@
 Fix:
-	When val_mult is too low it doesnt get sorted!!!!
+	When val_mult is too low it doesnt get sorted!!!! maybe because of faulty double act in mark_sort.
 	The original main segfaults in push_swap!
 	WS takes too long with long strings!
 	Is sortedness usefull??
@@ -7,7 +7,7 @@ Fix:
 LEFTOFF:
 	Calibrating -> test on different sortedness
 	Implement callibration in init_multiplier
-	TAKE A LOOK at if the double actions are correctly checked and done!
+	TAKE A LOOK at if the DOUBLE actions are correctly checked and done!
 
 To do?
 	Change to const for safety

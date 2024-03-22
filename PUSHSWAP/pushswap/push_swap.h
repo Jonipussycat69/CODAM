@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/21 21:40:20 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/22 08:30:16 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_sort
 
 enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
 enum	returns{err = -1, inert = -2, ok = 0};
-enum	flags{lower = -1, upper = 1, f_true, f_false, biggest = -2};
+enum	flags{lower = -1, upper = 1, biggest = -2};
 enum	stacks{st_a = 0, st_b = 1};
 enum	inputs{s_pa = 1, s_pb = 2, global = 20};
 enum	act_arr{

@@ -1,13 +1,55 @@
 #include "push_swap.h"
 
-static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
+static void	w_sorting(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
+	{
+		while (check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp)
+		{
+			ws_pb_stage(head_a, head_b, s);
+			hardsort(head_a, head_b, st_a);
+			ws_pa_stage(head_a, head_b, s);
+		}
+	}
+	else if (check_sort_asc(head_a) != ok)
+		hardsort(head_a, head_b, st_a);
+	print_values(head_a, 'a');// TEST!
+	print_values(head_b, 'b');// TEST!
+}
+
+static void	m_sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
 	{
 		ws_pb_stage(head_a, head_b, s);
 		hardsort(head_a, head_b, st_a);
 		mark_sort_pa(head_a, head_b, s);
-		// ws_pa_stage(head_a, head_b, s);
+	}
+	else if (check_sort_asc(head_a) != ok)
+		hardsort(head_a, head_b, st_a);
+	print_values(head_a, 'a');// TEST!
+	print_values(head_b, 'b');// TEST!
+}
+
+static void	c_sorting(t_list **head_a, t_list **head_b, t_sort *s)
+{
+	int	rounds;
+
+	rounds = 1;
+	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
+	{
+		while ((check_sort_asc(head_a) != ok || list_len(head_a) != s->total_inp) && rounds-- > 0)
+		{
+			ws_pb_stage(head_a, head_b, s);
+			hardsort(head_a, head_b, st_a);
+			ws_pa_stage(head_a, head_b, s);
+		}
+		if (check_sort_asc(head_a) != ok && s->total_inp > 3)
+		{
+			ws_pb_stage(head_a, head_b, s);
+			hardsort(head_a, head_b, st_a);
+			mark_sort_pa(head_a, head_b, s);
+		}
 	}
 	else if (check_sort_asc(head_a) != ok)
 		hardsort(head_a, head_b, st_a);
@@ -26,7 +68,7 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	if (!*head_a)
 		return (err);
 	init_multiplier(head_a, s);
-	sorting(head_a, head_b, s);
+	m_sorting(head_a, head_b, s);
 	free_list(head_a);
 	free_list(head_b);
 	printf("SortBegin: %f\n", sortbegin);// TEST!

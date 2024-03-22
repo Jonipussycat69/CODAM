@@ -3,11 +3,14 @@
 # define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
 # define RESET_F "\033[0m"// TEST!
 
-size_t	amount_of_act = 0;// TEST!
+size_t	am_act = 0;// TEST!
+size_t	am_doub = 0;// TEST!
 
 void	do_action(t_list **head_a, t_list **head_b, short action)
 {
-	printf("%stotal_actions = %zu%s\n", DIMMED_BOLD_F, ++amount_of_act, RESET_F);// TEST!
+	if (action == ss || action == rr || action == rrr)// TEST!
+			am_doub++;// TEST!
+	printf("%sactions = %zu | double = %zu%s\n", DIMMED_BOLD_F, ++am_act, am_doub, RESET_F);// TEST!
 	if (action == sa)
 		return (wr_a("sa"), swap(head_a));
 	if (action == sb)
