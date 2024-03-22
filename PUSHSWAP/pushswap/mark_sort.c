@@ -1,42 +1,30 @@
 #include "push_swap.h"
 
-static double	pathmark_weight(t_sort *s)
-{
-	const double	value = s->act_node->i_value;
-	int				actions;
-	int				i;
-
-	i = 0;
-	actions = 0;
-	while (i < 8)
-	{
-		actions += s->act_arr[i];
-		i++;
-	}
-	return ((double)actions + (1 / \
-	(((value + 1) / (s->total_inp + 1)) * 100.0)));
-}
-
-static void	do_mark_sort(t_list **head_a, t_list **head_b, t_sort *s, int mark)
-{
-	ms_do_act_arr(head_a, head_b, s);
-	if (mark == biggest)
-		do_action(head_a, head_b, ra);
-	return ;
-}
-
 static double	pathmark_big(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	const int	act_rb = s->act_node->list_index;
 	const int	act_rrb = list_len(head_b) - act_rb;
+	const int	act_ra = get_li(n_si_node(head_a, list_len(head_a) - 1)) + 1;
+	const int	act_rra = list_len(head_a) - act_ra;
 
+	if (act_ra == err)
+		return (err);
 	act_arr_reset(s);
-	if (act_rb < act_rrb)
-		s->act_arr[_rb] = act_rb;
+	s->act_arr[_rb] = act_rb;
+	s->act_arr[_ra] = act_ra;
+	s->act_arr[_rrb] = act_rrb;
+	s->act_arr[_rra] = act_rra;
+	if (act_rb > act_ra)
+		s->act_arr[_rr] = act_rb;
 	else
-		s->act_arr[_rrb] = act_rrb;
+		s->act_arr[_rr] = act_ra;
+	if (act_rrb > act_rra)
+		s->act_arr[_rrr] = act_rrb;
+	else
+		s->act_arr[_rrr] = act_rra;
+	shortest_path(s);
 	s->act_arr[_pa] = 1;
-	return (pathmark_weight(s) + 1);
+	return (pathmark_weight(s));
 }
 
 // Finds best path to get the act_node above the mark - pa stage
@@ -88,22 +76,37 @@ static void	choose_pathmark_pa(t_list **head_a, t_list **head_b, t_sort *s)
 			s->act_weight = cur_weight;
 			the_node = s->act_node;
 			copy_arr(best_act, s->act_arr, 8);
-			printf("%s>> mark %d[%d] = %f%s\n", DIMMED_F, s->act_node->i_value, i, cur_weight, RESET_F);// TEST!
 		}
 		i++;
+		// print_act_arr(s, i, cur_weight, the_node);// TEST!
 	}
-	return (do_mark_sort(head_a, head_b, s, the_node->mark));
+	return (ms_do_act(head_a, head_b, s, best_act));
 }
 
 // Chooses most efficient node to push to a out of the ones connected
 // Size + amount of act, lower = better
 void	mark_sort_pa(t_list **head_a, t_list **head_b, t_sort *s)
 {
+	int	act_ra;
+	int	act_rra;
+
 	while (list_len(head_b) > 0)
 	{
 		update_variable_index(head_a, head_b);
 		choose_pathmark_pa(head_a, head_b, s);
-		// print_values(head_a, 'a');// TEST!
-		// print_values(head_b, 'b');// TEST!
+		print_values(head_a, 'a');// TEST!
+		print_values(head_b, 'b');// TEST!
 	}
+	if (check_sort_asc(head_a) == ok)
+		return ;
+	update_variable_index(head_a, head_b);
+	act_ra = get_li(n_iv_node(head_a, 0));
+	act_rra = list_len(head_a) - act_ra;
+	act_arr_reset(s);
+	if (act_ra < act_rra)
+		s->act_arr[_ra] = act_ra;
+	else
+		s->act_arr[_rra] = act_rra;
+	do_act_arr(head_a, head_b, s);
+	return ;
 }

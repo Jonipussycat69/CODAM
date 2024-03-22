@@ -120,9 +120,11 @@ void	print_values(t_list **head, char stack)
 		print_width_format("-", CYAN_BOLD_F);
 	else
 		print_width_format("-", BLUE_BOLD_F);
-	printf("\n< Stack: %c >\n", stack);
-	print_sortedness_asc(head);
-	print_sortedness_des(head);
+	printf("\n< Stack: %c >\t", stack);
+	if (stack == 'a')
+		print_sortedness_asc(head);
+	else
+		print_sortedness_des(head);
 	// printf("Values:\n");
 	// while (tmp != NULL)
 	// {
@@ -131,7 +133,7 @@ void	print_values(t_list **head, char stack)
 	// }
 	// printf("\n\n");
 	// tmp = *head;
-	printf("Index_value:\n");
+	printf("\n");
 	while (tmp != NULL)
 	{
 		printf("%d ", tmp->i_value);
@@ -147,9 +149,13 @@ void	print_values(t_list **head, char stack)
 	return ;
 }
 
-void	print_act_arr(t_sort *s)
+void	print_act_arr(t_sort *s, int i, double cur_weight, t_list *the_node)
 {
-	printf("~> act_arr = [%d, %d, %d, %d, %d, %d, %d, %d]\n", s->act_arr[0], \
+	printf("%s>> mark %2d[%2d] = %6.3f", DIMMED_F, s->act_node->i_value, i, cur_weight);// TEST!
+	printf(" |~> act_arr = [ra %d| rb %d| rra %d| rrb %d| rr %d| rrr %d| pa %d| pb %d]", s->act_arr[0], \
 	s->act_arr[1], s->act_arr[2], s->act_arr[3], s->act_arr[4], s->act_arr[5], \
 	s->act_arr[6], s->act_arr[7]);
+	if (the_node == s->act_node)
+		printf("\nCHOSEN ONE");
+	printf("%s\n", RESET_F);
 }

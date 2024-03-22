@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/22 08:30:16 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/22 15:25:09 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ enum	act_arr{
 
 void	print_values(t_list **head, char stack);// TEST!
 void	print_width_format(char *c, char *f);// TEST!
-void	print_act_arr(t_sort *s);// TEST!
+void	print_act_arr(t_sort *s, int i, double cur_weight, t_list *the_node);// TEST!
 
 short	char_check(char *str);
 char	*input_to_string(int argc, char **argv, t_misc *m);
@@ -125,10 +125,11 @@ void	path_init(t_list **head_a, t_list **head_b, t_sort *s, short stage);
 
 void	mark_sort_pa(t_list **head_a, t_list **head_b, t_sort *s);
 void	ms_rep_action(t_list **head_a, t_list **head_b, int iter, short act);
-void	ms_do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
+void	ms_do_act(t_list **head_a, t_list **head_b, t_sort *s, int *act);
 void	init_shortest(t_sort *s, int *tmp, short *act);
 void	init_shortest_prepare(t_sort *s, short *act);
 void	shortest_path(t_sort *s);
+double	pathmark_weight(t_sort *s);
 
 void	free_list(t_list **head);
 short	nodeadd_back(t_list **head, t_list *node);
