@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/22 15:25:09 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/03/23 10:13:19 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define DIMMED_F "\033[2;37m"// TEST!
 # define DIMMED_BOLD_F "\033[1;2;37m"// TEST!
 # define RESET_F "\033[0m"// TEST!
+# define GREEN_BOLD_F "\033[1;32m"// TEST!
 
 /*
 	value = original inputted value
