@@ -1,10 +1,7 @@
 #include "push_swap.h"
 
-size_t	amount_of_act = 0;// TEST!
-
-short	do_action(t_list **head_a, t_list **head_b, short action)
+void	do_action(t_list **head_a, t_list **head_b, short action)
 {
-	printf("total_actions = %zu\n", ++amount_of_act);// TEST!
 	if (action == sa)
 		return (wr_a("sa"), swap(head_a));
 	if (action == sb)
@@ -27,10 +24,10 @@ short	do_action(t_list **head_a, t_list **head_b, short action)
 		return (wr_a("rr"), rotate_both(head_a, head_b));
 	if (action == rrr)
 		return (wr_a("rrr"), r_rotate_both(head_a, head_b));
-	return (err);
+	return ;
 }
 
-short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
+void	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 {
 	va_list	actions;
 	int		iteration;
@@ -39,42 +36,38 @@ short	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		if (do_action(head_a, head_b, double_act(head_a, head_b, \
-		va_arg(actions, int))) == err)
-			return (err);
+		do_action(head_a, head_b, double_act(head_a, head_b, \
+		va_arg(actions, int)));
 	}
 	va_end(actions);
-	return (ok);
+	return ;
 }
 
-short	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
+void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		if (do_action(head_a, head_b, double_act(head_a, head_b, act)) == err)
-			return (err);
+		do_action(head_a, head_b, double_act(head_a, head_b, act));
 	}
-	return (ok);
+	return ;
 }
 
-short	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
+void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	short		i;
-	const short	actions[] = {ra, rb, rra, rrb, pa, pb};
+	const short	actions[] = {ra, rb, rra, rrb, rr, rrr, pa, pb};
 
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
-		if (repeat_action(head_a, head_b, s->act_arr[i], actions[i]) != ok)
-			return (err);
+		repeat_action(head_a, head_b, s->act_arr[i], actions[i]);
 		i++;
 	}
-	return (ok);
+	return ;
 }
 
 short	double_act(t_list **head_a, t_list **head_b, short act)
 {
-	stack_indexer(head_a);
 	stack_indexer(head_b);
 	if (act == ra)
 	{
@@ -86,6 +79,7 @@ short	double_act(t_list **head_a, t_list **head_b, short act)
 		if (get_si(*head_b) < get_si(last_node(head_b)))
 			return (rrr);
 	}
+	stack_indexer(head_a);
 	if (act == rb)
 	{
 		if (get_si(*head_a) > get_si(last_node(head_a)))

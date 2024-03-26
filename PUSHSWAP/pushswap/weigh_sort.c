@@ -87,6 +87,19 @@ void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
 	return ;
 }
 
+// void	ws_pb_stage(t_list **head_a, t_list **head_b, t_sort *s)
+// {
+// 	while (list_len(head_a) != 3)
+// 	{
+// 		update_variable_index(head_a, head_b);
+// 		ws_pb_path(head_a, head_b, s);
+// 		do_act_arr(head_a, head_b, s);
+// 		// print_values(head_a, 'a');// TEST!
+// 		// print_values(head_b, 'b');// TEST!
+// 	}
+// 	return ;
+// }
+
 void	ws_pa_stage(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	while (list_len(head_b) != 0)

@@ -12,9 +12,9 @@ size_t	ps_strlen(char *str)
 
 short	ps_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (ok);
-	return (err);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 char	*ps_strjoin(char *add, char *line, size_t i, size_t j)

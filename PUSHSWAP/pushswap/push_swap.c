@@ -68,7 +68,7 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	if (!*head_a)
 		return (err);
 	init_multiplier(head_a, s);
-	w_sorting(head_a, head_b, s);
+	m_sorting(head_a, head_b, s);
 	if (check_sort_asc(head_a) == ok)
 		printf("%s~<<< SORTED >>>~%s\n", GREEN_BOLD_F, RESET_F);// TEST!
 	free_list(head_a);

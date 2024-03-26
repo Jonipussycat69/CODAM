@@ -1,4 +1,4 @@
-NAME=push_wsap.a
+NAME=push_swap.a
 
 CFLAGS=-Wall -Werror -Wextra
 

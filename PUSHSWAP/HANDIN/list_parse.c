@@ -51,33 +51,3 @@ t_list	*nth_node(t_list **head, int n)
 		tmp = tmp->next;
 	return (tmp);
 }
-
-// Pareses the starting-string and inputs it into a list
-short	parser(char *input, t_list **head)
-{
-	int		i;
-	long	num;
-	short	multiplier;
-
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] <= '9' && input[i] >= '0')
-		{
-			multiplier = 1;
-			if (i > 0 && input[i - 1] == '-')
-				multiplier = -1;
-			num = 0;
-			while (input[i] <= '9' && input[i] >= '0')
-			{
-				num = num * 10 + (input[i] - '0');
-				i++;
-			}
-			if (num < INT_MIN || num > INT_MAX || \
-			nodeadd_back(head, new_node((int)num * multiplier, 0)) != ok)
-				return (free_list(head), err);
-		}
-		i++;
-	}
-	return (ok);
-}

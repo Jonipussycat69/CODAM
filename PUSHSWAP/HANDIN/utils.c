@@ -44,3 +44,16 @@ void	copy_arr(int *dest, int *source, int size)
 		i++;
 	}
 }
+
+void	act_arr_reset(t_sort *s)
+{
+	short	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		s->act_arr[i] = 0;
+		i++;
+	}
+	return ;
+}
