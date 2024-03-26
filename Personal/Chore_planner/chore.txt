@@ -1,0 +1,7 @@
+[naam] [tijd in min] [tijdvak(begin-eind)] [dag(en)(ma/di/wo/do/vr/za/zo/all)].
+hond 30 08:00-09:00 all.
+keuken 10.
+koken 60.
+woonkamer 10.
+stofzuigen 20.
+vegen 20.

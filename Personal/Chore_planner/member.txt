@@ -1,0 +1,4 @@
+[naam] [leeftijd].
+Joni 22.
+Hanna 20.
+Kati 54.

@@ -1,0 +1,7 @@
+Fix:
+	MAKEFILE
+
+To do?
+	Add headers
+	Clean up and organize files
+	Rewrite MAKEFILE

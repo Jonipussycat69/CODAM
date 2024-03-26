@@ -1,0 +1,5 @@
+[naam persoon] [tijdvak(begin-eind)] [dag(ma/di/wo/do/vr/za/zo)].
+Joni 08:00-12:30 di.
+Hanna 15:40-19:00 di.
+Kati 13:00-14:30 ma.
+Joni 09:10-15:00 ma.
