@@ -43,7 +43,7 @@ void	init_multiplier(t_list **head_a, t_sort *s)
 {
 	const double	len_a = list_len(head_a);
 
-	s->act_pb_mult = 0.8;
+	s->act_pb_mult = 0.9;
 	s->val_pb_mult = 1;
 
 	s->act_pa_mult = 0;
