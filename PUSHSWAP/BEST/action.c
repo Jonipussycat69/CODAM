@@ -36,8 +36,7 @@ void	do_actions(t_list **head_a, t_list **head_b, int amount, ...)
 	iteration = 0;
 	while (iteration++ < amount)
 	{
-		do_a(head_a, head_b, double_act(head_a, head_b, \
-		va_arg(actions, int)));
+		do_a(head_a, head_b, va_arg(actions, int));
 	}
 	va_end(actions);
 	return ;
@@ -47,7 +46,7 @@ void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act)
 {
 	while (iter-- > 0)
 	{
-		do_a(head_a, head_b, double_act(head_a, head_b, act));
+		do_a(head_a, head_b, act);
 	}
 	return ;
 }
@@ -66,7 +65,7 @@ void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s)
 	return ;
 }
 
-short	double_act(t_list **head_a, t_list **head_b, short act)
+short	double_act(t_list **head_a, t_list **head_b, short act)// Obselete??
 {
 	stack_indexer(head_b);
 	if (act == ra)

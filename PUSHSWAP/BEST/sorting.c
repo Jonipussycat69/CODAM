@@ -5,15 +5,28 @@
 // node->ind = amound of r, node->ind - total list_len = rr (so it will be negative).
 // It pushes to b until there are only 3 num left in a.
 // at the end b should be rotated so it starts at the biggest and be sorted in descending order
-void	pb_stage(t_list **a, t_list **b)
+void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
-	
+	t_list	*node;
+
+	while (list_len(a) > 3 && check_sort_asc(a) != ok)
+	{
+		s->index = 0;
+		node = *a;
+		while (node != NULL)
+		{
+			weigh(a, b, s, node);
+			s->index++;
+			node = node->next;
+		}
+		do_act_arr(a, b, s);
+	}
 }
 
 // Pushes evrything back to stack a, and reverse rotates the remaining 3 num on top at the right time.
 // when this stage is done b should be empty.
 // when this stage is done a should be sorted in ascending order.
-void	pa_stage(t_list **a, t_list **b)
+void	pa_stage(t_list **a, t_list **b, t_sort *s)
 {
 	
 }
