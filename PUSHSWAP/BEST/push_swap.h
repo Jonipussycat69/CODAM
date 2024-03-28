@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/27 23:48:11 by joni          ########   odam.nl         */
+/*   Updated: 2024/03/28 14:38:40 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,12 @@
 typedef struct s_list
 {
 	int				num;
-	int				ind;
 	struct s_list	*next;
 }	t_list;
 
 typedef struct s_sort
 {
 	int		total_inp;
-	double	val_pb_mult;
-	double	act_pb_mult;
-	t_list	*act_node;
-	double	act_weight;
-	int		r_actions;
-	int		rr_actions;
 	int		act_arr[8];
 }	t_sort;
 
@@ -88,7 +81,7 @@ double	ms_path_weight(t_sort *s);
 
 void	free_list(t_list **head);
 short	node_back(t_list **head, t_list *node);
-t_list	*new_node(int val, int ind);
+t_list	*new_node(int val);
 
 int		get_i_value(t_list *node);
 int		get_si(t_list *node);

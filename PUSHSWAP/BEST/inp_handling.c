@@ -68,7 +68,7 @@ short	parser(char *inp, t_list **head)
 		}
 		p.num *= p.min;
 		if (i > 0 && ps_isdigit(inp[i - 1]) && (p.num < INT_MIN || \
-		p.num > INT_MAX || node_back(head, new_node((int)p.num, 0)) != ok))
+		p.num > INT_MAX || node_back(head, new_node((int)p.num)) != ok))
 			return (free_list(head), free(inp), err);
 		i++;
 	}

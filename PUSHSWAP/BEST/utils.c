@@ -45,3 +45,17 @@ void	wr_a(char *action)
 	write(STDOUT_FILENO, "\n", 1);
 	return ;
 }
+
+int	list_len(t_list **head)
+{
+	t_list	*tmp;
+	int		i;
+	
+	if (!*head)
+		return (0);
+	i = 0;
+	tmp = *head;
+	while (tmp != NULL && ++i)
+		tmp = tmp->next;
+	return (i);
+}

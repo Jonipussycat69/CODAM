@@ -36,7 +36,7 @@ short	node_back(t_list **head, t_list *node)
 	return (ok);
 }
 
-t_list	*new_node(int val, int ind)
+t_list	*new_node(int val)
 {
 	t_list	*node;
 
@@ -44,7 +44,6 @@ t_list	*new_node(int val, int ind)
 	if (!node)
 		return (NULL);
 	node->num = val;
-	node->ind = ind;
 	node->next = NULL;
 	return (node);
 }
