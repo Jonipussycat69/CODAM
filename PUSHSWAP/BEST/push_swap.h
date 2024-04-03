@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/03/28 20:19:25 by joni          ########   odam.nl         */
+/*   Updated: 2024/04/03 18:15:41 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ typedef struct s_sort
 	int	index;
 	int	r_num;
 	int	rr_num;
+	int	dir_a;
+	int	dir_b;
 	int	weight;
+	int	act_ra;
+	int	act_rra;
+	int	act_rb;
+	int	act_rrb;
 	int	act_arr[8];
 }	t_sort;
 
@@ -65,7 +71,7 @@ short	check_sort_asc(t_list **head);
 void	pb_stage(t_list **a, t_list **b, t_sort *s);
 void	pa_stage(t_list **a, t_list **b, t_sort *s);
 void	hardsort(t_list **a, t_list **b);
-void	weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
+int		weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
 
 void	free_list(t_list **head);
 short	node_back(t_list **head, t_list *node);

@@ -8,6 +8,8 @@
 void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
+	t_list	*lightest;
+	int		weight;
 
 	while (list_len(a) > 3 && check_sort_asc(a) != ok)
 	{
@@ -15,11 +17,15 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 		node = *a;
 		while (node != NULL)
 		{
-			weigh(a, b, s, node);
+			if (weigh(a, b, s, node) < weight || s->index == 0)
+			{
+				weight = weigh(a, b, s, node);
+				lightest = node;
+			}
 			s->index++;
 			node = node->next;
 		}
-		do_act_arr(a, b, s);
+		execute_act(a, b, s, lightest);
 	}
 }
 
