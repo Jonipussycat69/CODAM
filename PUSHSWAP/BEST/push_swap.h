@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/03 18:15:41 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/04/03 23:16:17 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ typedef struct s_sort
 	int	index;
 	int	r_num;
 	int	rr_num;
-	int	dir_a;
-	int	dir_b;
-	int	weight;
-	int	act_ra;
-	int	act_rra;
-	int	act_rb;
-	int	act_rrb;
 	int	act_arr[8];
 }	t_sort;
 

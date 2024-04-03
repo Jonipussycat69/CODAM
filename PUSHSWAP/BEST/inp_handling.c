@@ -75,3 +75,30 @@ short	parser(char *inp, t_list **head)
 	free(inp);
 	return (ok);
 }
+
+// Checks for doubles
+short	doubles_check(t_list **head)
+{
+	t_list	*tmp;
+	t_list	*tmptmp;
+	int		i;
+	short	double_check;
+
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		double_check = 0;
+		i = 0;
+		tmptmp = *head;
+		while (tmptmp != NULL)
+		{
+			if (tmp->num == tmptmp->num)
+				double_check += 1;
+			if (double_check > 1)
+				return (err);
+			tmptmp = tmptmp->next;
+		}
+		tmp = tmp->next;
+	}
+	return (ok);
+}

@@ -74,8 +74,24 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 	}
 }
 
-// this is the middle stage that sorts the remaining 3 num in stack a before commencing to pa_stage.
+// Hard-sorting for 2 or 3 value list
 void	hardsort(t_list **a, t_list **b)
 {
-	
+	if (list_len(a) > 3 || list_len(a) < 2 || \
+	check_sort_asc(a) == ok)
+		return ;
+	if (list_len(a) == 2 || ((*a)->num > (*a)->next->num \
+	&& (*a)->num < (*a)->next->next->num))
+		return (do_action(a, b, sa));
+	if ((*a)->num < (*a)->next->num && (*a)->num < (*a)->next->next->num)
+		return (do_actions(a, b, 2, sa, ra));
+	if ((*a)->num > (*a)->next->num && (*a)->num > (*a)->next->next->num \
+	&& (*a)->next->num < (*a)->next->next->num)
+		return (do_action(a, b, ra));
+	if ((*a)->num > (*a)->next->num && (*a)->num > (*a)->next->next->num \
+	&& (*a)->next->num > (*a)->next->next->num)
+		return (do_actions(a, b, 2, ra, sa));
+	if ((*a)->num < (*a)->next->num && (*a)->num > (*a)->next->next->num)
+		return (do_actions(a, b, 2, ra, ra));
+	return ;
 }

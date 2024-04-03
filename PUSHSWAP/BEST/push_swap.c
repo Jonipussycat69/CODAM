@@ -41,10 +41,9 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (parser(input_to_string(argc, argv), head) != ok)
 		return (wr_a("Error"), -1);
-	if (indexer(head) != ok)
+	if (doubles_check(head) != ok)
 		return (wr_a("Error"), -1);
-	assign_mark(head);
-	s.total_inp = list_len(head);
+	s.total_inp = list_len(head);// DO I USE THIS?
 	if (ft_pushswap(head, &s) != ok)
 		return (wr_a("Error"), -1);
 	return (0);
