@@ -36,14 +36,16 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
 	t_list	*lightest;
-	int		weight;
+	double	weight;
 
 	while (list_len(a) > 3 && check_sort_asc(a) != ok)
 	{
 		s->index = 0;
+		weight = 0;
 		node = *a;
 		while (node != NULL)
 		{
+			printf("loop -> %i pa sorting\n", s->index);// TEST
 			if (weigh(a, b, s, node) < weight || s->index == 0)
 			{
 				weight = weigh(a, b, s, node);
@@ -53,6 +55,7 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 			node = node->next;
 		}
 		execute_act(a, b, s, lightest);
+		printf("biggest to top -> pa sorting\n");// TEST
 	}
 	biggest_to_top(a, b, s);
 }
@@ -66,8 +69,10 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 
 	while (list_len(b) > 0)
 	{
+		printf("loop -> 0 pa sorting\n");// TEST
 		last_a = last_node(a);
-		if (last_a->num < (*b)->num && last_a->num > (*b)->next->num)
+		printf("loop -> 1 pa sorting\n");// TEST
+		if (last_a->num < (*b)->num && (list_len(b) <= 1 || last_a->num > (*b)->next->num))
 			do_actions(a, b, 2, pa, rra);
 		else
 			do_action(a, b, pa);

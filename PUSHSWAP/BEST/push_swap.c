@@ -4,12 +4,16 @@ static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
 	{
+		print_values(head_a, head_b, s);// TEST
 		pb_stage(head_a, head_b, s);
+		print_values(head_a, head_b, s);// TEST
 		hardsort(head_a, head_b);
+		print_values(head_a, head_b, s);// TEST
 		pa_stage(head_a, head_b, s);
 	}
 	else if (check_sort_asc(head_a) != ok)
 		hardsort(head_a, head_b);
+	print_values(head_a, head_b, s);// TEST
 }
 
 static short	ft_pushswap(t_list **head_a, t_sort *s)
@@ -21,7 +25,6 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	head_b = &first;
 	if (!*head_a)
 		return (err);
-	init_multiplier(s);
 	sorting(head_a, head_b, s);
 	free_list(head_a);
 	free_list(head_b);

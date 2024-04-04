@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/03 23:16:17 by joni          ########   odam.nl         */
+/*   Updated: 2024/04/04 21:42:00 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,20 @@ enum	act_arr{
 	_pb = 7,
 };
 
+void	print_values(t_list **a, t_list **b, t_sort *s);// TEST
+
 short	char_check(char *str);
 char	*input_to_string(int argc, char **argv);
 short	parser(char *input, t_list **head);
+short	doubles_check(t_list **head);
 
 short	check_sort_asc(t_list **head);
 
 void	pb_stage(t_list **a, t_list **b, t_sort *s);
 void	pa_stage(t_list **a, t_list **b, t_sort *s);
 void	hardsort(t_list **a, t_list **b);
-int		weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
+double	weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
+void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node);
 
 void	free_list(t_list **head);
 short	node_back(t_list **head, t_list *node);
@@ -89,7 +93,7 @@ void	do_action(t_list **head_a, t_list **head_b, short action);
 void	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
 void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
-short	double_act(t_list **head_a, t_list **head_b, short act);
+// short	double_act(t_list **head_a, t_list **head_b, short act);
 
 size_t	ps_strlen(char *str);
 short	ps_isdigit(int c);

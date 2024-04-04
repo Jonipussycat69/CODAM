@@ -13,21 +13,6 @@ void	act_arr_reset(t_sort *s)
 	return ;
 }
 
-int	rotate_b(t_list **b, int num)
-{
-	t_list	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = *b;
-	while (tmp->num > num && tmp->next != NULL)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
-}
-
 // Returns 'ok' if stack is sorted ascending, 'err' if not
 short	check_sort_asc(t_list **head)
 {
