@@ -36,7 +36,7 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
 	t_list	*lightest;
-	double	weight;
+	int		weight;
 
 	while (list_len(a) > 3 && check_sort_asc(a) != ok)
 	{

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/04 21:42:00 by joni          ########   odam.nl         */
+/*   Updated: 2024/04/04 22:41:49 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ short	check_sort_asc(t_list **head);
 void	pb_stage(t_list **a, t_list **b, t_sort *s);
 void	pa_stage(t_list **a, t_list **b, t_sort *s);
 void	hardsort(t_list **a, t_list **b);
-double	weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
+int		weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
 void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node);
 
 void	free_list(t_list **head);

@@ -34,24 +34,19 @@ int	rotate_b(t_list **b, int num)
 	return (i);
 }
 
-double	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
+int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
 	const int	r_a = s->index;
 	const int	rr_a = list_len(a) - r_a;
 	const int	r_b = rotate_b(b, node->num);
 	const int	rr_b = list_len(b) - r_b;
-	double		val_diff;
-	
-	if (node->num == 0)
-		val_diff = -1 / 0.1;
-	else
-		val_diff = -1 / node->num;
+
 	if (r_a - rr_a > 0 && r_b - rr_b > 0)
-		return (bn(rr_a, rr_b) + val_diff);
+		return (bn(rr_a, rr_b));
 	if (r_a - rr_a < 0 && r_b - rr_b < 0)
-		return (bn(r_a, r_b) + val_diff);
+		return (bn(r_a, r_b));
 	else
-		return (sn(r_a, rr_a) + sn(r_b, rr_b) + val_diff);
+		return (sn(r_a, rr_a) + sn(r_b, rr_b));
 }
 
 void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)
