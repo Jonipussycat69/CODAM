@@ -49,9 +49,9 @@ int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
 	const int	r_a = s->index;
-	const int	rr_a = list_len(a) - r_a + 1;
+	const int	rr_a = list_len(a) - r_a;
 	const int	r_b = rotate_stack(b, node->num);
-	const int	rr_b = list_len(b) - r_b + 1;
+	const int	rr_b = list_len(b) - r_b;
 
 	act_arr_reset(s);
 	if (r_a - rr_a > 0 && r_b - rr_b > 0)

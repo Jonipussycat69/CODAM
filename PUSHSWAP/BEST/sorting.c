@@ -47,21 +47,21 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 	t_list	*best;
 	int		weight;
 
-	while (list_len(a) > 3 || check_sort_asc(a) != ok)
+	while (list_len(a) > 3 && check_sort_asc(a) != ok)
 	{
 		s->index = 0;
 		weight = 0;
 		node = *a;
 		while (node != NULL)
 		{
-			printf("loop -> %i pa sorting\n", s->index);// TEST
 			if (weigh(a, b, s, node) <= weight || s->index == 0)
 				assign_best(&weight, weigh(a, b, s, node), node, &best);
 			s->index++;
 			node = node->next;
 		}
+		print_values(a, b, s);// TEST
+		printf(">> best-> %i\n", best->n_i);// TEST
 		execute_act(a, b, s, best);
-		printf("biggest to top -> pa sorting\n");// TEST
 	}
 	biggest_to_top(a, b, s);
 }
@@ -71,22 +71,20 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 // when this stage is done a should be sorted in ascending order.
 void	pa_stage(t_list **a, t_list **b, t_sort *s)
 {
-	t_list	*last_a;
-
 	while (list_len(b) > 0)
 	{
-		printf("loop -> 0 pa sorting\n");// TEST
-		last_a = last_node(a);
-		printf("loop -> 1 pa sorting\n");// TEST
-		if (s->total_inp < 6 && (*a)->n_i > last_a->n_i)
+		if ((s->total_inp < 6 || list_len(b) < 3) && \
+		(*a)->n_i == last_node(a)->n_i + 1)
 			do_action(a, b, ra);
 		else
 		{
-			while (last_a->n_i + 1 == (*a)->n_i)
+			while (last_node(a)->n_i + 1 == (*a)->n_i)
 				do_action(a, b, rra);
 		}
 		do_action(a, b, pa);
 	}
+	while (last_node(a)->n_i + 1 == (*a)->n_i)
+		do_action(a, b, ra);
 }
 
 // Hard-sorting for 2 or 3 value list

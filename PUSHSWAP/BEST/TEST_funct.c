@@ -11,7 +11,7 @@
 #include <locale.h>
 #include <sys/ioctl.h>
 
-# define BLUE_F "\033[1;34m"
+# define BLUE_F "\033[0;34m"
 # define WHITE_F "\033[1;37m"
 # define DIMMED_F "\033[2;37m"
 # define DIMMED_BOLD_F "\033[1;2;37m"
@@ -23,7 +23,7 @@
 # define GREEN_BOLD_F "\033[1;32m"
 # define GREEN_F "\033[32m"
 # define GREEN_DIM_F "\033[2;32m"
-# define CYAN_DIM_F "\033[2;36m"
+# define CYAN_F "\033[0;36m"
 # define CYAN_BOLD_F "\033[1;36m"
 
 void	print_width_format(char *c, char *f)
@@ -60,22 +60,28 @@ void	print_values(t_list **a, t_list **b, t_sort *s)
 	printf("\n< Stack: a >\n");
 	while (tmp != NULL)
 	{
-		printf("%d ", tmp->num);
+		printf("%d ", tmp->n_i);
 		tmp = tmp->next;
 	}
-	printf("\n\n");
-	tmp = *b;
-	printf("\n%s< Stack: b >\n", CYAN_DIM_F);
-	while (tmp != NULL)
+	printf("\n");
+	printf("%s", RESET_F);
+	if (list_len(b) > 0)
 	{
-		printf("%d ", tmp->num);
-		tmp = tmp->next;
+		tmp = *b;
+		printf("%s< Stack: b >\n", CYAN_F);
+		while (tmp != NULL)
+		{
+			printf("%d ", tmp->n_i);
+			tmp = tmp->next;
+		}
+		printf("\n");
 	}
-	printf("\n\n");
+	printf("%s", RESET_F);
 	if (check_sort_asc(a) == ok && list_len(a) == s->total_inp)
 		printf("%sOK sort\n", GREEN_BOLD_F);
 	else
 		printf("%sKO sort\n", RED_DIM_F);
+	printf("%s", RESET_F);
 	print_width_format("-", BLUE_BOLD_F);
 	printf("%s", RESET_F);
 	printf("\n");
