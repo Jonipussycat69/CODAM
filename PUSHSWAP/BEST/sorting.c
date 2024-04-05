@@ -27,6 +27,15 @@ void	biggest_to_top(t_list **a, t_list **b, t_sort *s)
 	return (act_arr_reset(s), do_act_arr(a, b, s));
 }
 
+void	assign_best(int *weight, int new_weight, t_list *node, t_list **best_n)
+{
+	if (*weight == new_weight && node->n_i > (*best_n)->n_i)
+		return ;
+	*weight = new_weight;
+	*best_n = node;
+	return ;
+}
+
 // algo that calculates all the steps for each node, NO connecting nodes!
 // just looking at the right place it should go in b (inbetween the closest bigger and smaller number).
 // node->ind = amound of r, node->ind - total list_len = rr (so it will be negative).
@@ -35,10 +44,10 @@ void	biggest_to_top(t_list **a, t_list **b, t_sort *s)
 void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
-	t_list	*lightest;
+	t_list	*best;
 	int		weight;
 
-	while (list_len(a) > 3 && check_sort_asc(a) != ok)
+	while (list_len(a) > 3 || check_sort_asc(a) != ok)
 	{
 		s->index = 0;
 		weight = 0;
@@ -46,15 +55,12 @@ void	pb_stage(t_list **a, t_list **b, t_sort *s)
 		while (node != NULL)
 		{
 			printf("loop -> %i pa sorting\n", s->index);// TEST
-			if (weigh(a, b, s, node) < weight || s->index == 0)
-			{
-				weight = weigh(a, b, s, node);
-				lightest = node;
-			}
+			if (weigh(a, b, s, node) <= weight || s->index == 0)
+				assign_best(&weight, weigh(a, b, s, node), node, &best);
 			s->index++;
 			node = node->next;
 		}
-		execute_act(a, b, s, lightest);
+		execute_act(a, b, s, best);
 		printf("biggest to top -> pa sorting\n");// TEST
 	}
 	biggest_to_top(a, b, s);
@@ -72,10 +78,14 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 		printf("loop -> 0 pa sorting\n");// TEST
 		last_a = last_node(a);
 		printf("loop -> 1 pa sorting\n");// TEST
-		if (last_a->num < (*b)->num && (list_len(b) <= 1 || last_a->num > (*b)->next->num))
-			do_actions(a, b, 2, pa, rra);
+		if (s->total_inp < 6 && (*a)->n_i > last_a->n_i)
+			do_action(a, b, ra);
 		else
-			do_action(a, b, pa);
+		{
+			while (last_a->n_i + 1 == (*a)->n_i)
+				do_action(a, b, rra);
+		}
+		do_action(a, b, pa);
 	}
 }
 

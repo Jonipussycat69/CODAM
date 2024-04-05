@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/04 22:41:49 by joni          ########   odam.nl         */
+/*   Updated: 2024/04/05 08:59:29 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_list
 {
 	int				num;
+	int				n_i;
 	struct s_list	*next;
 }	t_list;
 
@@ -60,7 +61,7 @@ void	print_values(t_list **a, t_list **b, t_sort *s);// TEST
 short	char_check(char *str);
 char	*input_to_string(int argc, char **argv);
 short	parser(char *input, t_list **head);
-short	doubles_check(t_list **head);
+short	indexer(t_list **head);
 
 short	check_sort_asc(t_list **head);
 

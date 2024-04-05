@@ -76,8 +76,8 @@ short	parser(char *inp, t_list **head)
 	return (ok);
 }
 
-// Checks for doubles
-short	doubles_check(t_list **head)
+// Checks for doubles while assigning each value an corresponding index
+short	indexer(t_list **head)
 {
 	t_list	*tmp;
 	t_list	*tmptmp;
@@ -96,8 +96,11 @@ short	doubles_check(t_list **head)
 				double_check += 1;
 			if (double_check > 1)
 				return (err);
+			if (tmp->num > tmptmp->num)
+				i++;
 			tmptmp = tmptmp->next;
 		}
+		tmp->n_i = i;
 		tmp = tmp->next;
 	}
 	return (ok);

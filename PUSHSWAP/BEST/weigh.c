@@ -14,23 +14,20 @@ static int	sn(int one, int two)
 	return (two);
 }
 
-int	rotate_b(t_list **b, int num)
+int	rotate_stack(t_list **stack, int num)
 {
 	t_list	*tmp;
 	int		i;
 
-	printf("START rotate b\n");// TEST
-	if (*b == NULL)
+	if (*stack == NULL)
 		return (0);
 	i = 0;
-	tmp = *b;
+	tmp = *stack;
 	while (tmp->num > num && tmp->next != NULL)
 	{
-		printf("loop - rotate b\n");// TEST
 		tmp = tmp->next;
 		i++;
 	}
-	printf("END rotate b\n");// TEST
 	return (i);
 }
 
@@ -38,22 +35,22 @@ int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
 	const int	r_a = s->index;
 	const int	rr_a = list_len(a) - r_a;
-	const int	r_b = rotate_b(b, node->num);
+	const int	r_b = rotate_stack(b, node->num);
 	const int	rr_b = list_len(b) - r_b;
 
 	if (r_a - rr_a > 0 && r_b - rr_b > 0)
-		return (bn(rr_a, rr_b));
+		return (bn(rr_a, rr_b) + 1);
 	if (r_a - rr_a < 0 && r_b - rr_b < 0)
-		return (bn(r_a, r_b));
+		return (bn(r_a, r_b) + 1);
 	else
-		return (sn(r_a, rr_a) + sn(r_b, rr_b));
+		return (sn(r_a, rr_a) + sn(r_b, rr_b) + 1);
 }
 
 void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
 	const int	r_a = s->index;
 	const int	rr_a = list_len(a) - r_a + 1;
-	const int	r_b = rotate_b(b, node->num);
+	const int	r_b = rotate_stack(b, node->num);
 	const int	rr_b = list_len(b) - r_b + 1;
 
 	act_arr_reset(s);
