@@ -1,5 +1,36 @@
 #include "push_swap.h"
 
+int	bn(int one, int two)
+{
+	if (one > two)
+		return (one);
+	return (two);
+}
+
+int	sn(int one, int two)
+{
+	if (one < two)
+		return (one);
+	return (two);
+}
+
+int	rotate_amount_b(t_list **b, int a_num)
+{
+	t_list	*tmp;
+	int		i;
+
+	if (*b == NULL)
+		return (0);
+	i = 0;
+	tmp = *b;
+	while (tmp->num > a_num && tmp->next != NULL)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
 void	act_arr_reset(t_sort *s)
 {
 	short	i;

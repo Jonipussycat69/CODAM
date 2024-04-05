@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/05 08:59:29 by joni          ########   odam.nl         */
+/*   Updated: 2024/04/05 20:46:56 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*input_to_string(int argc, char **argv);
 short	parser(char *input, t_list **head);
 short	indexer(t_list **head);
 
-short	check_sort_asc(t_list **head);
 
 void	pb_stage(t_list **a, t_list **b, t_sort *s);
 void	pa_stage(t_list **a, t_list **b, t_sort *s);
@@ -75,10 +74,14 @@ void	free_list(t_list **head);
 short	node_back(t_list **head, t_list *node);
 t_list	*new_node(int val);
 
-int		list_len(t_list **head);
-void	wr_a(char *action);
+int		bn(int one, int two);
+int		sn(int one, int two);
+int		rotate_amount_b(t_list **b, int a_num);
+short	check_sort_asc(t_list **head);
 void	act_arr_reset(t_sort *s);
 
+void	wr_a(char *action);
+int		list_len(t_list **head);
 t_list	*last_node(t_list **head);
 
 void	swap(t_list **head);
