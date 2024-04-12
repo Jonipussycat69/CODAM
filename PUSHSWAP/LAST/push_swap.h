@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/04/12 16:03:19 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/04/12 15:41:02 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@
 typedef struct s_list
 {
 	int				num;
-	int				n_i;
+	int				index;
+	int				place;
+	int				to_be;
+	int				weight_a;
+	int				weight_b;
 	struct s_list	*next;
 }	t_list;
 
@@ -79,7 +83,7 @@ t_list	*new_node(int val);
 
 int		bn(int one, int two);
 int		sn(int one, int two);
-int		rotate_amount_a(t_list **a, int b_num);
+int		rotate_amount_b(t_list **b, int a_num);
 short	check_sort_asc(t_list **head);
 void	act_arr_reset(t_sort *s);
 

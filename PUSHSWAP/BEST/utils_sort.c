@@ -14,16 +14,16 @@ int	sn(int one, int two)
 	return (two);
 }
 
-int	rotate_amount_b(t_list **b, int a_num)
+int	rotate_amount_a(t_list **a, int b_num)
 {
 	t_list	*tmp;
 	int		i;
 
-	if (*b == NULL)
+	if (*a == NULL)
 		return (0);
 	i = 0;
-	tmp = *b;
-	while (tmp->num > a_num && tmp->next != NULL)
+	tmp = *a;
+	while (tmp->num > b_num && tmp->next != NULL)
 	{
 		tmp = tmp->next;
 		i++;

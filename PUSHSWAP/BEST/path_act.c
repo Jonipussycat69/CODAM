@@ -20,15 +20,16 @@ static void	exe_rr(t_sort *s, int r_a, int r_b)
 
 void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)// LEFTOFF!
 {
-	const int	r_a = s->index;
-	const int	rr_a = list_len(a) - r_a;
-	const int	r_b = rotate_amount_b(b, node->num);
+	const int	r_b = s->index;
 	const int	rr_b = list_len(b) - r_b;
+	const int	r_a = rotate_amount_a(a, node->num);
+	const int	rr_a = list_len(a) - r_a;
 
+	printf(">> ra: %i, rra: %i, rb: %i, rrb: %i\n", r_a, rr_a, r_b, rr_b);// TEST
 	act_arr_reset(s);
-	if (r_a - rr_a > 0 && r_b - rr_b > 0)
+	if (r_a - rr_a >= 0 && r_b - rr_b >= 0)
 		exe_rrr(s, rr_a, rr_b);
-	else if (r_a - rr_a < 0 && r_b - rr_b < 0)
+	else if (r_a - rr_a <= 0 && r_b - rr_b <= 0)
 		exe_rr(s, r_a, r_b);
 	else
 	{
@@ -41,22 +42,23 @@ void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)// LEFTOFF!
 		else
 			s->act_arr[_rb] = r_b;
 	}
-	s->act_arr[_pb] = 1;
+	s->act_arr[_pa] = 1;
 	do_act_arr(a, b, s);
 }
 
+// looks at the the amount of actions needed in both stacks
+// to get the node in the correct spot.
 int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
-	const int	r_a = s->index;
-	const int	rr_a = list_len(a) - r_a;
-	const int	r_b = rotate_amount_b(b, node->num);
+	const int	r_b = s->index;
 	const int	rr_b = list_len(b) - r_b;
+	const int	r_a = rotate_amount_a(a, node->num);
+	const int	rr_a = list_len(a) - r_a;
 
-	if (r_a - rr_a > 0 && r_b - rr_b > 0)
+	if (r_a - rr_a >= 0 && r_b - rr_b >= 0)
 		return (bn(rr_a, rr_b) + 1);
-	if (r_a - rr_a < 0 && r_b - rr_b < 0)
+	if (r_a - rr_a <= 0 && r_b - rr_b <= 0)
 		return (bn(r_a, r_b) + 1);
 	else
 		return (sn(r_a, rr_a) + sn(r_b, rr_b) + 1);
 }
-
