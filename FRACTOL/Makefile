@@ -1,4 +1,4 @@
-NAME	= fdf
+NAME	= fractol.a
 CFLAGS	= -Wall -Werror -Wextra
 
 LMLXDIR	= ./MLX42
@@ -33,6 +33,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(LMLXDIR)/build
+	rm -rf $(LFTDIR)/libft.a
 
 re: clean all
 
