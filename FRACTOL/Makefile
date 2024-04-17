@@ -9,7 +9,12 @@ LIBFT	= $(LFTDIR)/libft.a
 HEADERS	= -I ./include -I $(LMLXDIR)/include
 LIBS	= $(LIBMLX) $(LIBFT)
 SRCDIR	= ./src
-SRC		= $(SRCDIR)/main.c $(SRCDIR)/math.c $(SRCDIR)/math_utils.c $(SRCDIR)/image.c
+SRC		=	$(SRCDIR)/main.c \
+			$(SRCDIR)/math.c \
+			$(SRCDIR)/math_utils.c \
+			$(SRCDIR)/image.c \
+			$(SRCDIR)/input_mlx.c \
+			$(SRCDIR)/utils.c
 OBJS	= ${SRC:.c=.o}
 
 all: $(LIBS) $(NAME)
@@ -21,7 +26,9 @@ $(LIBMLX):
 	cmake $(LMLXDIR) -B $(LMLXDIR)/build && make -C $(LMLXDIR)/build -j4
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) -o $@ -c $< $(HEADERS)
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
