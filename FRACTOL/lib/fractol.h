@@ -39,6 +39,8 @@ typedef struct fractol_s
 	int			y;
 }	fra_t;
 
+void	draw(int32_t width, int32_t height, fra_t *f);
+
 size_t	ft_math(fra_t *f, c_t c);
 double	ft_scale(fra_t *f, double val, short axis);
 
