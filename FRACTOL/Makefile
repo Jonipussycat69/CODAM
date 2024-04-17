@@ -9,7 +9,7 @@ LIBFT	= $(LFTDIR)/libft.a
 HEADERS	= -I ./include -I $(LMLXDIR)/include
 LIBS	= $(LIBMLX) $(LIBFT)
 SRCDIR	= ./src
-SRC		= $(SRCDIR)/main.c
+SRC		= $(SRCDIR)/main.c $(SRCDIR)/math.c $(SRCDIR)/math_utils.c
 OBJS	= ${SRC:.c=.o}
 
 all: $(LIBS) $(NAME)
