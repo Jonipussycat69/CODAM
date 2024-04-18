@@ -3,9 +3,10 @@
 void	init_fractal_struct(t_fractal *f)
 {
 	f->draw = true;// ?
-	f->offset_x = 0.0;
+	f->offset_x = -1.0;
 	f->offset_y = 0.0;
 	f->zoom = 1.0;
+	f->zoom_prev = 1.0;
 	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
 	f->iterations = 42;
 	f->inp = 1.0;
@@ -50,4 +51,15 @@ void	close_all(t_fractal *f)
 {
 	mlx_terminate(f->mlx);
 	exit(EXIT_SUCCESS);
+}
+
+// Exit the program as failure, takes error-message as argument
+void	ft_error(char *message)
+{
+	if (message)
+	{
+		write(STDOUT_FILENO, message, ft_strlen(message));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+	exit(EXIT_FAILURE);
 }

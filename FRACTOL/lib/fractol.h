@@ -16,10 +16,10 @@
 # define HEIGHT_C 900
 
 // starting grid position
-# define X_MAX 0.8
-# define X_MIN -2.2
-# define Y_MAX -1.5
-# define Y_MIN 1.5
+# define X_MAX 2.0
+# define X_MIN -2.0
+# define Y_MAX -2.0
+# define Y_MIN 2.0
 
 # define BLACK	0x000000FF
 # define WHITE	0xFFFFFFFF
@@ -54,22 +54,26 @@ typedef struct s_fractal
 	short		set;
 	double		inp;
 	double		zoom;
+	double		zoom_prev;
 	double		ratio;
 	double		offset_x;
 	double		offset_y;
 	bool		draw;
 	int			x;
 	int			y;
+	double		julia_x;
+	double		julia_y;
+	bool		divine;
 }	t_fractal;
 
-void		ft_draw(int32_t width, int32_t height, t_fractal *f);
+void		ft_draw_mandel(t_fractal *f);
+void		ft_draw_julia(t_fractal *f);
 void		ft_image_resize(int32_t width, int32_t height, void* param);
 
 void		ft_key(mlx_key_data_t keydata, void* param);
 void		ft_scroll(double xdelta, double ydelta, void* param);
 
-void		ft_mandelbrot(t_fractal *f, t_complex c);
-void		ft_math(t_fractal *f, t_complex c);
+void		ft_fract_math(t_fractal *f, t_complex c, t_complex z);
 
 unsigned int	col_grad(int val, int lim, unsigned int col);
 double		ft_scale_x(t_fractal *f, double val);
@@ -81,5 +85,6 @@ void		init_fractal_struct(t_fractal *f);
 void		iteration_mod(t_fractal *f, short mod);
 void		ft_window_size_set(t_fractal *f, short size);
 void		close_all(t_fractal *f);
+void		ft_error(char *message);
 
 #endif
