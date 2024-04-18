@@ -2,13 +2,12 @@
 
 void	init_fractal_struct(t_fractal *f)
 {
-	f->scale_min_x = -2.2;
-	f->scale_max_x = 0.8;
-	f->scale_min_y = 1.5;
-	f->scale_max_y = -1.5;
-	f->zoom = 1.5;
+	f->draw = true;// ?
+	f->offset_x = 0.0;
+	f->offset_y = 0.0;
+	f->zoom = 1.0;
+	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
 	f->iterations = 42;
-	f->set = mandel;
 	f->inp = 1.0;
 }
 
@@ -18,14 +17,13 @@ void	iteration_mod(t_fractal *f, short mod)
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
-		return (ft_draw(f->mlx->width, f->mlx->height, f));
+		f->draw = true;// ?
 	}
-		
-	if (mod < 0 && f->iterations > 10)
+	else if (mod < 0 && f->iterations > 10)
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
-		return (ft_draw(f->mlx->width, f->mlx->height, f));
+		f->draw = true;// ?
 	}
 }
 
@@ -48,10 +46,8 @@ void	ft_window_size_set(t_fractal *f, short size)
 	}
 }
 
-void	init_aspect_ratio(t_fractal *f)
+void	close_all(t_fractal *f)
 {
-	const double	ratio = (double)f->mlx->height / (double)f->mlx->width;
-
-	f->scale_max_y = ratio * f->zoom;
-	f->scale_min_y = ratio * -(f->zoom);
+	mlx_terminate(f->mlx);
+	exit(EXIT_SUCCESS);
 }
