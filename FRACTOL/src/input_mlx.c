@@ -37,14 +37,32 @@ void	ft_scroll(double xdelta, double ydelta, void* param)
 	f->draw = true;// ?
 }
 
-void	ft_key(mlx_key_data_t keydata, void* param)
+void	ft_set_switch(t_fractal *f)
+{
+	if (f->set == mandel)
+		f->set = julia;
+	else if (f->set == julia)
+		f->set = mandel;
+	f->draw = true;
+}
+
+void	ft_key_universal(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
 	
 	f = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_all(f);
-	else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+		f->draw = true;
+}
+
+void	ft_key_basic(mlx_key_data_t keydata, void* param)
+{
+	t_fractal	*f;
+	
+	f = param;
+	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 1);
 	else if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 2);
@@ -54,8 +72,14 @@ void	ft_key(mlx_key_data_t keydata, void* param)
 		iteration_mod(f, 10);
 	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 		iteration_mod(f, -10);
-	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
-		f->draw = true;
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		ft_set_switch(f);
 }
 
-
+void	ft_key_divine(mlx_key_data_t keydata, void* param)
+{
+	t_fractal	*f;
+	
+	f = param;
+	// divine resize etc.
+}

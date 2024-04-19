@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
@@ -20,6 +21,15 @@
 # define X_MIN -2.0
 # define Y_MAX -2.0
 # define Y_MIN 2.0
+
+// divine mode:
+# define D_WIDTH 1200
+# define D_HEIGHT 900
+
+# define X_MAX_J 2.0
+# define X_MIN_J -2.0
+# define Y_MAX_J -2.0
+# define Y_MIN_J 2.0
 
 # define BLACK	0x000000FF
 # define WHITE	0xFFFFFFFF
@@ -50,15 +60,22 @@ typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*img_div_t;// d
+	mlx_image_t	*img_div_j;// d
 	size_t		iterations;
+	size_t		iterations_j;// d
 	short		set;
 	double		inp;
 	double		zoom;
 	double		zoom_prev;
 	double		ratio;
+	double		ratio_m;// d
+	double		ratio_j;// d
+	double		ratio_t;// d
 	double		offset_x;
 	double		offset_y;
 	bool		draw;
+	bool		draw_j;// d
 	int			x;
 	int			y;
 	double		julia_x;
@@ -70,7 +87,9 @@ void		ft_draw_mandel(t_fractal *f);
 void		ft_draw_julia(t_fractal *f);
 void		ft_image_resize(int32_t width, int32_t height, void* param);
 
-void		ft_key(mlx_key_data_t keydata, void* param);
+void		ft_key_universal(mlx_key_data_t keydata, void* param);
+void		ft_key_basic(mlx_key_data_t keydata, void* param);
+void		ft_key_divine(mlx_key_data_t keydata, void* param);
 void		ft_scroll(double xdelta, double ydelta, void* param);
 
 void		ft_fract_math(t_fractal *f, t_complex c, t_complex z);
