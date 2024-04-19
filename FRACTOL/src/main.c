@@ -112,11 +112,13 @@ void	draw_hook(void *param)
 		printf(">> DRAW MAND\n");// TEST
 		ft_draw_mandel(f);
 	}
-	if (f->draw && f->set == julia)
+	else if (f->draw && f->set == julia)
 	{
 		printf(">> DRAW JUL\n");// TEST
 		ft_draw_julia(f);
 	}
+	if (f->color_shift == true)
+		color_shift(f);
 }
 
 void	draw_hook_divine(void *param)

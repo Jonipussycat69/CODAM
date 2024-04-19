@@ -29,6 +29,7 @@ void	ft_draw_julia(t_fractal *f)
 	t_complex	z;
 	
 	f->draw = false;
+	f->draw_j = false;
 	f->y = 0;
 	c.x = f->julia_x;
 	c.y = f->julia_y;
@@ -39,7 +40,7 @@ void	ft_draw_julia(t_fractal *f)
 		{
 			z.x = ft_scale_x(f, f->x);
 			z.y = ft_scale_y(f, f->y);
-			ft_fract_math(f, z, c);
+			ft_fract_math(f, c, z);
 			f->x++;
 		}
 		f->y++;

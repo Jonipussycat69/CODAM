@@ -37,13 +37,60 @@ void	ft_scroll(double xdelta, double ydelta, void* param)
 	f->draw = true;// ?
 }
 
+void	ft_reset_view(t_fractal *f)
+{
+	f->draw = true;// ?
+	f->offset_x = -0.8;
+	if (f->set == julia)
+		f->offset_x = 0.0;
+	f->offset_y = 0.0;
+	f->zoom = 1.0;
+	f->zoom_prev = 1.0;
+}
+
 void	ft_set_switch(t_fractal *f)
 {
 	if (f->set == mandel)
+	{
 		f->set = julia;
+		ft_reset_view(f);
+		f->offset_x = 0.0;
+	}
 	else if (f->set == julia)
+	{
 		f->set = mandel;
+		ft_reset_view(f);
+	}
+}
+
+void	ft_color_switch(t_fractal *f)
+{
+	const int	arr[5] = {WHITE, RED, GREEN, BLUE, CYAN};
+	static int	i = 0;
+
+	if (i == 4)
+		i = 0;
+	else
+		i++;
+	f->color = arr[i];
 	f->draw = true;
+}
+
+void	ft_color_invert(t_fractal *f)
+{
+	// invert in gradient funct
+}
+
+void	ft_color_psych(t_fractal *f)
+{
+	f->color = WHITE;
+	if (f->color_shift == true)
+	{
+		f->color_shift = false;
+		f->c_range = 255;
+	}
+	else
+		f->color_shift = true;
 }
 
 void	ft_key_basic(mlx_key_data_t keydata, void* param)
@@ -54,7 +101,7 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_all(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
-		f->draw = true;
+		ft_reset_view(f);
 	else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 1);
 	else if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
@@ -67,6 +114,20 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 		ft_set_switch(f);
+	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
+		ft_color_switch(f);
+	else if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
+		ft_color_invert(f);
+	else if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
+		ft_color_psych(f);
+	else if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)// TEST
+	{
+		if (f->test == true)
+			f->test = false;
+		if (f->test == false)
+			f->test = true;
+		f->draw = true;
+	}
 }
 
 void	ft_key_divine(mlx_key_data_t keydata, void* param)
@@ -74,5 +135,12 @@ void	ft_key_divine(mlx_key_data_t keydata, void* param)
 	t_fractal	*f;
 	
 	f = param;
-	// divine resize etc.
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		close_all(f);
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+		ft_reset_view(f);
+	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
+		iteration_mod(f, 10);
+	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
+		iteration_mod(f, -10);
 }

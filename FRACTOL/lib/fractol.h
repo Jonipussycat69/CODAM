@@ -74,6 +74,9 @@ typedef struct s_fractal
 	double		ratio_t;// d
 	double		offset_x;
 	double		offset_y;
+	unsigned int	c_range;
+	unsigned int	color;
+	bool		color_shift;
 	bool		draw;
 	bool		draw_j;// d
 	int			x;
@@ -81,6 +84,7 @@ typedef struct s_fractal
 	double		julia_x;
 	double		julia_y;
 	bool		divine;
+	bool		test;// TEST
 }	t_fractal;
 
 void		ft_draw_mandel(t_fractal *f);
@@ -93,11 +97,12 @@ void		ft_scroll(double xdelta, double ydelta, void* param);
 
 void		ft_fract_math(t_fractal *f, t_complex c, t_complex z);
 
-unsigned int	col_grad(int val, int lim, unsigned int col);
 double		ft_scale_x(t_fractal *f, double val);
 double		ft_scale_y(t_fractal *f, double val);
 t_complex	sum_complex(t_complex a, t_complex b);
 t_complex	square_complex(t_complex a);
+
+void		color_shift(t_fractal *f);
 
 void		init_fractal_struct(t_fractal *f);
 void		iteration_mod(t_fractal *f, short mod);

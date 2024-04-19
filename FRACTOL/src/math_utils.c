@@ -1,10 +1,4 @@
 #include "../lib/fractol.h"
-unsigned int	col_grad(int val, int lim, unsigned int col)
-{
-	const double	proportion = ((double)val / (double)lim) * 255;
-
-	return (col - (255 - (int)proportion));
-}
 
 double	ft_scale_x(t_fractal *f, double val)
 {

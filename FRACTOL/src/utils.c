@@ -2,8 +2,14 @@
 
 void	init_fractal_struct(t_fractal *f)
 {
+	f->test = false;// TEST
 	f->draw = true;// ?
-	f->offset_x = -1.0;
+	f->c_range = 255;
+	f->color = WHITE;
+	f->color_shift = false;
+	f->offset_x = -0.8;
+	if (f->set == julia)
+		f->offset_x = 0.0;
 	f->offset_y = 0.0;
 	f->zoom = 1.0;
 	f->zoom_prev = 1.0;
