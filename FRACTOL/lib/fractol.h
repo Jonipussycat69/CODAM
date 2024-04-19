@@ -87,7 +87,6 @@ void		ft_draw_mandel(t_fractal *f);
 void		ft_draw_julia(t_fractal *f);
 void		ft_image_resize(int32_t width, int32_t height, void* param);
 
-void		ft_key_universal(mlx_key_data_t keydata, void* param);
 void		ft_key_basic(mlx_key_data_t keydata, void* param);
 void		ft_key_divine(mlx_key_data_t keydata, void* param);
 void		ft_scroll(double xdelta, double ydelta, void* param);

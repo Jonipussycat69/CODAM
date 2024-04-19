@@ -139,7 +139,6 @@ void	draw_hook_divine(void *param)
 static void	assign_hooks_universal(t_fractal *f)
 {
 	mlx_scroll_hook(f->mlx, ft_scroll, f);
-	mlx_key_hook(f->mlx, ft_key_universal, f);
 	mlx_loop_hook(f->mlx, move_hook, f);
 }
 

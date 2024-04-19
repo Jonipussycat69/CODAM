@@ -46,7 +46,7 @@ void	ft_set_switch(t_fractal *f)
 	f->draw = true;
 }
 
-void	ft_key_universal(mlx_key_data_t keydata, void* param)
+void	ft_key_basic(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
 	
@@ -55,14 +55,7 @@ void	ft_key_universal(mlx_key_data_t keydata, void* param)
 		close_all(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 		f->draw = true;
-}
-
-void	ft_key_basic(mlx_key_data_t keydata, void* param)
-{
-	t_fractal	*f;
-	
-	f = param;
-	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 1);
 	else if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 2);
