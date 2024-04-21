@@ -15,7 +15,8 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/image.c \
 			$(SRCDIR)/input_mlx.c \
 			$(SRCDIR)/utils.c \
-			$(SRCDIR)/color.c
+			$(SRCDIR)/color.c \
+			$(SRCDIR)/divine.c
 OBJS	= ${SRC:.c=.o}
 
 all: $(LIBS) $(NAME)
