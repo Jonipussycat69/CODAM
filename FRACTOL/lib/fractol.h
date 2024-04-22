@@ -22,18 +22,18 @@
 # define Y_MAX -2.0
 # define Y_MIN 2.0
 
-// DIVINE MODE
+// SPLIT MODE
 
-# define D_WIDTH 1400
-# define D_HEIGHT 700
+# define S_WIDTH 1600
+# define S_HEIGHT 800
 
 // mandelbrot
-# define M_WIDTH 700
-# define M_HEIGHT 700
+# define M_WIDTH 800
+# define M_HEIGHT 800
 
 // julia
-# define J_WIDTH 700
-# define J_HEIGHT 700
+# define J_WIDTH 800
+# define J_HEIGHT 800
 
 # define X_MAX_J 2.0
 # define X_MIN_J -2.0
@@ -70,7 +70,7 @@ typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	mlx_image_t	*img_div_j;// d
+	mlx_image_t	*img_j;// d
 	size_t		iterations;
 	size_t		iterations_j;// d
 	short		set;
@@ -92,21 +92,21 @@ typedef struct s_fractal
 	int			y;
 	double		julia_x;
 	double		julia_y;
-	bool		divine;
+	bool		split;
 	bool		test;// TEST
 }	t_fractal;
 
 void	ft_draw_mandel(t_fractal *f);
 void	ft_draw_julia(t_fractal *f);
-void	ft_draw_mandel_div(t_fractal *f, t_complex z);
-void	ft_draw_julia_div(t_fractal *f, t_complex c);
+void	ft_draw_mandel_split(t_fractal *f, t_complex z);
+void	ft_draw_julia_split(t_fractal *f, t_complex c);
 void	ft_image_resize(int32_t width, int32_t height, void* param);
 
 void	ft_key_basic(mlx_key_data_t keydata, void* param);
-void	ft_key_divine(mlx_key_data_t keydata, void* param);
+void	ft_key_split(mlx_key_data_t keydata, void* param);
 void	ft_scroll(double xdelta, double ydelta, void *param);
-void	ft_div_scroll(double xdelta, double ydelta, void *param);
-void	div_move_hook(void *param);
+void	ft_split_scroll(double xdelta, double ydelta, void *param);
+void	split_move_hook(void *param);
 bool	ft_cursor_check(t_fractal *f);
 
 void	ft_fract_math(t_fractal *f, t_complex c, t_complex z);
@@ -120,15 +120,15 @@ void	color_shift(t_fractal *f);
 void	ft_cursor_to_julia(void *param);
 
 void	assign_hooks_basic(t_fractal *f);
-void	assign_hooks_divine(t_fractal *f);
+void	assign_hooks_split(t_fractal *f);
 
 int		num_check(t_fractal *f, char *arg, int i);
 bool	arg_check(t_fractal *f, char *arg);
 void	assign_jul_c(t_fractal *f, char *arg);
 
 void	init_basic_struct(t_fractal *f);
-void	init_divine_struct(t_fractal *f);
-void	iteration_mod(t_fractal *f, short mod, short set);
+void	init_split_struct(t_fractal *f);
+void	iteration_mod(t_fractal *f, short mod);
 void	ft_window_size_set(t_fractal *f, short size);
 void	close_all(void *param);
 void	ft_error(t_fractal *f, char *message);

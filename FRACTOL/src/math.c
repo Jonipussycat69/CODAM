@@ -43,8 +43,8 @@ void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z)
 		z.x = real_tmp;
 		i++;
 	}
-	if (i < f->iterations)
-		return (mlx_put_pixel(f->img_div_j, f->x, f->y, \
-				col_grad(i, f->iterations, f->color, f)));
-	return (mlx_put_pixel(f->img_div_j, f->x, f->y, BLACK));
+	if (i < f->iterations_j)
+		return (mlx_put_pixel(f->img_j, f->x, f->y, \
+				col_grad(i, f->iterations_j, f->color, f)));
+	return (mlx_put_pixel(f->img_j, f->x, f->y, BLACK));
 }

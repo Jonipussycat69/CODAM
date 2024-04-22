@@ -38,7 +38,7 @@ void	ft_reset_view(t_fractal *f)
 	if (!ft_cursor_check(f))
 		return ;
 	mlx_get_mouse_pos(f->mlx, &x, &y);
-	if (f->divine == false || (f->divine == true && x < M_WIDTH))
+	if (f->split == false || (f->split == true && x < M_WIDTH))
 	{
 		f->draw = true;
 		f->offset_x = -0.8;
@@ -125,9 +125,9 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 	else if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
 		ft_window_size_set(f, 3);
 	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
-		iteration_mod(f, 10, mandel);
+		iteration_mod(f, 10);
 	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
-		iteration_mod(f, -10, mandel);
+		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 		ft_set_switch(f);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
@@ -146,7 +146,7 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 	}
 }
 
-void	ft_key_divine(mlx_key_data_t keydata, void* param)
+void	ft_key_split(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
 	
@@ -157,14 +157,14 @@ void	ft_key_divine(mlx_key_data_t keydata, void* param)
 		ft_reset_view(f);
 	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS \
 			&& mlx_is_key_down(f->mlx, MLX_KEY_J))
-		iteration_mod(f, 10, julia);
+		iteration_mod(f, 10);
 	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS \
 			&& mlx_is_key_down(f->mlx, MLX_KEY_J))
-		iteration_mod(f, -10, julia);
+		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
-		iteration_mod(f, 10, mandel);
+		iteration_mod(f, 10);
 	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
-		iteration_mod(f, -10, mandel);
+		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
 		ft_lock_j_switch(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)

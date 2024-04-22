@@ -19,7 +19,7 @@ void	ft_cursor_to_julia(void *param)
 	f->draw_j = true;
 }
 
-void	ft_div_scroll(double xdelta, double ydelta, void *param)
+void	ft_split_scroll(double xdelta, double ydelta, void *param)
 {
 	t_fractal	*f;
 	int32_t		x;
@@ -76,27 +76,27 @@ static void	move_jul(t_fractal *f)
 {
 	if (mlx_is_key_down(f->mlx, MLX_KEY_UP))
 	{
-		f->offset_y_j += 0.05 * f->zoom;
+		f->offset_y_j += 0.05 * f->zoom_j;
 		f->draw_j = true;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_DOWN))
 	{
-		f->offset_y_j -= 0.05 * f->zoom;
+		f->offset_y_j -= 0.05 * f->zoom_j;
 		f->draw_j = true;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_LEFT))
 	{
-		f->offset_x_j -= 0.05 * f->zoom;
+		f->offset_x_j -= 0.05 * f->zoom_j;
 		f->draw_j = true;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_RIGHT))
 	{
-		f->offset_x_j += 0.05 * f->zoom;
+		f->offset_x_j += 0.05 * f->zoom_j;
 		f->draw_j = true;
 	}
 }
 
-void	div_move_hook(void *param)
+void	split_move_hook(void *param)
 {
 	t_fractal	*f;
 	int32_t		x;

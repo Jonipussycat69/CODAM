@@ -14,17 +14,17 @@ static void	create_mlx_basic(t_fractal *f, char *name)
 // Creates an mlx window with two images:
 // one on the upper 2/3 (mandelbrot) (1:1)ratio
 // one on the lower 1/3 (julia) (1:2)ratio
-static void	create_mlx_divine(t_fractal *f)
+static void	create_mlx_split(t_fractal *f)
 {
 	mlx_set_setting(MLX_MAXIMIZED, false);
-	f->mlx = mlx_init(D_WIDTH, D_HEIGHT, "~ Divine View ~", false);
+	f->mlx = mlx_init(S_WIDTH, S_HEIGHT, "~ Split Screen ~", false);
 	if (!f->mlx)
 		ft_error(f, "MLX init error");
 	f->img = mlx_new_image(f->mlx, M_WIDTH, M_HEIGHT);// mand
 	if (!f->img || (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0))
 		ft_error(f, "MLX image error");
-	f->img_div_j = mlx_new_image(f->mlx, J_WIDTH, J_HEIGHT);// julia
-	if (!f->img || (mlx_image_to_window(f->mlx, f->img_div_j, 700, 0) < 0))
+	f->img_j = mlx_new_image(f->mlx, J_WIDTH, J_HEIGHT);// julia
+	if (!f->img || (mlx_image_to_window(f->mlx, f->img_j, M_WIDTH, 0) < 0))
 		ft_error(f, "MLX image error");
 	printf("test 1\n");// TEST
 	// HOW DO I PLACE THE IMAGES INSIDE WINDOW??
@@ -32,11 +32,11 @@ static void	create_mlx_divine(t_fractal *f)
 
 void	fractol(char *name, t_fractal *f)
 {
-	if (f->divine == true)
+	if (f->split == true)
 	{
-		create_mlx_divine(f);
-		assign_hooks_divine(f);
-		init_divine_struct(f);
+		create_mlx_split(f);
+		assign_hooks_split(f);
+		init_split_struct(f);
 	}
 	else
 	{
@@ -54,17 +54,17 @@ int32_t	main(int argc, char **argv)
 
 	f.mlx = NULL;
 	f.img = NULL;
-	f.img_div_j = NULL;
+	f.img_j = NULL;
 	if (argc != 2 && argc != 3)
 		ft_error(&f, "Instructions...1");
-	f.divine = false;
+	f.split = false;
 	f.set = mandel;
 	if (!(ft_strncmp(argv[1], "mandelbrot", 10)))
 		f.set = mandel;
 	else if (!(ft_strncmp(argv[1], "julia", 5)))
 		f.set = julia;
-	else if (!(ft_strncmp(argv[1], "divine", 6)))
-		f.divine = true;
+	else if (!(ft_strncmp(argv[1], "split", 6)))
+		f.split = true;
 	else
 		ft_error(&f, "Instructions...2");
 	f.julia_x = -1.2;

@@ -46,7 +46,7 @@ static void	draw_hook(void *param)
 		color_shift(f);
 }
 
-static void	draw_hook_divine(void *param)
+static void	draw_hook_split(void *param)
 {
 	t_fractal	*f;
 	t_complex	z;
@@ -58,14 +58,14 @@ static void	draw_hook_divine(void *param)
 		z.x = 0.0;
 		z.y = 0.0;
 		printf(">> DRAW MAND D\n");// TEST
-		ft_draw_mandel_div(f, z);
+		ft_draw_mandel_split(f, z);
 	}
 	if (f->draw_j)
 	{
 		c.x = f->julia_x;
 		c.y = f->julia_y;
 		printf(">> DRAW JUL D\n");// TEST
-		ft_draw_julia_div(f, c);
+		ft_draw_julia_split(f, c);
 	}
 }
 
@@ -79,12 +79,12 @@ void	assign_hooks_basic(t_fractal *f)
 	mlx_loop_hook(f->mlx, draw_hook, f);
 }
 
-void	assign_hooks_divine(t_fractal *f)
+void	assign_hooks_split(t_fractal *f)
 {
 	mlx_close_hook(f->mlx, close_all, f);
-	mlx_key_hook(f->mlx, ft_key_divine, f);
-	mlx_scroll_hook(f->mlx, ft_div_scroll, f);
-	mlx_loop_hook(f->mlx, draw_hook_divine, f);
+	mlx_key_hook(f->mlx, ft_key_split, f);
+	mlx_scroll_hook(f->mlx, ft_split_scroll, f);
+	mlx_loop_hook(f->mlx, draw_hook_split, f);
 	mlx_loop_hook(f->mlx, ft_cursor_to_julia, f);
-	mlx_loop_hook(f->mlx, div_move_hook, f);
+	mlx_loop_hook(f->mlx, split_move_hook, f);
 }

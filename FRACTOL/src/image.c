@@ -47,7 +47,7 @@ void	ft_draw_julia(t_fractal *f)
 }
 
 // divine
-void	ft_draw_mandel_div(t_fractal *f, t_complex z)
+void	ft_draw_mandel_split(t_fractal *f, t_complex z)
 {
 	t_complex	c;
 	const double	max_x = (X_MAX * f->zoom) + f->offset_x;
@@ -72,7 +72,7 @@ void	ft_draw_mandel_div(t_fractal *f, t_complex z)
 }
 
 // divine
-void	ft_draw_julia_div(t_fractal *f, t_complex c)
+void	ft_draw_julia_split(t_fractal *f, t_complex c)
 {
 	t_complex	z;
 	const double	max_x = (X_MAX_J * f->zoom_j) + f->offset_x_j;
@@ -103,6 +103,6 @@ void	ft_image_resize(int32_t width, int32_t height, void* param)
 	f = param;
 	printf("WIDTH: %d | HEIGHT: %d\n", width, height);// TEST
 	mlx_resize_image(f->img, width, height);
-	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
+	f->ratio = (double)height / (double)width;
 	f->draw = true;
 }

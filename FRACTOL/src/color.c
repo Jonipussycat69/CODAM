@@ -7,3 +7,8 @@ void	color_shift(t_fractal *f)// WHAT DOES THIS ACTUALLY DO?
 		f->c_range = UINT32_MAX;
 	f->draw = true;
 }
+
+void	color_engine(t_fractal *f)
+{
+	// LEFTOFF
+}

@@ -18,7 +18,7 @@ void	init_basic_struct(t_fractal *f)
 	f->lock_j = false;
 }
 
-void	init_divine_struct(t_fractal *f)
+void	init_split_struct(t_fractal *f)
 {
 	f->test = false;// TEST
 	f->draw = true;
@@ -39,30 +39,27 @@ void	init_divine_struct(t_fractal *f)
 	f->lock_j = false;
 }
 
-void	iteration_mod(t_fractal *f, short mod, short set)
+void	iteration_mod(t_fractal *f, short mod)
 {
-	if (set == mandel && mod > 0 && f->iterations < 1000)
+	int32_t	x;
+	int32_t	y;
+
+	if (!ft_cursor_check(f))
+		return ;
+	mlx_get_mouse_pos(f->mlx, &x, &y);
+	if (f->split == false || (x < M_WIDTH && \
+	((mod > 0 && f->iterations < 500) || \
+	(mod < 0 && f->iterations > 10))))
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
 		f->draw = true;
 	}
-	else if (set == mandel && mod < 0 && f->iterations > 10)
-	{
-		f->iterations += mod;
-		printf(">> iter %zu\n", f->iterations);// TEST
-		f->draw = true;
-	}
-	else if (set == julia && mod > 0 && f->iterations < 1000)
+	else if ((mod > 0 && f->iterations_j < 500) || \
+		(mod < 0 && f->iterations_j > 10))
 	{
 		f->iterations_j += mod;
-		printf(">> iter %zu\n", f->iterations);// TEST
-		f->draw_j = true;
-	}
-	else if (set == julia && mod < 0 && f->iterations > 10)
-	{
-		f->iterations_j += mod;
-		printf(">> iter %zu\n", f->iterations);// TEST
+		printf(">> iter %zu\n", f->iterations_j);// TEST
 		f->draw_j = true;
 	}
 }
@@ -93,8 +90,8 @@ void	close_all(void *param)
 	f = param;
 	if (f->img)
 		mlx_delete_image(f->mlx, f->img);
-	if (f->img_div_j)
-		mlx_delete_image(f->mlx, f->img_div_j);
+	if (f->img_j)
+		mlx_delete_image(f->mlx, f->img_j);
 	mlx_close_window(f->mlx);
 	mlx_terminate(f->mlx);
 	exit(EXIT_SUCCESS);
