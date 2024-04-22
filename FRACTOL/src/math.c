@@ -36,7 +36,7 @@ void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z)
 	double		real_tmp;
 
 	i = 0;
-	while (i < f->iterations + J_EXTRA && (z.x * z.x) + (z.y * z.y) <= 4)
+	while (i < f->iterations_j && (z.x * z.x) + (z.y * z.y) <= 4)
 	{
 		real_tmp = (z.x * z.x - z.y * z.y) + c.x;
 		z.y = (2 * z.x * z.y) + c.y;

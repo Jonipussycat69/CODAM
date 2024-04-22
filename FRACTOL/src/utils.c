@@ -1,10 +1,9 @@
 #include "../lib/fractol.h"
 
-void	init_fractal_struct(t_fractal *f)
+void	init_basic_struct(t_fractal *f)
 {
 	f->test = false;// TEST
 	f->draw = true;
-	f->draw_j = true;
 	f->c_range = 255;
 	f->color = WHITE;
 	f->color_shift = false;
@@ -13,28 +12,58 @@ void	init_fractal_struct(t_fractal *f)
 		f->offset_x = 0.0;
 	f->offset_y = 0.0;
 	f->zoom = 1.0;
-	f->zoom_prev = 1.0;
-	f->rat_j = J_HEIGHT / J_WIDTH;
 	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
-	if (f->divine == true)
-		f->ratio = 1;
 	f->iterations = 42;
 	f->inp = 1.0;
+	f->lock_j = false;
 }
 
-void	iteration_mod(t_fractal *f, short mod)
+void	init_divine_struct(t_fractal *f)
 {
-	if (mod > 0 && f->iterations < 1000)
+	f->test = false;// TEST
+	f->draw = true;
+	f->draw_j = true;
+	f->c_range = 255;
+	f->color = WHITE;
+	f->color_shift = false;
+	f->offset_x = -0.8;
+	f->offset_y = 0.0;
+	f->offset_x_j = 0.0;
+	f->offset_y_j = 0.0;
+	f->zoom = 1.0;
+	f->zoom_j = 1.0;
+	f->ratio = 1;
+	f->iterations = 42;
+	f->iterations_j = 62;
+	f->inp = 1.0;
+	f->lock_j = false;
+}
+
+void	iteration_mod(t_fractal *f, short mod, short set)
+{
+	if (set == mandel && mod > 0 && f->iterations < 1000)
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
 		f->draw = true;
 	}
-	else if (mod < 0 && f->iterations > 10)
+	else if (set == mandel && mod < 0 && f->iterations > 10)
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
 		f->draw = true;
+	}
+	else if (set == julia && mod > 0 && f->iterations < 1000)
+	{
+		f->iterations_j += mod;
+		printf(">> iter %zu\n", f->iterations);// TEST
+		f->draw_j = true;
+	}
+	else if (set == julia && mod < 0 && f->iterations > 10)
+	{
+		f->iterations_j += mod;
+		printf(">> iter %zu\n", f->iterations);// TEST
+		f->draw_j = true;
 	}
 }
 
@@ -62,6 +91,11 @@ void	close_all(void *param)
 	t_fractal	*f;
 	
 	f = param;
+	if (f->img)
+		mlx_delete_image(f->mlx, f->img);
+	if (f->img_div_j)
+		mlx_delete_image(f->mlx, f->img_div_j);
+	mlx_close_window(f->mlx);
 	mlx_terminate(f->mlx);
 	exit(EXIT_SUCCESS);
 }
