@@ -4,9 +4,6 @@ void	init_basic_struct(t_fractal *f)
 {
 	f->test = false;// TEST
 	f->draw = true;
-	f->c_range = 255;
-	f->color = WHITE;
-	f->color_shift = false;
 	f->offset_x = -0.8;
 	if (f->set == julia)
 		f->offset_x = 0.0;
@@ -23,9 +20,6 @@ void	init_split_struct(t_fractal *f)
 	f->test = false;// TEST
 	f->draw = true;
 	f->draw_j = true;
-	f->c_range = 255;
-	f->color = WHITE;
-	f->color_shift = false;
 	f->offset_x = -0.8;
 	f->offset_y = 0.0;
 	f->offset_x_j = 0.0;
@@ -53,6 +47,7 @@ void	iteration_mod(t_fractal *f, short mod)
 	{
 		f->iterations += mod;
 		printf(">> iter %zu\n", f->iterations);// TEST
+		re_init_palette(f, mandel);
 		f->draw = true;
 	}
 	else if ((mod > 0 && f->iterations_j < 500) || \
@@ -60,6 +55,7 @@ void	iteration_mod(t_fractal *f, short mod)
 	{
 		f->iterations_j += mod;
 		printf(">> iter %zu\n", f->iterations_j);// TEST
+		re_init_palette(f, julia);
 		f->draw_j = true;
 	}
 }
@@ -88,6 +84,10 @@ void	close_all(void *param)
 	t_fractal	*f;
 	
 	f = param;
+	if (f->palette_m)
+		free(f->palette_m);
+	if (f->palette_j)
+		free(f->palette_j);
 	if (f->img)
 		mlx_delete_image(f->mlx, f->img);
 	if (f->img_j)

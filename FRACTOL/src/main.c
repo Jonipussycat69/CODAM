@@ -32,11 +32,15 @@ static void	create_mlx_split(t_fractal *f)
 
 void	fractol(char *name, t_fractal *f)
 {
+	f->color_inf = BLACK;
+	f->c_low = hex_to_rgba(BLACK);
+	f->c_high = hex_to_rgba(WHITE);
 	if (f->split == true)
 	{
 		create_mlx_split(f);
 		assign_hooks_split(f);
 		init_split_struct(f);
+		init_color_palette_j(f, f->iterations_j);
 	}
 	else
 	{
@@ -44,6 +48,7 @@ void	fractol(char *name, t_fractal *f)
 		assign_hooks_basic(f);
 		init_basic_struct(f);
 	}
+	init_color_palette_m(f, f->iterations);
 	mlx_loop(f->mlx);
 	mlx_terminate(f->mlx);
 }
@@ -55,6 +60,8 @@ int32_t	main(int argc, char **argv)
 	f.mlx = NULL;
 	f.img = NULL;
 	f.img_j = NULL;
+	f.palette_m = NULL;
+	f.palette_j = NULL;
 	if (argc != 2 && argc != 3)
 		ft_error(&f, "Instructions...1");
 	f.split = false;

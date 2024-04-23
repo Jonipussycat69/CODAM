@@ -73,32 +73,24 @@ void	ft_set_switch(t_fractal *f)
 
 void	ft_color_switch(t_fractal *f)
 {
-	const int	arr[5] = {WHITE, RED, GREEN, BLUE, CYAN};
-	static int	i = 0;
+	const unsigned int	arr_i[5] = {BLACK, WHITE, LAND, BLACK, WHITE};
+	const unsigned int	arr_h[5] = {WHITE, PINK, SHORE, ORANGE, WHITE};
+	const unsigned int	arr_l[5] = {BLACK, CYAN, WATER, WHITE, BLACK};
+	static int			i = 0;
 
-	if (i == 4)
+	i++;
+	if (i == 5)
 		i = 0;
-	else
-		i++;
-	f->color = arr[i];
+	f->color_inf = arr_i[i];
+	f->c_high = hex_to_rgba(arr_h[i]);
+	f->c_low = hex_to_rgba(arr_l[i]);
+	re_init_palette(f, mandel);
 	f->draw = true;
-}
-
-void	ft_color_invert(t_fractal *f)
-{
-	// invert in gradient funct
-}
-
-void	ft_color_psych(t_fractal *f)
-{
-	f->color = WHITE;
-	if (f->color_shift == true)
+	if (f->split == true)
 	{
-		f->color_shift = false;
-		f->c_range = 255;
+		re_init_palette(f, julia);
+		f->draw_j = true;
 	}
-	else
-		f->color_shift = true;
 }
 
 void	ft_lock_j_switch(t_fractal *f)
@@ -132,10 +124,6 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 		ft_set_switch(f);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		ft_color_switch(f);
-	else if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
-		ft_color_invert(f);
-	else if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
-		ft_color_psych(f);
 	else if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)// TEST
 	{
 		if (f->test == true)
@@ -149,17 +137,15 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 void	ft_key_split(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
-	
+
 	f = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_all(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 		ft_reset_view(f);
-	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS \
-			&& mlx_is_key_down(f->mlx, MLX_KEY_J))
+	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 		iteration_mod(f, 10);
-	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS \
-			&& mlx_is_key_down(f->mlx, MLX_KEY_J))
+	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 		iteration_mod(f, 10);
@@ -169,4 +155,6 @@ void	ft_key_split(mlx_key_data_t keydata, void* param)
 		ft_lock_j_switch(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 		ft_reset_view(f);
+	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
+		ft_color_switch(f);
 }

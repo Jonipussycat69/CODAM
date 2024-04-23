@@ -42,8 +42,6 @@ static void	draw_hook(void *param)
 		printf(">> DRAW JUL\n");// TEST
 		ft_draw_julia(f);
 	}
-	if (f->color_shift == true)
-		color_shift(f);
 }
 
 static void	draw_hook_split(void *param)

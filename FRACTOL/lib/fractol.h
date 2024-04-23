@@ -9,6 +9,8 @@
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
+# define ERR_MESSAGE "ERROR"// change this!
+
 # define WIDTH_A 900
 # define HEIGHT_A 600
 # define WIDTH_B 600
@@ -43,14 +45,16 @@
 // colours
 # define BLACK	0x000000FF
 # define WHITE	0xFFFFFFFF
-# define RED	0xFF0000FF
-# define GREEN	0x00FF00FF
-# define BLUE	0x0000FFFF
-# define YELLOW	0xFFFF00FF
-# define CYAN	0x00FFFFFF
+# define SHORE	0xFFDD99DD
+# define LAND	0x339911FF
+# define WATER	0x7799FFFF
+# define YELLOW	0xFFFFAAAA
+# define CYAN	0x00FFFF88
 # define MAGENT	0xFF00FFFF
 # define GRAY	0x808080FF
-
+# define ORANGE	0xFC9A08FF
+# define RED	0xFC0845FF
+# define PINK	0xFC08C3BB
 
 enum	axis{x_ax, y_ax};
 enum	sets
@@ -66,11 +70,31 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
+typedef struct s_color_char
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}	t_color;
+
+typedef struct s_color_double
+{
+	double	r;
+	double	g;
+	double	b;
+	double	a;
+}	t_color_d;
+
 typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	mlx_image_t	*img_j;// d
+	unsigned int	*palette_m;
+	unsigned int	*palette_j;
+	t_color		c_low;
+	t_color		c_high;
 	size_t		iterations;
 	size_t		iterations_j;// d
 	short		set;
@@ -82,9 +106,7 @@ typedef struct s_fractal
 	double		offset_y;
 	double		offset_x_j;
 	double		offset_y_j;
-	unsigned int	c_range;
-	unsigned int	color;
-	bool		color_shift;
+	unsigned int	color_inf;
 	bool		draw;
 	bool		draw_j;// d
 	bool		lock_j;// d
@@ -115,7 +137,11 @@ void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z);
 double	ft_scale_x(t_fractal *f, double val);
 double	ft_scale_y(t_fractal *f, double val);
 
-void	color_shift(t_fractal *f);
+unsigned int	rgba_to_hex(t_color c);
+t_color	hex_to_rgba(unsigned int hex);
+void	init_color_palette_m(t_fractal *f, unsigned int size);
+void	init_color_palette_j(t_fractal *f, unsigned int size);
+void	re_init_palette(t_fractal *f, short set);
 
 void	ft_cursor_to_julia(void *param);
 
