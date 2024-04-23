@@ -95,6 +95,7 @@ typedef struct s_fractal
 	unsigned int	*palette_j;
 	t_color		c_low;
 	t_color		c_high;
+	unsigned int	color_inf;
 	size_t		iterations;
 	size_t		iterations_j;// d
 	short		set;
@@ -106,7 +107,6 @@ typedef struct s_fractal
 	double		offset_y;
 	double		offset_x_j;
 	double		offset_y_j;
-	unsigned int	color_inf;
 	bool		draw;
 	bool		draw_j;// d
 	bool		lock_j;// d
@@ -115,8 +115,17 @@ typedef struct s_fractal
 	double		julia_x;
 	double		julia_y;
 	bool		split;
-	bool		test;// TEST
+	bool		zebra;
 }	t_fractal;
+
+typedef struct s_picture
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	short		color_mode;
+	bool		draw;
+}	t_pic;
+
 
 void	ft_draw_mandel(t_fractal *f);
 void	ft_draw_julia(t_fractal *f);
@@ -141,6 +150,8 @@ unsigned int	rgba_to_hex(t_color c);
 t_color	hex_to_rgba(unsigned int hex);
 void	init_color_palette_m(t_fractal *f, unsigned int size);
 void	init_color_palette_j(t_fractal *f, unsigned int size);
+void	z_init_color_palette_m(t_fractal *f, unsigned int size);
+void	z_init_color_palette_j(t_fractal *f, unsigned int size);
 void	re_init_palette(t_fractal *f, short set);
 
 void	ft_cursor_to_julia(void *param);

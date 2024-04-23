@@ -2,7 +2,6 @@
 
 void	init_basic_struct(t_fractal *f)
 {
-	f->test = false;// TEST
 	f->draw = true;
 	f->offset_x = -0.8;
 	if (f->set == julia)
@@ -17,7 +16,6 @@ void	init_basic_struct(t_fractal *f)
 
 void	init_split_struct(t_fractal *f)
 {
-	f->test = false;// TEST
 	f->draw = true;
 	f->draw_j = true;
 	f->offset_x = -0.8;
@@ -106,6 +104,17 @@ void	ft_error(t_fractal *f, char *message)
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	if (f->mlx)
-		close_all(f);
+	{
+		if (f->palette_m)
+			free(f->palette_m);
+		if (f->palette_j)
+			free(f->palette_j);
+		if (f->img)
+			mlx_delete_image(f->mlx, f->img);
+		if (f->img_j)
+			mlx_delete_image(f->mlx, f->img_j);
+		mlx_close_window(f->mlx);
+		mlx_terminate(f->mlx);
+	}
 	exit(EXIT_FAILURE);
 }

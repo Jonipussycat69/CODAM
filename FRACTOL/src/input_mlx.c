@@ -101,6 +101,21 @@ void	ft_lock_j_switch(t_fractal *f)
 		f->lock_j = true;
 }
 
+void	zebra_mode_switch(t_fractal *f)
+{
+	if (f->zebra == true)
+		f->zebra = false;
+	else
+		f->zebra = true;
+	re_init_palette(f, mandel);
+	f->draw = true;
+	if (f->split)
+	{
+		re_init_palette(f, julia);
+		f->draw_j = true;
+	}
+}
+
 void	ft_key_basic(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
@@ -124,14 +139,8 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 		ft_set_switch(f);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		ft_color_switch(f);
-	else if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)// TEST
-	{
-		if (f->test == true)
-			f->test = false;
-		if (f->test == false)
-			f->test = true;
-		f->draw = true;
-	}
+	else if (keydata.key == MLX_KEY_Z && keydata.action == MLX_PRESS)
+		zebra_mode_switch(f);
 }
 
 void	ft_key_split(mlx_key_data_t keydata, void* param)
@@ -147,14 +156,12 @@ void	ft_key_split(mlx_key_data_t keydata, void* param)
 		iteration_mod(f, 10);
 	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 		iteration_mod(f, -10);
-	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
-		iteration_mod(f, 10);
-	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
-		iteration_mod(f, -10);
 	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
 		ft_lock_j_switch(f);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 		ft_reset_view(f);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		ft_color_switch(f);
+	else if (keydata.key == MLX_KEY_Z && keydata.action == MLX_PRESS)
+		zebra_mode_switch(f);
 }

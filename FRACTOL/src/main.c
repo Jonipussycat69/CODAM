@@ -1,5 +1,14 @@
 #include "../lib/fractol.h"
 
+static void	init_null(t_fractal *f)
+{
+	f->mlx = NULL;
+	f->img = NULL;
+	f->img_j = NULL;
+	f->palette_m = NULL;
+	f->palette_j = NULL;
+}
+
 static void	create_mlx_basic(t_fractal *f, char *name)
 {
 	mlx_set_setting(MLX_MAXIMIZED, false);
@@ -35,6 +44,7 @@ void	fractol(char *name, t_fractal *f)
 	f->color_inf = BLACK;
 	f->c_low = hex_to_rgba(BLACK);
 	f->c_high = hex_to_rgba(WHITE);
+	f->zebra = false;
 	if (f->split == true)
 	{
 		create_mlx_split(f);
@@ -50,18 +60,14 @@ void	fractol(char *name, t_fractal *f)
 	}
 	init_color_palette_m(f, f->iterations);
 	mlx_loop(f->mlx);
-	mlx_terminate(f->mlx);
+	close_all(f);
 }
 
 int32_t	main(int argc, char **argv)
 {
 	t_fractal	f;
 
-	f.mlx = NULL;
-	f.img = NULL;
-	f.img_j = NULL;
-	f.palette_m = NULL;
-	f.palette_j = NULL;
+	init_null(&f);
 	if (argc != 2 && argc != 3)
 		ft_error(&f, "Instructions...1");
 	f.split = false;

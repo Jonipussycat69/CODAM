@@ -46,7 +46,7 @@ void	ft_draw_julia(t_fractal *f)
 	}
 }
 
-// divine
+// split
 void	ft_draw_mandel_split(t_fractal *f, t_complex z)
 {
 	t_complex	c;
@@ -71,7 +71,7 @@ void	ft_draw_mandel_split(t_fractal *f, t_complex z)
 	}
 }
 
-// divine
+// split
 void	ft_draw_julia_split(t_fractal *f, t_complex c)
 {
 	t_complex	z;
@@ -101,7 +101,6 @@ void	ft_image_resize(int32_t width, int32_t height, void* param)
 	t_fractal	*f;
 
 	f = param;
-	printf("WIDTH: %d | HEIGHT: %d\n", width, height);// TEST
 	mlx_resize_image(f->img, width, height);
 	f->ratio = (double)height / (double)width;
 	f->draw = true;
