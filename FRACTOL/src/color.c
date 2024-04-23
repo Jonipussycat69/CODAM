@@ -19,3 +19,8 @@ t_color	hex_to_rgba(unsigned int hex)
 	c.a = hex & 0xFF;
 	return (c);
 }
+
+unsigned int	round_to_uint(double n)
+{
+	return ((unsigned int)(n + 0.5));
+}

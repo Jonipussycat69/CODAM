@@ -44,7 +44,7 @@ void	fractol(char *name, t_fractal *f)
 	f->color_inf = BLACK;
 	f->c_low = hex_to_rgba(BLACK);
 	f->c_high = hex_to_rgba(WHITE);
-	f->zebra = false;
+	f->palette = normal;
 	if (f->split == true)
 	{
 		create_mlx_split(f);

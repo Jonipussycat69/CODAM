@@ -90,21 +90,69 @@ void	z_init_color_palette_j(t_fractal *f, unsigned int size)
 	}
 }
 
+void	i_init_color_palette_m(t_fractal *f, unsigned int size)
+{
+	double			t;
+	unsigned int	i;
+	t_color			c;
+
+	f->palette_m = (unsigned int *)malloc(sizeof(unsigned int) * size);
+	if (!f->palette_m)
+		ft_error(f, "");
+	i = 0;
+	while (i < size)
+	{
+		t = (double)i / (double)(size - 1);
+		c.r = round_to_uint((1 - t) * f->c_high.r + t * f->c_low.r);
+		c.g = round_to_uint((1 - t) * f->c_high.g + t * f->c_low.g);
+		c.b = round_to_uint((1 - t) * f->c_high.b + t * f->c_low.b);
+		c.a = round_to_uint((1 - t) * f->c_high.a + t * f->c_low.a);
+		f->palette_m[i] = rgba_to_hex(c);
+		i++;
+	}
+}
+
+void	i_init_color_palette_j(t_fractal *f, unsigned int size)
+{
+	double			t;
+	unsigned int	i;
+	t_color			c;
+
+	f->palette_j = (unsigned int *)malloc(sizeof(unsigned int) * size);
+	if (!f->palette_j)
+		ft_error(f, "");
+	i = 0;
+	while (i < size)
+	{
+		t = (double)i / (double)(size - 1);
+		c.r = round_to_uint((1 - t) * f->c_high.r + t * f->c_low.r);
+		c.g = round_to_uint((1 - t) * f->c_high.g + t * f->c_low.g);
+		c.b = round_to_uint((1 - t) * f->c_high.b + t * f->c_low.b);
+		c.a = round_to_uint((1 - t) * f->c_high.a + t * f->c_low.a);
+		f->palette_j[i] = rgba_to_hex(c);
+		i++;
+	}
+}
+
 void	re_init_palette(t_fractal *f, short set)
 {
 	if (set == mandel)
 	{
 		free(f->palette_m);
-		if (f->zebra)
+		if (f->palette == zebra)
 			return (z_init_color_palette_m(f, f->iterations));
+		if (f->palette == inverse)
+			return (i_init_color_palette_m(f, f->iterations));
 		init_color_palette_m(f, f->iterations);
 		return ;
 	}
 	if (set == julia)
 	{
 		free(f->palette_j);
-		if (f->zebra)
+		if (f->palette == zebra)
 			return (z_init_color_palette_j(f, f->iterations_j));
+		if (f->palette == inverse)
+			return (i_init_color_palette_j(f, f->iterations_j));
 		init_color_palette_j(f, f->iterations_j);
 		return ;
 	}

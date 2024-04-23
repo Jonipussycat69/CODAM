@@ -45,9 +45,9 @@
 // colours
 # define BLACK	0x000000FF
 # define WHITE	0xFFFFFFFF
-# define SHORE	0xFFDD99DD
-# define LAND	0x339911FF
-# define WATER	0x7799FFFF
+# define SHORE	0xFFDD88FF
+# define LAND	0x337711FF
+# define WATER	0x3399FFFF
 # define YELLOW	0xFFFFAAAA
 # define CYAN	0x00FFFF88
 # define MAGENT	0xFF00FFFF
@@ -61,6 +61,13 @@ enum	sets
 {
 	mandel = 1,
 	julia = 2
+};
+
+enum	palettes
+{
+	normal,
+	zebra,
+	inverse
 };
 
 // complex point, x = real, y = imaginary
@@ -115,16 +122,8 @@ typedef struct s_fractal
 	double		julia_x;
 	double		julia_y;
 	bool		split;
-	bool		zebra;
+	short		palette;
 }	t_fractal;
-
-typedef struct s_picture
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	short		color_mode;
-	bool		draw;
-}	t_pic;
 
 
 void	ft_draw_mandel(t_fractal *f);
@@ -146,8 +145,10 @@ void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z);
 double	ft_scale_x(t_fractal *f, double val);
 double	ft_scale_y(t_fractal *f, double val);
 
+unsigned int	round_to_uint(double n);
 unsigned int	rgba_to_hex(t_color c);
 t_color	hex_to_rgba(unsigned int hex);
+
 void	init_color_palette_m(t_fractal *f, unsigned int size);
 void	init_color_palette_j(t_fractal *f, unsigned int size);
 void	z_init_color_palette_m(t_fractal *f, unsigned int size);
