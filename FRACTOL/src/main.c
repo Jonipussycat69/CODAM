@@ -44,6 +44,10 @@ void	fractol(char *name, t_fractal *f)
 	f->color_inf = BLACK;
 	f->c_low = hex_to_rgba(BLACK);
 	f->c_high = hex_to_rgba(WHITE);
+	f->c_a = hex_to_rgba(BLACK);
+	f->c_b = hex_to_rgba(BLACK);
+	f->c_c = hex_to_rgba(ORANGE);
+	f->c_d = hex_to_rgba(WATER);
 	f->palette = normal;
 	if (f->split == true)
 	{

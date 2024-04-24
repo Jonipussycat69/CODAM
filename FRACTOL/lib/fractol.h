@@ -56,6 +56,91 @@
 # define RED	0xFC0845FF
 # define PINK	0xFC08C3BB
 
+# define C_WHITE     0xFFFFFFFF
+# define C_BLACK     0x000000FF
+# define C_RED       0xFF0000FF
+# define C_GREEN     0x00FF00FF
+# define C_BLUE      0x0000FFFF
+# define C_YELLOW    0xFFFF00FF
+# define C_CYAN      0x00FFFFFF
+# define C_MAGENTA   0xFF00FFFF
+# define C_ORANGE    0xFFA500FF
+# define C_PURPLE    0x800080FF
+# define C_PINK      0xFFC0CBFF
+# define C_BROWN     0xA52A2AFF
+# define C_GOLD      0xFFD700FF
+# define C_SILVER    0xC0C0C0FF
+# define C_GRAY      0x808080FF
+# define C_LIGHT_GRAY 0xD3D3D3FF
+# define C_DARK_GRAY 0xA9A9A9FF
+# define C_MAROON    0x800000FF
+# define C_OLIVE     0x808000FF
+# define C_TEAL      0x008080FF
+# define C_NAVY      0x000080FF
+# define C_LIME      0x00FF00FF
+# define C_INDIGO    0x4B0082FF
+# define C_CRIMSON   0xDC143CFF
+# define C_CORAL     0xFF7F50FF
+# define C_LAVENDER  0xE6E6FAFF
+# define C_TURQUOISE 0x40E0D0FF
+# define C_VIOLET    0x8A2BE2FF
+# define C_BEIGE     0xF5F5DCFF
+# define C_IVORY     0xFFFFF0FF
+# define C_KHAKI     0xF0E68CFF
+# define C_SEASHELL  0xFFF5EEFF
+# define C_CORNSILK  0xFFF8DCFF
+# define C_PAPAYA_WHIP 0xFFEFD5FF
+# define C_LINEN     0xFAF0E6FF
+# define C_ANTIQUE_WHITE 0xFAEBD7FF
+
+# define C_OLD_LACE  0xFDF5E6FF
+# define C_BLANCHED_ALMOND 0xFFEBCDFF
+# define C_BISQUE    0xFFE4C4FF
+# define C_PEACH_PUFF 0xFFDAB9FF
+# define C_NAVAJO_WHITE 0xFFDEADFF
+# define C_MOCCASIN  0xFFE4B5FF
+# define C_WHEAT     0xF5DEB3FF
+# define C_MISTY_ROSE 0xFFE4E1FF
+# define C_ROSY_BROWN 0xBC8F8FFF
+# define C_SALMON    0xFA8072FF
+# define C_LIGHT_SALMON 0xFFA07AFF
+# define C_DARK_SALMON 0xE9967AFF
+# define C_LIGHT_CORAL 0xF08080FF
+# define C_INDIAN_RED 0xCD5C5CFF
+# define C_LIGHT_PINK 0xFFB6C1FF
+# define C_MEDIUM_VIOLET_RED 0xC71585FF
+# define C_DARK_VIOLET 0x9400D3FF
+# define C_DARK_ORCHID 0x9932CCFF
+# define C_DARK_MAGENTA 0x8B008BFF
+# define C_PURPLE     0x800080FF
+# define C_INDIGO     0x4B0082FF
+# define C_SLATE_BLUE 0x6A5ACDFF
+# define C_MEDIUM_PURPLE 0x9370DBFF
+# define C_DARK_SLATE_BLUE 0x040947FF
+# define C_MEDIUM_SLATE_BLUE 0x7B68EEFF
+# define C_LAVENDER_BLUSH 0xFFF0F5FF
+# define C_THISTLE    0xD8BFD8FF
+# define C_PLUM       0xDDA0DDFF
+# define C_VIOLET_RED 0xEE82EEFF
+# define C_ORCHID     0xDA70D6FF
+# define C_MEDIUM_ORCHID 0xBA55D3FF
+# define C_DARK_ORCHID 0x9932CCFF
+# define C_DARK_VIOLET 0x9400D3FF
+# define C_BLUE_VIOLET 0x8A2BE2FF
+# define C_MEDIUM_VIOLET_RED 0xC71585FF
+# define C_PALE_VIOLET_RED 0xDB7093FF
+# define C_DEEP_PINK 0xFF1493FF
+# define C_HOT_PINK  0xFF69B4FF
+# define C_LIGHT_HOT_PINK 0xFFB6C1FF
+# define C_MEDIUM_HOT_PINK 0xCD5C5CFF
+# define C_DARK_HOT_PINK 0x8B0000FF
+# define C_LIGHT_SKY_BLUE 0x87CEFAFF
+# define C_SKY_BLUE   0x87CEEBFF
+# define C_DEEP_SKY_BLUE 0x00BFFFFF
+# define C_LIGHT_STEEL_BLUE 0xB0C4DEFF
+# define C_DODGER    0x1E90FFFF
+
+
 enum	axis{x_ax, y_ax};
 enum	sets
 {
@@ -67,7 +152,8 @@ enum	palettes
 {
 	normal,
 	zebra,
-	inverse
+	inverse,
+	multi
 };
 
 // complex point, x = real, y = imaginary
@@ -103,6 +189,10 @@ typedef struct s_fractal
 	t_color		c_low;
 	t_color		c_high;
 	unsigned int	color_inf;
+	t_color		c_a;
+	t_color		c_b;
+	t_color		c_c;
+	t_color		c_d;
 	size_t		iterations;
 	size_t		iterations_j;// d
 	short		set;
