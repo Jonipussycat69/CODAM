@@ -143,6 +143,8 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 		ft_color_switch(f);
 	else if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
 		palette_switch(f);
+	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
+		ft_lock_j_switch(f);
 }
 
 void	ft_key_split(mlx_key_data_t keydata, void* param)

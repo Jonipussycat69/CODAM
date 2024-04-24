@@ -156,6 +156,7 @@ void	z_init_color_palette_j(t_fractal *f, unsigned int size);
 void	re_init_palette(t_fractal *f, short set);
 
 void	ft_cursor_to_julia(void *param);
+void	ft_cursor_to_julia_basic(void *param);
 
 void	assign_hooks_basic(t_fractal *f);
 void	assign_hooks_split(t_fractal *f);

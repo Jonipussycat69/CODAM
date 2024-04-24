@@ -6,9 +6,9 @@ void	ft_cursor_to_julia(void *param)
 	int32_t	x;
 	int32_t	y;
 
+	f = param;
 	if (f->lock_j == true)
 		return ;
-	f = param;
 	x = 0;
 	y = 0;
 	mlx_get_mouse_pos(f->mlx, &x, &y);
@@ -17,6 +17,26 @@ void	ft_cursor_to_julia(void *param)
 	f->julia_x = ft_scale_x(f, x * 2);
 	f->julia_y = ft_scale_y(f, y);
 	f->draw_j = true;
+}
+
+void	ft_cursor_to_julia_basic(void *param)
+{
+	t_fractal	*f;
+	int32_t	x;
+	int32_t	y;
+
+	f = param;
+	if (f->lock_j == true)
+		return ;
+	x = 0;
+	y = 0;
+	mlx_get_mouse_pos(f->mlx, &x, &y);
+	if (f->set != julia || x < 0 || y < 0 || x > f->mlx->width || \
+		y > f->mlx->height)
+		return ;
+	f->julia_x = ft_scale_x(f, x);
+	f->julia_y = ft_scale_y(f, y);
+	f->draw = true;
 }
 
 void	ft_split_scroll(double xdelta, double ydelta, void *param)

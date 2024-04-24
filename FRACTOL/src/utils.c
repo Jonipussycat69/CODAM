@@ -11,7 +11,7 @@ void	init_basic_struct(t_fractal *f)
 	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
 	f->iterations = 82;
 	f->inp = 1.0;
-	f->lock_j = false;
+	f->lock_j = true;
 }
 
 void	init_split_struct(t_fractal *f)

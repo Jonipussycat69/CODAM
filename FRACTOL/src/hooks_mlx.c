@@ -74,6 +74,7 @@ void	assign_hooks_basic(t_fractal *f)
 	mlx_scroll_hook(f->mlx, ft_scroll, f);
 	mlx_key_hook(f->mlx, ft_key_basic, f);
 	mlx_resize_hook(f->mlx, ft_image_resize, f);
+	mlx_loop_hook(f->mlx, ft_cursor_to_julia_basic, f);
 	mlx_loop_hook(f->mlx, draw_hook, f);
 }
 
