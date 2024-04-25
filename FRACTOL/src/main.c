@@ -9,6 +9,20 @@ static void	init_null(t_fractal *f)
 	f->palette_j = NULL;
 }
 
+void	init_color(t_fractal *f)
+{
+	f->color_inf = BLACK;
+	f->c_inf_m = BLACK;
+	f->c_inf_n = BLACK;
+	f->c_low = hex_to_rgba(BLACK);
+	f->c_high = hex_to_rgba(WHITE);
+	f->c_a = hex_to_rgba(BLACK);
+	f->c_b = hex_to_rgba(BLACK);
+	f->c_c = hex_to_rgba(ORANGE);
+	f->c_d = hex_to_rgba(WATER);
+	f->palette = multi;
+}
+
 static void	create_mlx_basic(t_fractal *f, char *name)
 {
 	mlx_set_setting(MLX_MAXIMIZED, false);
@@ -41,20 +55,13 @@ static void	create_mlx_split(t_fractal *f)
 
 void	fractol(char *name, t_fractal *f)
 {
-	f->color_inf = BLACK;
-	f->c_low = hex_to_rgba(BLACK);
-	f->c_high = hex_to_rgba(WHITE);
-	f->c_a = hex_to_rgba(BLACK);
-	f->c_b = hex_to_rgba(BLACK);
-	f->c_c = hex_to_rgba(ORANGE);
-	f->c_d = hex_to_rgba(WATER);
-	f->palette = normal;
+	init_color(f);
 	if (f->split == true)
 	{
 		create_mlx_split(f);
 		assign_hooks_split(f);
 		init_split_struct(f);
-		init_color_palette_j(f, f->iterations_j);
+		re_init_palette(f, julia);
 	}
 	else
 	{
@@ -62,7 +69,7 @@ void	fractol(char *name, t_fractal *f)
 		assign_hooks_basic(f);
 		init_basic_struct(f);
 	}
-	init_color_palette_m(f, f->iterations);
+	re_init_palette(f, mandel);
 	mlx_loop(f->mlx);
 	close_all(f);
 }

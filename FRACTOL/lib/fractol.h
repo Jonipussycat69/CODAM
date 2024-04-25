@@ -189,6 +189,8 @@ typedef struct s_fractal
 	t_color		c_low;
 	t_color		c_high;
 	unsigned int	color_inf;
+	unsigned int	c_inf_n;
+	unsigned int	c_inf_m;
 	t_color		c_a;
 	t_color		c_b;
 	t_color		c_c;

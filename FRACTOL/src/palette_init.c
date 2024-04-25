@@ -24,9 +24,9 @@ void	init_color_palette_m(t_fractal *f, unsigned int size)
 	{
 		t = (double)i / (double)size;
 		if (f->palette == inverse)
-			f->palette_m[i] = color_interpolate(f->c_low, f->c_high, t);
-		else
 			f->palette_m[i] = color_interpolate(f->c_high, f->c_low, t);
+		else
+			f->palette_m[i] = color_interpolate(f->c_low, f->c_high, t);
 		i++;
 	}
 }
@@ -44,9 +44,9 @@ void	init_color_palette_j(t_fractal *f, unsigned int size)
 	{
 		t = (double)i / (double)size;
 		if (f->palette == inverse)
-			f->palette_j[i] = color_interpolate(f->c_low, f->c_high, t);
-		else
 			f->palette_j[i] = color_interpolate(f->c_high, f->c_low, t);
+		else
+			f->palette_j[i] = color_interpolate(f->c_low, f->c_high, t);
 		i++;
 	}
 }
@@ -195,6 +195,10 @@ void	jewel_init_color_palette_j(t_fractal *f, unsigned int size)
 
 void	re_init_palette(t_fractal *f, short set)
 {
+	if (f->palette == multi)
+		f->color_inf = f->c_inf_m;
+	else
+		f->color_inf = f->c_inf_n;
 	if (set == mandel)
 	{
 		free(f->palette_m);

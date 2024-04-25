@@ -73,17 +73,17 @@ void	ft_set_switch(t_fractal *f)
 // LEFTOFF! Fuckaround and then define the best array combination!
 void	ft_color_switch_multi(t_fractal *f)
 {
-	const unsigned int	a_i[5] = {C_DODGER, C_DARK_SLATE_BLUE, LAND, BLACK, BLACK};
-	const unsigned int	a_a[5] = {BLACK, BLACK, LAND, BLACK, BLACK};
-	const unsigned int	a_b[5] = {ORANGE, ORANGE, SHORE, ORANGE, BLACK};
-	const unsigned int	a_c[5] = {RED, C_LIGHT_STEEL_BLUE, WATER, WHITE, ORANGE};
-	const unsigned int	a_d[5] = {WATER, C_DARK_SLATE_BLUE, WATER, WHITE, C_LIGHT_STEEL_BLUE};
+	const unsigned int	a_i[5] = {C_CRIMSON, C_SILVER, WATER, BLACK, BLACK};
+	const unsigned int	a_a[5] = {BLACK, C_SILVER, C_LIGHT_SKY_BLUE, BLACK, BLACK};
+	const unsigned int	a_b[5] = {C_IVORY, ORANGE, SHORE, ORANGE, BLACK};
+	const unsigned int	a_c[5] = {C_DARK_ORCHID, C_CRIMSON, C_CRIMSON, WHITE, ORANGE};
+	const unsigned int	a_d[5] = {C_YELLOW, C_DARK_ORCHID, WATER, C_LIGHT_STEEL_BLUE, C_LIGHT_STEEL_BLUE};
 	static int			i = 0;
 
 	i++;
 	if (i == 5)
 		i = 0;
-	f->color_inf = a_i[i];
+	f->c_inf_m = a_i[i];
 	f->c_a = hex_to_rgba(a_a[i]);
 	f->c_b = hex_to_rgba(a_b[i]);
 	f->c_c = hex_to_rgba(a_c[i]);
@@ -109,7 +109,7 @@ void	ft_color_switch(t_fractal *f)
 	i++;
 	if (i == 5)
 		i = 0;
-	f->color_inf = arr_i[i];
+	f->c_inf_n = arr_i[i];
 	f->c_high = hex_to_rgba(arr_h[i]);
 	f->c_low = hex_to_rgba(arr_l[i]);
 	re_init_palette(f, mandel);
@@ -141,7 +141,7 @@ void	palette_switch(t_fractal *f)
 		f->palette = normal;
 	re_init_palette(f, mandel);
 	f->draw = true;
-	if (f->split)
+	if (f->split == true)
 	{
 		re_init_palette(f, julia);
 		f->draw_j = true;
