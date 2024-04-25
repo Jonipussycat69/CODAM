@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdobos <jdobos@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:55:23 by jdobos            #+#    #+#             */
-/*   Updated: 2023/10/24 11:40:58 by jdobos           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strtrim.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/10 17:55:23 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/04/25 16:47:59 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	check(char const ch, char const *set)
 	return (0);
 }
 
+// changed "j - i < 0 to j - i == 0" while working on fractol
 static int	count(char const *s1, char const *set)
 {
 	size_t	i;
@@ -37,7 +38,7 @@ static int	count(char const *s1, char const *set)
 	while (check(s1[j], set) == 1 && j >= i)
 	{
 		j--;
-		if (j - i < 0)
+		if (j - i == 0)
 			return (j - i);
 	}
 	return (j - i);

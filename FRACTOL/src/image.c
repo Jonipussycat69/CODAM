@@ -96,6 +96,7 @@ void	ft_draw_julia_split(t_fractal *f, t_complex c)
 	}
 }
 
+// segfault when changing too suddenly? because of with vs. f->mlx->with etc.?
 void	ft_image_resize(int32_t width, int32_t height, void* param)
 {
 	t_fractal	*f;
