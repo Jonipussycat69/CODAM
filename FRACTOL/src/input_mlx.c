@@ -60,12 +60,14 @@ void	ft_set_switch(t_fractal *f)
 {
 	if (f->set == mandel)
 	{
+		mlx_set_window_title(f->mlx, "julia");
 		f->set = julia;
 		ft_reset_view(f);
 		f->offset_x = 0.0;
 	}
 	else if (f->set == julia)
 	{
+		mlx_set_window_title(f->mlx, "mandelbrot");
 		f->set = mandel;
 		ft_reset_view(f);
 	}

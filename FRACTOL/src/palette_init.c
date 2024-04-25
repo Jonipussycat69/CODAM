@@ -56,6 +56,7 @@ void	z_init_color_palette_m(t_fractal *f, unsigned int size)
 	const unsigned int	color_a = rgba_to_hex(f->c_high);
 	const unsigned int	color_b = rgba_to_hex(f->c_low);
 	unsigned int		i;
+	double	t;
 
 	f->palette_m = (unsigned int *)malloc(sizeof(unsigned int) * size);
 	if (!f->palette_m)
@@ -63,10 +64,11 @@ void	z_init_color_palette_m(t_fractal *f, unsigned int size)
 	i = 0;
 	while (i < size)
 	{
+		t = (double)i / (double)size;
 		if (i % 2 == 0)
-			f->palette_m[i] = color_a;
+			f->palette_m[i] = color_interpolate(f->c_high, f->c_low, t);
 		else
-			f->palette_m[i] = color_b;
+			f->palette_m[i] = color_interpolate(f->c_low, f->c_high, t);
 		i++;
 	}
 }
@@ -76,6 +78,7 @@ void	z_init_color_palette_j(t_fractal *f, unsigned int size)
 	const unsigned int	color_a = rgba_to_hex(f->c_high);
 	const unsigned int	color_b = rgba_to_hex(f->c_low);
 	unsigned int	i;
+	double	t;
 
 	f->palette_j = (unsigned int *)malloc(sizeof(unsigned int) * size);
 	if (!f->palette_j)
@@ -83,10 +86,11 @@ void	z_init_color_palette_j(t_fractal *f, unsigned int size)
 	i = 0;
 	while (i < size)
 	{
+		t = (double)i / (double)size;
 		if (i % 2 == 0)
-			f->palette_j[i] = color_a;
+			f->palette_j[i] = color_interpolate(f->c_high, f->c_low, t);
 		else
-			f->palette_j[i] = color_b;
+			f->palette_j[i] = color_interpolate(f->c_low, f->c_high, t);
 		i++;
 	}
 }
