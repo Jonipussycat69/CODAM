@@ -9,7 +9,8 @@
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
-# define ERR_MESSAGE "ERROR"// change this!
+# define ERR_MESSAGE "Input error! Correct input format:\n./[name.a][mandelbbrot/ julia/ split][x, yi](optional for julia)\n"// change this!
+# define RETINA_ITER 1600
 
 # define WIDTH_A 900
 # define HEIGHT_A 600
@@ -68,7 +69,7 @@
 # define C_PURPLE    0x800080FF
 # define C_PINK      0xFFC0CBFF
 # define C_BROWN     0xA52A2AFF
-# define C_GOLD      0xFFD700FF
+# define C_GOLD      0xFFD755FF
 # define C_SILVER    0xC0C0C0FF
 # define C_GRAY      0x808080FF
 # define C_LIGHT_GRAY 0xD3D3D3FF
@@ -140,7 +141,6 @@
 # define C_LIGHT_STEEL_BLUE 0xB0C4DEFF
 # define C_DODGER    0x1E90FFFF
 
-
 enum	axis{x_ax, y_ax};
 enum	sets
 {
@@ -179,11 +179,13 @@ typedef struct s_color_double
 	double	a;
 }	t_color_d;
 
+typedef unsigned int	c_a;// use for color arr!
+
 typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	mlx_image_t	*img_j;// d
+	mlx_image_t	*img_j;
 	unsigned int	*palette_m;
 	unsigned int	*palette_j;
 	t_color		c_low;
@@ -196,7 +198,7 @@ typedef struct s_fractal
 	t_color		c_c;
 	t_color		c_d;
 	size_t		iterations;
-	size_t		iterations_j;// d
+	size_t		iterations_j;
 	short		set;
 	double		inp;
 	double		zoom;
@@ -207,13 +209,14 @@ typedef struct s_fractal
 	double		offset_x_j;
 	double		offset_y_j;
 	bool		draw;
-	bool		draw_j;// d
-	bool		lock_j;// d
+	bool		draw_j;
+	bool		lock_j;
 	int			x;
 	int			y;
 	double		julia_x;
 	double		julia_y;
 	bool		split;
+	bool		retina_mode;
 	short		palette;
 }	t_fractal;
 
@@ -256,6 +259,8 @@ void	assign_hooks_split(t_fractal *f);
 int		num_check(t_fractal *f, char *arg, int i);
 bool	arg_check(t_fractal *f, char *arg);
 void	assign_jul_c(t_fractal *f, char *arg);
+
+void	ft_retina_switch(t_fractal *f);
 
 void	init_basic_struct(t_fractal *f);
 void	init_split_struct(t_fractal *f);

@@ -16,8 +16,8 @@ void	ft_scroll(double xdelta, double ydelta, void *param)
 	t_fractal	*f;
 
 	f = param;
-	printf(">> SCROLL %f\n", ydelta);// TEST
-	if (ft_cursor_check(f) == false || !ydelta || xdelta > 1)
+	if (ft_cursor_check(f) == false || !ydelta || xdelta > 1 || \
+		f->retina_mode == true)
 		return ;
 	if (ydelta > 0)
 	{
@@ -72,18 +72,18 @@ void	ft_set_switch(t_fractal *f)
 		ft_reset_view(f);
 	}
 }
-// LEFTOFF! Fuckaround and then define the best array combination!
+// LEFTOFF! Fuckaround and find the best array combination!
 void	ft_color_switch_multi(t_fractal *f)
 {
-	const unsigned int	a_i[5] = {C_CRIMSON, C_SILVER, WATER, BLACK, BLACK};
-	const unsigned int	a_a[5] = {BLACK, C_SILVER, C_LIGHT_SKY_BLUE, BLACK, BLACK};
-	const unsigned int	a_b[5] = {C_IVORY, ORANGE, SHORE, ORANGE, BLACK};
-	const unsigned int	a_c[5] = {C_DARK_ORCHID, C_CRIMSON, C_CRIMSON, WHITE, ORANGE};
-	const unsigned int	a_d[5] = {C_YELLOW, C_DARK_ORCHID, WATER, C_LIGHT_STEEL_BLUE, C_LIGHT_STEEL_BLUE};
+	const unsigned int	a_i[] = {BLACK, BLACK, BLACK, C_ANTIQUE_WHITE, C_CORNSILK, WATER, BLACK};
+	const unsigned int	a_a[] = {BLACK, C_WHEAT, C_BLANCHED_ALMOND, C_BEIGE, C_BISQUE, C_LIGHT_SKY_BLUE, BLACK};
+	const unsigned int	a_b[] = {ORANGE, C_BROWN, C_BROWN, ORANGE, ORANGE, SHORE, BLACK};
+	const unsigned int	a_c[] = {C_GOLD, C_BLUE, C_DARK_SLATE_BLUE, WATER, C_CRIMSON, C_CRIMSON, ORANGE};
+	const unsigned int	a_d[] = {C_LIGHT_STEEL_BLUE, C_PLUM, C_ANTIQUE_WHITE, C_ANTIQUE_WHITE, C_CORNSILK, WATER, C_LIGHT_STEEL_BLUE};
 	static int			i = 0;
 
 	i++;
-	if (i == 5)
+	if (i == 7)
 		i = 0;
 	f->c_inf_m = a_i[i];
 	f->c_a = hex_to_rgba(a_a[i]);
@@ -150,6 +150,27 @@ void	palette_switch(t_fractal *f)
 	}
 }
 
+void	ft_retina_switch(t_fractal *f)
+{
+	static int	tmp_iterations = 0;
+
+	if (f->retina_mode)
+	{
+		f->iterations = tmp_iterations;
+		re_init_palette(f, mandel);
+		f->retina_mode = false;
+	}
+	else
+	{
+		f->lock_j = true;
+		f->retina_mode = true;
+		tmp_iterations = f->iterations;
+		f->iterations = RETINA_ITER;
+		re_init_palette(f, mandel);
+	}
+	f->draw = true;
+}
+
 void	ft_key_basic(mlx_key_data_t keydata, void* param)
 {
 	t_fractal	*f;
@@ -157,26 +178,28 @@ void	ft_key_basic(mlx_key_data_t keydata, void* param)
 	f = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_all(f);
-	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_reset_view(f);
-	else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_window_size_set(f, 1);
-	else if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_window_size_set(f, 2);
-	else if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_window_size_set(f, 3);
-	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS && f->retina_mode == false)
 		iteration_mod(f, 10);
-	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS && f->retina_mode == false)
 		iteration_mod(f, -10);
-	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_set_switch(f);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		ft_color_switch(f);
 	else if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
 		palette_switch(f);
-	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS && f->retina_mode == false)
 		ft_lock_j_switch(f);
+	else if (keydata.key == MLX_KEY_0 && keydata.action == MLX_PRESS)
+		ft_retina_switch(f);
 }
 
 void	ft_key_split(mlx_key_data_t keydata, void* param)

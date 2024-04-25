@@ -9,7 +9,7 @@ int	num_check(t_fractal *f, char *arg, int i)
 	if (arg[i] == '-')
 		i++;
 	if (!(ft_isdigit(arg[i])))
-		ft_error(f, "Instr...2");
+		ft_error(f, ERR_MESSAGE);
 	while (arg[i] && (ft_isdigit(arg[i]) || arg[i] == '.'))
 	{
 		if (arg[i] == '.')
@@ -17,7 +17,7 @@ int	num_check(t_fractal *f, char *arg, int i)
 		i++;
 	}
 	if (c > 1)
-		ft_error(f, "Instr...3");
+		ft_error(f, ERR_MESSAGE);
 	return (i);
 }
 
@@ -26,15 +26,15 @@ bool	arg_check(t_fractal *f, char *arg)
 	int	i;
 
 	if (!arg || ft_strlen(arg) > 1000 || ft_strlen(arg) < 4)
-		ft_error(f, "Instr...1");
+		ft_error(f, ERR_MESSAGE);
 	i = 0;
 	i = num_check(f, arg, i);
 	if (arg[i] != ',' || arg[i + 1] != ' ' || !ft_isdigit(arg[i + 2]))
-		ft_error(f, "Instr...4");
+		ft_error(f, ERR_MESSAGE);
 	i += 2;
 	i = num_check(f, arg, i);
 	if (ft_strlen(arg) != i)
-		ft_error(f, "Instr...5");
+		ft_error(f, ERR_MESSAGE);
 	return (true);
 }
 

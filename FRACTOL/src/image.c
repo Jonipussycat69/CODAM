@@ -102,6 +102,8 @@ void	ft_image_resize(int32_t width, int32_t height, void* param)
 	t_fractal	*f;
 
 	f = param;
+	if (f->retina_mode == true)
+		ft_retina_switch(f);
 	mlx_resize_image(f->img, width, height);
 	f->ratio = (double)height / (double)width;
 	f->draw = true;

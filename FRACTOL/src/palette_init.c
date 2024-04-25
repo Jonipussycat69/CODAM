@@ -53,9 +53,7 @@ void	init_color_palette_j(t_fractal *f, unsigned int size)
 
 void	z_init_color_palette_m(t_fractal *f, unsigned int size)
 {
-	const unsigned int	color_a = rgba_to_hex(f->c_high);
-	const unsigned int	color_b = rgba_to_hex(f->c_low);
-	unsigned int		i;
+	int		i;
 	double	t;
 
 	f->palette_m = (unsigned int *)malloc(sizeof(unsigned int) * size);
@@ -75,9 +73,7 @@ void	z_init_color_palette_m(t_fractal *f, unsigned int size)
 
 void	z_init_color_palette_j(t_fractal *f, unsigned int size)
 {
-	const unsigned int	color_a = rgba_to_hex(f->c_high);
-	const unsigned int	color_b = rgba_to_hex(f->c_low);
-	unsigned int	i;
+	int		i;
 	double	t;
 
 	f->palette_j = (unsigned int *)malloc(sizeof(unsigned int) * size);
@@ -125,8 +121,6 @@ void	multi_init_color_palette_j(t_fractal *f, unsigned int size)
 	int			end_i;
 	double		step;
 	const t_color	arr[4] = {f->c_a, f->c_b, f->c_c, f->c_d};
-	// const t_color	arr[4] = {hex_to_rgba(BLACK), hex_to_rgba(ORANGE), \
-	// 						hex_to_rgba(RED), hex_to_rgba(WATER)};
 
 	f->palette_j = (unsigned int *)malloc(sizeof(unsigned int) * size);
 	if (!f->palette_j)

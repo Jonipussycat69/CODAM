@@ -17,10 +17,11 @@ void	init_color(t_fractal *f)
 	f->c_low = hex_to_rgba(BLACK);
 	f->c_high = hex_to_rgba(WHITE);
 	f->c_a = hex_to_rgba(BLACK);
-	f->c_b = hex_to_rgba(BLACK);
-	f->c_c = hex_to_rgba(ORANGE);
-	f->c_d = hex_to_rgba(WATER);
+	f->c_b = hex_to_rgba(ORANGE);
+	f->c_c = hex_to_rgba(C_GOLD);
+	f->c_d = hex_to_rgba(C_LIGHT_STEEL_BLUE);
 	f->palette = multi;
+	f->retina_mode = false;
 }
 
 static void	create_mlx_basic(t_fractal *f, char *name)
@@ -80,7 +81,7 @@ int32_t	main(int argc, char **argv)
 
 	init_null(&f);
 	if (argc != 2 && argc != 3)
-		ft_error(&f, "Instructions...1");
+		ft_error(&f, ERR_MESSAGE);
 	f.split = false;
 	f.set = mandel;
 	if (!(ft_strncmp(argv[1], "mandelbrot", 10)))
@@ -90,7 +91,7 @@ int32_t	main(int argc, char **argv)
 	else if (!(ft_strncmp(argv[1], "split", 6)))
 		f.split = true;
 	else
-		ft_error(&f, "Instructions...2");
+		ft_error(&f, ERR_MESSAGE);
 	f.julia_x = -1.2;
 	f.julia_y = 0.0;
 	if (argc == 3 && arg_check(&f, argv[2]))

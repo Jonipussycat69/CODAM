@@ -3,8 +3,10 @@
 static void	move_hook(void *param)
 {
 	t_fractal	*f;
-	
+
 	f = param;
+	if (f->retina_mode)
+		return ;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_UP))
 	{
 		f->offset_y += 0.05 * f->zoom;
