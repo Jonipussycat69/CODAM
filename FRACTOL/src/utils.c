@@ -10,6 +10,7 @@ void	init_basic_struct(t_fractal *f)
 	f->zoom = 1.0;
 	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
 	f->iterations = 82;
+	f->iterations_j = 2;
 	f->inp = 1.0;
 	f->lock_j = true;
 }
