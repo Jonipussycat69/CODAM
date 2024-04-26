@@ -154,7 +154,8 @@ enum	palettes
 	normal,
 	zebra,
 	inverse,
-	multi
+	multi,
+	logarithmic
 };
 
 // complex point, x = real, y = imaginary
@@ -180,20 +181,21 @@ typedef struct s_color_double
 	double	a;
 }	t_color_d;
 
-typedef unsigned int	c_a;// use for color arr!
+typedef unsigned int	t_uint;// use for color arr!
+typedef unsigned char	t_uchar;// use for color arr!
 
 typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	mlx_image_t	*img_j;
-	unsigned int	*palette_m;
-	unsigned int	*palette_j;
+	t_uint		*palette_m;
+	t_uint		*palette_j;
 	t_color		c_low;
 	t_color		c_high;
-	unsigned int	color_inf;
-	unsigned int	c_inf_n;
-	unsigned int	c_inf_m;
+	t_uint		color_inf;
+	t_uint		c_inf_n;
+	t_uint		c_inf_m;
 	t_color		c_a;
 	t_color		c_b;
 	t_color		c_c;
@@ -241,14 +243,14 @@ void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z);
 double	ft_scale_x(t_fractal *f, double val);
 double	ft_scale_y(t_fractal *f, double val);
 
-unsigned int	round_to_uint(double n);
-unsigned int	rgba_to_hex(t_color c);
-t_color	hex_to_rgba(unsigned int hex);
+t_uint	round_to_uint(double n);
+t_uint	rgba_to_hex(t_color c);
+t_color	hex_to_rgba(t_uint hex);
 
-void	init_color_palette_m(t_fractal *f, unsigned int size);
-void	init_color_palette_j(t_fractal *f, unsigned int size);
-void	z_init_color_palette_m(t_fractal *f, unsigned int size);
-void	z_init_color_palette_j(t_fractal *f, unsigned int size);
+void	init_color_palette_m(t_fractal *f, t_uint size);
+void	init_color_palette_j(t_fractal *f, t_uint size);
+void	z_init_color_palette_m(t_fractal *f, t_uint size);
+void	z_init_color_palette_j(t_fractal *f, t_uint size);
 void	re_init_palette(t_fractal *f, short set);
 
 void	ft_cursor_to_julia(void *param);

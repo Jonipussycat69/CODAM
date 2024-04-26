@@ -36,6 +36,7 @@ void	iteration_mod(t_fractal *f, short mod)
 	int32_t	x;
 	int32_t	y;
 
+	printf("split = %d", f->split);// test
 	if (!ft_cursor_check(f))
 		return ;
 	mlx_get_mouse_pos(f->mlx, &x, &y);
@@ -44,15 +45,15 @@ void	iteration_mod(t_fractal *f, short mod)
 	(mod < 0 && f->iterations > 10)))
 	{
 		f->iterations += mod;
-		printf(">> iter %zu\n", f->iterations);// TEST
+		printf(">> iter m %zu\n", f->iterations);// TEST
 		re_init_palette(f, mandel);
 		f->draw = true;
 	}
-	else if (f->split && (mod > 0 && f->iterations_j < 500) || \
-		(mod < 0 && f->iterations_j > 10))
+	else if (f->split == true && (mod > 0 && f->iterations_j < 500) || \
+	(mod < 0 && f->iterations_j > 10))
 	{
 		f->iterations_j += mod;
-		printf(">> iter %zu\n", f->iterations_j);// TEST
+		printf(">> iter j %zu\n", f->iterations_j);// TEST
 		re_init_palette(f, julia);
 		f->draw_j = true;
 	}

@@ -1,15 +1,15 @@
 #include "../lib/fractol.h"
 
-unsigned int	rgba_to_hex(t_color c)
+t_uint	rgba_to_hex(t_color c)
 {
-	unsigned int	hex;
+	t_uint	hex;
 
-	hex = ((unsigned int)c.r << 24) | ((unsigned int)c.g << 16) | \
-	((unsigned int)c.b << 8) | (unsigned int)c.a;
+	hex = ((t_uint)c.r << 24) | ((t_uint)c.g << 16) | \
+	((t_uint)c.b << 8) | (t_uint)c.a;
 	return (hex);
 }
 
-t_color	hex_to_rgba(unsigned int hex)
+t_color	hex_to_rgba(t_uint hex)
 {
 	t_color	c;
 
@@ -20,7 +20,7 @@ t_color	hex_to_rgba(unsigned int hex)
 	return (c);
 }
 
-unsigned int	round_to_uint(double n)
+t_uint	round_to_uint(double n)
 {
-	return ((unsigned int)(n + 0.5));
+	return ((t_uint)(n + 0.5));
 }

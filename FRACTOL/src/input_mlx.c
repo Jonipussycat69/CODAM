@@ -140,6 +140,8 @@ void	palette_switch(t_fractal *f)
 	else if(f->palette == zebra)
 		f->palette = multi;
 	else if(f->palette == multi)
+		f->palette = logarithmic;
+	else if(f->palette == logarithmic)
 		f->palette = normal;
 	re_init_palette(f, mandel);
 	f->draw = true;
