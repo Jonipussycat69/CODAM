@@ -9,8 +9,8 @@
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
-# define ERR_MESSAGE "Input error! Correct input format:\n./[name.a] \
-[mandelbbrot/ julia/ split][x, yi](option for julia)\n"
+# define ERR_MESSAGE "Input ERROR! Correct input format:\n./[name.a] \
+[mandelbrot/ julia/ split][x, yi](option for julia)\n"
 # define RETINA_ITER 1600
 
 # define WIDTH_A 900

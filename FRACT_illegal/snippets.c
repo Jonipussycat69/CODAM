@@ -1,5 +1,3 @@
-#include "../lib/fractol.h"
-
 double	mx(double a, double b)
 {
 	if (a > b)
@@ -208,45 +206,45 @@ void	log_init_color_palette_j(t_fractal *f, t_uint size)
 	}
 }
 
-// void	log_init_color_palette_m(t_fractal *f, t_uint size)
-// {
-// 	int		i;
-// 	double	t;
+void	log_init_color_palette_m(t_fractal *f, t_uint size)
+{
+	int		i;
+	double	t;
 
-// 	f->palette_m = (t_uint *)malloc(sizeof(t_uint) * size);
-// 	if (!f->palette_m)
-// 		ft_error(f, "");
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		t = (double)i / (double)size;
-// 		if (f->palette == inverse)
-// 			f->palette_m[i] = color_log_interpolate(f->c_high, f->c_low, t);
-// 		else
-// 			f->palette_m[i] = color_log_interpolate(f->c_low, f->c_high, t);
-// 		i++;
-// 	}
-// }
+	f->palette_m = (t_uint *)malloc(sizeof(t_uint) * size);
+	if (!f->palette_m)
+		ft_error(f, "");
+	i = 0;
+	while (i < size)
+	{
+		t = (double)i / (double)size;
+		if (f->palette == inverse)
+			f->palette_m[i] = color_log_interpolate(f->c_high, f->c_low, t);
+		else
+			f->palette_m[i] = color_log_interpolate(f->c_low, f->c_high, t);
+		i++;
+	}
+}
 
-// void	log_init_color_palette_j(t_fractal *f, t_uint size)
-// {
-// 	int		i;
-// 	double	t;
+void	log_init_color_palette_j(t_fractal *f, t_uint size)
+{
+	int		i;
+	double	t;
 
-// 	f->palette_j = (t_uint *)malloc(sizeof(t_uint) * size);
-// 	if (!f->palette_j)
-// 		ft_error(f, "");
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		t = (double)i / (double)size;
-// 		if (f->palette == inverse)
-// 			f->palette_j[i] = color_log_interpolate(f->c_high, f->c_low, t);
-// 		else
-// 			f->palette_j[i] = color_log_interpolate(f->c_low, f->c_high, t);
-// 		i++;
-// 	}
-// }
+	f->palette_j = (t_uint *)malloc(sizeof(t_uint) * size);
+	if (!f->palette_j)
+		ft_error(f, "");
+	i = 0;
+	while (i < size)
+	{
+		t = (double)i / (double)size;
+		if (f->palette == inverse)
+			f->palette_j[i] = color_log_interpolate(f->c_high, f->c_low, t);
+		else
+			f->palette_j[i] = color_log_interpolate(f->c_low, f->c_high, t);
+		i++;
+	}
+}
 
 void	re_init_palette(t_fractal *f, short set)
 {

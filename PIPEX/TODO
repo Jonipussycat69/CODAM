@@ -1,0 +1,5 @@
+PIPEX
+
+- set up parsing: format: "file inp" "cmd 1" "cmd 2" "file outp"
+- input.txt > cmd 1 > pipe write > pipe read > cmd 2 > output.txt
+- fork() = child cmd 1 | parent cmd 2 (wait())
