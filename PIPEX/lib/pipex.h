@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+# include <sys/wait.h>
 
 
 # endif

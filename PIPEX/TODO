@@ -3,3 +3,15 @@ PIPEX
 - set up parsing: format: "file inp" "cmd 1" "cmd 2" "file outp"
 - input.txt > cmd 1 > pipe write > pipe read > cmd 2 > output.txt
 - fork() = child cmd 1 | parent cmd 2 (wait())
+- child pid = 0, parent pid > 0, error pid < 0
+
+functions:
+- access(fd, setting) = used to check if fd is accessible
+- perror(message) = prints out-> given message: errno message
+- strerror(errno) = same as perror but does not print, instead gives back str*
+- dub(fd_old) = duplicates fd to next unused fd
+- dub2(fd_old, fd_new) = duplicates fd to given dest fd
+- execve(const char *path, char *const argv[]) = starts a new process in place of the current one
+- fork() = creates a child process and returns pid
+- pipe(pipefd) = arr of 2 fd (assigned with dub2()) with read[0] and write[1] side, that can be used by separate processes
+- unlink() = ?
