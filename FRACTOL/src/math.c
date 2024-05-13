@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   math.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:45:19 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:45:21 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
 
 double	ft_scale_x(t_fractal *f, double val)
@@ -37,7 +49,7 @@ void	ft_fract_math(t_fractal *f, t_complex c, t_complex z)
 	return (mlx_put_pixel(f->img, f->x, f->y, f->color_inf));
 }
 
-// divine
+// split
 void	ft_fract_math_jul(t_fractal *f, t_complex c, t_complex z)
 {
 	size_t		i;

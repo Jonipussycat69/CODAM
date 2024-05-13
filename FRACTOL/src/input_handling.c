@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   input_handling.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:45:05 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:48:39 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
 
-// Input error | format: ./name "[type/ set]"(mandelbrot/ julia/ divine) "[optional julia z val]"
 int	num_check(t_fractal *f, char *arg, int i)
 {
 	int	c;
-	
+
 	c = 0;
 	if (arg[i] == '-')
 		i++;
@@ -33,7 +44,7 @@ bool	arg_check(t_fractal *f, char *arg)
 		ft_error(f, ERR_MESSAGE);
 	i += 2;
 	i = num_check(f, arg, i);
-	if (ft_strlen(arg) != i)
+	if ((int)ft_strlen(arg) != i)
 		ft_error(f, ERR_MESSAGE);
 	return (true);
 }
@@ -44,7 +55,7 @@ static double	ft_atof(char *arg)
 	int		i;
 	int		mult;
 	int		c;
-	
+
 	i = 0;
 	mult = 1;
 	num = 0;

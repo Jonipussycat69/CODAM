@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   image.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:44:59 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:48:19 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
 
 void	ft_draw_mandel(t_fractal *f)
 {
 	t_complex	c;
 	t_complex	z;
-	
+
 	f->draw = false;
 	f->y = 0;
 	z.x = 0.0;
@@ -27,7 +39,7 @@ void	ft_draw_julia(t_fractal *f)
 {
 	t_complex	c;
 	t_complex	z;
-	
+
 	f->draw = false;
 	f->y = 0;
 	c.x = f->julia_x;
@@ -49,7 +61,7 @@ void	ft_draw_julia(t_fractal *f)
 // split
 void	ft_draw_mandel_split(t_fractal *f, t_complex z)
 {
-	t_complex	c;
+	t_complex		c;
 	const double	max_x = (X_MAX * f->zoom) + f->offset_x;
 	const double	min_x = (X_MIN * f->zoom) + f->offset_x;
 	const double	max_y = (Y_MAX * f->zoom) + f->offset_y;
@@ -74,7 +86,7 @@ void	ft_draw_mandel_split(t_fractal *f, t_complex z)
 // split
 void	ft_draw_julia_split(t_fractal *f, t_complex c)
 {
-	t_complex	z;
+	t_complex		z;
 	const double	max_x = (X_MAX_J * f->zoom_j) + f->offset_x_j;
 	const double	min_x = (X_MIN_J * f->zoom_j) + f->offset_x_j;
 	const double	max_y = (Y_MAX_J * f->zoom_j) + f->offset_y_j;
@@ -96,8 +108,7 @@ void	ft_draw_julia_split(t_fractal *f, t_complex c)
 	}
 }
 
-// segfault when changing too suddenly? because of with vs. f->mlx->with etc.?
-void	ft_image_resize(int32_t width, int32_t height, void* param)
+void	ft_image_resize(int32_t width, int32_t height, void *param)
 {
 	t_fractal	*f;
 

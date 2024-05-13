@@ -11,15 +11,18 @@ LIBS	= $(LIBMLX) $(LIBFT)
 SRCDIR	= ./src
 SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/math.c \
-			$(SRCDIR)/math_utils.c \
+			$(SRCDIR)/init_struct.c \
 			$(SRCDIR)/image.c \
-			$(SRCDIR)/input_mlx.c \
+			$(SRCDIR)/key_mlx.c \
+			$(SRCDIR)/key_utils.c \
+			$(SRCDIR)/key_palette.c \
 			$(SRCDIR)/utils.c \
 			$(SRCDIR)/color.c \
 			$(SRCDIR)/split.c \
 			$(SRCDIR)/hooks_mlx.c \
 			$(SRCDIR)/input_handling.c \
-			$(SRCDIR)/palette_init.c
+			$(SRCDIR)/palette_init_j.c \
+			$(SRCDIR)/palette_init_m.c
 OBJS	= ${SRC:.c=.o}
 
 all: $(LIBS) $(NAME)
@@ -31,9 +34,7 @@ $(LIBMLX):
 	cmake $(LMLXDIR) -B $(LMLXDIR)/build && make -C $(LMLXDIR)/build -j4
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(HEADERS)
-# %.o: %.c
-# 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)

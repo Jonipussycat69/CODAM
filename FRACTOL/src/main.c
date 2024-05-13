@@ -1,28 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:45:17 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:49:46 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
-
-static void	init_null(t_fractal *f)
-{
-	f->mlx = NULL;
-	f->img = NULL;
-	f->img_j = NULL;
-	f->palette_m = NULL;
-	f->palette_j = NULL;
-}
-
-void	init_color(t_fractal *f)
-{
-	f->color_inf = BLACK;
-	f->c_inf_m = BLACK;
-	f->c_inf_n = BLACK;
-	f->c_low = hex_to_rgba(BLACK);
-	f->c_high = hex_to_rgba(WHITE);
-	f->c_a = hex_to_rgba(BLACK);
-	f->c_b = hex_to_rgba(ORANGE);
-	f->c_c = hex_to_rgba(C_GOLD);
-	f->c_d = hex_to_rgba(C_LIGHT_STEEL_BLUE);
-	f->palette = multi;
-	f->retina_mode = false;
-}
 
 static void	create_mlx_basic(t_fractal *f, char *name)
 {
@@ -36,22 +24,20 @@ static void	create_mlx_basic(t_fractal *f, char *name)
 }
 
 // Creates an mlx window with two images:
-// one on the upper 2/3 (mandelbrot) (1:1)ratio
-// one on the lower 1/3 (julia) (1:2)ratio
+// one on the left half (mandelbrot) (1:1)ratio
+// one on the right half (julia) (1:1)ratio
 static void	create_mlx_split(t_fractal *f)
 {
 	mlx_set_setting(MLX_MAXIMIZED, false);
 	f->mlx = mlx_init(S_WIDTH, S_HEIGHT, "~ Split Screen ~", false);
 	if (!f->mlx)
 		ft_error(f, "MLX init error");
-	f->img = mlx_new_image(f->mlx, M_WIDTH, M_HEIGHT);// mand
+	f->img = mlx_new_image(f->mlx, M_WIDTH, M_HEIGHT);
 	if (!f->img || (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0))
-		ft_error(f, "MLX image error");
-	f->img_j = mlx_new_image(f->mlx, J_WIDTH, J_HEIGHT);// julia
-	if (!f->img || (mlx_image_to_window(f->mlx, f->img_j, M_WIDTH, 0) < 0))
-		ft_error(f, "MLX image error");
-	printf("test 1\n");// TEST
-	// HOW DO I PLACE THE IMAGES INSIDE WINDOW??
+		ft_error(f, "MLX image mandelbrot error");
+	f->img_j = mlx_new_image(f->mlx, J_WIDTH, J_HEIGHT);
+	if (!f->img_j || (mlx_image_to_window(f->mlx, f->img_j, M_WIDTH, 0) < 0))
+		ft_error(f, "MLX image julia error");
 }
 
 void	fractol(char *name, t_fractal *f)

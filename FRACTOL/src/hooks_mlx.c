@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   hooks_mlx.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:44:56 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:47:23 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
 
 static void	move_hook(void *param)
@@ -32,16 +44,14 @@ static void	move_hook(void *param)
 static void	draw_hook(void *param)
 {
 	t_fractal	*f;
-	
+
 	f = param;
 	if (f->draw && f->set == mandel)
 	{
-		printf(">> DRAW MAND\n");// TEST
 		ft_draw_mandel(f);
 	}
 	else if (f->draw && f->set == julia)
 	{
-		printf(">> DRAW JUL\n");// TEST
 		ft_draw_julia(f);
 	}
 }
@@ -51,20 +61,18 @@ static void	draw_hook_split(void *param)
 	t_fractal	*f;
 	t_complex	z;
 	t_complex	c;
-	
+
 	f = param;
 	if (f->draw)
 	{
 		z.x = 0.0;
 		z.y = 0.0;
-		printf(">> DRAW MAND D\n");// TEST
 		ft_draw_mandel_split(f, z);
 	}
 	if (f->draw_j)
 	{
 		c.x = f->julia_x;
 		c.y = f->julia_y;
-		printf(">> DRAW JUL D\n");// TEST
 		ft_draw_julia_split(f, c);
 	}
 }

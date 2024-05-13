@@ -1,43 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   utils.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/13 16:45:31 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/05/13 16:51:46 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/fractol.h"
-
-void	init_basic_struct(t_fractal *f)
-{
-	f->draw = true;
-	f->offset_x = -0.8;
-	if (f->set == julia)
-		f->offset_x = 0.0;
-	f->offset_y = 0.0;
-	f->zoom = 1.0;
-	f->ratio = (double)f->mlx->height / (double)f->mlx->width;
-	f->iterations = 82;
-	f->iterations_j = 2;
-	f->inp = 1.0;
-	f->lock_j = true;
-}
-
-void	init_split_struct(t_fractal *f)
-{
-	f->draw = true;
-	f->draw_j = true;
-	f->offset_x = -0.8;
-	f->offset_y = 0.0;
-	f->offset_x_j = 0.0;
-	f->offset_y_j = 0.0;
-	f->zoom = 1.0;
-	f->zoom_j = 1.0;
-	f->ratio = 1;
-	f->iterations = 102;
-	f->iterations_j = 102;
-	f->inp = 1.0;
-	f->lock_j = false;
-}
 
 void	iteration_mod(t_fractal *f, short mod)
 {
 	int32_t	x;
 	int32_t	y;
 
-	printf("split = %d", f->split);// test
 	if (!ft_cursor_check(f))
 		return ;
 	mlx_get_mouse_pos(f->mlx, &x, &y);
@@ -46,15 +25,13 @@ void	iteration_mod(t_fractal *f, short mod)
 	(mod < 0 && f->iterations > 10)))
 	{
 		f->iterations += mod;
-		printf(">> iter m %zu\n", f->iterations);// TEST
 		re_init_palette(f, mandel);
 		f->draw = true;
 	}
-	else if (f->split == true && (mod > 0 && f->iterations_j < 500) || \
-	(mod < 0 && f->iterations_j > 10))
+	else if (f->split == true && x > M_WIDTH && ((mod > 0 && \
+	f->iterations_j < 500) || (mod < 0 && f->iterations_j > 10)))
 	{
 		f->iterations_j += mod;
-		printf(">> iter j %zu\n", f->iterations_j);// TEST
 		re_init_palette(f, julia);
 		f->draw_j = true;
 	}
@@ -82,7 +59,7 @@ void	ft_window_size_set(t_fractal *f, short size)
 void	close_all(void *param)
 {
 	t_fractal	*f;
-	
+
 	f = param;
 	if (f->palette_m)
 		free(f->palette_m);
