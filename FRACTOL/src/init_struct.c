@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:02 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:45:03 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/05/13 18:18:16 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	init_color(t_fractal *f)
 	f->c_high = hex_to_rgba(WHITE);
 	f->c_a = hex_to_rgba(BLACK);
 	f->c_b = hex_to_rgba(ORANGE);
-	f->c_c = hex_to_rgba(C_GOLD);
-	f->c_d = hex_to_rgba(C_LIGHT_STEEL_BLUE);
+	f->c_c = hex_to_rgba(C_B);
+	f->c_d = hex_to_rgba(C_M);
 	f->palette = multi;
 	f->retina_mode = false;
+	f->i_multi = 0;
 }

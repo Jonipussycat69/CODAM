@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:11 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:54:51 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/05/13 18:24:42 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 // FIX LENGTH
 void	ft_color_switch_multi(t_fractal *f)
 {
-	const unsigned int	a_i[] = {BLACK, BLACK, BLACK, C_ANTIQUE_WHITE, C_CORNSILK, WATER, BLACK};
-	const unsigned int	a_a[] = {BLACK, C_WHEAT, C_BLANCHED_ALMOND, C_BEIGE, C_BISQUE, C_LIGHT_SKY_BLUE, BLACK};
-	const unsigned int	a_b[] = {ORANGE, C_BROWN, C_BROWN, ORANGE, ORANGE, SHORE, BLACK};
-	const unsigned int	a_c[] = {C_GOLD, C_BLUE, C_DARK_SLATE_BLUE, WATER, C_CRIMSON, C_CRIMSON, ORANGE};
-	const unsigned int	a_d[] = {C_LIGHT_STEEL_BLUE, C_PLUM, C_ANTIQUE_WHITE, C_ANTIQUE_WHITE, C_CORNSILK, WATER, C_LIGHT_STEEL_BLUE};
-	static int			i = 0;
+	const t_uint	i[7] = {BLACK, BLACK, BLACK, C_F, C_E, WATER, BLACK};
+	const t_uint	a[7] = {BLACK, C_I, C_G, C_D, C_H, C_L, BLACK};
+	const t_uint	b[7] = {ORANGE, C_A, C_A, ORANGE, ORANGE, SHORE, BLACK};
+	const t_uint	c[7] = {C_B, BLUE, C_J, WATER, C_C, C_C, ORANGE};
+	const t_uint	d[7] = {C_M, C_K, C_F, C_F, C_E, WATER, C_M};
 
-	i++;
-	if (i == 7)
-		i = 0;
-	f->c_inf_m = a_i[i];
-	f->c_a = hex_to_rgba(a_a[i]);
-	f->c_b = hex_to_rgba(a_b[i]);
-	f->c_c = hex_to_rgba(a_c[i]);
-	f->c_d = hex_to_rgba(a_d[i]);
+	f->i_multi++;
+	if (f->i_multi == 7)
+		f->i_multi = 0;
+	f->c_inf_m = i[f->i_multi];
+	f->c_a = hex_to_rgba(a[f->i_multi]);
+	f->c_b = hex_to_rgba(b[f->i_multi]);
+	f->c_c = hex_to_rgba(c[f->i_multi]);
+	f->c_d = hex_to_rgba(d[f->i_multi]);
 	re_init_palette(f, mandel);
 	f->draw = true;
 	if (f->split == true)
@@ -41,10 +40,10 @@ void	ft_color_switch_multi(t_fractal *f)
 
 void	ft_color_switch(t_fractal *f)
 {
-	const unsigned int	arr_i[5] = {BLACK, WHITE, LAND, BLACK, WHITE};
-	const unsigned int	arr_h[5] = {WHITE, PINK, SHORE, ORANGE, WHITE};
-	const unsigned int	arr_l[5] = {BLACK, CYAN, WATER, WHITE, BLACK};
-	static int			i = 0;
+	const t_uint	arr_i[5] = {BLACK, WHITE, LAND, BLACK, WHITE};
+	const t_uint	arr_h[5] = {WHITE, PINK, SHORE, ORANGE, WHITE};
+	const t_uint	arr_l[5] = {BLACK, CYAN, WATER, WHITE, BLACK};
+	static int		i = 0;
 
 	if (f->palette == multi)
 		return (ft_color_switch_multi(f));
