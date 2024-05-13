@@ -8,7 +8,7 @@
 
 int	main(int argc, char *argv)
 {
-	int	pfd[2];
+	int		pfd[2];
 	pid_t	pid;
 	
 	
