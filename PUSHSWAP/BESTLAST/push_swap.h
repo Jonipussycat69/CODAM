@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/06 08:27:26 by joni          ########   odam.nl         */
+/*   Updated: 2024/05/21 18:01:29 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ void	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
 void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
 // short	double_act(t_list **head_a, t_list **head_b, short act);
+
+int		abs(int num);
+int		total_act(t_list *n);
+void	zero_node_act(t_list **head);
 
 size_t	ps_strlen(char *str);
 short	ps_isdigit(int c);
