@@ -65,7 +65,7 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 	smallest_to_top(a, b, s);
 }
 
-// Hard-sorting for 2 or 3 value list
+// Hard-sorting for 2 or 3 value list (stack a)
 void	hardsort(t_list **a, t_list **b)
 {
 	if (list_len(a) > 3 || list_len(a) < 2 || \
