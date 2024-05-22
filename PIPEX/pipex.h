@@ -21,6 +21,9 @@ typedef struct s_pipex
 	pid_t	pid_b;
 }	t_pipex;
 
-void error_exit(const char *message);
+void	error_exit(const char *message, int error_code);
+char	**ft_split(const char *s, const char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strlen(char *str);
 
 # endif

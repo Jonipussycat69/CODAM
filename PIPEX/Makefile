@@ -1,7 +1,7 @@
 NAME = pipex.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c utils.c
+SRCS = main.c utils.c split.c pathfind.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
