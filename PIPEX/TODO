@@ -15,3 +15,10 @@ functions:
 - fork() = creates a child process and returns pid
 - pipe(pipefd) = arr of 2 fd (assigned with dub2()) with read[0] and write[1] side, that can be used by separate processes
 - unlink() = ?
+
+! WORKING ! JUST NEED TO TEST SOME MORE (WITH VALGRIND!!)
+
+TEST INPUTS:
+- ./pipex.a input.txt "ls -l" "wc -l" output.txt && < input.txt ls -l | wc -l > TESToutput.txt && diff output.txt TESToutput.txt
+
+- ./pipex.a input.txt "wc -l" "cat" output.txt && < input.txt wc -l | cat > TESToutput.txt && diff output.txt TESToutput.txt
