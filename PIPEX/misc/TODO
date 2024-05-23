@@ -19,6 +19,6 @@ functions:
 ! WORKING ! JUST NEED TO TEST SOME MORE (WITH VALGRIND!!)
 
 TEST INPUTS:
-- ./pipex.a input.txt "ls -l" "wc -l" output.txt && < input.txt ls -l | wc -l > TESToutput.txt && diff output.txt TESToutput.txt
+- ./pipex.a t_input.txt "ls -l" "wc -l" t_output.txt && < t_input.txt ls -l | wc -l > t_TESToutput.txt && diff t_output.txt t_TESToutput.txt
 
-- ./pipex.a input.txt "wc -l" "cat" output.txt && < input.txt wc -l | cat > TESToutput.txt && diff output.txt TESToutput.txt
+- ./pipex.a t_input.txt "wc -l" "cat" t_output.txt && < t_input.txt wc -l | cat > t_TESToutput.txt && diff t_output.txt t_TESToutput.txt
