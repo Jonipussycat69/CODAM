@@ -22,3 +22,8 @@ TEST INPUTS:
 - ./pipex.a t_input.txt "ls -l" "wc -l" t_output.txt && < t_input.txt ls -l | wc -l > t_TESToutput.txt && diff t_output.txt t_TESToutput.txt
 
 - ./pipex.a t_input.txt "wc -l" "cat" t_output.txt && < t_input.txt wc -l | cat > t_TESToutput.txt && diff t_output.txt t_TESToutput.txt
+
+VALGRIND:
+- gcc -g -o valgrind_gcc *.c && valgrind --leak-check=full --trace-children=yes --track-fds=yes ./valgrind_gcc
+
+??? 7 open fd on exit ??? CHECK WITH FRANCINETTE !!! FIX EXIT CODES !!!

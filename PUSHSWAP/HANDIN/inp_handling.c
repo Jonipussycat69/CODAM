@@ -68,10 +68,40 @@ short	parser(char *inp, t_list **head)
 		}
 		p.num *= p.min;
 		if (i > 0 && ps_isdigit(inp[i - 1]) && (p.num < INT_MIN || \
-		p.num > INT_MAX || node_back(head, new_node((int)p.num, 0)) != ok))
+		p.num > INT_MAX || node_back(head, new_node((int)p.num)) != ok))
 			return (free_list(head), free(inp), err);
 		i++;
 	}
 	free(inp);
+	return (ok);
+}
+
+// Checks for doubles while assigning each value an corresponding index
+short	indexer(t_list **head)
+{
+	t_list	*tmp;
+	t_list	*tmptmp;
+	int		i;
+	short	double_check;
+
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		double_check = 0;
+		i = 0;
+		tmptmp = *head;
+		while (tmptmp != NULL)
+		{
+			if (tmp->num == tmptmp->num)
+				double_check += 1;
+			if (double_check > 1)
+				return (err);
+			if (tmp->num > tmptmp->num)
+				i++;
+			tmptmp = tmptmp->next;
+		}
+		tmp->n_i = i;
+		tmp = tmp->next;
+	}
 	return (ok);
 }
