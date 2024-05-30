@@ -16,19 +16,19 @@ void	smallest_to_top(t_list **a, t_list **b, t_sort *s)
 	if (i <= list_len(a) / 2)
 		s->act_arr[_ra] = i;
 	else
-		s->act_arr[_rra] = list_len(a) - i + 1;
+		s->act_arr[_rra] = list_len(a) - i;
 	return (do_act_arr(a, b, s));
 }
 
-void	assign_best(int weight, t_list *node, t_sort *s)
-{
-	if (s->the_weight == weight && node->n_i > s->the_node->n_i)
-		return ;
-	s->the_weight = weight;
-	s->the_node = node;
-	s->the_index = s->index;
-	return ;
-}
+// void	assign_best(int weight, t_list *node, t_sort *s)
+// {
+// 	if (s->the_weight == weight && node->n_i > s->the_node->n_i)
+// 		return ;
+// 	s->the_weight = weight;
+// 	s->the_node = node;
+// 	s->the_index = s->index;
+// 	return ;
+// }
 
 void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
@@ -44,6 +44,7 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
 	int		weight;
+	t_list	*chosen_node;
 
 	while (list_len(b))
 	{
@@ -53,13 +54,17 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 		while (node != NULL)
 		{
 			if (weigh(a, b, s, node) <= weight || s->index == 0)
-				assign_best(weigh(a, b, s, node), node, s);
+			{
+				weight = weigh(a, b, s, node);
+				chosen_node = node;
+				s->the_index = s->index;
+			}
 			s->index++;
 			node = node->next;
 		}
 		print_values(a, b, s);// TEST
-		printf(">> best-> %i\n", s->the_node->n_i);// TEST
-		execute_act(a, b, s, s->the_node);
+		printf(">> best-> %i\n", chosen_node->n_i);// TEST
+		execute_act(a, b, s, chosen_node);
 	}
 	smallest_to_top(a, b, s);
 }

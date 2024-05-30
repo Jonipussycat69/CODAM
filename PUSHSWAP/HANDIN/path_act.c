@@ -18,9 +18,9 @@ static void	exe_rr(t_sort *s, int r_a, int r_b)
 	s->act_arr[_rr] = sn(r_a, r_b);
 }
 
-void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)// LEFTOFF!
+void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)
 {
-	const int	r_b = s->index;
+	const int	r_b = s->the_index;
 	const int	rr_b = list_len(b) - r_b;
 	const int	r_a = rotate_amount_a(a, node->num);
 	const int	rr_a = list_len(a) - r_a;

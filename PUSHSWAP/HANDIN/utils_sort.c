@@ -14,7 +14,67 @@ int	sn(int one, int two)
 	return (two);
 }
 
-int	rotate_amount_a(t_list **a, int b_num)
+short	smallest(t_list **a, int val)
+{
+	t_list	*tmp;
+
+	tmp = *a;
+	while (tmp != NULL)
+	{
+		if (tmp->n_i < val)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	smallest_node_rotate_a(t_list **a)
+{
+	int		i;
+	int		i_small;
+	int		small;
+	t_list	*tmp;
+
+	tmp = *a;
+	i = 0;
+	small = INT_MAX;
+	while (tmp != NULL)
+	{
+		if (tmp->n_i < small)
+		{
+			small = tmp->n_i;
+			i_small = i;
+		}
+		i++;
+		tmp = tmp->next;
+	}
+	return (i_small);
+}
+
+int	biggest_node_rotate_a(t_list **a)
+{
+	int		i;
+	int		i_big;
+	int		big;
+	t_list	*tmp;
+
+	tmp = *a;
+	i = 0;
+	big = INT_MIN;
+	while (tmp != NULL)
+	{
+		if (tmp->n_i > big)
+		{
+			big = tmp->n_i;
+			i_big = i;
+		}
+		i++;
+		tmp = tmp->next;
+	}
+	return (i_big);
+}
+
+int	rotate_amount_a(t_list **a, int val)//TEST!!!
 {
 	t_list			*tmp;
 	const t_list	*last_a = last_node(a);
@@ -22,20 +82,22 @@ int	rotate_amount_a(t_list **a, int b_num)
 
 	if (*a == NULL)
 		return (0);
+	if (smallest(a, val))
+		return (smallest_node_rotate_a(a));
 	i = 0;
 	tmp = *a;
 	while (tmp != NULL)
 	{
-		if (i == 0 && tmp->num > b_num && last_a->num < b_num)
+		if (i == 0 && tmp->num > val && last_a->num < val)
 			return (0);
-		if (tmp == last_a && tmp->num < b_num && (*a)->num > b_num)
+		if (tmp == last_a && tmp->num < val && (*a)->num > val)
 			return (i);
-		if (i != 0 && tmp != last_a && tmp->num < b_num && tmp->next->num > b_num)
-			return (i);
+		if (tmp != last_a && tmp->num < val && tmp->next->num > val)
+			return (i + 1);
 		tmp = tmp->next;
 		i++;
 	}
-	return (i);
+	return (biggest_node_rotate_a(a));
 }
 
 void	act_arr_reset(t_sort *s)
