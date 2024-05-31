@@ -55,6 +55,7 @@ int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 	const int	r_a = rotate_amount_a(a, node->num);
 	const int	rr_a = list_len(a) - r_a;
 
+	printf(">> ra: %i, rra: %i, rb: %i, rrb: %i\n", r_a, rr_a, r_b, rr_b);// TEST
 	if (r_a - rr_a >= 0 && r_b - rr_b >= 0)
 		return (bn(rr_a, rr_b) + 1);
 	if (r_a - rr_a <= 0 && r_b - rr_b <= 0)

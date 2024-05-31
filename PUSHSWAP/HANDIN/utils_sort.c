@@ -71,7 +71,7 @@ int	biggest_node_rotate_a(t_list **a)
 		i++;
 		tmp = tmp->next;
 	}
-	return (i_big);
+	return (i_big + 1);
 }
 
 int	rotate_amount_a(t_list **a, int val)//TEST!!!
@@ -97,6 +97,7 @@ int	rotate_amount_a(t_list **a, int val)//TEST!!!
 		tmp = tmp->next;
 		i++;
 	}
+	printf(">> biggest: %i\n", val);// TEST
 	return (biggest_node_rotate_a(a));
 }
 

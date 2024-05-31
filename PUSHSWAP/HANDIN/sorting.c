@@ -44,26 +44,29 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
 	int		weight;
+	int		chosen_weight;
 	t_list	*chosen_node;
 
 	while (list_len(b))
 	{
 		s->index = 0;
-		weight = 0;
+		chosen_weight = 0;
 		node = *b;
+		print_values(a, b, s);// TEST
 		while (node != NULL)
 		{
-			if (weigh(a, b, s, node) <= weight || s->index == 0)
+			printf("\n!>> sycle-> %i\n", node->n_i);// TEST
+			weight = weigh(a, b, s, node);
+			if (weight <= chosen_weight || s->index == 0)
 			{
-				weight = weigh(a, b, s, node);
+				chosen_weight = weight;
 				chosen_node = node;
 				s->the_index = s->index;
 			}
 			s->index++;
 			node = node->next;
 		}
-		print_values(a, b, s);// TEST
-		printf(">> best-> %i\n", chosen_node->n_i);// TEST
+		printf("\n>> best-> %i\n", chosen_node->n_i);// TEST
 		execute_act(a, b, s, chosen_node);
 	}
 	smallest_to_top(a, b, s);
