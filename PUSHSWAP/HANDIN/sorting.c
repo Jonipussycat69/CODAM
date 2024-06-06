@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   sorting.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/06 13:30:59 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/06/06 14:36:49 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	smallest_to_top(t_list **a, t_list **b, t_sort *s)
@@ -20,26 +32,17 @@ void	smallest_to_top(t_list **a, t_list **b, t_sort *s)
 	return (do_act_arr(a, b, s));
 }
 
-// void	assign_best(int weight, t_list *node, t_sort *s)
-// {
-// 	if (s->the_weight == weight && node->n_i > s->the_node->n_i)
-// 		return ;
-// 	s->the_weight = weight;
-// 	s->the_node = node;
-// 	s->the_index = s->index;
-// 	return ;
-// }
-
-void	pb_stage(t_list **a, t_list **b, t_sort *s)
+void	pb_stage(t_list **a, t_list **b)
 {
 	while (list_len(a) > 3 && check_sort_asc(a) != ok)
 		do_action(a, b, pb);
 }
 
 // algo that calculates all the steps for each node.
-// just looking at the right place it should go in a (inbetween the closest bigger and smaller number).
-// node->ind = amound of r, node->ind - total list_len = rr (so it will be negative).
-// at the end a should be rotated so it starts at the smallest and be sorted in descending order and b should be empty.
+// just looking at the right place it should go in a
+// (inbetween the closest bigger and smaller number).
+// at the end a should be rotated so it starts at the smallest
+// and be sorted in descending order and b should be empty.
 void	pa_stage(t_list **a, t_list **b, t_sort *s)
 {
 	t_list	*node;
@@ -52,10 +55,8 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 		s->index = 0;
 		chosen_weight = 0;
 		node = *b;
-		print_values(a, b, s);// TEST
 		while (node != NULL)
 		{
-			printf("\n!>> sycle-> %i\n", node->n_i);// TEST
 			weight = weigh(a, b, s, node);
 			if (weight <= chosen_weight || s->index == 0)
 			{
@@ -66,7 +67,6 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 			s->index++;
 			node = node->next;
 		}
-		printf("\n>> best-> %i\n", chosen_node->n_i);// TEST
 		execute_act(a, b, s, chosen_node);
 	}
 	smallest_to_top(a, b, s);

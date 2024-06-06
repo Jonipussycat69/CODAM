@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   path_act.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/06 13:28:04 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/06/06 13:28:31 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	exe_rrr(t_sort *s, int rr_a, int rr_b)
@@ -25,7 +37,6 @@ void	execute_act(t_list **a, t_list **b, t_sort *s, t_list *node)
 	const int	r_a = rotate_amount_a(a, node->num);
 	const int	rr_a = list_len(a) - r_a;
 
-	printf(">> ra: %i, rra: %i, rb: %i, rrb: %i\n", r_a, rr_a, r_b, rr_b);// TEST
 	act_arr_reset(s);
 	if (r_a - rr_a >= 0 && r_b - rr_b >= 0)
 		exe_rrr(s, rr_a, rr_b);
@@ -55,7 +66,6 @@ int	weigh(t_list **a, t_list **b, t_sort *s, t_list *node)
 	const int	r_a = rotate_amount_a(a, node->num);
 	const int	rr_a = list_len(a) - r_a;
 
-	printf(">> ra: %i, rra: %i, rb: %i, rrb: %i\n", r_a, rr_a, r_b, rr_b);// TEST
 	if (r_a - rr_a >= 0 && r_b - rr_b >= 0)
 		return (bn(rr_a, rr_b) + 1);
 	if (r_a - rr_a <= 0 && r_b - rr_b <= 0)

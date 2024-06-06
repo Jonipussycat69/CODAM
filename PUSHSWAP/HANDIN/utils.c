@@ -1,20 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   utils.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/06 13:32:11 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/06/06 13:41:26 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 size_t	ps_strlen(char *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (str && str[i])
 		i++;
 	return (i);
-}
-
-short	ps_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
 }
 
 char	*ps_strjoin(char *add, char *line, size_t i, size_t j)
@@ -57,7 +62,7 @@ int	list_len(t_list **head)
 {
 	t_list	*tmp;
 	int		i;
-	
+
 	if (!*head)
 		return (0);
 	i = 0;

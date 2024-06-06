@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/31 14:29:06 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 14:38:58 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ typedef struct s_list
 
 typedef struct s_sort
 {
-	int	total_inp;
-	int	index;
-	int	the_index;
-	int	the_weight;
+	int		total_inp;
+	int		index;
+	int		the_index;
+	int		the_weight;
 	t_list	*the_node;
-	int	r_num;
-	int	rr_num;
-	int	act_arr[8];
+	int		r_num;
+	int		rr_num;
+	int		act_arr[8];
 }	t_sort;
 
 typedef struct s_parser
@@ -49,10 +49,32 @@ typedef struct s_parser
 	short	min;
 }	t_parse;
 
-enum	actions{sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
-enum	returns{err = -1, inert = -2, ok = 0};
-enum	flags{biggest = -2};
-enum	act_arr{
+enum	e_actions
+{
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+};
+enum	e_returns
+{
+	err = -1,
+	inert = -2,
+	ok = 0
+};
+enum	e_flags
+{
+	biggest = -2
+};
+enum	e_act_arr
+{
 	_ra = 0,
 	_rb = 1,
 	_rra = 2,
@@ -70,8 +92,7 @@ char	*input_to_string(int argc, char **argv);
 short	parser(char *input, t_list **head);
 short	indexer(t_list **head);
 
-
-void	pb_stage(t_list **a, t_list **b, t_sort *s);
+void	pb_stage(t_list **a, t_list **b);
 void	pa_stage(t_list **a, t_list **b, t_sort *s);
 void	hardsort(t_list **a, t_list **b);
 int		weigh(t_list **a, t_list **b, t_sort *s, t_list *node);
@@ -94,7 +115,7 @@ t_list	*last_node(t_list **head);
 
 void	swap(t_list **head);
 void	push(t_list **head_a, t_list **head_b, short stack);
-void	rotate(t_list **head); 
+void	rotate(t_list **head);
 void	r_rotate(t_list **head);
 
 void	swap_both(t_list **head_a, t_list **head_b);
@@ -105,7 +126,6 @@ void	do_action(t_list **head_a, t_list **head_b, short action);
 void	do_actions(t_list **head_a, t_list **head_b, int amount, ...);
 void	repeat_action(t_list **head_a, t_list **head_b, int iter, short act);
 void	do_act_arr(t_list **head_a, t_list **head_b, t_sort *s);
-// short	double_act(t_list **head_a, t_list **head_b, short act);
 
 int		abs(int num);
 int		total_act(t_list *n);
@@ -114,5 +134,6 @@ void	zero_node_act(t_list **head);
 size_t	ps_strlen(char *str);
 short	ps_isdigit(int c);
 char	*ps_strjoin(char *add, char *line, size_t i, size_t j);
+short	smallest(t_list **a, int val);
 
 #endif

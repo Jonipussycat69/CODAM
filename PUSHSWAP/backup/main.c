@@ -40,14 +40,14 @@ int	main(int argc, char **argv)
 
 	first = NULL;
 	head = &first;
-	if (argc <= 1)
-		return (-1);
+	if (argc <= 2)
+		exit(EXIT_FAILURE);
 	if (parser(input_to_string(argc, argv), head) != ok)
-		return (wr_a("Error"), -1);
+		wr_err("Error");
 	if (indexer(head) != ok)
-		return (wr_a("Error"), -1);
+		wr_err("Error");
 	s.total_inp = list_len(head);// DO I USE THIS?
 	if (ft_pushswap(head, &s) != ok)
-		return (wr_a("Error"), -1);
+		wr_err("Error");
 	return (0);
 }

@@ -46,6 +46,13 @@ void	wr_a(char *action)
 	return ;
 }
 
+void	wr_err(char *message)
+{
+	write(STDERR_FILENO, message, ps_strlen(message));
+	write(STDERR_FILENO, "\n", 1);
+	exit(EXIT_FAILURE);
+}
+
 int	list_len(t_list **head)
 {
 	t_list	*tmp;

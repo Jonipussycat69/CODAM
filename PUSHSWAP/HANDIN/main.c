@@ -1,19 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/06 13:27:14 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/06/06 14:37:08 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	if (check_sort_asc(head_a) != ok && s->total_inp > 3)
 	{
-		print_values(head_a, head_b, s);// TEST
-		pb_stage(head_a, head_b, s);
-		print_values(head_a, head_b, s);// TEST
+		pb_stage(head_a, head_b);
 		hardsort(head_a, head_b);
-		print_values(head_a, head_b, s);// TEST
 		pa_stage(head_a, head_b, s);
 	}
 	else if (check_sort_asc(head_a) != ok)
 		hardsort(head_a, head_b);
-	print_values(head_a, head_b, s);// TEST
 }
 
 static short	ft_pushswap(t_list **head_a, t_sort *s)
@@ -33,7 +41,6 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 
 int	main(int argc, char **argv)
 {
-	short	ret;
 	t_list	*first;
 	t_list	**head;
 	t_sort	s;
@@ -46,7 +53,7 @@ int	main(int argc, char **argv)
 		wr_err("Error");
 	if (indexer(head) != ok)
 		wr_err("Error");
-	s.total_inp = list_len(head);// DO I USE THIS?
+	s.total_inp = list_len(head);
 	if (ft_pushswap(head, &s) != ok)
 		wr_err("Error");
 	return (0);

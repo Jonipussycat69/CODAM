@@ -1,16 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   utils_sort.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/06/06 13:32:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:41:07 by jdobos        ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
+
+int	bn(int one, int two)
+{
+	if (one > two)
+		return (one);
+	return (two);
+}
+
+int	sn(int one, int two)
+{
+	if (one < two)
+		return (one);
+	return (two);
+}
+
+short	smallest(t_list **a, int val)
+{
+	t_list	*tmp;
+
+	tmp = *a;
+	while (tmp != NULL)
+	{
+		if (tmp->n_i < val)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 
 int	smallest_node_rotate_a(t_list **a)
 {
@@ -58,7 +74,7 @@ int	biggest_node_rotate_a(t_list **a)
 	return (i_big + 1);
 }
 
-int	rotate_amount_a(t_list **a, int val)
+int	rotate_amount_a(t_list **a, int val)//TEST!!!
 {
 	t_list			*tmp;
 	const t_list	*last_a = last_node(a);
@@ -81,7 +97,21 @@ int	rotate_amount_a(t_list **a, int val)
 		tmp = tmp->next;
 		i++;
 	}
+	printf(">> biggest: %i\n", val);// TEST
 	return (biggest_node_rotate_a(a));
+}
+
+void	act_arr_reset(t_sort *s)
+{
+	short	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		s->act_arr[i] = 0;
+		i++;
+	}
+	return ;
 }
 
 // Returns 'ok' if stack is sorted ascending, 'err' if not
@@ -89,7 +119,7 @@ short	check_sort_asc(t_list **head)
 {
 	t_list	*tmp;
 	int		prev_index;
-
+	
 	if (!*head)
 		return (err);
 	tmp = *head;

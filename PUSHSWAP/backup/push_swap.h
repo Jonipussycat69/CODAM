@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/21 18:01:29 by joni          ########   odam.nl         */
+/*   Updated: 2024/05/31 14:29:06 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ short	check_sort_asc(t_list **head);
 void	act_arr_reset(t_sort *s);
 
 void	wr_a(char *action);
+void	wr_err(char *message);
 int		list_len(t_list **head);
 t_list	*last_node(t_list **head);
 

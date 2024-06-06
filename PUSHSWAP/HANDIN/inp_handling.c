@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   inp_handling.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/06 13:26:38 by jdobos        #+#    #+#                 */
+/*   Updated: 2024/06/06 13:38:56 by jdobos        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 short	char_check(char *str)
@@ -11,7 +23,8 @@ short	char_check(char *str)
 	{
 		if (str[i] != ' ' && !ps_isdigit(str[i]) && str[i] != '-')
 			return (err);
-		if (str[i] == '-' && ((i == 0 || str[i - 1] != ' ') || !ps_isdigit(str[i + 1])))
+		if (str[i] == '-' && ((i == 0 || str[i - 1] != ' ') \
+		|| !ps_isdigit(str[i + 1])))
 			return (err);
 		i++;
 	}
