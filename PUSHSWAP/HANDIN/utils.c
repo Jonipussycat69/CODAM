@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:32:11 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:41:26 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 20:31:09 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ps_strjoin(char *add, char *line, size_t i, size_t j)
 void	wr_a(char *action)
 {
 	write(STDOUT_FILENO, action, ps_strlen(action));
-	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, " ", 1);// CHANGE !!
 	return ;
 }
 

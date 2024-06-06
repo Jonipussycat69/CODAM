@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 14:37:08 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 19:23:40 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ int	main(int argc, char **argv)
 
 	first = NULL;
 	head = &first;
-	if (argc <= 2)
+	if (argc <= 1)
 		exit(EXIT_FAILURE);
+	if (argc == 2 && char_check(argv[0]) == err)
+		wr_err("Error char");
 	if (parser(input_to_string(argc, argv), head) != ok)
-		wr_err("Error");
+		wr_err("Error char");
 	if (indexer(head) != ok)
-		wr_err("Error");
+		wr_err("Error double");
 	s.total_inp = list_len(head);
 	if (ft_pushswap(head, &s) != ok)
 		wr_err("Error");

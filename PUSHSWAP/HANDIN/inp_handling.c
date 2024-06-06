@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:26:38 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 17:53:45 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 20:47:12 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ short	char_check(char *str)
 	{
 		if (str[i] != ' ' && !ps_isdigit(str[i]) && str[i] != '-')
 			return (err);
-		if (str[i] == '-' && ((i == 0 || str[i - 1] != ' ') \
+		if (str[i] == '-' && i != 0 && ((str[i - 1] != ' ') \
 		|| !ps_isdigit(str[i + 1])))
 			return (err);
 		i++;
@@ -56,6 +56,8 @@ char	*input_to_string(int argc, char **argv)
 	}
 	if (char_check(str) != ok)
 		return (free(str), NULL);
+	printf("\nSTRING\n");// TEST
+	printf(">>> %s\n", str);// TEST
 	return (str);
 }
 
@@ -85,6 +87,13 @@ short	parser(char *inp, t_list **head)
 			return (free_list(head), free(inp), err);
 		i++;
 	}
+	printf("\nNODE->NUM\n");// TEST
+	t_list *test = *head;
+	while (test != NULL)
+	{
+		printf("%i ", test->num);
+		test = test->next;
+	}
 	free(inp);
 	return (ok);
 }
@@ -97,6 +106,7 @@ short	indexer(t_list **head)
 	int		i;
 	short	double_check;
 
+	printf("\nINDEX\n");// TEST
 	tmp = *head;
 	while (tmp != NULL)
 	{
@@ -109,10 +119,11 @@ short	indexer(t_list **head)
 				double_check += 1;
 			if (double_check > 1)
 				return (free_list(head), err);
-			if (tmp->num > tmptmp->num)
+			else if (tmp->num > tmptmp->num)
 				i++;
 			tmptmp = tmptmp->next;
 		}
+		printf("%i ", i);// TEST
 		tmp->n_i = i;
 		tmp = tmp->next;
 	}

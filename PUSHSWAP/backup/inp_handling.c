@@ -11,7 +11,7 @@ short	char_check(char *str)
 	{
 		if (str[i] != ' ' && !ps_isdigit(str[i]) && str[i] != '-')
 			return (err);
-		if (str[i] == '-' && ((i == 0 || str[i - 1] != ' ') || !ps_isdigit(str[i + 1])))
+		if (str[i] == '-' && i != 0 && ((str[i - 1] != ' ') || !ps_isdigit(str[i + 1])))
 			return (err);
 		i++;
 	}
@@ -95,7 +95,7 @@ short	indexer(t_list **head)
 			if (tmp->num == tmptmp->num)
 				double_check += 1;
 			if (double_check > 1)
-				return (err);
+				return (free_list(head), err);
 			if (tmp->num > tmptmp->num)
 				i++;
 			tmptmp = tmptmp->next;
