@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:32:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:41:07 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 17:36:33 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,22 @@ short	check_sort_asc(t_list **head)
 			return (err);
 	}
 	return (ok);
+}
+
+char	*ps_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = (char *) malloc ((ps_strlen((char *)s) + 1) * sizeof(char));
+	if (!(ptr))
+		return (NULL);
+	while (s[i])
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

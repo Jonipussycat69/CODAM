@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:09 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:39:31 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 17:38:57 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_list(t_list **head)
 	t_list	*tmp;
 	t_list	*tmptmp;
 
-	if (!*head)
+	if (!(head) || !(*head))
 		return ;
 	tmp = *head;
 	while (tmp != NULL)

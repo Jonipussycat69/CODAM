@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 14:38:58 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 17:33:40 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ size_t	ps_strlen(char *str);
 short	ps_isdigit(int c);
 char	*ps_strjoin(char *add, char *line, size_t i, size_t j);
 short	smallest(t_list **a, int val);
+char	*ps_strdup(const char *s);
 
 #endif

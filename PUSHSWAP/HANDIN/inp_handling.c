@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:26:38 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:38:56 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/06 17:53:45 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*input_to_string(int argc, char **argv)
 	{
 		if (char_check(argv[1]) != ok)
 			return (NULL);
-		return (argv[1]);
+		return (ps_strdup(argv[1]));
 	}
 	i = 1;
 	str = NULL;
@@ -65,9 +65,9 @@ short	parser(char *inp, t_list **head)
 	int		i;
 	t_parse	p;
 
-	i = 0;
 	if (!inp)
-		return (err);
+		return (free_list(head), err);
+	i = 0;
 	while (inp[i])
 	{
 		p.min = 1;
@@ -108,7 +108,7 @@ short	indexer(t_list **head)
 			if (tmp->num == tmptmp->num)
 				double_check += 1;
 			if (double_check > 1)
-				return (err);
+				return (free_list(head), err);
 			if (tmp->num > tmptmp->num)
 				i++;
 			tmptmp = tmptmp->next;
