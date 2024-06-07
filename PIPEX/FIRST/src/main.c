@@ -6,18 +6,18 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:47 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/23 15:56:05 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 16:59:42 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	open_files(t_pipex *p)
 {
 	p->fd_in = open(p->file_a, O_RDONLY);
 	if (p->fd_in < 0)
 		error_exit(p, "Error opening input file", EXIT_FAILURE);
-	p->fd_out = open(p->file_b, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	p->fd_out = open(p->file_b, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (p->fd_out < 0)
 	{
 		close(p->fd_in);
@@ -54,7 +54,7 @@ void	exec_cmd_a(t_pipex *p, int *pipe_fd, char **envp)
 		p->path_a = path_find(p->cmd_a[0], envp);
 		if (!p->path_a)
 			error_exit(p, "", EXIT_FAILURE);
-		execve(p->path_a, p->cmd_a, envp);// !!
+		execve(p->path_a, p->cmd_a, envp);
 		error_exit(p, "Error executing cmd_a", EXIT_FAILURE);
 	}
 }
@@ -78,7 +78,7 @@ void	exec_cmd_b(t_pipex *p, int *pipe_fd, char **envp)
 		p->path_b = path_find(p->cmd_b[0], envp);
 		if (!p->path_b)
 			error_exit(p, "", EXIT_FAILURE);
-		execve(p->path_b, p->cmd_b, envp);// !!
+		execve(p->path_b, p->cmd_b, envp);
 		error_exit(p, "Error executing cmd_b", EXIT_FAILURE);
 	}
 }
@@ -107,7 +107,6 @@ int	main(int argc, char *argv[], char *envp[])
 	close(pipe_fd[1]);
 	close(p.fd_in);
 	close(p.fd_out);
-	waitpid(p.pid_a, NULL, 0);
-	waitpid(p.pid_b, NULL, 0);
+	wait_secure(&p, p.pid_a);
 	return (0);
 }

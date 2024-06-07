@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:17:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/23 15:55:37 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 16:43:14 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 char	*create_full_path(char *path, char *cmd)
 {

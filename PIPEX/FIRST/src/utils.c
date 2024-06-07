@@ -6,17 +6,25 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:41 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 15:49:21 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 16:50:41 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-void	error_exit(t_pipex *p, const char *message, int error_code)
+void	error_exit(t_pipex *p, char *message, int error_code)
 {
-	perror(message);
+	const char	*nill = "\0";
+
 	free_struct(p);
-	exit(error_code);
+	if (message == NULL)
+		message = (char *)nill;
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	if (error_code == 127)
+		ft_printf("pipex: command not found: %s\n", message);
+	else
+		ft_printf("pipex: %s: %s\n", strerror(errno), message);
+	exit(errno);
 }
 
 void	free_struct(t_pipex *p)
@@ -134,4 +142,19 @@ void	init_null(t_pipex *p)
 	p->cmd_b = NULL;
 	p->path_a = NULL;
 	p->path_b = NULL;
+}
+
+int	wait_secure(t_pipex *p, int pid)
+{
+	int	status;
+
+	if (waitpid(pid, &status, 0) == -1)
+		error_exit(p, "Waitpid error", errno);
+	while (wait(NULL) != -1)
+		;
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (WTERMSIG(status));
+	return (errno);
 }

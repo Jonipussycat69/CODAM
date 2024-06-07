@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:15:39 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/22 14:16:05 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 16:43:10 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static size_t	count(char const *s, char c)
 {
