@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:32:11 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 20:31:09 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:26:26 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 size_t	ps_strlen(char *str)
 {
@@ -47,7 +47,7 @@ char	*ps_strjoin(char *add, char *line, size_t i, size_t j)
 void	wr_a(char *action)
 {
 	write(STDOUT_FILENO, action, ps_strlen(action));
-	write(STDOUT_FILENO, " ", 1);// CHANGE !!
+	write(STDOUT_FILENO, "\n", 1);
 	return ;
 }
 

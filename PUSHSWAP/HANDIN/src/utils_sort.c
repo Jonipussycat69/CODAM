@@ -6,34 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:32:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 17:36:33 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:26:17 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	smallest_node_rotate_a(t_list **a)
-{
-	int		i;
-	int		i_small;
-	int		small;
-	t_list	*tmp;
-
-	tmp = *a;
-	i = 0;
-	small = INT_MAX;
-	while (tmp != NULL)
-	{
-		if (tmp->n_i < small)
-		{
-			small = tmp->n_i;
-			i_small = i;
-		}
-		i++;
-		tmp = tmp->next;
-	}
-	return (i_small);
-}
+#include "../push_swap.h"
 
 int	biggest_node_rotate_a(t_list **a)
 {
@@ -58,30 +35,39 @@ int	biggest_node_rotate_a(t_list **a)
 	return (i_big + 1);
 }
 
+int	abs(int val)
+{
+	if (val < 0)
+		return (val * -1);
+	return (val);
+}
+
 int	rotate_amount_a(t_list **a, int val)
 {
-	t_list			*tmp;
-	const t_list	*last_a = last_node(a);
-	int				i;
+	t_list	*tmp;
+	int		bindex;
+	int		i;
+	int		diff;
+	int		small;
 
-	if (*a == NULL)
-		return (0);
-	if (smallest(a, val))
-		return (smallest_node_rotate_a(a));
-	i = 0;
 	tmp = *a;
+	small = INT_MAX;
+	i = 0;
+	bindex = -1;
 	while (tmp != NULL)
 	{
-		if (i == 0 && tmp->num > val && last_a->num < val)
-			return (0);
-		if (tmp == last_a && tmp->num < val && (*a)->num > val)
-			return (i);
-		if (tmp != last_a && tmp->num < val && tmp->next->num > val)
-			return (i + 1);
+		diff = abs(val - tmp->num);
+		if (diff < small && val < tmp->num)
+		{
+			small = diff;
+			bindex = i;
+		}
+		++i;
 		tmp = tmp->next;
-		i++;
 	}
-	return (biggest_node_rotate_a(a));
+	if (bindex == -1)
+		return (biggest_node_rotate_a(a));
+	return (bindex);
 }
 
 // Returns 'ok' if stack is sorted ascending, 'err' if not

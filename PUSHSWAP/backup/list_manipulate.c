@@ -52,7 +52,7 @@ t_list	*last_node(t_list **head)
 {
 	t_list	*tmp;
 	
-	if (!*head)
+	if (!(head) || !(*head))
 		return (NULL);
 	tmp = *head;
 	while (tmp->next != NULL)

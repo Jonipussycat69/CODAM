@@ -1,43 +1,36 @@
-NAME=push_swap
+NAME		=	push_swap
+CFLAGS		=	-Wall -Werror -Wextra
 
-CFLAGS=-Wall -Wextra -Werror
+SRCDIR		=	./src
+SRC			=	$(SRCDIR)/action.c\
+				$(SRCDIR)/inp_handling.c\
+				$(SRCDIR)/list_action_double.c\
+				$(SRCDIR)/list_action.c\
+				$(SRCDIR)/list_manipulate.c\
+				$(SRCDIR)/main.c\
+				$(SRCDIR)/path_act.c\
+				$(SRCDIR)/sorting.c\
+				$(SRCDIR)/utils_extend.c\
+				$(SRCDIR)/utils_sort.c\
+				$(SRCDIR)/utils.c\
 
-RM=rm -f
-
-SRC= *.c
-
-# SRC=	main.c\
-# 		action.c\
-# 		inp_handling.c\
-# 		list_action_double.c\
-# 		list_action.c\
-# 		list_manipulate.c\
-# 		path_act.c\
-# 		sorting.c\
-# 		utils_extend.c\
-# 		utils_sort.c\
-# 		utils.c
-
-# OBJ=$(SRC:.c=.o)
+OBJS		=	${SRC:.c=.o}
 
 all: $(NAME)
 
-$(NAME):
-	cc $(CFLAGS) -o $(NAME) $(SRC)
+%.o: %.c
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-# %.o: %.c
-# 	cc $(CFLAGS) -c $< -o $@
-
-# $(NAME): $(OBJ)
-# 	@ar rc $(NAME) $(OBJ)
-# 	ranlib $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME)
 
 clean:
-	@$(RM)
+	rm -rf $(OBJS)
 
-fclean: clean
-	@$(RM) $(NAME)
+fclean:
+	rm -rf $(OBJS)
+	rm -rf $(NAME)
 
-re: fclean all
+re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: all, clean, fclean, re

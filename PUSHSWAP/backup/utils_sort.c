@@ -74,32 +74,71 @@ int	biggest_node_rotate_a(t_list **a)
 	return (i_big + 1);
 }
 
-int	rotate_amount_a(t_list **a, int val)//TEST!!!
+int	abs(int val)
 {
-	t_list			*tmp;
-	const t_list	*last_a = last_node(a);
-	int				i;
+	if (val < 0)
+		return (val * -1);
+	return (val);
+}
 
-	if (*a == NULL)
+int	rotate_amount_a(t_list **a, int val)
+{
+	t_list	*tmp;
+	int		bindex;
+	int		i;
+	int		diff;
+	int		small;
+
+	if (!(a) || !(*a))
 		return (0);
-	if (smallest(a, val))
-		return (smallest_node_rotate_a(a));
-	i = 0;
+	// if (smallest(a, val))
+	// 	return (smallest_node_rotate_a(a));
 	tmp = *a;
+	small = INT_MAX;
+	i = 0;
+	bindex = -1;
 	while (tmp != NULL)
 	{
-		if (i == 0 && tmp->num > val && last_a->num < val)
-			return (0);
-		if (tmp == last_a && tmp->num < val && (*a)->num > val)
-			return (i);
-		if (tmp != last_a && tmp->num < val && tmp->next->num > val)
-			return (i + 1);
+		diff = abs(val - tmp->num);
+		if (diff < small && val < tmp->num)
+		{
+			small = diff;
+			bindex = i;
+		}
+		++i;
 		tmp = tmp->next;
-		i++;
 	}
-	printf(">> biggest: %i\n", val);// TEST
-	return (biggest_node_rotate_a(a));
+	if (bindex == -1)
+		return (biggest_node_rotate_a(a));
+	return (bindex);
 }
+
+// int	rotate_amount_a(t_list **a, int val)//TEST!!!
+// {
+// 	t_list			*tmp;
+// 	const t_list	*last_a = last_node(a);
+// 	int				i;
+
+// 	if (last_a == NULL)
+// 		return (0);
+// 	if (smallest(a, val))
+// 		return (smallest_node_rotate_a(a));
+// 	i = 0;
+// 	tmp = *a;
+// 	while (tmp != NULL)
+// 	{
+// 		if (i == 0 && tmp->num > val && last_a->num < val)
+// 			return (0);
+// 		if (tmp == last_a && tmp->num < val && (*a)->num > val)
+// 			return (i);
+// 		if (tmp != last_a && tmp->num < val && tmp->next->num > val)
+// 			return (i + 1);
+// 		tmp = tmp->next;
+// 		i++;
+// 	}
+// 	printf(">> biggest: %i\n", val);// TEST
+// 	return (biggest_node_rotate_a(a));
+// }
 
 void	act_arr_reset(t_sort *s)
 {

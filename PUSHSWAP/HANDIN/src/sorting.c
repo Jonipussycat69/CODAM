@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:30:59 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 14:36:49 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:26:06 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	smallest_to_top(t_list **a, t_list **b, t_sort *s)
 {

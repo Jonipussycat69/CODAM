@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:28:04 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:28:31 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:26:00 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static void	exe_rrr(t_sort *s, int rr_a, int rr_b)
 {

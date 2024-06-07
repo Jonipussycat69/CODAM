@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:26:29 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:26:31 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:25:34 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	do_action(t_list **head_a, t_list **head_b, short action)
 {

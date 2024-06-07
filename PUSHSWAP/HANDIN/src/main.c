@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 19:23:40 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:25:55 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
@@ -50,11 +50,11 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		exit(EXIT_FAILURE);
 	if (argc == 2 && char_check(argv[0]) == err)
-		wr_err("Error char");
+		wr_err("Error");
 	if (parser(input_to_string(argc, argv), head) != ok)
-		wr_err("Error char");
+		wr_err("Error");
 	if (indexer(head) != ok)
-		wr_err("Error double");
+		wr_err("Error");
 	s.total_inp = list_len(head);
 	if (ft_pushswap(head, &s) != ok)
 		wr_err("Error");

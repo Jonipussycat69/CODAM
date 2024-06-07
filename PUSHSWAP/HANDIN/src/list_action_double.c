@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:26:42 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:26:46 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:25:41 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	swap_both(t_list **head_a, t_list **head_b)
 {

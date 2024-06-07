@@ -20,16 +20,6 @@ void	smallest_to_top(t_list **a, t_list **b, t_sort *s)
 	return (do_act_arr(a, b, s));
 }
 
-// void	assign_best(int weight, t_list *node, t_sort *s)
-// {
-// 	if (s->the_weight == weight && node->n_i > s->the_node->n_i)
-// 		return ;
-// 	s->the_weight = weight;
-// 	s->the_node = node;
-// 	s->the_index = s->index;
-// 	return ;
-// }
-
 void	pb_stage(t_list **a, t_list **b, t_sort *s)
 {
 	while (list_len(a) > 3 && check_sort_asc(a) != ok)

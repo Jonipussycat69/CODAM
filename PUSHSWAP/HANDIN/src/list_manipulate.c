@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:09 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 17:38:57 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:25:52 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	free_list(t_list **head)
 {

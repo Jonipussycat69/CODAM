@@ -6,11 +6,11 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:36:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/06 13:38:11 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:26:10 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	act_arr_reset(t_sort *s)
 {
