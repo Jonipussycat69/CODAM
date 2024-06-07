@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:41 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/23 15:31:30 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/07 15:49:21 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	free_struct(t_pipex *p)
 	if (p->cmd_b)
 		free_double_arr(p->cmd_b);
 }
-
-// strcmp, split, function to find the path (with access)
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

@@ -1,13 +1,15 @@
-NAME	= fractol.a
+NAME	= fractol
 CFLAGS	= -Wall -Werror -Wextra
 
 LMLXDIR	= ./MLX42
 LIBMLX	= $(LMLXDIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
 LFTDIR	= ./libft
 LIBFT	= $(LFTDIR)/libft.a
 
 HEADERS	= -I ./include -I $(LMLXDIR)/include
 LIBS	= $(LIBMLX) $(LIBFT)
+
 SRCDIR	= ./src
 SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/math.c \
@@ -23,6 +25,7 @@ SRC		=	$(SRCDIR)/main.c \
 			$(SRCDIR)/input_handling.c \
 			$(SRCDIR)/palette_init_j.c \
 			$(SRCDIR)/palette_init_m.c
+
 OBJS	= ${SRC:.c=.o}
 
 all: $(LIBS) $(NAME)
