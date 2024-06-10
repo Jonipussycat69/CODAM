@@ -6,24 +6,24 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 17:04:30 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 18:23:17 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 12:49:52 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	error_exit(int no, char *param)
+void	error_exit(int errornum, char *message)
 {
 	const char	*nill = "\0";
 
-	if (param == NULL)
-		param = (char *)nill;
+	if (message == NULL)
+		message = (char *)nill;
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	if (no == 127)
-		ft_printf("pipex: command not found: %s\n", param);
+	if (errornum == 127)
+		ft_printf("pipex: command not found: %s\n", message);
 	else
-		ft_printf("pipex: %s: %s\n", strerror(no), param);
-	exit(no);
+		ft_printf("pipex: %s: %s\n", strerror(errornum), message);
+	exit(errornum);
 }
 
 void	set_input(int input_fd)
@@ -42,22 +42,22 @@ void	set_output(int output_fd)
 		error_exit(errno, NULL);
 }
 
-int	open_infile(const char *infile)
+int	open_inputfile(const char *inputfile)
 {
 	int	fd;
 
-	fd = open(infile, O_RDONLY);
+	fd = open(inputfile, O_RDONLY);
 	if (fd == -1)
-		error_exit(errno, (char *)infile);
+		error_exit(errno, (char *)inputfile);
 	return (fd);
 }
 
-int	open_outfile(const char *outfile)
+int	open_outputfile(const char *outputfile)
 {
 	int	fd;
 
-	fd = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd = open(outputfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
-		error_exit(errno, (char *)outfile);
+		error_exit(errno, (char *)outputfile);
 	return (fd);
 }

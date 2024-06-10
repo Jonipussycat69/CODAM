@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:47 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 18:36:11 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 12:58:00 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	execute_command(char *cmd, char *path, char **envp)
 
 	split_cmd = split_command(cmd);
 	if (path_find(split_cmd[0], path, envp) == NULL)
-		error_exit(EXIT_FAILURE, NULL);
+		error_exit(127, NULL);
 	execve(path, split_cmd, envp);
 	free_double_arr(split_cmd);
-	error_exit(EXIT_FAILURE, "Execve");
+	error_exit(errno, "execve");
 }
 
 static int	first_child(char **arg, char *path, char **envp)
@@ -37,10 +37,13 @@ static int	first_child(char **arg, char *path, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
-		set_input(open_infile(input_file));
-		close(pipe_fds[0]);
+		set_input(open_inputfile(input_file));
+		if (close(pipe_fds[0]) == -1)
+			error_exit(errno, NULL);
 		execute_command((char *)cmd, path, envp);
 	}
+	if (close(pipe_fds[1]) == -1)
+		error_exit(errno, NULL);
 	return (pipe_fds[0]);
 }
 
@@ -55,11 +58,15 @@ static pid_t	last_child(int inp_fd, char **arg, char *path, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
-		set_output(open_outfile(output_file));
+		set_output(open_outputfile(output_file));
 		execute_command((char *)cmd, path, envp);
 	}
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
+	if (close(inp_fd) == -1)
+		error_exit(errno, NULL);
+	if (close(STDIN_FILENO) == -1)
+		error_exit(errno, NULL);
+	if (close(STDOUT_FILENO) == -1)
+		error_exit(errno, NULL);
 	return (pid);
 }
 
@@ -82,7 +89,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
 	int		input_fd;
-	char	path[1024];
+	char	path[4097];
 
 	if (argc < 5 || argc > 5)
 		error_exit(EINVAL, NULL);

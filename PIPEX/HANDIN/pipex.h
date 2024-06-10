@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 18:47:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 18:48:55 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 12:49:57 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	free_double_arr(char **arr);
 char	*path_find(char *cmd, char *path, char **envp);
 char	**split_command(char *cmd);
 
-void	error_exit(int i, char *param);
+void	error_exit(int errornum, char *message);
 void	set_input(int input_fd);
 void	set_output(int output_fd);
-int		open_infile(const char *infile);
-int		open_outfile(const char *outfile);
+int		open_inputfile(const char *inputfile);
+int		open_outputfile(const char *outputfile);
 
 #endif

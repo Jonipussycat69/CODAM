@@ -6,12 +6,15 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 15:25:55 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 13:13:35 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+// pb_stage -> pushes values to stack b till 3 remain in stack a
+// hardsort -> sorts the three values in stack a
+// pa_stage -> pushes the most efficient values back to their right place in a
 static void	sorting(t_list **head_a, t_list **head_b, t_sort *s)
 {
 	if (check_sort_asc(head_a) != ok && s->total_inp > 3)

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:17:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 18:45:28 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 12:57:17 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	free_double_arr(char **arr)
 
 static char	*create_path(char *piece, char *cmd, char *path)
 {
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (piece[i])
@@ -58,7 +58,7 @@ char	*path_find(char *cmd, char *path, char **envp)
 		error_exit(127, NULL);
 	split_paths = ft_split((*envp) + 5, ':');
 	if (!split_paths)
-		error_exit(errno, "Malloc");
+		error_exit(errno, "malloc");
 	i = 0;
 	while (split_paths[i])
 	{
@@ -68,7 +68,7 @@ char	*path_find(char *cmd, char *path, char **envp)
 		i++;
 	}
 	free_double_arr(split_paths);
-	return (error_exit(127, NULL), NULL);
+	return (NULL);
 }
 
 char	**split_command(char *cmd)
@@ -77,6 +77,6 @@ char	**split_command(char *cmd)
 
 	split_cmd = ft_split(cmd, ' ');
 	if (!split_cmd)
-		error_exit(EXIT_FAILURE, "Malloc");
+		error_exit(EXIT_FAILURE, "malloc");
 	return (split_cmd);
 }
