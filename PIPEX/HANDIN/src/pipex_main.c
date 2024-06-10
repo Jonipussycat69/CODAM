@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:47 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 12:58:00 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 15:01:08 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ static int	first_child(char **arg, char *path, char **envp)
 	{
 		set_input(open_inputfile(input_file));
 		if (close(pipe_fds[0]) == -1)
-			error_exit(errno, NULL);
+			error_exit(errno, "close first child");
 		execute_command((char *)cmd, path, envp);
 	}
-	if (close(pipe_fds[1]) == -1)
-		error_exit(errno, NULL);
 	return (pipe_fds[0]);
 }
 
@@ -61,12 +59,10 @@ static pid_t	last_child(int inp_fd, char **arg, char *path, char **envp)
 		set_output(open_outputfile(output_file));
 		execute_command((char *)cmd, path, envp);
 	}
-	if (close(inp_fd) == -1)
-		error_exit(errno, NULL);
 	if (close(STDIN_FILENO) == -1)
-		error_exit(errno, NULL);
+		error_exit(errno, "close STDIN");
 	if (close(STDOUT_FILENO) == -1)
-		error_exit(errno, NULL);
+		error_exit(errno, "close STDOUT");
 	return (pid);
 }
 

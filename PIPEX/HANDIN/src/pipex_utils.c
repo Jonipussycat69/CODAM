@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 17:04:30 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 12:49:52 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 14:53:07 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_input(int input_fd)
 	if (dup2(input_fd, STDIN_FILENO) == -1)
 		error_exit(errno, NULL);
 	if (close(input_fd) == -1)
-		error_exit(errno, NULL);
+		error_exit(errno, "close input");
 }
 
 void	set_output(int output_fd)
@@ -39,7 +39,7 @@ void	set_output(int output_fd)
 	if (dup2(output_fd, STDOUT_FILENO) == -1)
 		error_exit(errno, NULL);
 	if (close(output_fd) == -1)
-		error_exit(errno, NULL);
+		error_exit(errno, "close output");
 }
 
 int	open_inputfile(const char *inputfile)
