@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:17 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:49:46 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 19:43:51 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int32_t	main(int argc, char **argv)
 		ft_error(&f, ERR_MESSAGE);
 	f.split = false;
 	f.set = mandel;
-	if (!(ft_strncmp(argv[1], "mandelbrot", 10)))
+	if (!(ft_strncmp(argv[1], "mandelbrot", 11)))
 		f.set = mandel;
-	else if (!(ft_strncmp(argv[1], "julia", 5)))
+	else if (!(ft_strncmp(argv[1], "julia", 6)))
 		f.set = julia;
 	else if (!(ft_strncmp(argv[1], "split", 6)))
 		f.split = true;

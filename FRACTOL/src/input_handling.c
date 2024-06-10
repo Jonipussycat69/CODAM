@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:48:39 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 19:39:26 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ bool	arg_check(t_fractal *f, char *arg)
 		ft_error(f, ERR_MESSAGE);
 	i = 0;
 	i = num_check(f, arg, i);
-	if (arg[i] != ',' || arg[i + 1] != ' ' || !ft_isdigit(arg[i + 2]))
+	if (arg[i] != ',' || arg[i + 1] != ' ' || \
+	(!ft_isdigit(arg[i + 2]) && arg[i + 2] != '-'))
 		ft_error(f, ERR_MESSAGE);
 	i += 2;
 	i = num_check(f, arg, i);
@@ -59,7 +60,7 @@ static double	ft_atof(char *arg)
 	i = 0;
 	mult = 1;
 	num = 0;
-	if (arg[i] == '-')
+	if (arg[i++] == '-')
 		mult = -1;
 	while (arg[i] && ft_isdigit(arg[i]))
 	{
