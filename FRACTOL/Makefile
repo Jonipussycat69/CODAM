@@ -1,4 +1,5 @@
 NAME	= fractol
+
 CFLAGS	= -Wall -Werror -Wextra
 
 LMLXDIR	= ./MLX42

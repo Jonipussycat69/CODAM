@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:31 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:51:46 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 14:43:42 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_error(t_fractal *f, char *message)
 {
 	if (message)
 	{
-		write(STDOUT_FILENO, message, ft_strlen(message));
-		write(STDOUT_FILENO, "\n", 1);
+		write(STDERR_FILENO, message, ft_strlen(message));
+		write(STDERR_FILENO, "\n", 1);
 	}
 	if (f->mlx)
 	{

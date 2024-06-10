@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:44:17 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 18:21:28 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/10 14:28:48 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
-# define ERR_MESSAGE "Input ERROR! Correct input format:\n./[name.a] \
-[mandelbrot/ julia/ split][x, yi](option for julia)"
+# define ERR_MESSAGE "Input ERROR! Correct input format:\n./fractol \
+[mandelbrot/ julia/ split] [x, yi](option for julia)"
 # define RETINA_ITER 1600
 
 // NORMAL MODE
