@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 16:43:40 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 13:20:00 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/11 15:25:40 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ typedef struct s_list
 {
 	int				num;
 	int				n_i;
-	int				ra;
-	int				rb;
-	int				rrb;
-	int				rra;
 	struct s_list	*next;
 }	t_list;
 
@@ -47,6 +43,7 @@ typedef struct s_parser
 {
 	long	num;
 	short	min;
+	int		start;
 }	t_parse;
 
 enum	e_actions

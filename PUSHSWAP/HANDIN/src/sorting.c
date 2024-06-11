@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:30:59 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/07 15:26:06 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/11 15:15:57 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,22 @@ void	pa_stage(t_list **a, t_list **b, t_sort *s)
 // Hard-sorting for 2 or 3 value list (stack a)
 void	hardsort(t_list **a, t_list **b)
 {
+	const int	first = (*a)->num;
+	const int	middle = (*a)->next->num;
+	const int	last = (*a)->next->next->num;
+
 	if (list_len(a) > 3 || list_len(a) < 2 || \
 	check_sort_asc(a) == ok)
 		return ;
-	if (list_len(a) == 2 || ((*a)->num > (*a)->next->num \
-	&& (*a)->num < (*a)->next->next->num))
+	if (list_len(a) == 2 || (first > middle && first < last))
 		return (do_action(a, b, sa));
-	if ((*a)->num < (*a)->next->num && (*a)->num < (*a)->next->next->num)
+	if (first < middle && first < last)
 		return (do_actions(a, b, 2, sa, ra));
-	if ((*a)->num > (*a)->next->num && (*a)->num > (*a)->next->next->num \
-	&& (*a)->next->num < (*a)->next->next->num)
+	if (first > middle && first > last && middle < last)
 		return (do_action(a, b, ra));
-	if ((*a)->num > (*a)->next->num && (*a)->num > (*a)->next->next->num \
-	&& (*a)->next->num > (*a)->next->next->num)
+	if (first > middle && first > last && middle > last)
 		return (do_actions(a, b, 2, ra, sa));
-	if ((*a)->num < (*a)->next->num && (*a)->num > (*a)->next->next->num)
-		return (do_actions(a, b, 2, ra, ra));
+	if (first < middle && first > last)
+		return (do_action(a, b, rra));
 	return ;
 }

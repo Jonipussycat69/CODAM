@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:25 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/05/13 16:55:32 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/11 12:57:42 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	multi_init_color_palette_m(t_fractal *f, t_uint size)
 	t_uint			start_i;
 	t_uint			end_i;
 	double			step;
-	const t_color	arr[4] = {f->c_a, f->c_b, f->c_c, f->c_d};
+	const t_color	arr[5] = {f->c_a, f->c_b, f->c_c, f->c_d, f->c_a};
 
 	f->palette_m = (t_uint *)malloc(sizeof(t_uint) * size);
 	if (!f->palette_m)

@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/13 16:45:05 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 19:39:26 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/11 14:11:10 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ bool	arg_check(t_fractal *f, char *arg)
 	return (true);
 }
 
+static short	min_check(char c, int *i)
+{
+	if (c == '-')
+	{
+		*i = 1;
+		return (-1);
+	}
+	else
+	{
+		*i = 0;
+		return (1);
+	}
+}
+
 static double	ft_atof(char *arg)
 {
 	double	num;
@@ -57,11 +71,8 @@ static double	ft_atof(char *arg)
 	int		mult;
 	int		c;
 
-	i = 0;
-	mult = 1;
 	num = 0;
-	if (arg[i++] == '-')
-		mult = -1;
+	mult = min_check(arg[0], &i);
 	while (arg[i] && ft_isdigit(arg[i]))
 	{
 		num = num * 10 + (arg[i] - '0');

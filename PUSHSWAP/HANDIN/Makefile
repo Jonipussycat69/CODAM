@@ -1,6 +1,10 @@
 NAME		=	push_swap
 
+CC			=	cc
+
 CFLAGS		=	-Wall -Werror -Wextra
+
+FSANITIZE	=	-g -fsanitize=address
 
 SRCDIR		=	./src
 SRC			=	$(SRCDIR)/action.c \
@@ -23,7 +27,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CC) $(FSANITIZE) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)

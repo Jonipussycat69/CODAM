@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/06 13:27:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 22:22:30 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/11 16:05:13 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ static short	ft_pushswap(t_list **head_a, t_sort *s)
 	return (ok);
 }
 
+static short	single_arg_check(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (err);
+	i = 0;
+	while (str[i])
+	{
+		if (i > 0 && (ps_isdigit(str[i]) || str[i] == '-') \
+		&& str[i - 1] == ' ')
+			return (err);
+		i++;
+	}
+	return (ok);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*first;
@@ -51,10 +68,10 @@ int	main(int argc, char **argv)
 	first = NULL;
 	head = &first;
 	if (argc <= 1)
-		exit(EXIT_FAILURE);
+		return (0);
 	if (argc == 2 && char_check(argv[1]) == err)
 		wr_err("Error");
-	else if (argc == 2)
+	else if (argc == 2 && single_arg_check(argv[1]) == ok)
 		return (0);
 	if (parser(input_to_string(argc, argv), head) != ok)
 		wr_err("Error");

@@ -1,6 +1,10 @@
 NAME	= fractol
 
+CC		= cc
+
 CFLAGS	= -Wall -Werror -Wextra
+
+FSANIT	= -g -fsanitize=address
 
 LMLXDIR	= ./MLX42
 LIBMLX	= $(LMLXDIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
@@ -41,7 +45,7 @@ $(LIBMLX):
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	$(CC) $(FSANIT) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	make -C $(LFTDIR) clean
