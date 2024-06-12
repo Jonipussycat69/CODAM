@@ -36,10 +36,10 @@ $(LIBFT):
 	make -C $(LFTDIR) all
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(NAME): $(OBJSSRC) $(OBJSPRINT) $(LIBFT)
-	$(CC) $(OBJSSRC) $(OBJSPRINT) $(LIBFT) -o $(NAME) $(LDFLAGS)
+	$(CC) $(OBJSSRC) $(OBJSPRINT) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJSSRC)

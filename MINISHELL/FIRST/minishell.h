@@ -6,7 +6,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
-# include <readline.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 
 
