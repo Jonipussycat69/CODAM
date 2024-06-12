@@ -4,7 +4,15 @@ CC=			cc
 
 CFLAGS=		-Wall -Wextra -Werror
 
-HEADERS=	-I ./include
+# Adding platform-specific settings for macOS and Ubuntu
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)  # macOS
+	INCLUDES=	-I /usr/local/opt/readline/include -I ./include
+	LDFLAGS=	-L /usr/local/opt/readline/lib -lreadline
+else ifeq ($(UNAME_S), Linux)  # Ubuntu
+	INCLUDES=	-I /usr/include/readline -I ./include
+	LDFLAGS=	-lreadline
+endif
 
 LFTDIR=		./libft
 LIBFT=		$(LFTDIR)/libft.a
@@ -28,10 +36,10 @@ $(LIBFT):
 	make -C $(LFTDIR) all
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
 
 $(NAME): $(OBJSSRC) $(OBJSPRINT) $(LIBFT)
-	$(CC) $(OBJSSRC) $(OBJSPRINT) $(LIBFT) -o $(NAME) $(HEADERS)
+	$(CC) $(OBJSSRC) $(OBJSPRINT) $(LIBFT) -o $(NAME) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJSSRC)
