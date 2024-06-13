@@ -1,16 +1,33 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   libft_split.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/05/22 14:15:39 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/13 18:29:26 by jdobos        ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include "../pipex.h"
+char	**ft_split(const char *s, const char c);
+
+int	main(void)
+{
+	char	str[] = "hallo";
+	char	**split;
+
+	split = ft_split(str, ' ');
+	if (!split)
+		return (printf("error\n"), 1);
+	printf("split: %s | %s\n", split[0], split[1]);
+	return (0);
+}
+
+// SPLIT
+
+size_t	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		++i;
+	return (i);
+}
 
 static size_t	count(char const *s, char c)
 {
@@ -38,7 +55,6 @@ static void	*free_er(char **arr, size_t word)
 	while (word--)
 		free(arr[word]);
 	free(arr);
-	arr = NULL;
 	return (NULL);
 }
 
@@ -50,7 +66,7 @@ static char	*wordalloc(char const *s, char const c)
 	i = 0;
 	while (s[i] && s[i] != c)
 		i++;
-	word = (char *)malloc((i + 1) * sizeof(char));
+	word = malloc((i + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
 	i = 0;

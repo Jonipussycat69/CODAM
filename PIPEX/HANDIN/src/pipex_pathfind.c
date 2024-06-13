@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:17:20 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 12:57:17 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/13 18:29:26 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	free_double_arr(char **arr)
 {
 	int	i;
 
+	if (!arr)
+		return ;
 	i = 0;
 	while (arr[i] != NULL)
 	{
 		free(arr[i]);
 		arr[i] = NULL;
+		++i;
 	}
 	free(arr);
 	arr = NULL;
@@ -77,6 +80,6 @@ char	**split_command(char *cmd)
 
 	split_cmd = ft_split(cmd, ' ');
 	if (!split_cmd)
-		error_exit(EXIT_FAILURE, "malloc");
+		error_exit(errno, "malloc");
 	return (split_cmd);
 }
