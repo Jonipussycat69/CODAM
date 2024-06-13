@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 18:47:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 12:49:57 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/13 23:43:58 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
-# include <wait.h>
+# include <sys/wait.h>
 # include <errno.h>
 # include <fcntl.h>
 

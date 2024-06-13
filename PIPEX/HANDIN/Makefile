@@ -2,6 +2,8 @@ NAME=pipex
 
 CC=cc
 
+ASAN=-g -fsanitize=address #TEST
+
 CFLAGS=-Wall -Wextra -Werror
 
 HEADERS=-I ./include
@@ -29,7 +31,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJSSRC) $(OBJSPRINT)
-	$(CC) $(OBJSSRC) $(OBJSPRINT) -o $(NAME) $(HEADERS)
+	$(CC) $(ASAN) $(OBJSSRC) $(OBJSPRINT) -o $(NAME) $(HEADERS)
 
 clean:
 	rm -f $(OBJSSRC)
