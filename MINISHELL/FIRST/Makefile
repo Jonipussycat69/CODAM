@@ -24,8 +24,11 @@ PRINTF=		$(PRINTFDIR)/ft_convert.c \
 			$(PRINTFDIR)/ft_printf_utils.c \
 			$(PRINTFDIR)/ft_printf.c
 
-SRCDIR=		./src
+SRCDIR=		./test_env_src
 SRCS=		$(SRCDIR)/main.c
+
+# SRCDIR=		./src
+# SRCS=		$(SRCDIR)/main.c
 
 OBJSSRC=	$(SRCS:.c=.o)
 OBJSPRINT=	$(PRINTF:.c=.o)
