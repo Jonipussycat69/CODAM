@@ -4,7 +4,7 @@ CC=cc
 
 ASAN=-g -fsanitize=address #TEST
 
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS= -g -Wall -Wextra -Werror 
 
 HEADERS=-I ./include
 

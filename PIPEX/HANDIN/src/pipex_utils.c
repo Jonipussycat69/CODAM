@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 17:04:30 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 14:53:07 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/14 13:46:09 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	error_exit(int errornum, char *message)
 		ft_printf("pipex: command not found: %s\n", message);
 	else
 		ft_printf("pipex: %s: %s\n", strerror(errornum), message);
+	if (errornum == EACCES)
+		exit(EPERM);
 	exit(errornum);
 }
 
@@ -31,7 +33,7 @@ void	set_input(int input_fd)
 	if (dup2(input_fd, STDIN_FILENO) == -1)
 		error_exit(errno, NULL);
 	if (close(input_fd) == -1)
-		error_exit(errno, "close input");
+		error_exit(errno, "input");
 }
 
 void	set_output(int output_fd)
@@ -39,7 +41,7 @@ void	set_output(int output_fd)
 	if (dup2(output_fd, STDOUT_FILENO) == -1)
 		error_exit(errno, NULL);
 	if (close(output_fd) == -1)
-		error_exit(errno, "close output");
+		error_exit(errno, "output");
 }
 
 int	open_inputfile(const char *inputfile)

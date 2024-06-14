@@ -2,18 +2,38 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 char	**ft_split(const char *s, const char c);
 
+void	free_double_arr(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		++i;
+	}
+	free(arr);
+	arr = NULL;
+}
+
 int	main(void)
 {
-	char	str[] = "hallo";
+	char	str[] = "hallo:/dit/is/mijn/path:::::/hallo:";
 	char	**split;
 
-	split = ft_split(str, ' ');
+	printf("PATH: %i\n", _PC_PATH_MAX);
+	split = ft_split(str, ':');
 	if (!split)
 		return (printf("error\n"), 1);
 	printf("split: %s | %s\n", split[0], split[1]);
+	free_double_arr(split);
 	return (0);
 }
 

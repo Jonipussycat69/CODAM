@@ -6,25 +6,33 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 13:58:47 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/10 15:01:08 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/14 14:17:41 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static void	execute_command(char *cmd, char *path, char **envp)
+static void	execute_command(char *cmd, char **envp)
 {
 	char	**split_cmd;
+	char	*path;
 
-	split_cmd = split_command(cmd);
-	if (path_find(split_cmd[0], path, envp) == NULL)
-		error_exit(127, NULL);
+	split_cmd = ft_split(cmd, ' ');
+	if (!split_cmd)
+		error_exit(errno, cmd);
+	path = path_find(split_cmd[0], envp);
+	if (path == NULL)
+	{
+		free_double_arr(split_cmd);
+		error_exit(errno, cmd);
+	}
 	execve(path, split_cmd, envp);
+	free(path);
 	free_double_arr(split_cmd);
 	error_exit(errno, "execve");
 }
 
-static int	first_child(char **arg, char *path, char **envp)
+static int	first_child(char **arg, char **envp)
 {
 	const char	*input_file = arg[1];
 	const char	*cmd = arg[2];
@@ -39,14 +47,13 @@ static int	first_child(char **arg, char *path, char **envp)
 	{
 		set_input(open_inputfile(input_file));
 		if (close(pipe_fds[0]) == -1)
-			error_exit(errno, "close first child");
-		execute_command((char *)cmd, path, envp);
+			error_exit(errno, "first child");
+		execute_command((char *)cmd, envp);
 	}
 	return (pipe_fds[0]);
 }
 
-// output to specific fd instead a new pipe
-static pid_t	last_child(int inp_fd, char **arg, char *path, char **envp)
+static pid_t	last_child(int inp_fd, char **arg, char **envp)
 {
 	const char	*output_file = arg[4];
 	const char	*cmd = arg[3];
@@ -57,12 +64,12 @@ static pid_t	last_child(int inp_fd, char **arg, char *path, char **envp)
 	if (pid == 0)
 	{
 		set_output(open_outputfile(output_file));
-		execute_command((char *)cmd, path, envp);
+		execute_command((char *)cmd, envp);
 	}
 	if (close(STDIN_FILENO) == -1)
-		error_exit(errno, "close STDIN");
+		error_exit(errno, "STDIN");
 	if (close(STDOUT_FILENO) == -1)
-		error_exit(errno, "close STDOUT");
+		error_exit(errno, "STDOUT");
 	return (pid);
 }
 
@@ -85,12 +92,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
 	int		input_fd;
-	char	path[4097];
 
-	if (argc < 5 || argc > 5)
+	if (argc != 5)
 		error_exit(EINVAL, NULL);
-	path[0] = '\0';
-	input_fd = first_child(argv, path, envp);
-	pid = last_child(input_fd, argv, path, envp);
+	input_fd = first_child(argv, envp);
+	pid = last_child(input_fd, argv, envp);
 	return (safe_waitpid(pid));
 }

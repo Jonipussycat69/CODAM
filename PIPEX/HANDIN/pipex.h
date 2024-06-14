@@ -6,7 +6,7 @@
 /*   By: jdobos <jdobos@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/07 18:47:14 by jdobos        #+#    #+#                 */
-/*   Updated: 2024/06/13 23:43:58 by joni          ########   odam.nl         */
+/*   Updated: 2024/06/14 13:52:55 by jdobos        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 // PIPEX UTILS
 
 void	free_double_arr(char **arr);
-char	*path_find(char *cmd, char *path, char **envp);
-char	**split_command(char *cmd);
+char	*path_find(char *cmd, char **envp);
 
 void	error_exit(int errornum, char *message);
 void	set_input(int input_fd);
