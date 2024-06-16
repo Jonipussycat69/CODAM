@@ -20,13 +20,13 @@ int	readline_loop(void)
 			if (hisstate->length >= hindex)
 			{
 				hisentry = history_get(2);
-				ft_printf("history[%i]: %s\n", hindex, hisentry->line);
+				printf("history[%i]: %s\n", hindex, hisentry->line);
 			}
 			else
-				ft_printf("history[entry doesn't exist!] >> first entry: %i\n", hisstate->length + 1);
+				printf("history[entry doesn't exist!] >> first entry: %i\n", hisstate->length + 1);
 		}
 		if (!ft_strncmp(line, "print: ", 7))
-			ft_printf("%s\n", line + 7);
+			printf("%s\n", line + 7);
 		free(line);
 	}
 	return (1);
@@ -34,7 +34,7 @@ int	readline_loop(void)
 
 int	main(void)
 {
-	ft_printf("START\n");
-	ft_printf("RET: %i\n", readline_loop());
-	ft_printf("END\n");
+	printf("START\n");
+	printf("RET: %i\n", readline_loop());
+	printf("END\n");
 }
