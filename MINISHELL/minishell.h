@@ -13,6 +13,28 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
+// Colors
+
+# define C_RESET "\033[0m"
+# define C_TEAL "\033[0;36m"
+# define C_YELLOW "\033[0;33m"
+# define C_RED "\033[31;1m"
+
+// Enums
+
+enum	e_function_return
+{
+	SUCCESS = 1,
+	NEUTRAL = 0,
+	ERROR = -1,
+	MEM_ERR = -2,
+	MAL_ERR = -3
+};
+
+// STRUCTS
+
+// Cmd and arg structs
+
 typedef struct s_cmd_node
 {
 	char	*content;
@@ -27,5 +49,9 @@ typedef struct s_sig_argument
 	void		*next;
 }	t_sig_argument;
 
+typedef struct s_father_of_all_structs
+{
+	t_sig_argument	sig_arg;
+}	t_dad;
 
 #endif

@@ -2,7 +2,7 @@ NAME=		minishell
 
 CC=			cc
 
-CFLAGS=		-Wall -Wextra -Werror
+# CFLAGS=		-Wall -Wextra -Werror
 
 # Adding platform-specific settings for macOS and Ubuntu
 UNAME_S := $(shell uname -s)
@@ -17,21 +17,13 @@ endif
 LFTDIR=		./libft
 LIBFT=		$(LFTDIR)/libft.a
 
-PRINTFDIR=	./ft_printf
-PRINTF=		$(PRINTFDIR)/ft_convert.c \
-			$(PRINTFDIR)/ft_get_arg.c \
-			$(PRINTFDIR)/ft_printer_funct.c \
-			$(PRINTFDIR)/ft_printf_utils.c \
-			$(PRINTFDIR)/ft_printf.c
-
-SRCDIR=		./test_env_src
-SRCS=		$(SRCDIR)/main.c
-
-# SRCDIR=		./src
+# SRCDIR=		./test_env_src
 # SRCS=		$(SRCDIR)/main.c
 
+SRCDIR=		./src
+SRCS=		$(SRCDIR)/main.c
+
 OBJSSRC=	$(SRCS:.c=.o)
-OBJSPRINT=	$(PRINTF:.c=.o)
 
 all: $(NAME)
 
@@ -41,12 +33,11 @@ $(LIBFT):
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
-$(NAME): $(OBJSSRC) $(OBJSPRINT) $(LIBFT)
-	$(CC) $(OBJSSRC) $(OBJSPRINT) $(LIBFT) $(LDFLAGS) -o $(NAME)
+$(NAME): $(OBJSSRC) $(LIBFT)
+	$(CC) $(OBJSSRC) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJSSRC)
-	rm -f $(OBJSPRINT)
 	make -C $(LFTDIR) clean
 
 fclean: clean

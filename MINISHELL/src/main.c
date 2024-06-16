@@ -1,40 +1,51 @@
+/*
+MINISHELL:
+
+Part list:
+- History management
+- Cmd management
+- File/ dir management
+- Sig management
+*/
+
 #include "../minishell.h"
 
-int	readline_loop(void)
-{
-	char	*line;
-	int		hindex;
-	HIST_ENTRY	*hisentry;
-	HISTORY_STATE	*hisstate;
+short	sig = 0;
 
-	while (true)
+void	exit_error(t_dad *d, int num, char *message)
+{
+	//cleanup
+	perror(message);
+	exit(num);
+}
+
+void	exit_success(t_dad *d)
+{
+	//cleanup
+	exit(EXIT_SUCCESS);
+}
+
+void	parse_line(t_dad *d, char *line)
+{
+	if (!ft_strncmp(line, "exit", 5))
 	{
-		line = readline("minishell > ");
-		if (!line || !ft_strncmp(line, "exit", 5))
-			return (free(line), 0);
-		add_history(line);
-		if (ft_strlen(line) >= 6 && !ft_strncmp(line, "hget ", 5) && ft_isdigit(line[5]))
-		{
-			hindex = ft_atoi(line + 5);
-			hisstate = history_get_history_state();
-			if (hisstate->length >= hindex)
-			{
-				hisentry = history_get(2);
-				printf("history[%i]: %s\n", hindex, hisentry->line);
-			}
-			else
-				printf("history[entry doesn't exist!] >> first entry: %i\n", hisstate->length + 1);
-		}
-		if (!ft_strncmp(line, "print: ", 7))
-			printf("%s\n", line + 7);
 		free(line);
+		exit_success(d);
 	}
-	return (1);
 }
 
 int	main(void)
 {
-	printf("START\n");
-	printf("RET: %i\n", readline_loop());
-	printf("END\n");
+	char	*line;
+	t_dad	d;
+
+	while (true)
+	{
+		line = readline(C_YELLOW "mini" C_RED " > " C_RESET);
+		if (!line)
+			exit_error(&d, errno, NULL);
+		parse_line(&d, line);
+		free(line);
+	}
+	return (0);
 }
