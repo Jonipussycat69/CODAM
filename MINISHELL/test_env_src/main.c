@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../minish_param.h"
 
 int	readline_loop(void)
 {

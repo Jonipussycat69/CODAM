@@ -1,17 +1,5 @@
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <limits.h>
-# include <sys/wait.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <stdbool.h>
+#ifndef MINISH_DEF_H
+# define MINISH_DEF_H
 
 // Colors
 
@@ -19,6 +7,11 @@
 # define C_TEAL "\033[0;36m"
 # define C_YELLOW "\033[0;33m"
 # define C_RED "\033[31;1m"
+
+// Typedefs
+
+typedef unsigned int	t_uint;
+typedef unsigned char	t_uchar;
 
 // Enums
 
@@ -28,7 +21,7 @@ enum	e_function_return
 	NEUTRAL = 0,
 	ERROR = -1,
 	MEM_ERR = -2,
-	MAL_ERR = -3
+	SYNTAX_ERR = -3
 };
 
 // STRUCTS
@@ -52,6 +45,8 @@ typedef struct s_sig_argument
 typedef struct s_father_of_all_structs
 {
 	t_sig_argument	sig_arg;
+	char			*prev_line;
+	char			*line;
 }	t_dad;
 
 #endif
