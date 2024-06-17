@@ -50,8 +50,8 @@ bool	syntax_check(const char *line)
 		++i;
 	}
 	if (s_quote_count % 2 != 0 || d_quote_count % 2 != 0)
-		return (1);
-	return (0);
+		return (ERROR);
+	return (NEUTRAL);
 }
 
 // Adds current line to history if:
@@ -74,8 +74,6 @@ void	line_history_management(t_dad *d)
 
 void	line_parse(t_dad *d)
 {
-	if (syntax_check(d->line))
-		exit_clean(d, EXIT_FAILURE, "syntax error ");
 	if (!ft_strncmp(d->line, "exit", 5))
 		exit_clean(d, EXIT_SUCCESS, NULL);
 }
@@ -90,8 +88,13 @@ int	main(void)
 		d.line = readline(C_YELLOW "mini" C_RED " > " C_RESET);
 		if (!d.line)
 			break ;
-		line_history_management(&d);
-		line_parse(&d);
+		if (!syntax_check(d.line))
+		{
+			line_history_management(&d);
+			line_parse(&d);
+		}
+		else
+			printf("syntax error\n");
 		free(d.line);
 	}
 	free(d.prev_line);
