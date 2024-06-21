@@ -24,6 +24,16 @@ enum	e_function_return
 	SYNTAX_ERR = -3
 };
 
+enum	e_tokens
+{
+	CMD,
+	FILE,
+	BUILTIN,
+	PIPE,
+	REDIR,
+	ENVVAR
+};
+
 // STRUCTS
 
 // Cmd and arg structs
@@ -34,19 +44,19 @@ typedef struct s_cmd_node
 	void	*next;
 }	t_cmd_node;
 
-typedef struct s_sig_argument
+typedef struct s_significant_argument
 {
 	t_cmd_node	**cmd_head; // can be used as single pointer, head stored in sig_argument node only
 	char		**cmd_array;
 	int			token;
 	void		*next;
-}	t_sig_argument;
+}	t_sig_arg;
 
 typedef struct s_father_of_all_structs
 {
-	t_sig_argument	sig_arg;
-	char			*prev_line;
-	char			*line;
+	t_sig_arg	**sig_arg_head;
+	char		*prev_line;
+	char		*line;
 }	t_dad;
 
 #endif

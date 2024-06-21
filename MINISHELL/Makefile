@@ -17,11 +17,12 @@ endif
 LFTDIR=		./libft
 LIBFT=		$(LFTDIR)/libft.a
 
-# SRCDIR=		./test_env_src
+# SRCDIR=	./test_env_src
 # SRCS=		$(SRCDIR)/main.c
 
 SRCDIR=		./src
-SRCS=		$(SRCDIR)/main.c
+SRCS=		$(SRCDIR)/main.c \
+			$(SRCDIR)/parsing.c
 
 OBJSSRC=	$(SRCS:.c=.o)
 

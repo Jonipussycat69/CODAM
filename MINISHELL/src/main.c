@@ -10,20 +10,9 @@ Part list:
 
 #include "../minish_param.h"
 
-short	sig = 0;
+void	TEST_printline(char *line);
 
-// Frees main stings, linkedlists and exits.
-void	exit_clean(t_dad *d, int num, char *message)
-{
-	//cleanup
-	free(d->line);
-	free(d->prev_line);
-	rl_clear_history();
-	errno = num;
-	if (num != EXIT_SUCCESS)
-		perror(message);
-	exit(num);
-}
+short	sig = 0;
 
 // Initializes struct of all structs: t_dad.
 void	init_dad(t_dad *d)
@@ -50,8 +39,8 @@ bool	syntax_check(const char *line)
 		++i;
 	}
 	if (s_quote_count % 2 != 0 || d_quote_count % 2 != 0)
-		return (ERROR);
-	return (NEUTRAL);
+		return (NEUTRAL);
+	return (SUCCESS);
 }
 
 // Adds current line to history if:
@@ -72,12 +61,9 @@ void	line_history_management(t_dad *d)
 	}
 }
 
-void	line_parse(t_dad *d)
-{
-	if (!ft_strncmp(d->line, "exit", 5))
-		exit_clean(d, EXIT_SUCCESS, NULL);
-}
-
+// Contains the readline() loop.
+// FOR TESTING: to print the input of readline() input:
+// "print [this will be printed]"
 int	main(void)
 {
 	t_dad	d;
@@ -85,13 +71,15 @@ int	main(void)
 	init_dad(&d);
 	while (true)
 	{
+		rl_on_new_line();
 		d.line = readline(C_YELLOW "mini" C_RED " > " C_RESET);
 		if (!d.line)
 			break ;
-		if (!syntax_check(d.line))
+		if (syntax_check(d.line))
 		{
+			TEST_printline(d.line);// TEST
 			line_history_management(&d);
-			line_parse(&d);
+			parsing_distributor(&d);
 		}
 		else
 			printf("syntax error\n");
@@ -100,4 +88,12 @@ int	main(void)
 	free(d.prev_line);
 	rl_clear_history();
 	return (0);
+}
+
+// TEST FUNCTIONS:
+
+void	TEST_printline(char *line)
+{
+	if (ft_strlen(line) >= 7 && !ft_strncmp(line, "print ", 6))
+		printf("*\n%s\n*\n", line + 6);
 }
