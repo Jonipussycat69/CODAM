@@ -26,12 +26,13 @@ enum	e_function_return
 
 enum	e_tokens
 {
-	CMD,
-	FILE,
-	BUILTIN,
-	PIPE,
-	REDIR,
-	ENVVAR
+	NO_ACTION = 0,
+	CMD = 1,
+	FILE = 2,
+	BUILTIN = 3,
+	PIPE = 4,
+	REDIR = 5,
+	ENV_VAR = 6
 };
 
 // STRUCTS
@@ -48,7 +49,7 @@ typedef struct s_significant_argument
 {
 	t_cmd_node	**cmd_head; // can be used as single pointer, head stored in sig_argument node only
 	char		**cmd_array;
-	int			token;
+	short		token;
 	void		*next;
 }	t_sig_arg;
 
