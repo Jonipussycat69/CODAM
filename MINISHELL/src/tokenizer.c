@@ -16,17 +16,17 @@ char* expand_env_vars(const char* input) {
         strncpy(var_name, dollar + 1, end - dollar - 1);
         var_name[end - dollar - 1] = '\0';
 
-        // Get the value of the variable
-        char* value = getenv(var_name);
+        // Get the getenv_ret_value of the variable
+        char* getenv_ret_value = getenv(var_name);
 
-        if (value != NULL) {
-            // Replace the variable with its value
-            size_t new_len = strlen(result) + strlen(value) - (end - dollar);
+        if (getenv_ret_value != NULL) {
+            // Replace the variable with its getenv_ret_value
+            size_t new_len = strlen(result) + strlen(getenv_ret_value) - (end - dollar);
             char* new_result = malloc(new_len + 1);
 
             strncpy(new_result, result, dollar - result);
             new_result[dollar - result] = '\0';
-            strcat(new_result, value);
+            strcat(new_result, getenv_ret_value);
             strcat(new_result, end);
 
             free(result);
@@ -40,10 +40,15 @@ char* expand_env_vars(const char* input) {
     return result;
 }
 
-size_t	env_variable_check(t_dad *d, size_t i)
+// Parses for envariable, if found:
+// Inputs envariable into node 0 of cmd_node
+// and a strdup of getenv() output into node 1
+size_t	parse_for_env_variable(t_dad *d, size_t i)
 {
-	size_t	start;
-	char 	*extracted_str;
+	size_t		start;
+	t_cmd_node	**cmd_head;
+	char		*extracted_str;
+	char		*getenv_ret_value;
 
 	if (d->line[i] != '$')
 		return (i);
@@ -53,13 +58,21 @@ size_t	env_variable_check(t_dad *d, size_t i)
 	extracted_str = strdup_index(d->line, start, i);
 	if (!extracted_str)
 		exit_clean(d, errno, NULL);
-	
+	getenv_ret_value = getenv(extracted_str);
+	cmd_head = init_cmd_head();// experimental
+	if (!new_node_back_arglist(NULL, NULL, ENV_VAR, d->sig_arg_head) || \
+	!new_node_back_cmdlist(cmd_head, extracted_str) || \
+	!new_node_back_cmdlist(cmd_head, getenv_ret_value))
+	{
+		free(extracted_str);
+		exit_clean(d, errno, NULL);
+	}
+	return (i);
 }
 
 
 // Assigns tokens to each argument.
-// Tokens:
-// CMD
+// Tokens defined in: minish_def.h
 void	tokenizer(t_dad *d)
 {
 	size_t	i;
@@ -69,6 +82,6 @@ void	tokenizer(t_dad *d)
 	{
 		if (d->line[i] == ' ')
 			++i;
-		i = env_variable_check(d, i);
+		i = parse_for_env_variable(d, i);
 	}
 }

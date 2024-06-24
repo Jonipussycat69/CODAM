@@ -24,6 +24,8 @@ enum	e_function_return
 	SYNTAX_ERR = -3
 };
 
+// Token enum:
+
 enum	e_tokens
 {
 	NO_ACTION = 0,
