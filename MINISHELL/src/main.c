@@ -15,32 +15,12 @@ void	TEST_printline(char *line);
 short	sig = 0;
 
 // Initializes struct of all structs: t_dad.
-void	init_dad(t_dad *d)
+void	init_dad(t_dad *d, char **envp)
 {
+	d->sig_arg_head = NULL;
 	d->prev_line = NULL;
 	d->line = NULL;
-}
-
-bool	syntax_check(const char *line)
-{
-	size_t	i;
-	t_uint	s_quote_count;
-	t_uint	d_quote_count;
-
-	i = 0;
-	s_quote_count = 0;
-	d_quote_count = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'')
-			++s_quote_count;
-		if (line[i] == '\"')
-			++d_quote_count;
-		++i;
-	}
-	if (s_quote_count % 2 != 0 || d_quote_count % 2 != 0)
-		return (NEUTRAL);
-	return (SUCCESS);
+	d->env_head = create_env_list(envp);
 }
 
 // Adds current line to history if:
@@ -64,11 +44,11 @@ void	line_history_management(t_dad *d)
 // Contains the readline() loop.
 // FOR TESTING: to print the input of readline() input:
 // "print [this will be printed]"
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_dad	d;
 
-	init_dad(&d);
+	init_dad(&d, envp);
 	while (true)
 	{
 		rl_on_new_line();

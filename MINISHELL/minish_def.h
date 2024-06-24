@@ -47,6 +47,13 @@ typedef struct s_cmd_node
 	void	*next;
 }	t_cmd_node;
 
+typedef struct s_envariable_list
+{
+	char	*key;
+	char	*value;
+	void	*next;
+}	t_env_node;
+
 typedef struct s_significant_argument
 {
 	t_cmd_node	**cmd_head; // can be used as single pointer, head stored in sig_argument node only
@@ -58,6 +65,7 @@ typedef struct s_significant_argument
 typedef struct s_father_of_all_structs
 {
 	t_sig_arg	**sig_arg_head;
+	t_env_node	**env_head;
 	char		*prev_line;
 	char		*line;
 }	t_dad;

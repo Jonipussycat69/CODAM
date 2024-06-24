@@ -24,7 +24,7 @@ void	exit_va_free(t_dad *d, int num, char *message, short amount, ...)
 	i = 0;
 	while (i < amount)
 	{
-		free(va_arg(ptrs_to_free, void *));
+		free_if(va_arg(ptrs_to_free, void *));
 		++i;
 	}
 	va_end(ptrs_to_free);

@@ -19,9 +19,8 @@ t_sig_arg	*create_arg_node
 	return (new_arg_node);
 }
 
-// Creates new sig_arg node AND appends it to back of the list
-// Returns bool: 1 = success
-bool	new_node_back_arglist
+// RETURN: head = success, NULL = failure (whole list is freed)
+t_sig_arg	**new_node_back_arglist
 (
 	t_cmd_node	**cmd_head,
 	char		**cmd_arr,
@@ -29,18 +28,20 @@ bool	new_node_back_arglist
 	t_sig_arg	**head
 )
 {
-	const t_sig_arg	*arg_node = create_arg_node(cmd_head, cmd_arr, token);
-	t_sig_arg		*tmp;
+	t_sig_arg	*new_arg_node;
+	t_sig_arg	*tmp;
 
-	if (!arg_node)
-		return (false);
+	new_arg_node = create_arg_node(cmd_head, cmd_arr, token);
+	if (!new_arg_node)
+		return (free_arglist(head), NULL);
+	if (!head)
+		return (&new_arg_node);
 	if (!(*head))
-		return (head = &arg_node, true);
+		return (head = &new_arg_node, head);
 	tmp = *head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = arg_node;
-	return (true);
+	return (tmp->next = new_arg_node, head);
 }
 
 t_sig_arg	*arglist_last_node(t_sig_arg **head)
@@ -53,4 +54,22 @@ t_sig_arg	*arglist_last_node(t_sig_arg **head)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	return (tmp);
+}
+
+void	free_arglist(t_sig_arg **head)
+{
+	t_sig_arg	*tmp;
+	t_sig_arg	*tmp_tmp;
+
+	if (!head || !(*head))
+		return ;
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		free_cmdlist(tmp->cmd_head);
+		free_double_arr(tmp->cmd_array);
+		tmp_tmp = tmp->next;
+		free(tmp);
+		tmp = tmp_tmp;
+	}
 }
