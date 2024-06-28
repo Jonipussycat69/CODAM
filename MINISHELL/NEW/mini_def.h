@@ -52,16 +52,4 @@ typedef struct s_shell
 	char		**envp;
 }	t_shell;
 
-
-// LISTS (node types with their respective getnext functions)
-// this part should be in libft, along with other generic types like int
-// >
-// getnext function type
-typedef void	*(*t_getnext_func)(void *node);
-
-t_getnext_func	getnext_string;
-
-t_getnext_func	getnext_sig_arg;
-// <
-
 #endif

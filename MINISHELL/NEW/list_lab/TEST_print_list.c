@@ -5,7 +5,7 @@
 static char	*token_to_char(short token)
 {
 	static char	arr[6][10] = {
-		"NO_ACTION\0", "BUILTIN\0", "PIPE\0", "REDIRECT\0", "FILE\0", NULL};
+		"NO_ACTION\0", "BUILTIN\0", "PIPE\0", "REDIRECT\0", "FILE\0", (char *)NULL};
 
 	return (arr[token]);
 }

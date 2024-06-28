@@ -6,11 +6,28 @@
 /*   By: svan-hoo <svan-hoo@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/26 21:57:05 by svan-hoo      #+#    #+#                 */
-/*   Updated: 2024/06/28 14:58:56 by jdobos        ########   odam.nl         */
+/*   Updated: 2024/06/28 16:16:37 by joni          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_types.h"
+
+void	ft_free_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		++i;
+	}
+	free(arr);
+	arr = NULL;
+}
 
 void	*
 	lstlast(
@@ -51,7 +68,7 @@ static void	string_lstfree(
 	tmp = (t_string_node *)(*head);
 	while (tmp != NULL)
 	{
-		free_if(tmp->data);
+		free(tmp->data);
 		tmp_tmp = tmp->next;
 		free(tmp);
 		tmp = tmp_tmp;
@@ -68,7 +85,7 @@ static void	sig_arg_lstfree(
 	while (tmp != NULL)
 	{
 		ft_free_array(tmp->cmd_array);
-		string_lstfree(tmp->cmd_head);
+		string_lstfree((void **)tmp->cmd_head);
 		tmp_tmp = tmp->next;
 		free(tmp);
 		tmp = tmp_tmp;

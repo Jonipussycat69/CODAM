@@ -49,11 +49,12 @@ void		free_setnull(void **ptr);
 void		free_if(void *ptr);
 void		free_va(int amount, ...);
 
-// FUNCTIONS list_general.c list_types.c
-t_string_node	*new_node_string(char *data);
-t_sig_arg		*new_node_sig_arg(t_list **cmd_head, char **cmd_array, short token);
-void			lstadd_back(void **head, t_getnext_func getnext, void *new_node);
-void			*lstlast(void **head, t_getnext_func getnext);
-void			lstfree(void **head, t_getnext_func getnext);
+// utils_sig_arg_list.c
+
+void		sig_arg_add_back(t_sig_arg **node, t_sig_arg *new);
+t_sig_arg	*sig_arg_last(t_sig_arg *node);
+t_sig_arg	*sig_arg_new(t_list **cmd_head, char **cmd_array, short token);
+void		sig_arg_clear(t_sig_arg **node);
+void		sig_arg_delone(t_sig_arg *node);
 
 #endif
