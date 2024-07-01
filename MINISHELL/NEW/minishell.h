@@ -40,7 +40,7 @@ char		*strdup_index(char *str, size_t	start, size_t end);
 
 // utils_exit.c
 
-void		exit_clean(t_shell *d, int num, char *message);
+void		exit_clean(t_shell *shell, int num, char *message);
 // void	exit_va_free(t_shell *d, int num, char *message, int amount, ...);
 
 // utils_freeing.c

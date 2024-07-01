@@ -25,4 +25,3 @@ void	free_va(int amount, ...)
 	}
 	va_end(ptrs_to_free);
 }
-
