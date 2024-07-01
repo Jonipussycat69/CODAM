@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+// There should be a universal function for this
 static void	add_to_arglist(t_shell *shell, char *str, size_t len)
 {
 	char		*var;
@@ -11,7 +12,18 @@ static void	add_to_arglist(t_shell *shell, char *str, size_t len)
 		exit_clean(shell, errno, NULL);
 	new_list = ft_lstnew(var);
 	if (!new_list)
-	// LEFTOFF !!
+	{
+		free(var);
+		exit_clean(shell, errno, NULL);
+	}
+	new_sig = sig_arg_new(new_list, NULL, T_BUILTIN);
+	if (!new_sig)
+	{
+		free(var);
+		free(new_list);
+		exit_clean(shell, errno, NULL);
+	}
+	sig_arg_add_back(shell->sig_arg_head, new_sig);
 }
 
 // Parses for envariable corresponding to envkey, if found:
