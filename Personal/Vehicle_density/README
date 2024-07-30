@@ -1,0 +1,17 @@
+Input example: "1.2 10 0.4 1.5 0.9" 
+! An arbitrary amount/ sort of characters can be put in between values,
+! only the digits, periods and their order matter.
+! So this is also possible: "1.2, 10; |0.4|1.5|0.9|"
+
+Stands for:
+- 1.2 = Position to calculate density for
+- 10 = the amount of itterations (smoothing factor)
+- 0.4 etc. = recorded (vehicle)positions
+
+Output: density on point 1.2
+
+Algorithm: Close-in
+It will iteratively calculate the density over an ever shrinking area(of the trajectory),
+with each iteration closing-in on the point you want to calculate.
+When the iteration limit is reached all the results (density for each iteration)
+will be compiled into one density.
