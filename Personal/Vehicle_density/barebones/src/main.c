@@ -4,7 +4,7 @@ int	main(void)
 {
 	char	input_str[INPUT_LIMIT];
 	double	*pos_arr = NULL;
-	int		arr_len;
+	int		loop_count = 0;;
 	t_data	data;
 
 	while (1)
@@ -15,10 +15,15 @@ int	main(void)
 			return (0);
 		if (parse_input(&data, input_str))
 		{
-			// calc
+			if (!calc_density(&data))
+				return (free(data.pos_arr), 1);
+			print_results(&data, loop_count);
 			free(data.pos_arr);
+			free(data.dens_arr);
+			loop_count++;
 		}
 		else
 			printf("Invalid input\n");
 	}
+	return (0);
 }

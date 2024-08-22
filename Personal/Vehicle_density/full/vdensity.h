@@ -5,8 +5,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <limits.h>
 # include <sys/wait.h>
 # include <errno.h>
@@ -16,15 +14,25 @@
 # include <math.h>
 # include <time.h>
 
-# define INPUT_LIMIT 256
+# define BUFFER_SIZE 256
 
 // STRUCTS
+
+// typedef struct s_area
+// {
+// 	double	start;
+// 	double	end;
+// }	t_area;
 
 typedef struct s_data
 {
 	double	target_pos;
 	double	*pos_arr;
-	int		iterations;
+	int		pos_arr_len;
+	int		iterations;//?
+	double	dens_result;
+	FILE	*inp_file;
+	FILE	*out_file;
 }	t_data;
 
 // FUNCTION PARAMETERS
@@ -32,18 +40,21 @@ typedef struct s_data
 // parse_input.c
 
 bool	parse_input(t_data *data, char *str);
+char	*parse_line_to_buffer(FILE *input_file, char *buffer);
 
 // array_utils.c
 
-int		get_arr_len(char *str);
+int		get_pos_arr_len(char *str);
 double	*init_pos_array(char *str, int arr_len);
+double	*init_double_array(int arr_len);
 
 // utils.c
 
 double	ft_atof(char *arg);
+void	print_results(t_data *data, int loop_count);
 
 // math.c
 
-double	calc_density(double *pos_array, double x);
+bool	calc_density(t_data *data);
 
 #endif

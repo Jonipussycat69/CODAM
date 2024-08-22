@@ -1,6 +1,6 @@
 #include "../vdensity.h"
 
-int	get_arr_len(char *str)
+int	get_pos_arr_len(char *str)
 {
 	int	i = 0;
 	int	len = 0;
@@ -42,4 +42,17 @@ double	*init_pos_array(char *str, int arr_len)
 		}
 		i++;
 	}
+	return (pos_array);
+}
+
+double	*init_double_array(int arr_len)
+{
+	double		*double_array = NULL;
+
+	if (arr_len < 1)
+		return (NULL);
+	double_array = (double *)malloc(sizeof(double) * arr_len);
+	if (!double_array)
+		return (NULL);
+	return (double_array);
 }
