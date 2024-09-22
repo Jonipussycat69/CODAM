@@ -1,83 +1,77 @@
 #include "../term_snake.h"
 
-t_turn	*new_turn(const t_turn *data)
+t_body	*new_body(const t_body *data)
 {
-	t_turn	*turn;
+	t_body	*body;
 
-	turn = malloc(sizeof(t_turn));
-	if (turn == NULL)
+	body = malloc(sizeof(t_body));
+	if (body == NULL)
 		return (NULL);
-	turn->pos[0] = data->pos[0];
-	turn->pos[1] = data->pos[1];
-	turn->len_remain = data->len_remain;
-	turn->pre_direction = data->pre_direction;
-	turn->post_direction = data->post_direction;
-	turn->next = NULL;
-	return (turn);
+	body->pos[0] = data->pos[0];
+	body->pos[1] = data->pos[1];
+	body->next = NULL;
+	return (body);
 }
 
-void	node_back(t_turn **turn, t_turn *node)
+void	node_back(t_body **body, t_body *node)
 {
-	t_turn	*temp;
+	t_body	*temp;
 
-	temp = *turn;
+	temp = *body;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = node;
 }
 
-void	free_list(t_turn **turn)
+void	free_list(t_body **body)
 {
-	t_turn	*temp;
+	t_body	*temp;
 
-	temp = *turn;
+	temp = *body;
 	while (temp != NULL)
 	{
-		*turn = temp->next;
+		*body = temp->next;
 		free(temp);
-		temp = *turn;
+		temp = *body;
 	}
 }
 
-void	turn_copy(t_turn *turn, const t_turn *data)
+void	node_copy(t_body *body, const t_body *data)
 {
-	turn->pos[0] = data->pos[0];
-	turn->pos[1] = data->pos[1];
-	turn->len_remain = data->len_remain;
-	turn->pre_direction = data->pre_direction;
-	turn->post_direction = data->post_direction;
-	turn->next = NULL;
+	body->pos[0] = data->pos[0];
+	body->pos[1] = data->pos[1];
+	body->next = NULL;
 }
 
-bool	turn_add_back(t_turn **turn, const t_turn *data)
+bool	body_add_back(t_body **body, const t_body *data)
 {
-	t_turn	*new_t;
+	t_body	*new_t;
 
 	new_t = new_turn(data);
 	if (new_turn == NULL)
 		return (FAIL);
-	if (*turn == NULL)
-		*turn = new_t;
+	if (*body == NULL)
+		*body = new_t;
 	else
-		node_back(turn, new_t);
+		node_back(body, new_t);
 	return (SUCC);
 }
 
-int		list_len(t_turn *turn)
+int		body_len(t_body *body)
 {
 	int	i = 0;
 
-	while (turn != NULL)
+	while (body != NULL)
 	{
 		i++;
-		turn = turn->next;
+		body = body->next;
 	}
 	return (i);
 }
 
-t_turn	*last_node(t_turn *turn)
+t_body	*last_node(t_body *body)
 {
-	while (turn->next != NULL)
-		turn = turn->next;
-	return (turn);
+	while (body->next != NULL)
+		body = body->next;
+	return (body);
 }
