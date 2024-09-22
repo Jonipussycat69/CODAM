@@ -32,7 +32,7 @@ typedef struct s_data
 	double	*pos_arr;
 	int		pos_arr_len;
 	int		iterations;
-	t_area	*area;
+	t_area	area;
 	double	*dens_arr;
 	double	dens_result;
 }	t_data;
@@ -51,8 +51,10 @@ double	*init_double_array(int arr_len);
 
 // utils.c
 
-double	ft_atof(char *arg);
-void	print_results(t_data *data, int loop_count);
+double			ft_atof(char *arg);
+void			print_results(t_data *data, int loop_count);
+unsigned short	get_terminal_rows(void);
+unsigned short	get_terminal_cols(void);
 
 // math.c
 

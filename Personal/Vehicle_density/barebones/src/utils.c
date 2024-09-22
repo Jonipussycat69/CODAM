@@ -47,3 +47,19 @@ void	print_results(t_data *data, int loop_count)
 	}
 	printf("\nCompiled density: %f\n\n", data->dens_result);
 }
+
+unsigned short	get_terminal_rows(void)
+{
+	struct	winsize w;
+
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return (w.ws_row);
+}
+
+unsigned short	get_terminal_cols(void)
+{
+	struct	winsize w;
+
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return (w.ws_col);
+}

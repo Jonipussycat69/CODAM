@@ -10,9 +10,9 @@ int	main(void)
 	while (1)
 	{
 		if (!fgets(input_str, INPUT_LIMIT, stdin))
-			return (1);
+			return (EXIT_FAILURE);
 		if (strncmp(input_str, "exit", strlen(input_str)) || strncmp(input_str, "", 1))
-			return (0);
+			return (EXIT_SUCCESS);
 		if (parse_input(&data, input_str))
 		{
 			if (!calc_density(&data))
@@ -25,5 +25,5 @@ int	main(void)
 		else
 			printf("Invalid input\n");
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
