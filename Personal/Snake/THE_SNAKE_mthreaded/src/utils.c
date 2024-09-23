@@ -25,7 +25,7 @@ __uint64_t	get_time_us(void)
 	return ((tv.tv_sec * (__uint64_t)1000000) + (tv.tv_usec));
 }
 
-uint_fast32_t	delta_time(__uint64_t prev_time_ms)
+uint_fast64_t	delta_time(__uint64_t prev_time_ms)
 {
 	return (get_time_us() - prev_time_ms);
 }
@@ -33,39 +33,59 @@ uint_fast32_t	delta_time(__uint64_t prev_time_ms)
 void	clean_up(t_data *data)
 {
 	free_list(&data->snake);
-	pthread_mutex_destroy(&data->data_lock);
+	free(data->print_buffer);
 	pthread_mutex_destroy(&data->input_lock);
+	disableRawMode();
 }
 
-void	error_exit(t_data *data, bool parent)
+void	exit_clean(t_data *data, bool error, char *message)
 {
-	pthread_mutex_lock(&data->data_lock);
-	data->exit_code = FAIL;
 	data->game_over = true;
-	pthread_mutex_unlock(&data->data_lock);
-	if (parent)
+	pthread_join(data->input_thread, NULL);
+	clean_up(data);
+	if (error)
 	{
-		pthread_join(data->input_thread, NULL);
-		clean_up(data);
+		perror(message);
+		exit(EXIT_FAILURE);
 	}
-	exit(EXIT_FAILURE);
+	else
+	{
+		game_over_message(data);
+		exit(EXIT_SUCCESS);
+	}
 }
 
-void	wait_for_start(t_data *data)
+void	wait_for_unpause(t_data *data)
 {
-	while (!data->game_started)
+	clear_screen();
+	printf("PRESS SPACE TO CONTINUE\n");
+	while (data->input != PAUSE)
 	{
-		if (data->exit_code != RUNNING)
-			error_exit(data, false);
+		if (data->input == QUIT)
+			exit_clean(data, false, NULL);
 	}
 }
 
 void	game_over_message(t_data *data)
 {
-	write(STDOUT_FILENO, "\033[2J", 4);
+	clear_screen();
 	write(STDOUT_FILENO, C_BOLD, strlen(C_BOLD));
 	write(STDOUT_FILENO, C_RED, strlen(C_RED));
 	write(STDOUT_FILENO, END_MESSAGE, strlen(END_MESSAGE));
 	write(STDOUT_FILENO, C_RESET, strlen(C_RESET));
 	printf("\n\nscore: %d\n\n", data->score);
+}
+
+void	clear_screen(void)
+{
+	write(STDOUT_FILENO, "\033[2J", 4);
+	write(STDOUT_FILENO, "\033[H", 3);
+}
+
+uint_fast64_t	get_random(uint_fast64_t seed, uint_fast64_t max)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((seed * tv.tv_usec + tv.tv_sec) % (max + 1));
 }

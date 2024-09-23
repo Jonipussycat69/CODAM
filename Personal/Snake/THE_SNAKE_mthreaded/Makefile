@@ -14,7 +14,10 @@ SRC			=	$(SRCDIR)/main.c \
 				$(SRCDIR)/utils.c \
 				$(SRCDIR)/input_loop.c \
 				$(SRCDIR)/game_loop.c \
-				$(SRCDIR)/loop_utils.c
+				$(SRCDIR)/loop_utils.c \
+				$(SRCDIR)/game_utils.c \
+				$(SRCDIR)/init.c \
+				$(SRCDIR)/termios.c
 
 OBJS		=	${SRC:.c=.o}
 

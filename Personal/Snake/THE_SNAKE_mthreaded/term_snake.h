@@ -19,12 +19,12 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <ncurses.h>
+# include <termios.h>
 
 # define STARTING_LEN 4
 # define STARTING_LIVES 3
-# define QUIT_KEY 27
 # define INP_BUFFER_SIZE 128
-# define FRAMETIME 10000
+# define TICK_TIME_US 100000
 
 # define C_RESET "\033[0m"
 # define C_BOLD "\033[1m"
@@ -39,21 +39,22 @@ enum	e_error
 	RUNNING = 2
 };
 
-enum	e_directions
+enum	e_input
 {
-	UP = 'w',
-	DOWN = 's',
-	LEFT = 'a',
-	RIGHT = 'd',
-	SPACE = ' ',
-	ESC = '\033'
+	NON = 0,
+	UP = 1,
+	LEFT = 2,
+	DOWN = 3,
+	RIGHT = 4,
+	PAUSE = 5,
+	QUIT = 6
 };
 
 typedef struct s_body
 {
-	__uint16_t		pos[2];
-	bool			head;
-	struct s_body	*next;
+	uint_fast16_t		pos[2];
+	bool				head;
+	struct s_body		*next;
 }	t_body;
 
 typedef struct s_data
@@ -62,21 +63,16 @@ typedef struct s_data
 	__uint16_t		candy_pos[2];
 	__uint16_t		new_body_pos[2];
 	t_body			*snake;
+	char			*print_buffer;
 	uint_fast16_t	rows;
 	uint_fast16_t	cols;
+	uint_fast16_t	last_direction;
 	char			input;
 	short			level;
 	short			score;
 	short			lives;
-	bool			resized;
-	bool			dead;
-	bool			game_started;
-	bool			game_paused;
 	bool			game_over;
-	short			exit_code;
-	bool			tick;
 	pthread_mutex_t	input_lock;
-	pthread_mutex_t	data_lock;
 	pthread_t		input_thread;
 }	t_data;
 
@@ -88,17 +84,18 @@ void	game_loop(t_data *data);
 
 void	*input_loop(void *arg);
 
+// termios.c
+
+void	disableRawMode(void);
+void	enableRawMode(void);
 
 // loop_utils.c
 
 void	candy_pos_generate(t_data *data);
-void	pause_game(t_data *data);
-void	esc_sequence(t_data *data);
 void	check_candy(t_data *data);
 char	get_pos_char(t_data *data, __uint16_t x, __uint16_t y);
 void	image_to_buffer(t_data *data, char *buffer);
 char	*malloc_buffer(t_data *data);
-char	*resize_image(t_data *data, char *buffer);
 
 // list.c
 
@@ -109,6 +106,15 @@ bool	body_add_back(t_body **body, const t_body *data);
 int		body_len(t_body *body);
 t_body	*last_node(t_body *body);
 
+// init.c
+
+void	init_data(t_data *data);
+
+// game_utils.c
+
+void	create_snake(t_data *data);
+void	snake_pos_reset(t_data *data);
+
 // utils.c
 
 __uint16_t		get_terminal_rows(void);
@@ -116,8 +122,10 @@ __uint16_t		get_terminal_cols(void);
 __uint64_t		get_time_us(void);
 uint_fast32_t	delta_time(__uint64_t prev_time_ms);
 void			clean_up(t_data *data);
-void			error_exit(t_data *data, bool clean);
-void			wait_for_start(t_data *data);
+void			exit_clean(t_data *data, bool error, char *message);
+void			wait_for_unpause(t_data *data);
 void			game_over_message(t_data *data);
+void			clear_screen(void);
+uint_fast16_t	get_random(uint_fast64_t seed, uint_fast64_t max);
 
 #endif
