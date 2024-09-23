@@ -5,7 +5,7 @@ void	init_data(t_data *data)
 	__uint16_t	rows;
 	__uint16_t	cols;
 
-	rows = get_terminal_rows() - 1;
+	rows = get_terminal_rows() - 2;
 	cols = get_terminal_cols();
 	data->rows = rows;
 	data->cols = cols;

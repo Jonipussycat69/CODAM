@@ -28,9 +28,9 @@ void	cntr_key(t_data *data, char input)
 	pthread_mutex_lock(&data->input_lock);
 	switch (input)
 	{
-		case ' ': data->input = PAUSE; break ;
-		case 'q': data->input = QUIT; break ;
-		case '\033': data->input = QUIT; break ;
+		// case 'p': data->input = PAUSE; break ;
+		case 'p': data->input = PAUSE; break ;
+		case 'q': data->input = QUIT; exit(EXIT_SUCCESS);
 		case 'w': data->input = UP; break ;
 		case 's': data->input = DOWN; break ;
 		case 'd': data->input = RIGHT; break ;
@@ -42,17 +42,27 @@ void	cntr_key(t_data *data, char input)
 
 void	*input_loop(void *arg)
 {
-	t_data	*data;
-	char	input;
+	t_data			*data;
+	char			input;
+	struct pollfd	fds[1];
+	int				ret;
 
+	fds[0].fd = STDIN_FILENO;
+	fds[0].events = POLLIN;
 	data = (t_data *)arg;
-	while (data->game_over == false)
+	while (1)
 	{
-		read(STDIN_FILENO, &input, 1);
-		if (input == '\x1b')
-			arrow_key(data);
-		else
-			cntr_key(data, input);
+		ret = poll(fds, 1, 10);
+		if (ret > 0 && (fds[0].revents & POLLIN))
+		{
+			read(STDIN_FILENO, &input, 1);
+			if (input == '\x1b')
+				arrow_key(data);
+			else
+				cntr_key(data, input);
+		}
+		if (data->game_over == true)
+			break ;
 	}
 	return (NULL);
 }

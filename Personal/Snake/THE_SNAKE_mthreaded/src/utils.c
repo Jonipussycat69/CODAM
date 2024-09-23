@@ -41,45 +41,39 @@ void	clean_up(t_data *data)
 void	exit_clean(t_data *data, bool error, char *message)
 {
 	data->game_over = true;
-	pthread_join(data->input_thread, NULL);
-	clean_up(data);
 	if (error)
 	{
 		perror(message);
+		clean_up(data);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		game_over_message(data);
+		clean_up(data);
 		exit(EXIT_SUCCESS);
 	}
 }
 
 void	wait_for_unpause(t_data *data)
 {
-	clear_screen();
-	printf("PRESS SPACE TO CONTINUE\n");
-	while (data->input != PAUSE)
+	char	input;
+
+	pause_screen(data);
+	pthread_mutex_lock(&data->input_lock);
+	while (1)
 	{
-		if (data->input == QUIT)
+		read(STDIN_FILENO, &input, 1);
+		if (input == 'q')
 			exit_clean(data, false, NULL);
+		if (input == 'p')
+			break ;
 	}
-}
-
-void	game_over_message(t_data *data)
-{
-	clear_screen();
-	write(STDOUT_FILENO, C_BOLD, strlen(C_BOLD));
-	write(STDOUT_FILENO, C_RED, strlen(C_RED));
-	write(STDOUT_FILENO, END_MESSAGE, strlen(END_MESSAGE));
-	write(STDOUT_FILENO, C_RESET, strlen(C_RESET));
-	printf("\n\nscore: %d\n\n", data->score);
-}
-
-void	clear_screen(void)
-{
-	write(STDOUT_FILENO, "\033[2J", 4);
-	write(STDOUT_FILENO, "\033[H", 3);
+	pthread_mutex_unlock(&data->input_lock);
+	usleep(100);
+	pthread_mutex_lock(&data->input_lock);
+	data->input = NON;
+	pthread_mutex_unlock(&data->input_lock);
 }
 
 uint_fast64_t	get_random(uint_fast64_t seed, uint_fast64_t max)

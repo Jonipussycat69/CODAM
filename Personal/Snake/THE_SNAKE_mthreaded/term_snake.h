@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <ncurses.h>
 # include <termios.h>
+# include <poll.h>
 
 # define STARTING_LEN 4
 # define STARTING_LIVES 3
@@ -30,7 +31,6 @@
 # define C_BOLD "\033[1m"
 # define C_GREEN "\033[32m"
 # define C_RED "\033[31m"
-# define END_MESSAGE "GAME OVER\n\n"
 
 enum	e_error
 {
@@ -84,6 +84,14 @@ void	game_loop(t_data *data);
 
 void	*input_loop(void *arg);
 
+// game_print.c
+
+void	clear_screen(void);
+void	print_buffered_image(t_data *data, char *buffer);
+void	print_to_terminal(t_data *data, char *buffer);
+void	game_over_message(t_data *data);
+void	pause_screen(t_data *data);
+
 // termios.c
 
 void	disableRawMode(void);
@@ -94,7 +102,6 @@ void	enableRawMode(void);
 void	candy_pos_generate(t_data *data);
 void	check_candy(t_data *data);
 char	get_pos_char(t_data *data, __uint16_t x, __uint16_t y);
-void	image_to_buffer(t_data *data, char *buffer);
 char	*malloc_buffer(t_data *data);
 
 // list.c
@@ -124,8 +131,6 @@ uint_fast64_t	delta_time(__uint64_t prev_time_ms);
 void			clean_up(t_data *data);
 void			exit_clean(t_data *data, bool error, char *message);
 void			wait_for_unpause(t_data *data);
-void			game_over_message(t_data *data);
-void			clear_screen(void);
 uint_fast64_t	get_random(uint_fast64_t seed, uint_fast64_t max);
 
 #endif

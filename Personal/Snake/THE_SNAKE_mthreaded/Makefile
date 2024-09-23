@@ -17,7 +17,8 @@ SRC			=	$(SRCDIR)/main.c \
 				$(SRCDIR)/loop_utils.c \
 				$(SRCDIR)/game_utils.c \
 				$(SRCDIR)/init.c \
-				$(SRCDIR)/termios.c
+				$(SRCDIR)/termios.c \
+				$(SRCDIR)/game_print.c
 
 OBJS		=	${SRC:.c=.o}
 

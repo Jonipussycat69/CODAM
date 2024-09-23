@@ -36,10 +36,7 @@ void	check_collision(t_data *data)
 	{
 		if (tmp->pos[0] == head_pos[0] && tmp->pos[1] == head_pos[1])
 		{
-			if (data->lives > 0)
-				return (data->lives--, snake_pos_reset(data));
-			else
-				exit_clean(data, false, NULL);
+			exit_clean(data, false, NULL);
 		}
 		tmp = tmp->next;
 	}
@@ -88,7 +85,8 @@ void	input_to_move(t_data *data)
 		case DOWN: data->last_direction = DOWN; break ;
 		case LEFT: data->last_direction = LEFT; break ;
 		case RIGHT: data->last_direction = RIGHT; break ;
-		default: switch(input)
+		default:
+		switch(input)
 		{
 			case PAUSE: wait_for_unpause(data); break ;
 			case QUIT: exit_clean(data, false, NULL);
@@ -98,38 +96,26 @@ void	input_to_move(t_data *data)
 	move_snake(data);
 }
 
-void	update_game(t_data *data, char *buffer)
+void	update_game(t_data *data)
 {
 	input_to_move(data);
 	check_candy(data);
 	check_collision(data);
-	image_to_buffer(data, buffer);
-}
-
-void	print_to_terminal(t_data *data, char *buffer, __uint16_t len)
-{
-	clear_screen();
-	if (data->cols > 50)
-	printf("TERM~SNAKE length: %d lives: %d width: %hu height: %hu\n", data->snake_len, data->lives, data->cols, data->rows);
-	fflush(stdout);
-	write(STDOUT_FILENO, buffer, len);
 }
 
 void	game_loop(t_data *data)
 {
-	__uint16_t	len;
 	__uint64_t	prev_time_us;
 
 	create_snake(data);
 	candy_pos_generate(data);
 	data->print_buffer = malloc_buffer(data);
-	len = strlen(data->print_buffer);
 	wait_for_unpause(data);
 	prev_time_us = get_time_us();
 	while (1)
 	{
-		update_game(data, data->print_buffer);
-		print_to_terminal(data, data->print_buffer, len);
+		update_game(data);
+		print_to_terminal(data, data->print_buffer);
 		while (delta_time(prev_time_us) < TICK_TIME_US)
 			;
 		prev_time_us = get_time_us();

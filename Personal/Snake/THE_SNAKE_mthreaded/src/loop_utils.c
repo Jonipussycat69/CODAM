@@ -40,34 +40,11 @@ char	get_pos_char(t_data *data, __uint16_t x, __uint16_t y)
 	return (' ');
 }
 
-void	image_to_buffer(t_data *data, char *buffer)
-{
-	uint_fast16_t	x;
-	uint_fast16_t	y;
-	uint_fast16_t	i;
-
-	y = 0;
-	i = 0;
-	while (y < data->rows)
-	{
-		x = 0;
-		while (x < data->cols)
-		{
-			buffer[i++] = get_pos_char(data, x, y);
-			++x;
-		}
-		if (y < data->rows - 1)
-			buffer[i++] = '\n';
-		++y;
-	}
-	buffer[i] = '\0';
-}
-
 char	*malloc_buffer(t_data *data)
 {
 	char	*buffer;
 
-	buffer = (char *)malloc(data->rows * (data->cols + 1));
+	buffer = (char *)malloc(sizeof(char) * (data->cols + 1));
 	if (buffer == NULL)
 		exit_clean(data, true, "malloc_buffer");
 	return (buffer);
