@@ -4,12 +4,17 @@ CC			=	cc
 
 CFLAGS		=	-Wall -Werror -Wextra
 
+LIBS		=	-lncurses
+
 FSANITIZE	=	-g -fsanitize=address
 
 SRCDIR		=	./src
-SRC			=	$(SRCDIR)/action.c \
-				$(SRCDIR)/main.c \
-				$(SRCDIR)/utils.c
+SRC			=	$(SRCDIR)/main.c \
+				$(SRCDIR)/list.c \
+				$(SRCDIR)/utils.c \
+				$(SRCDIR)/input_loop.c \
+				$(SRCDIR)/game_loop.c \
+				$(SRCDIR)/loop_utils.c
 
 OBJS		=	${SRC:.c=.o}
 
@@ -19,7 +24,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(FSANITIZE) $(OBJS) -o $(NAME)
+	$(CC) $(FSANITIZE) $(OBJS) -o $(NAME) $(LIBS)
 
 clean:
 	rm -rf $(OBJS)

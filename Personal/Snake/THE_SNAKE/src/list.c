@@ -9,7 +9,8 @@ t_body	*new_body(const t_body *data)
 		return (NULL);
 	body->pos[0] = data->pos[0];
 	body->pos[1] = data->pos[1];
-	body->next = NULL;
+	body->head = data->head;
+	body->next = data->next;
 	return (body);
 }
 
@@ -36,24 +37,17 @@ void	free_list(t_body **body)
 	}
 }
 
-void	node_copy(t_body *body, const t_body *data)
-{
-	body->pos[0] = data->pos[0];
-	body->pos[1] = data->pos[1];
-	body->next = NULL;
-}
-
 bool	body_add_back(t_body **body, const t_body *data)
 {
-	t_body	*new_t;
+	t_body	*new_b;
 
-	new_t = new_turn(data);
-	if (new_turn == NULL)
+	new_b = new_body(data);
+	if (new_b == NULL)
 		return (FAIL);
 	if (*body == NULL)
-		*body = new_t;
+		*body = new_b;
 	else
-		node_back(body, new_t);
+		node_back(body, new_b);
 	return (SUCC);
 }
 

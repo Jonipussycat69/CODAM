@@ -52,14 +52,15 @@ enum	e_directions
 typedef struct s_body
 {
 	__uint16_t		pos[2];
+	bool			head;
 	struct s_body	*next;
 }	t_body;
 
 typedef struct s_data
 {
-	uint_fast16_t	head_pos[2];
 	__uint32_t		snake_len;
 	__uint16_t		candy_pos[2];
+	__uint16_t		new_body_pos[2];
 	t_body			*snake;
 	uint_fast16_t	rows;
 	uint_fast16_t	cols;
@@ -67,38 +68,43 @@ typedef struct s_data
 	short			level;
 	short			score;
 	short			lives;
+	bool			resized;
 	bool			dead;
 	bool			game_started;
 	bool			game_paused;
+	bool			game_over;
 	short			exit_code;
 	bool			tick;
-	__uint16_t		thread_ret[3];
-	pthread_mutex_t	data_lock;
-	pthread_mutex_t	write_lock;
 	pthread_mutex_t	input_lock;
-	pthread_mutex_t	candy_lock;
+	pthread_mutex_t	data_lock;
+	pthread_t		input_thread;
 }	t_data;
 
-// gameplay.c
+// game_loop.c
 
-void	candy_pos_generate(t_data *data);
-void	*game(void *data);
+void	game_loop(t_data *data);
 
-// loops.c
+// input_loop.c
 
 void	*input_loop(void *arg);
-void	*print_loop(void *data);
 
-// monitor.c
 
-void	monitor(t_data *data);
+// loop_utils.c
+
+void	candy_pos_generate(t_data *data);
+void	pause_game(t_data *data);
+void	esc_sequence(t_data *data);
+void	check_candy(t_data *data);
+char	get_pos_char(t_data *data, __uint16_t x, __uint16_t y);
+void	image_to_buffer(t_data *data, char *buffer);
+char	*malloc_buffer(t_data *data);
+char	*resize_image(t_data *data, char *buffer);
 
 // list.c
 
 t_body	*new_body(const t_body *data);
 void	node_back(t_body **body, t_body *node);
 void	free_list(t_body **body);
-void	node_copy(t_body *body, const t_body *data);
 bool	body_add_back(t_body **body, const t_body *data);
 int		body_len(t_body *body);
 t_body	*last_node(t_body *body);
@@ -112,5 +118,6 @@ uint_fast32_t	delta_time(__uint64_t prev_time_ms);
 void			clean_up(t_data *data);
 void			error_exit(t_data *data, bool clean);
 void			wait_for_start(t_data *data);
+void			game_over_message(t_data *data);
 
 #endif
