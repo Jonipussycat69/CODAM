@@ -110,7 +110,7 @@ void	print_to_terminal(t_data *data, char *buffer, __uint16_t len)
 {
 	clear_screen();
 	if (data->cols > 50)
-	printf("TERM~SNAKE length: %d lives: %d width: %ld height: %ld\n", data->snake_len, data->lives, data->cols, data->rows);
+	printf("TERM~SNAKE length: %d lives: %d width: %hu height: %hu\n", data->snake_len, data->lives, data->cols, data->rows);
 	fflush(stdout);
 	write(STDOUT_FILENO, buffer, len);
 }

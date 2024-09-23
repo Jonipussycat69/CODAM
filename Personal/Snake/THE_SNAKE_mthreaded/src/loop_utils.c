@@ -32,13 +32,7 @@ char	get_pos_char(t_data *data, __uint16_t x, __uint16_t y)
 	while (temp != NULL)
 	{
 		if (temp->pos[0] == x && temp->pos[1] == y)
-		{
-			switch (temp->head)
-			{
-				case true: return ('o');
-				case false: return ('@');
-			}
-		}
+			return (temp->head ? 'o' : '@');
 		temp = temp->next;
 	}
 	if (x == data->candy_pos[0] && y == data->candy_pos[1])

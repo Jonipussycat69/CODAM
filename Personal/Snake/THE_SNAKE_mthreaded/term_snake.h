@@ -120,12 +120,12 @@ void	snake_pos_reset(t_data *data);
 __uint16_t		get_terminal_rows(void);
 __uint16_t		get_terminal_cols(void);
 __uint64_t		get_time_us(void);
-uint_fast32_t	delta_time(__uint64_t prev_time_ms);
+uint_fast64_t	delta_time(__uint64_t prev_time_ms);
 void			clean_up(t_data *data);
 void			exit_clean(t_data *data, bool error, char *message);
 void			wait_for_unpause(t_data *data);
 void			game_over_message(t_data *data);
 void			clear_screen(void);
-uint_fast16_t	get_random(uint_fast64_t seed, uint_fast64_t max);
+uint_fast64_t	get_random(uint_fast64_t seed, uint_fast64_t max);
 
 #endif
