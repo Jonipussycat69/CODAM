@@ -6,8 +6,6 @@ void	clear_screen(void)
 	write(STDOUT_FILENO, "\033[H", 3);
 }
 
-
-
 void	print_buffered_image(t_data *data, char *buffer)
 {
 	uint_fast16_t	x;
@@ -36,12 +34,13 @@ void	print_to_terminal(t_data *data, char *buffer)
 
 	clear_screen();
 	if (data->cols > 40)
-	printf("\033[1;35m TERM~SNAKE %sw[%lu] h[%lu]  length: %d  score: %u\n", \
-			C_RESET, data->cols, data->rows, data->snake_len, data->score);
+	printf("\033[1;35m TERM~SNAKE %sw[%lu] h[%lu]  speed: %.2lfx length: %d  score: %u  \"P\" to pause\n", \
+			C_RESET, data->cols, data->rows, (double)(TICK_TIME_US) / (double)(data->tick_time_us), data->snake_len, data->score);
 	fflush(stdout);
-	i = data->cols;
-	while (i--)
-		write(STDOUT_FILENO, "_", 1);
+	i = 0;
+	while (i < data->cols)
+		buffer[i++] = '_';
+	write(STDOUT_FILENO, buffer, data->cols);
 	print_buffered_image(data, buffer);
 }
 

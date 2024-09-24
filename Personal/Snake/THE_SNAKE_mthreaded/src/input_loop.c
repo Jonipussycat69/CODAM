@@ -30,7 +30,7 @@ void	cntr_key(t_data *data, char input)
 	{
 		// case 'p': data->input = PAUSE; break ;
 		case 'p': data->input = PAUSE; break ;
-		case 'q': data->input = QUIT; exit(EXIT_SUCCESS);
+		case 'q': data->input = QUIT; exit(SUCC);
 		case 'w': data->input = UP; break ;
 		case 's': data->input = DOWN; break ;
 		case 'd': data->input = RIGHT; break ;
@@ -52,7 +52,7 @@ void	*input_loop(void *arg)
 	data = (t_data *)arg;
 	while (1)
 	{
-		ret = poll(fds, 1, 10);
+		ret = poll(fds, 1, POLL_TIME_MS);
 		if (ret > 0 && (fds[0].revents & POLLIN))
 		{
 			read(STDIN_FILENO, &input, 1);
@@ -62,7 +62,7 @@ void	*input_loop(void *arg)
 				cntr_key(data, input);
 		}
 		if (data->game_over == true)
-			break ;
+			exit(SUCC);
 	}
 	return (NULL);
 }

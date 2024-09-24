@@ -18,6 +18,8 @@ void	check_candy(t_data *data)
 	{
 		data->score++;
 		data->snake_len++;
+		if (data->tick_time_us > 50000)
+			data->tick_time_us -= 1000;
 		add_body(data);
 		candy_pos_generate(data);
 	}
@@ -35,9 +37,7 @@ void	check_collision(t_data *data)
 	while (tmp != NULL)
 	{
 		if (tmp->pos[0] == head_pos[0] && tmp->pos[1] == head_pos[1])
-		{
 			exit_clean(data, false, NULL);
-		}
 		tmp = tmp->next;
 	}
 }
@@ -116,7 +116,7 @@ void	game_loop(t_data *data)
 	{
 		update_game(data);
 		print_to_terminal(data, data->print_buffer);
-		while (delta_time(prev_time_us) < TICK_TIME_US)
+		while (delta_time(prev_time_us) < data->tick_time_us)
 			;
 		prev_time_us = get_time_us();
 	}

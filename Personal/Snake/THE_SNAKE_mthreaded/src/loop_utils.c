@@ -17,10 +17,10 @@ bool	candy_in_snake(t_data *data)
 
 void	candy_pos_generate(t_data *data)
 {
-	while (candy_in_snake(data))
+	while (data->candy_pos[0] < 1 || data->candy_pos[1] < 1 || candy_in_snake(data))
 	{
-		data->candy_pos[0] = get_random(data->candy_pos[0], data->cols);
-		data->candy_pos[1] = get_random(data->candy_pos[1], data->rows);
+		data->candy_pos[0] = get_random(data->candy_pos[0], data->cols - 1);
+		data->candy_pos[1] = get_random(data->candy_pos[1], data->rows - 1);
 	}
 }
 

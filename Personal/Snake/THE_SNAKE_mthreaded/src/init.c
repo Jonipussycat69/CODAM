@@ -21,4 +21,5 @@ void	init_data(t_data *data)
 	pthread_mutex_init(&data->input_lock, NULL);
 	data->candy_pos[0] = cols / 4;
 	data->candy_pos[1] = rows / 2;
+	data->tick_time_us = TICK_TIME_US;
 }

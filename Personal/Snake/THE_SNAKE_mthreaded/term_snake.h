@@ -26,6 +26,7 @@
 # define STARTING_LIVES 3
 # define INP_BUFFER_SIZE 128
 # define TICK_TIME_US 100000
+# define POLL_TIME_MS 10
 
 # define C_RESET "\033[0m"
 # define C_BOLD "\033[1m"
@@ -74,6 +75,7 @@ typedef struct s_data
 	bool			game_over;
 	pthread_mutex_t	input_lock;
 	pthread_t		input_thread;
+	uint_fast32_t	tick_time_us;
 }	t_data;
 
 // game_loop.c
