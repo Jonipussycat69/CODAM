@@ -18,8 +18,8 @@ void	check_candy(t_data *data)
 	{
 		data->score++;
 		data->snake_len++;
-		if (data->tick_time_us > 50000)
-			data->tick_time_us -= 1000;
+		if (data->tick_time_us > 40000)
+			data->tick_time_us -= 3000;
 		add_body(data);
 		candy_pos_generate(data);
 	}

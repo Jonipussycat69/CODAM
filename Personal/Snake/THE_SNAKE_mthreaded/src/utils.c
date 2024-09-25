@@ -43,14 +43,16 @@ void	exit_clean(t_data *data, bool error, char *message)
 	data->game_over = true;
 	if (error)
 	{
-		perror(message);
+		usleep(10000);
 		clean_up(data);
+		perror(message);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		game_over_message(data);
+		usleep(10000);
 		clean_up(data);
+		game_over_message(data);
 		exit(EXIT_SUCCESS);
 	}
 }
